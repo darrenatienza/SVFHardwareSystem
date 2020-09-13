@@ -17,3 +17,4 @@ C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\Met
 C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\MetroFramework.Fonts.dll
 C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmLogin.resources
 C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmProducts.resources
+C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmCategory.resources
