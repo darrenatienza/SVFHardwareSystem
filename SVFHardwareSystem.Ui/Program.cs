@@ -16,7 +16,7 @@ namespace SVFHardwareSystem.Ui
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmCustomerForm());
+            Application.Run(new frmSaleForm());
         }
     }
 }

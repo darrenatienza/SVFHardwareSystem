@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             "Product 1",
             "kg",
             "5",
             "250"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
             "2",
             "Product 2",
             "Sock",
@@ -47,34 +47,34 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
-            this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.metroPanel5 = new MetroFramework.Controls.MetroPanel();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.metroPanel1.SuspendLayout();
+            this.metroPanel5.SuspendLayout();
+            this.metroPanel4.SuspendLayout();
+            this.metroPanel3.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            this.metroPanel3.SuspendLayout();
-            this.metroPanel4.SuspendLayout();
-            this.metroPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroListView1
@@ -98,8 +98,8 @@
             this.metroListView1.FullRowSelect = true;
             this.metroListView1.GridLines = true;
             this.metroListView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem5,
+            listViewItem6});
             this.metroListView1.Location = new System.Drawing.Point(20, 85);
             this.metroListView1.Name = "metroListView1";
             this.metroListView1.OwnerDraw = true;
@@ -140,101 +140,6 @@
             this.columnHeader6.Text = "SI/DR";
             this.columnHeader6.Width = 63;
             // 
-            // metroPanel1
-            // 
-            this.metroPanel1.Controls.Add(this.metroPanel5);
-            this.metroPanel1.Controls.Add(this.metroPanel4);
-            this.metroPanel1.Controls.Add(this.metroPanel3);
-            this.metroPanel1.Controls.Add(this.metroPanel2);
-            this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.metroPanel1.HorizontalScrollbarBarColor = true;
-            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(20, 60);
-            this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(1305, 25);
-            this.metroPanel1.TabIndex = 6;
-            this.metroPanel1.VerticalScrollbarBarColor = true;
-            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 10;
-            // 
-            // metroPanel2
-            // 
-            this.metroPanel2.Controls.Add(this.toolStrip1);
-            this.metroPanel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.metroPanel2.HorizontalScrollbarBarColor = true;
-            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel2.HorizontalScrollbarSize = 10;
-            this.metroPanel2.Location = new System.Drawing.Point(0, 0);
-            this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(609, 25);
-            this.metroPanel2.TabIndex = 2;
-            this.metroPanel2.VerticalScrollbarBarColor = true;
-            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel2.VerticalScrollbarSize = 10;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripButton4,
-            this.toolStripSeparator1,
-            this.toolStripTextBox1,
-            this.toolStripButton3});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(609, 25);
-            this.toolStrip1.TabIndex = 5;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.Image = global::SVFHardwareSystem.Ui.Properties.Resources.plus_4_48;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(49, 22);
-            this.toolStripButton1.Text = "Add";
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.Image = global::SVFHardwareSystem.Ui.Properties.Resources.edit_3_48;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(47, 22);
-            this.toolStripButton2.Text = "Edit";
-            // 
-            // toolStripButton4
-            // 
-            this.toolStripButton4.Image = global::SVFHardwareSystem.Ui.Properties.Resources.trash_2_48;
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(60, 22);
-            this.toolStripButton4.Text = "Delete";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripTextBox1
-            // 
-            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 25);
-            this.toolStripTextBox1.ToolTipText = "Search";
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::SVFHardwareSystem.Ui.Properties.Resources.search;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "toolStripButton3";
-            this.toolStripButton3.ToolTipText = "Search";
-            // 
             // columnHeader7
             // 
             this.columnHeader7.Text = "Debit";
@@ -265,57 +170,28 @@
             this.columnHeader12.Text = "Credit";
             this.columnHeader12.Width = 86;
             // 
-            // metroLabel1
+            // columnHeader13
             // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(73, 3);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(38, 19);
-            this.metroLabel1.Style = MetroFramework.MetroColorStyle.Green;
-            this.metroLabel1.TabIndex = 3;
-            this.metroLabel1.Text = "Sales";
+            this.columnHeader13.Text = "Customer Name";
+            this.columnHeader13.Width = 141;
             // 
-            // metroPanel3
+            // metroPanel1
             // 
-            this.metroPanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.metroPanel3.Controls.Add(this.metroLabel1);
-            this.metroPanel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.metroPanel3.HorizontalScrollbarBarColor = true;
-            this.metroPanel3.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel3.HorizontalScrollbarSize = 10;
-            this.metroPanel3.Location = new System.Drawing.Point(609, 0);
-            this.metroPanel3.Name = "metroPanel3";
-            this.metroPanel3.Size = new System.Drawing.Size(181, 25);
-            this.metroPanel3.TabIndex = 4;
-            this.metroPanel3.VerticalScrollbarBarColor = true;
-            this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel3.VerticalScrollbarSize = 10;
-            // 
-            // metroPanel4
-            // 
-            this.metroPanel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.metroPanel4.Controls.Add(this.metroLabel2);
-            this.metroPanel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.metroPanel4.HorizontalScrollbarBarColor = true;
-            this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel4.HorizontalScrollbarSize = 10;
-            this.metroPanel4.Location = new System.Drawing.Point(790, 0);
-            this.metroPanel4.Name = "metroPanel4";
-            this.metroPanel4.Size = new System.Drawing.Size(183, 25);
-            this.metroPanel4.TabIndex = 5;
-            this.metroPanel4.VerticalScrollbarBarColor = true;
-            this.metroPanel4.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel4.VerticalScrollbarSize = 10;
-            // 
-            // metroLabel2
-            // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(73, 3);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(37, 19);
-            this.metroLabel2.Style = MetroFramework.MetroColorStyle.Green;
-            this.metroLabel2.TabIndex = 3;
-            this.metroLabel2.Text = "Cash";
+            this.metroPanel1.Controls.Add(this.metroPanel5);
+            this.metroPanel1.Controls.Add(this.metroPanel4);
+            this.metroPanel1.Controls.Add(this.metroPanel3);
+            this.metroPanel1.Controls.Add(this.metroPanel2);
+            this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(20, 60);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(1305, 25);
+            this.metroPanel1.TabIndex = 6;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
             // 
             // metroPanel5
             // 
@@ -327,7 +203,7 @@
             this.metroPanel5.HorizontalScrollbarSize = 10;
             this.metroPanel5.Location = new System.Drawing.Point(973, 0);
             this.metroPanel5.Name = "metroPanel5";
-            this.metroPanel5.Size = new System.Drawing.Size(181, 25);
+            this.metroPanel5.Size = new System.Drawing.Size(180, 25);
             this.metroPanel5.TabIndex = 6;
             this.metroPanel5.VerticalScrollbarBarColor = true;
             this.metroPanel5.VerticalScrollbarHighlightOnWheel = false;
@@ -343,10 +219,133 @@
             this.metroLabel3.TabIndex = 3;
             this.metroLabel3.Text = "Receivables";
             // 
-            // columnHeader13
+            // metroPanel4
             // 
-            this.columnHeader13.Text = "Customer Name";
-            this.columnHeader13.Width = 141;
+            this.metroPanel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.metroPanel4.Controls.Add(this.metroLabel2);
+            this.metroPanel4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.metroPanel4.HorizontalScrollbarBarColor = true;
+            this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel4.HorizontalScrollbarSize = 10;
+            this.metroPanel4.Location = new System.Drawing.Point(791, 0);
+            this.metroPanel4.Name = "metroPanel4";
+            this.metroPanel4.Size = new System.Drawing.Size(182, 25);
+            this.metroPanel4.TabIndex = 5;
+            this.metroPanel4.VerticalScrollbarBarColor = true;
+            this.metroPanel4.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel4.VerticalScrollbarSize = 10;
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(73, 3);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(37, 19);
+            this.metroLabel2.Style = MetroFramework.MetroColorStyle.Green;
+            this.metroLabel2.TabIndex = 3;
+            this.metroLabel2.Text = "Cash";
+            // 
+            // metroPanel3
+            // 
+            this.metroPanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.metroPanel3.Controls.Add(this.metroLabel1);
+            this.metroPanel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.metroPanel3.HorizontalScrollbarBarColor = true;
+            this.metroPanel3.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel3.HorizontalScrollbarSize = 10;
+            this.metroPanel3.Location = new System.Drawing.Point(610, 0);
+            this.metroPanel3.Name = "metroPanel3";
+            this.metroPanel3.Size = new System.Drawing.Size(181, 25);
+            this.metroPanel3.TabIndex = 4;
+            this.metroPanel3.VerticalScrollbarBarColor = true;
+            this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel3.VerticalScrollbarSize = 10;
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(73, 3);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(38, 19);
+            this.metroLabel1.Style = MetroFramework.MetroColorStyle.Green;
+            this.metroLabel1.TabIndex = 3;
+            this.metroLabel1.Text = "Sales";
+            // 
+            // metroPanel2
+            // 
+            this.metroPanel2.Controls.Add(this.toolStrip1);
+            this.metroPanel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.metroPanel2.HorizontalScrollbarBarColor = true;
+            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.HorizontalScrollbarSize = 10;
+            this.metroPanel2.Location = new System.Drawing.Point(0, 0);
+            this.metroPanel2.Name = "metroPanel2";
+            this.metroPanel2.Size = new System.Drawing.Size(610, 25);
+            this.metroPanel2.TabIndex = 2;
+            this.metroPanel2.VerticalScrollbarBarColor = true;
+            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.VerticalScrollbarSize = 10;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.toolStripButton2,
+            this.toolStripButton4,
+            this.toolStripSeparator1,
+            this.toolStripTextBox1,
+            this.toolStripButton3});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(610, 25);
+            this.toolStrip1.TabIndex = 5;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 25);
+            this.toolStripTextBox1.ToolTipText = "Search";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Image = global::SVFHardwareSystem.Ui.Properties.Resources.plus_4_48;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(49, 22);
+            this.toolStripButton1.Text = "Add";
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.Image = global::SVFHardwareSystem.Ui.Properties.Resources.edit_3_48;
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(47, 22);
+            this.toolStripButton2.Text = "Edit";
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.Image = global::SVFHardwareSystem.Ui.Properties.Resources.trash_2_48;
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(60, 22);
+            this.toolStripButton4.Text = "Delete";
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Image = global::SVFHardwareSystem.Ui.Properties.Resources.search;
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton3.Text = "toolStripButton3";
+            this.toolStripButton3.ToolTipText = "Search";
             // 
             // frmSales
             // 
@@ -359,16 +358,16 @@
             this.Text = "Daily Sales";
             this.Load += new System.EventHandler(this.frmSales_Load);
             this.metroPanel1.ResumeLayout(false);
+            this.metroPanel5.ResumeLayout(false);
+            this.metroPanel5.PerformLayout();
+            this.metroPanel4.ResumeLayout(false);
+            this.metroPanel4.PerformLayout();
+            this.metroPanel3.ResumeLayout(false);
+            this.metroPanel3.PerformLayout();
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel2.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.metroPanel3.ResumeLayout(false);
-            this.metroPanel3.PerformLayout();
-            this.metroPanel4.ResumeLayout(false);
-            this.metroPanel4.PerformLayout();
-            this.metroPanel5.ResumeLayout(false);
-            this.metroPanel5.PerformLayout();
             this.ResumeLayout(false);
 
         }

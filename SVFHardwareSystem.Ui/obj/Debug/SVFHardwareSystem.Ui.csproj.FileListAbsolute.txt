@@ -21,3 +21,5 @@ C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVF
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmSales.resources
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmCustomers.resources
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmCustomerForm.resources
+C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmProductForm.resources
+C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmSaleForm.resources
