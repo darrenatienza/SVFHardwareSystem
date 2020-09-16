@@ -209,7 +209,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(368, 346);
+            this.ClientSize = new System.Drawing.Size(368, 332);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.txtUnit);

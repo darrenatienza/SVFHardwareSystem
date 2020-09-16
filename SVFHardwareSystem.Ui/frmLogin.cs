@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Unity;
 
 namespace SVFHardwareSystem.Ui
 {
@@ -34,6 +35,11 @@ namespace SVFHardwareSystem.Ui
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+           
         }
     }
 }

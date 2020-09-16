@@ -13,7 +13,7 @@ namespace SVFHardwareSystem.DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202009161830411_initial"; }
+            get { return "202009161544004_initial"; }
         }
         
         string IMigrationMetadata.Source

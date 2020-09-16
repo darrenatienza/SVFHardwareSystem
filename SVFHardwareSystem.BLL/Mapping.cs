@@ -30,6 +30,8 @@ namespace AutoMap
         {
             CreateMap<Product, ProductModel>();
             CreateMap<ProductModel, Product>();
+            CreateMap<CategoryModel, Category>();
+            CreateMap<CustomerModel, Customer>();
             // Additional mappings here...
         }
     }

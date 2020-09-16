@@ -1,5 +1,6 @@
 ﻿using MetroFramework.Forms;
 using SVFHardwareSystem.Services;
+using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,14 @@ namespace SVFHardwareSystem.Ui
 {
     public partial class frmProductForm : MetroForm
     {
-        ProductService productService;
-        public frmProductForm()
+        IProductService _productService;
+        public frmProductForm(IProductService productService)
         {
             InitializeComponent();
             this.MinimizeBox = false;
             this.MaximizeBox = false;
             this.Resizable = false;
-            productService = new ProductService();
+            _productService = productService;
         }
 
         private void frmProductForm_Load(object sender, EventArgs e)
@@ -37,7 +38,7 @@ namespace SVFHardwareSystem.Ui
             productModel.Name = txtName.Text;
             productModel.Price = decimal.Parse(txtPrice.Text);
             productModel.Unit = txtUnit.Text;
-            await Task.Run(() =>productService.Add(productModel));
+            await Task.Run(() =>_productService.Add(productModel));
         }
         
        

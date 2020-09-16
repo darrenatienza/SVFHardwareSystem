@@ -1,8 +1,11 @@
-﻿using System;
+﻿using SVFHardwareSystem.Services;
+using SVFHardwareSystem.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Unity;
 
 namespace SVFHardwareSystem.Ui
 {
@@ -14,9 +17,13 @@ namespace SVFHardwareSystem.Ui
         [STAThread]
         static void Main()
         {
+           
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmProductForm());
+
+            var form = UnityConfig
+                .Register().Resolve<frmCustomerForm>();
+            Application.Run(form);
         }
     }
 }

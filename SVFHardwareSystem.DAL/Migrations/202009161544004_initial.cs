@@ -17,6 +17,17 @@
                 .PrimaryKey(t => t.CategoryID);
             
             CreateTable(
+                "dbo.Customers",
+                c => new
+                    {
+                        CustomerID = c.Int(nullable: false, identity: true),
+                        FullName = c.String(),
+                        Address = c.String(),
+                        ContactNumber = c.String(),
+                    })
+                .PrimaryKey(t => t.CustomerID);
+            
+            CreateTable(
                 "dbo.Products",
                 c => new
                     {
@@ -33,6 +44,7 @@
         public override void Down()
         {
             DropTable("dbo.Products");
+            DropTable("dbo.Customers");
             DropTable("dbo.Categories");
         }
     }

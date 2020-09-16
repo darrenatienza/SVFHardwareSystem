@@ -1,4 +1,6 @@
 ﻿using MetroFramework.Forms;
+using SVFHardwareSystem.Services.Interfaces;
+using SVFHardwareSystem.Services.ServiceModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +15,13 @@ namespace SVFHardwareSystem.Ui
 {
     public partial class frmCategory : MetroForm
     {
-        public frmCategory()
+        ICategoryService _categoryService;
+
+        public frmCategory(ICategoryService categoryService)
         {
             InitializeComponent();
+            _categoryService = categoryService;
+
         }
 
         private void frmCategory_Load(object sender, EventArgs e)
@@ -25,6 +31,14 @@ namespace SVFHardwareSystem.Ui
 
         private void metroTextBox1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private async void btnSave_Click(object sender, EventArgs e)
+        {
+            var category = new CategoryModel();
+            category.Name = txtName.Text;
+           await  Task.Run(() =>_categoryService.Add(category).ConfigureAwait(false));
 
         }
     }

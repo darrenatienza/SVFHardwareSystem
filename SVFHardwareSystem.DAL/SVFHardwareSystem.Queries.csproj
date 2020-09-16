@@ -55,12 +55,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductInventory.cs" />
     <Compile Include="DataContext.cs" />
-    <Compile Include="Migrations\202009161830411_initial.cs" />
-    <Compile Include="Migrations\202009161830411_initial.designer.cs">
-      <DependentUpon>202009161830411_initial.cs</DependentUpon>
+    <Compile Include="Migrations\202009161544004_initial.cs" />
+    <Compile Include="Migrations\202009161544004_initial.designer.cs">
+      <DependentUpon>202009161544004_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,8 +71,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202009161830411_initial.resx">
-      <DependentUpon>202009161830411_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202009161544004_initial.resx">
+      <DependentUpon>202009161544004_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

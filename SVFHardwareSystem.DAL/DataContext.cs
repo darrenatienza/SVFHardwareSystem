@@ -10,11 +10,13 @@ namespace SVFHardwareSystem.Queries
 {
     public class DataContext : DbContext
     {
-        public DataContext() : base("DataContext")
+        public DataContext() : base("name=DataContext")
         {
-
+            Configuration.LazyLoadingEnabled = true;
         }
+        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+       
     }
 }

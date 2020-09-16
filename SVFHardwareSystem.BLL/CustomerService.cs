@@ -11,36 +11,39 @@ using System.Threading.Tasks;
 
 namespace SVFHardwareSystem.Services
 {
-    public class CategoryService : ICategoryService
+    public class CustomerService : ICustomerService
     {
-
-        public CategoryService()
+        public async Task<int> Add(CustomerModel obj)
         {
-           
-        }
-
-        public async Task<int> Add(CategoryModel obj)
-        {
-            using (var db = new DataContext())
+            try
             {
-                var category = Mapping.Mapper.Map<Category>(obj);
-                db.Categories.Add(category);
-                await db.SaveChangesAsync();
-                return category.CategoryID;
+                using (var db = new DataContext())
+                {
+                    var customer = Mapping.Mapper.Map<Customer>(obj);
+                    db.Customers.Add(customer);
+                    await db.SaveChangesAsync();
+                    return customer.CustomerID;
+                }
             }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            
         }
 
-        public int Edit(int id, CategoryModel obj)
+        public int Edit(int id, CustomerModel obj)
         {
             throw new NotImplementedException();
         }
 
-        public CategoryModel Get(int id)
+        public CustomerModel Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<CategoryModel> GetAll()
+        public IList<CustomerModel> GetAll()
         {
             throw new NotImplementedException();
         }
