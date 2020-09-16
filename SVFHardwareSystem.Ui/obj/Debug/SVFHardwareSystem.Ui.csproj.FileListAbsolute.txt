@@ -23,3 +23,11 @@ C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVF
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmCustomerForm.resources
 C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmProductForm.resources
 C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmSaleForm.resources
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SVFHardwareSystem.Services.dll
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SVFHardwareSystem.DAL.dll
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\AutoMapper.dll
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SVFHardwareSystem.Services.pdb
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SVFHardwareSystem.Services.dll.config
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SVFHardwareSystem.DAL.pdb
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SVFHardwareSystem.DAL.dll.config
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\AutoMapper.xml

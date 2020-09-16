@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVFHardwareSystem.Ui", "SVFHardwareSystem.Ui\SVFHardwareSystem.Ui.csproj", "{C96E89B5-0C6A-49F8-ABC7-7D8E5C7E27D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVFHardwareSystem.BLL", "SVFHardwareSystem.BLL\SVFHardwareSystem.BLL.csproj", "{B9976CF2-6FBA-4E02-A9C4-2B11B0D7B9DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVFHardwareSystem.Services", "SVFHardwareSystem.BLL\SVFHardwareSystem.Services.csproj", "{B9976CF2-6FBA-4E02-A9C4-2B11B0D7B9DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVFHardwareSystem.DAL", "SVFHardwareSystem.DAL\SVFHardwareSystem.DAL.csproj", "{44DDEC24-5AAE-44FB-9F05-4BF60138BAA5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVFHardwareSystem.Queries", "SVFHardwareSystem.DAL\SVFHardwareSystem.Queries.csproj", "{44DDEC24-5AAE-44FB-9F05-4BF60138BAA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

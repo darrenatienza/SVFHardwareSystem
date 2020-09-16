@@ -4,16 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SVFHardwareSystem.DAL.Core
+namespace SVFHardwareSystem.Services.ServiceModels
 {
-    public class Product
+    public class ProductModel
     {
-        public Product() { }
-        public int ProductID { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
         public string Unit { get; set; }
         public decimal Price { get; set; }
-
     }
 }
