@@ -15,8 +15,7 @@ namespace SVFHardwareSystem.Services
     {
         public async Task<int> Add(CustomerModel obj)
         {
-            try
-            {
+           
                 using (var db = new DataContext())
                 {
                     var customer = Mapping.Mapper.Map<Customer>(obj);
@@ -24,31 +23,26 @@ namespace SVFHardwareSystem.Services
                     await db.SaveChangesAsync();
                     return customer.CustomerID;
                 }
-            }
-            catch (Exception e)
-            {
-
-                throw e;
-            }
+           
             
         }
 
-        public int Edit(int id, CustomerModel obj)
+        public async Task<int> Edit(int id, CustomerModel obj)
         {
             throw new NotImplementedException();
         }
 
-        public CustomerModel Get(int id)
+        public async Task<CustomerModel> Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<CustomerModel> GetAll()
+        public Task<IList<CustomerModel>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public int Remove(int id)
+        public async Task Remove(int id)
         {
             throw new NotImplementedException();
         }

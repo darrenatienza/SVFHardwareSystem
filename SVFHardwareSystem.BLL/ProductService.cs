@@ -32,22 +32,22 @@ namespace SVFHardwareSystem.Services
 
        
 
-        public int Edit(int id, ProductModel obj)
+        public async Task<int> Edit(int id, ProductModel obj)
         {
             throw new NotImplementedException();
         }
 
-        public ProductModel Get(int id)
+        public async Task<ProductModel> Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IList<ProductModel> GetAll()
+        public async Task<IList<ProductModel>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public int Remove(int id)
+        public async Task Remove(int id)
         {
             throw new NotImplementedException();
         }

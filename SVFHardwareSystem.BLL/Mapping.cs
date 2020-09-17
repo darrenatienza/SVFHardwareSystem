@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using AutoMapper.Collection;
+using AutoMapper.EquivalencyExpression;
 using SVFHardwareSystem.DAL.Entities;
 using SVFHardwareSystem.Services.ServiceModels;
 using System;
@@ -17,6 +19,8 @@ namespace AutoMap
                 // This line ensures that internal properties are also mapped over.
                 cfg.ShouldMapProperty = p => p.GetMethod.IsPublic || p.GetMethod.IsAssembly;
                 cfg.AddProfile<MappingProfile>();
+                cfg.AllowNullCollections = true;
+                cfg.AddCollectionMappers();
             });
             var mapper = config.CreateMapper();
             return mapper;
@@ -30,8 +34,12 @@ namespace AutoMap
         {
             CreateMap<Product, ProductModel>();
             CreateMap<ProductModel, Product>();
-            CreateMap<CategoryModel, Category>();
+            // ignoring category id for updating entity
+            CreateMap<CategoryModel, Category>().ForMember(dest => dest.CategoryID, act => act.Ignore());
+
+            CreateMap<Category, CategoryModel>();
             CreateMap<CustomerModel, Customer>();
+           
             // Additional mappings here...
         }
     }

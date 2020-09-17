@@ -9,5 +9,6 @@ namespace SVFHardwareSystem.Services.Interfaces
 {
     public interface ICategoryService : IService<CategoryModel>
     {
+        
     }
 }

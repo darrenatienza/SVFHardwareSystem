@@ -8,10 +8,10 @@ namespace SVFHardwareSystem.Services.Interfaces
 {
     public interface IService<T> where T : class
     {
-        T Get(int id);
-        IList<T> GetAll();
+        Task<T> Get(int id);
+        Task <IList<T>> GetAll();
         Task<int> Add(T obj);
-        int Edit(int id, T obj);
-        int Remove(int id);
+        Task<int> Edit(int id, T obj);
+        Task Remove(int id);
     }
 }

@@ -28,18 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
-            "1",
-            "Product 1 asdfasdfasdfasdfasdfasf",
-            "kg",
-            "5",
-            "250"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
-            "2",
-            "Product 2",
-            "Sock",
-            "50",
-            "753"}, -1);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -48,7 +36,7 @@
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.metroListView1 = new MetroFramework.Controls.MetroListView();
+            this.lvCategories = new MetroFramework.Controls.MetroListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1 = new System.Windows.Forms.Panel();
@@ -73,7 +61,7 @@
             this.toolStripButton3});
             this.toolStrip1.Location = new System.Drawing.Point(20, 60);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(528, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(636, 25);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -108,6 +96,7 @@
             // 
             // toolStripTextBox1
             // 
+            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.Size = new System.Drawing.Size(100, 25);
             this.toolStripTextBox1.ToolTipText = "Search";
@@ -124,40 +113,38 @@
             // 
             // metroPanel1
             // 
-            this.metroPanel1.Controls.Add(this.metroListView1);
+            this.metroPanel1.Controls.Add(this.lvCategories);
             this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
             this.metroPanel1.Location = new System.Drawing.Point(20, 85);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(244, 280);
+            this.metroPanel1.Size = new System.Drawing.Size(354, 280);
             this.metroPanel1.TabIndex = 6;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
-            // metroListView1
+            // lvCategories
             // 
-            this.metroListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvCategories.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
-            this.metroListView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroListView1.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.metroListView1.FullRowSelect = true;
-            this.metroListView1.GridLines = true;
-            this.metroListView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-            this.metroListView1.Location = new System.Drawing.Point(0, 0);
-            this.metroListView1.Name = "metroListView1";
-            this.metroListView1.OwnerDraw = true;
-            this.metroListView1.Size = new System.Drawing.Size(244, 280);
-            this.metroListView1.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroListView1.TabIndex = 6;
-            this.metroListView1.UseCompatibleStateImageBehavior = false;
-            this.metroListView1.UseSelectable = true;
-            this.metroListView1.View = System.Windows.Forms.View.Details;
+            this.lvCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvCategories.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lvCategories.FullRowSelect = true;
+            this.lvCategories.GridLines = true;
+            this.lvCategories.Location = new System.Drawing.Point(0, 0);
+            this.lvCategories.Name = "lvCategories";
+            this.lvCategories.OwnerDraw = true;
+            this.lvCategories.Size = new System.Drawing.Size(354, 280);
+            this.lvCategories.Style = MetroFramework.MetroColorStyle.Blue;
+            this.lvCategories.TabIndex = 6;
+            this.lvCategories.UseCompatibleStateImageBehavior = false;
+            this.lvCategories.UseSelectable = true;
+            this.lvCategories.View = System.Windows.Forms.View.Details;
+            this.lvCategories.SelectedIndexChanged += new System.EventHandler(this.lvCategories_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -176,9 +163,9 @@
             this.panel1.Controls.Add(this.txtName);
             this.panel1.Controls.Add(this.metroLabel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(264, 85);
+            this.panel1.Location = new System.Drawing.Point(374, 85);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(284, 280);
+            this.panel1.Size = new System.Drawing.Size(282, 280);
             this.panel1.TabIndex = 7;
             // 
             // metroLabel2
@@ -249,7 +236,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(568, 385);
+            this.ClientSize = new System.Drawing.Size(676, 385);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.toolStrip1);
@@ -277,7 +264,7 @@
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private MetroFramework.Controls.MetroPanel metroPanel1;
-        private MetroFramework.Controls.MetroListView metroListView1;
+        private MetroFramework.Controls.MetroListView lvCategories;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Panel panel1;

@@ -5,6 +5,8 @@ using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,22 +32,44 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public int Edit(int id, CategoryModel obj)
+        public void AddNewRecord()
         {
             throw new NotImplementedException();
         }
 
-        public CategoryModel Get(int id)
+        public async Task<int> Edit(int id, CategoryModel obj)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext())
+            {
+                var entity = db.Categories.Find(id);
+                var category = Mapping.Mapper.Map(obj,entity);
+                db.Entry(category).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return category.CategoryID;
+            }
         }
 
-        public IList<CategoryModel> GetAll()
+        public async Task<CategoryModel> Get(int id)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext())
+            {
+                var obj = db.Categories.Find(id);
+                var model = obj != null ? Mapping.Mapper.Map<CategoryModel>(obj) : throw new KeyNotFoundException();
+                return model;
+            }
         }
 
-        public int Remove(int id)
+        public async Task<IList<CategoryModel>> GetAll()
+        {
+            using (var db = new DataContext())
+            {
+                List<Category> objs = await db.Categories.ToListAsync();
+                var models = Mapping.Mapper.Map<List<CategoryModel>>(objs);
+                return models;
+            }
+        }
+
+        public async Task Remove(int id)
         {
             throw new NotImplementedException();
         }
