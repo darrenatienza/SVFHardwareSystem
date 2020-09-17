@@ -36,10 +36,11 @@ namespace AutoMap
             CreateMap<ProductModel, Product>();
             // ignoring category id for updating entity
             CreateMap<CategoryModel, Category>().ForMember(dest => dest.CategoryID, act => act.Ignore());
-
             CreateMap<Category, CategoryModel>();
-            CreateMap<CustomerModel, Customer>();
-           
+            // ignoring category id for updating entity
+            CreateMap<CustomerModel, Customer>().ForMember(dest => dest.CustomerID, act => act.Ignore()); ;
+            CreateMap<Customer, CustomerModel>();
+
             // Additional mappings here...
         }
     }

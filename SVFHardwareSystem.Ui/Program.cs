@@ -22,7 +22,7 @@ namespace SVFHardwareSystem.Ui
             Application.SetCompatibleTextRenderingDefault(false);
 
             var form = UnityConfig
-                .Register().Resolve<frmCategory>();
+                .Register().Resolve<frmCustomers>();
             Application.Run(form);
         }
     }

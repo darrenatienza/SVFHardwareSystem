@@ -9,6 +9,6 @@ namespace SVFHardwareSystem.Services.Interfaces
 {
     public interface ICategoryService : IService<CategoryModel>
     {
-        
+        Task<IList<CategoryModel>> GetAll(string criteria);
     }
 }

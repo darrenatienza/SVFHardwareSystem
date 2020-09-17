@@ -10,8 +10,8 @@ namespace SVFHardwareSystem.Services.Interfaces
     {
         Task<T> Get(int id);
         Task <IList<T>> GetAll();
-        Task<int> Add(T obj);
-        Task<int> Edit(int id, T obj);
+        Task<int> Add(T model);
+        Task<int> Edit(int id, T model);
         Task Remove(int id);
     }
 }

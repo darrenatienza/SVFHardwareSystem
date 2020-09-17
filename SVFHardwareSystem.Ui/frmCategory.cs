@@ -71,7 +71,6 @@ namespace SVFHardwareSystem.Ui
                 else
                 {
                     //add
-                   
                     await _categoryService.Add(category);
                 }
                 
@@ -97,6 +96,68 @@ namespace SVFHardwareSystem.Ui
                     txtName.Text = category.Name;
                 }
                 
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString());
+            }
+        }
+
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    var dialogResult = MetroMessageBox.Show(this, "Do you want to delete this record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                       await _categoryService.Remove(id);
+                        id = 0;
+                        ResetInputValues();
+                    }
+                    await LoadCategories();
+                    
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "No record selected to remove", "Notification", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString());
+            }
+        }
+
+        private void ResetInputValues()
+        {
+            txtName.ResetText();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            ResetInputValues();
+            id = 0;
+        }
+
+        private async void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var categories = await _categoryService.GetAll(txtSearch.Text);
+                int count = 0;
+                lvCategories.Items.Clear();
+                foreach (var item in categories)
+                {
+                    count++;
+                    var lvi = new ListViewItem(count.ToString());
+                    lvi.SubItems.Add(item.Name);
+                    lvi.Tag = item.CategoryID;
+                    lvCategories.Items.Add(lvi);
+                }
             }
             catch (Exception ex)
             {

@@ -32,10 +32,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public void AddNewRecord()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public async Task<int> Edit(int id, CategoryModel obj)
         {
@@ -69,9 +66,24 @@ namespace SVFHardwareSystem.Services
             }
         }
 
+        public async Task<IList<CategoryModel>> GetAll(string criteria)
+        {
+            using (var db = new DataContext())
+            {
+                List<Category> objs = await db.Categories.Where(x => x.Name.Contains(criteria)).ToListAsync();
+                var models = Mapping.Mapper.Map<List<CategoryModel>>(objs);
+                return models;
+            }
+        }
+
         public async Task Remove(int id)
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext())
+            {
+                var entity = db.Categories.Find(id);
+                db.Categories.Remove(entity);
+                await db.SaveChangesAsync();
+            }
         }
     }
 }
