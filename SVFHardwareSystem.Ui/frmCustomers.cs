@@ -40,17 +40,19 @@ namespace SVFHardwareSystem.Ui
             {
                 var customers = await _customerService.GetAll();
                 int count = 0;
-                lvCustomers.Items.Clear();
+                gridCustomers.Rows.Clear();
                 foreach (var item in customers)
                 {
                     count++;
-                    var lvi = new ListViewItem(count.ToString());
-                    lvi.SubItems.Add(item.FullName);
-                    lvi.SubItems.Add(item.Address);
-                    lvi.SubItems.Add(item.ContactNumber);
-                    lvi.Tag = item.CustomerID;
-                    lvCustomers.Items.Add(lvi);
+                    gridCustomers.Rows.Add(new string[] {
+                            item.CustomerID.ToString(),
+                            count.ToString(),
+                            item.FullName,
+                            item.Address,
+                    item.ContactNumber});
                 }
+              
+
             }
             catch (Exception ex)
             {
@@ -63,20 +65,24 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
- 
+                
                 var categories = await _customerService.GetAll(txtSearch.Text);
                 int count = 0;
-                lvCustomers.Items.Clear();
+                gridCustomers.Rows.Clear();
                 foreach (var item in categories)
                 {
                     count++;
-                    var lvi = new ListViewItem(count.ToString());
-                    lvi.SubItems.Add(item.FullName);
-                    lvi.SubItems.Add(item.Address);
-                    lvi.SubItems.Add(item.ContactNumber);
-                    lvi.Tag = item.CustomerID;
-                    lvCustomers.Items.Add(lvi);
+                    gridCustomers.Rows.Add(new string[] {
+                            item.CustomerID.ToString(),
+                            count.ToString(),
+                            item.FullName,
+                            item.Address,
+                    item.ContactNumber});
                 }
+               
+               
+
+
             }
             catch (Exception ex)
             {
@@ -120,23 +126,7 @@ namespace SVFHardwareSystem.Ui
             }
         }
 
-        private async void lvCustomers_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try {
-                id = lvCustomers.SelectedItems.Count > 0 ? int.Parse(lvCustomers.SelectedItems[0].Tag.ToString()) : 0;
-                if (id > 0)
-                {
-                    var category = await _customerService.Get(id);
-                    
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                MetroMessageBox.Show(this, ex.ToString());
-            }
-        }
+       
 
         private async void btnEdit_Click(object sender, EventArgs e)
         {
@@ -144,6 +134,19 @@ namespace SVFHardwareSystem.Ui
                .Register().RegisterType<frmCustomerForm>(new InjectionConstructor(new object[] { new CustomerService(), id })).Resolve<frmCustomerForm>();
             form.ShowDialog();
             await LoadCustomers();
+        }
+
+        private void gridCustomers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var grid = gridCustomers;
+
+            if (grid.SelectedRows.Count > 0)
+            {
+                id = int.Parse(grid.SelectedRows[0].Cells[0].Value.ToString());
+                
+
+
+            }
         }
     }
 }

@@ -1,6 +1,8 @@
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SVFHardwareSystem.Ui.exe.config
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SVFHardwareSystem.Ui.exe
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SVFHardwareSystem.Ui.pdb
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\AutoMapper.Collection.dll
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\AutoMapper.dll
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\EntityFramework.dll
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\MetroFramework.Design.dll
@@ -10,17 +12,16 @@ C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SVF
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\Unity.Abstractions.dll
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\Unity.Container.dll
-C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\AutoMapper.dll
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SVFHardwareSystem.DAL.dll
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\System.Threading.Tasks.Extensions.dll
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SVFHardwareSystem.Services.pdb
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SVFHardwareSystem.Services.dll.config
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\AutoMapper.xml
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\EntityFramework.xml
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\Unity.Abstractions.pdb
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\Unity.Container.pdb
-C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\AutoMapper.xml
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SVFHardwareSystem.DAL.pdb
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SVFHardwareSystem.DAL.dll.config
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.csprojAssemblyReference.cache
@@ -38,4 +39,6 @@ C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVF
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.csproj.CopyComplete
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.exe
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.pdb
-C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\AutoMapper.Collection.dll
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmPointofSale.resources
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmPointofSaleQuantityEdit.resources
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmSalesReturned.resources
