@@ -15,7 +15,9 @@ namespace SVFHardwareSystem.Ui
     {
         public frmPointofSale()
         {
+
             InitializeComponent();
+            metroTextBox2.CustomButton.Click += CustomButton_Click;
         }
 
         private void frmPointofSale_Load(object sender, EventArgs e)
@@ -25,7 +27,12 @@ namespace SVFHardwareSystem.Ui
 
         private void btnSaveTransaction_Click(object sender, EventArgs e)
         {
-            txtTotal.Text = "10000.00";
+           
+        }
+
+        private void CustomButton_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

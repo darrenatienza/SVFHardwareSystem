@@ -150,6 +150,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="frmSalesReceivablesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSalesReceivablesForm.Designer.cs">
+      <DependentUpon>frmSalesReceivablesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UnityConfig.cs" />
     <EmbeddedResource Include="frmCategory.resx">
       <DependentUpon>frmCategory.cs</DependentUpon>
@@ -194,6 +200,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="frmSalesReceivablesForm.resx">
+      <DependentUpon>frmSalesReceivablesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

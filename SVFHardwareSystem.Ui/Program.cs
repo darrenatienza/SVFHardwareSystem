@@ -17,12 +17,13 @@ namespace SVFHardwareSystem.Ui
         [STAThread]
         static void Main()
         {
-           
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             var form = UnityConfig
-                .Register().Resolve<frmSalesReturned>();
+                .Register().Resolve<frmPointofSale>();
+
             Application.Run(form);
         }
     }
