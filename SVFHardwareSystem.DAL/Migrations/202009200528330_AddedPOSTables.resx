@@ -117,23 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Target" xml:space="preserve">
+    <value>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</value>
   </data>
-  <data name="edit-3-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\edit-3-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="plus-4-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\plus-4-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="trash-2-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\trash-2-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="shopping-basket-2-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\shopping-basket-2-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="shopping-basket-2-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\shopping-basket-2-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DefaultSchema" xml:space="preserve">
+    <value>dbo</value>
   </data>
 </root>

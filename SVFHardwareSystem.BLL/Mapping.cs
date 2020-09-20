@@ -40,6 +40,9 @@ namespace AutoMap
             // ignoring category id for updating entity
             CreateMap<CustomerModel, Customer>().ForMember(dest => dest.CustomerID, act => act.Ignore()); ;
             CreateMap<Customer, CustomerModel>();
+            //
+            CreateMap<POSTransaction, POSTransactionModel>();
+            CreateMap<POSTransactionModel, POSTransaction>();
 
             // Additional mappings here...
         }

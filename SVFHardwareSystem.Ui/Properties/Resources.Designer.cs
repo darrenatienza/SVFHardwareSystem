@@ -93,6 +93,26 @@ namespace SVFHardwareSystem.Ui.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap shopping_basket_2_24 {
+            get {
+                object obj = ResourceManager.GetObject("shopping-basket-2-24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap shopping_basket_2_32 {
+            get {
+                object obj = ResourceManager.GetObject("shopping-basket-2-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap trash_2_48 {
             get {
                 object obj = ResourceManager.GetObject("trash-2-48", resourceCulture);

@@ -60,15 +60,22 @@
     <Compile Include="CustomerService.cs" />
     <Compile Include="Interfaces\ICustomerService.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
+    <Compile Include="Interfaces\IPOSPaymentService.cs" />
+    <Compile Include="Interfaces\IPOSTransactionService.cs" />
+    <Compile Include="Interfaces\ITransactionProductService.cs" />
     <Compile Include="Mapping.cs" />
     <Compile Include="CategoryService.cs" />
+    <Compile Include="POSTransactionService.cs" />
     <Compile Include="ProductService.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
     <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceModels\CategoryModel.cs" />
     <Compile Include="ServiceModels\CustomerModel.cs" />
+    <Compile Include="ServiceModels\POSPaymentModel.cs" />
+    <Compile Include="ServiceModels\POSTransactionModel.cs" />
     <Compile Include="ServiceModels\ProductModel.cs" />
+    <Compile Include="ServiceModels\TransactionProductModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SVFHardwareSystem.DAL\SVFHardwareSystem.Queries.csproj">

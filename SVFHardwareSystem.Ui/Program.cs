@@ -21,10 +21,14 @@ namespace SVFHardwareSystem.Ui
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var form = UnityConfig
-                .Register().Resolve<frmPointofSale>();
+            
 
-            Application.Run(form);
+            Application.Run(CallPointofSale());
+        }
+        static frmPointofSale CallPointofSale()
+        {
+            return UnityConfig
+                            .Register().Resolve<frmPointofSale>();
         }
     }
 }
