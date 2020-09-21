@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 
 namespace SVFHardwareSystem.Services.Interfaces
 {
+    /// <summary>
+    /// Base Services Interface
+    /// </summary>
+    /// <typeparam name="T">T is model</typeparam>
     public interface IService<T> where T : class
     {
         Task<T> Get(int id);
         Task <IList<T>> GetAll();
-        Task<int> Add(T model);
-        Task<int> Edit(int id, T model);
+        Task Add(T model);
+        Task Edit(int id, T model);
         Task Remove(int id);
     }
 }

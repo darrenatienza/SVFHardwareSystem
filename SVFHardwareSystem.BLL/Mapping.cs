@@ -44,6 +44,10 @@ namespace AutoMap
             CreateMap<POSTransaction, POSTransactionModel>();
             CreateMap<POSTransactionModel, POSTransaction>();
 
+            //
+            CreateMap<TransactionProduct, TransactionProductModel>();
+            CreateMap<TransactionProductModel, TransactionProduct>();
+
             // Additional mappings here...
         }
     }

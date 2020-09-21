@@ -11,47 +11,21 @@ using System.Threading.Tasks;
 
 namespace SVFHardwareSystem.Services
 {
-    public class ProductService : IProductService
+    public class ProductService : Service<ProductModel,Product>, IProductService
     {
 
         public ProductService()
         {
            
         }
-        public async Task<int> Add(ProductModel obj)
+
+        public int GetProductID(string productName)
         {
             using (var db = new DataContext())
             {
-                var product = Mapping.Mapper.Map<Product>(obj);
-                db.Products.Add(product);
-                await db.SaveChangesAsync();
-                return product.ProductID;
+                var product = db.Products.FirstOrDefault(x => x.Name == productName);
+                return product == null ? 0 : product.ProductID;
             }
-
         }
-
-       
-
-        public async Task<int> Edit(int id, ProductModel obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<ProductModel> Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IList<ProductModel>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        
     }
 }

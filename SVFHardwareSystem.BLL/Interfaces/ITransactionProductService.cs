@@ -9,5 +9,6 @@ namespace SVFHardwareSystem.Services.Interfaces
 {
     public interface ITransactionProductService : IService<TransactionProductModel>
     {
+        Task<IList<TransactionProductModel>> GetProductsByTransactionID(int id);
     }
 }

@@ -9,5 +9,6 @@ namespace SVFHardwareSystem.Services.Interfaces
 {
     public interface IProductService : IService<ProductModel>
     {
+        int GetProductID(string productName);
     }
 }

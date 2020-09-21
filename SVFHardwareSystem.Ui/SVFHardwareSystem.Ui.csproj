@@ -241,6 +241,18 @@
   <ItemGroup>
     <None Include="Resources\shopping-basket-2-24.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add-64 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\banknotes-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\banknotes-641.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

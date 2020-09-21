@@ -63,9 +63,49 @@ namespace SVFHardwareSystem.Ui.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap add_64__1_ {
+            get {
+                object obj = ResourceManager.GetObject("add-64 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap banknotes_64 {
+            get {
+                object obj = ResourceManager.GetObject("banknotes-64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap banknotes_641 {
+            get {
+                object obj = ResourceManager.GetObject("banknotes-641", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap edit_3_48 {
             get {
                 object obj = ResourceManager.GetObject("edit-3-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_64 {
+            get {
+                object obj = ResourceManager.GetObject("money-64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

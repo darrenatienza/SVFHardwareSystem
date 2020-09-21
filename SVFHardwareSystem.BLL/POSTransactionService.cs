@@ -11,39 +11,10 @@ using System.Threading.Tasks;
 
 namespace SVFHardwareSystem.Services
 {
-    public class POSTransactionService : IPOSTransactionService
+    public class POSTransactionService : Service<POSTransactionModel,POSTransaction>, IPOSTransactionService
     {
         public POSTransactionService() { }
 
-        public async Task<int> Add(POSTransactionModel model)
-        {
-            using (var db = new DataContext())
-            {
-                var postransaction = Mapping.Mapper.Map<POSTransaction>(model);
-                db.POSTransactions.Add(postransaction);
-                await db.SaveChangesAsync();
-                return postransaction.POSTransactionID;
-            }
-        }
-
-        public async Task<int> Edit(int id, POSTransactionModel model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<POSTransactionModel> Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IList<POSTransactionModel>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
