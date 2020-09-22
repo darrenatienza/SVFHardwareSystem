@@ -10,5 +10,7 @@ namespace SVFHardwareSystem.Services.Interfaces
 {
     public interface IPOSTransactionService : IService<POSTransactionModel>
     {
+        Task<POSTransactionModel> Get(string code);
+        POSTransactionModel GetUnFinishedTransaction();
     }
 }

@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,20 +17,21 @@ namespace SVFHardwareSystem.Ui
 {
     public partial class frmPointofSale : MetroForm
     {
-        private int id;
+        private int posTransactionID;
         private IPOSTransactionService _posTransactionService;
         private IProductService _productService;
         private ITransactionProductService _transactionProductService;
+        private int transactionProductID;
 
         public frmPointofSale(IPOSTransactionService posTransactionService, 
             IProductService productService, ITransactionProductService transactionProductService)
         {
 
             InitializeComponent();
-            txtProductName.CustomButton.Click += CustomButton_Click;
             _posTransactionService = posTransactionService;
             _productService = productService;
             _transactionProductService = transactionProductService;
+            gridList.CellValueChanged += GridList_CellValueChanged;
         }
 
         private  void frmPointofSale_Load(object sender, EventArgs e)
@@ -37,8 +39,22 @@ namespace SVFHardwareSystem.Ui
         {
 
              loadAutoCompleteData();
-            LoadProductsOnTransaction();
+            GenerateNewOrLoadUnFinishedPOSTransaction();
+         
 
+        }
+
+        private void GenerateNewOrLoadUnFinishedPOSTransaction()
+        {
+            try
+            {
+                var previousPOSTransaction = _posTransactionService.GetUnFinishedTransaction();
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString());
+            }
         }
 
         private async void btnSaveTransaction_Click(object sender, EventArgs e)
@@ -46,15 +62,15 @@ namespace SVFHardwareSystem.Ui
             try
             {
                 var posTransaction = new POSTransactionModel();
-                id = 2;
+                posTransactionID = 2;
                 posTransaction.CustomerID = 2;
                 posTransaction.Cost = txtCost.Text;
                 posTransaction.CreateTimeStamp = DateTime.Now;
                 posTransaction.SIDR = txtSIDR.Text;
                 //edit
-                if (id > 0)
+                if (posTransactionID > 0)
                 {
-                    await _posTransactionService.Edit(id, posTransaction);
+                    await _posTransactionService.Edit(posTransactionID, posTransaction);
                 }
                 else
                 {
@@ -71,10 +87,7 @@ namespace SVFHardwareSystem.Ui
             }
         }
 
-        private void CustomButton_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        
         //AutoCompleteData Method
         private async void loadAutoCompleteData()
         {
@@ -109,6 +122,7 @@ namespace SVFHardwareSystem.Ui
                 var transactionProductModel = new TransactionProductModel();
                 transactionProductModel.ProductID = productID;
                 transactionProductModel.IsPaid = false;
+                transactionProductModel.IsToPay = true;
                 transactionProductModel.POSTransactionID = 2;
                 transactionProductModel.Quantity = 1;
                 transactionProductModel.UpdateTimeStamp = DateTime.Now;
@@ -129,26 +143,44 @@ namespace SVFHardwareSystem.Ui
             
         }
 
-        private async void LoadProductsOnTransaction()
+        private async Task LoadProductsOnTransaction()
         {
             try
             {
-                var productsOnTransaction = await _transactionProductService.GetProductsByTransactionID(2);
-                int count = 0;
+                var productsOnTransaction = await _transactionProductService.GetProductsByTransactionID(posTransactionID);
+                
+                int rowIndex = 0; // index of rows
+                int checkboxColumnIndex = 1;
                 gridList.Rows.Clear();
+                decimal total = 0;
                 foreach (var item in productsOnTransaction)
                 {
-                    gridList.Rows.Add(new string[] {
+                    gridList.Rows.Add(new object[] {
                             item.TransactionProductID.ToString(),
-                            count.ToString(),
+                           item.IsToPay,
                             item.ProductName,
                             item.ProductPrice.ToString(),
                     item.Quantity.ToString(),
                     item.Total.ToString()});
+                    DataGridViewCheckBoxCell chk = gridList.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
+                    if (item.IsPaid)
+                    {
+                        chk.ReadOnly = true;
+                        chk.ToolTipText = "This item is already paid!";
+                    }
+                    rowIndex++; // increment for proceeding to new row;
+
+
+                    //compute the total
+                    total += item.Total;
                 }
-               
-                
-                
+
+                txtTotal.Text = total.ToString();
+
+                //select all check box state must be update to avoid confusion on current state of list
+                UpdateSelecAllCheckboxState();
+
+
             }
             catch (Exception ex)
             {
@@ -161,13 +193,22 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                if (id > 0)
+                if (transactionProductID > 0)
                 {
-                    var dialogResult = MetroMessageBox.Show(this, "Do you want to delete this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    var dialogResult = MetroMessageBox.Show(this, "Do you want to remove this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        await _transactionProductService.Remove(id);
-                        id = 0;
+                        var transactionProduct = await _transactionProductService.Get(transactionProductID);
+                        if (!transactionProduct.IsPaid)
+                        {
+                            await _transactionProductService.Remove(transactionProductID);
+                            transactionProductID = 0;
+                        }
+                        else
+                        {
+                            MetroMessageBox.Show(this, "Product is already paid. You cannot remove the product!","Remove Product",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        }
+                       
                     }
                     LoadProductsOnTransaction();
 
@@ -185,15 +226,176 @@ namespace SVFHardwareSystem.Ui
            
         }
 
-        private void gridList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+       
+
+        
+        private void SelectAllProducts()
+        {
+            var rows = gridList.Rows;
+            int checkboxColumnIndex = 1;
+
+            transactionProductID = 0;
+            gridList.CellValueChanged -= GridList_CellValueChanged; // subscribe for future manual action
+            gridList.CellMouseUp -= gridList_CellMouseUp;
+            foreach (DataGridViewRow item in rows)
+            {
+                //row with readonly checkbox is already paid 
+                //then must not change the value
+                if (!item.Cells[checkboxColumnIndex].ReadOnly)
+                {
+                    var _transactionProductID = int.Parse(item.Cells[0].Value.ToString());
+                    item.Cells[checkboxColumnIndex].Value = chkSelectAll.Checked;
+                    var chkValue = bool.Parse(item.Cells[checkboxColumnIndex].Value.ToString());
+                    _transactionProductService.EditIsToPay(_transactionProductID, chkValue);
+
+                }
+            }
+            gridList.CellValueChanged += GridList_CellValueChanged; // subscribe for future manual action
+            gridList.CellMouseUp += gridList_CellMouseUp;
+        }
+        private void UpdateSelecAllCheckboxState()
+        {
+            // unsubcribe on checkbox event to avoid multiple event occurences 
+            // on checkbox while updating the state of select all checkbox
+            chkSelectAll.CheckedChanged -= ChkSelectAll_CheckedChanged; 
+
+            int totalRows = gridList.Rows.Count;
+            int unCheckRows = 0;
+            var rows = gridList.Rows;
+            int checkboxColumnIndex = 1;
+            foreach (DataGridViewRow item in rows)
+            {
+                if (!bool.Parse(item.Cells[checkboxColumnIndex].Value.ToString()))
+                {
+                    unCheckRows++;
+                }
+            }
+           
+            if (unCheckRows == totalRows)
+            {
+                chkSelectAll.CheckState = CheckState.Unchecked;
+            }
+            if (unCheckRows > 0 && unCheckRows < totalRows)
+            {
+                chkSelectAll.CheckState = CheckState.Indeterminate;
+            }
+            if (unCheckRows == 0)
+            {
+                chkSelectAll.CheckState = CheckState.Checked;
+            }
+            chkSelectAll.CheckedChanged += ChkSelectAll_CheckedChanged; // subcribe on checkbox event to handle future manual action on select all checkbox;
+        }
+
+        private void gridList_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // handles checkbox click event on datagridview
+            int checkboxColumnIndex = 1;
+            if (e.ColumnIndex == checkboxColumnIndex && e.RowIndex != -1)
+            {
+                gridList.EndEdit();
+            }
+        }
+
+        private void gridList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             var grid = gridList;
 
             if (grid.SelectedRows.Count > 0)
             {
-                id = int.Parse(grid.SelectedRows[0].Cells[0].Value.ToString());
+                transactionProductID = int.Parse(grid.SelectedRows[0].Cells[0].Value.ToString());
 
             }
+        }
+
+        private void frmPointofSale_Shown(object sender, EventArgs e)
+        {
+            //load only after all objects and event initialized to avoid
+            //recursive action on updating the state of select all checkbox
+            chkSelectAll.CheckedChanged += ChkSelectAll_CheckedChanged;
+        }
+
+        private void ChkSelectAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSelectAll.CheckState != CheckState.Indeterminate)
+            {
+                SelectAllProducts();
+            }
+            
+        }
+
+        private void GridList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                // handles checkbox click event on datagridview
+                int checkboxColumnIndex = 1;
+                if (e.ColumnIndex == checkboxColumnIndex && e.RowIndex != -1)
+                {
+                    if (transactionProductID > 0)
+                    {
+                        var rows = gridList.SelectedRows[0];
+                        var chkValue = bool.Parse(rows.Cells[checkboxColumnIndex].Value.ToString());
+                        _transactionProductService.EditIsToPay(transactionProductID, chkValue);
+                    }
+
+                }
+                UpdateSelecAllCheckboxState();
+
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString());
+            }
+        }
+
+
+        private async Task SetTransactionData()
+        {
+            try
+            {
+                if (txtSIDR.Text != "")
+                {
+                   
+                    var code = txtSIDR.Text;
+                    var posTransaction = await _posTransactionService.Get(code);
+                    posTransactionID = posTransaction.POSTransactionID;
+                   txtCost.Text = posTransaction.Cost;
+                    txtCustomerName.Text = posTransaction.CustomerFullName;
+                    await LoadProductsOnTransaction();
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Please provide SI/DR!", "SI/DR is empty!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtSIDR.WithError = true;
+                }
+                
+            }
+            catch (KeyNotFoundException)
+            {
+                MetroMessageBox.Show(this, "No Record Found on SI/DR!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                gridList.Rows.Clear();
+                txtCost.Text = "";
+                txtCustomerName.Text = "";
+                txtTotal.Text = "0.00";
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString());
+            }
+        }
+
+        private async void txtSIDR_ButtonClick(object sender, EventArgs e)
+        {
+            await SetTransactionData();
+            
+
+        }
+
+        private void txtProductName_ButtonClick(object sender, EventArgs e)
+        {
+
         }
     }
 }

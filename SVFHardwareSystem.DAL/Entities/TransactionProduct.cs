@@ -18,7 +18,14 @@ namespace SVFHardwareSystem.DAL.Entities
         public int POSTransactionID { get; set; }
         public virtual POSTransaction POSTransaction{get; set;}
         public int Quantity { get; set; }
+        /// <summary>
+        /// Indicates the product that is paid by customer
+        /// </summary>
         public bool IsPaid { get; set; }
+        /// <summary>
+        /// Indicates the product that will be paid in the future
+        /// </summary>
+        public bool IsToPay { get; set; }
         /// <summary>
         /// Indicates the time when the product transaction updated
         /// </summary>

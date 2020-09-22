@@ -19,7 +19,9 @@ namespace SVFHardwareSystem.DAL.Entities
         public virtual Customer Customer { get; set; }
         public string Cost { get; set; }
         public string SIDR { get; set; }
+        public bool IsFinish { get; set; }
         public ICollection<POSPayment> POSPayments { get; set; } = new HashSet<POSPayment>();
         public ICollection<TransactionProduct> TransactionProducts { get; set; } = new HashSet<TransactionProduct>();
+        
     }
 }

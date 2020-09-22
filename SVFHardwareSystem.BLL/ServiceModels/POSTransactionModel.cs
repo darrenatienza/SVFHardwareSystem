@@ -12,6 +12,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public string CustomerFullName { get; set; }
         public string Cost { get; set; }
         public string SIDR { get; set; }
-        public object CustomerID { get; set; }
+        public int CustomerID { get; set; }
+        public int POSTransactionID { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public string ProductName { get; set; }
         public int Quantity { get; set; }
         public bool IsPaid { get; set; }
+        public bool IsToPay { get; set; }
         /// <summary>
         /// Indicates the time when the product transaction updated
         /// </summary>
