@@ -7,13 +7,13 @@ namespace SVFHardwareSystem.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AddIFinishColumnOnPOSTransaction : IMigrationMetadata
+    public sealed partial class AddIsToPayOnPOSTransaction : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddIFinishColumnOnPOSTransaction));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddIsToPayOnPOSTransaction));
         
         string IMigrationMetadata.Id
         {
-            get { return "202009220849200_AddIFinishColumnOnPOSTransaction"; }
+            get { return "202009221428375_AddIsToPayOnPOSTransaction"; }
         }
         
         string IMigrationMetadata.Source

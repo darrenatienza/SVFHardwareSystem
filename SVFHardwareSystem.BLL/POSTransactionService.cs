@@ -15,6 +15,8 @@ namespace SVFHardwareSystem.Services
     {
         public POSTransactionService() { }
 
+       
+
         public async Task<POSTransactionModel> Get(string code)
         {
             using (var db = new DataContext())
@@ -30,9 +32,10 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var entity = db.POSTransactions.FirstOrDefault(x => x.IsFinish == false);
+                var entity = db.POSTransactions.FirstOrDefault(x => x.IsFinished == false);
                 var model = entity != null ? Mapping.Mapper.Map<POSTransactionModel>(entity) : throw new KeyNotFoundException();
                 return model;
+  
             }
         }
     }

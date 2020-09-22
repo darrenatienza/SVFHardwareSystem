@@ -3,16 +3,16 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddIFinishColumnOnPOSTransaction : DbMigration
+    public partial class AddIsToPayOnPOSTransaction : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.POSTransactions", "IsFinish", c => c.Boolean(nullable: false));
+            AddColumn("dbo.TransactionProducts", "IsToPay", c => c.Boolean(nullable: false));
         }
         
         public override void Down()
         {
-            DropColumn("dbo.POSTransactions", "IsFinish");
+            DropColumn("dbo.TransactionProducts", "IsToPay");
         }
     }
 }

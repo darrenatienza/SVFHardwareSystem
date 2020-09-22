@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,34 +22,50 @@ namespace SVFHardwareSystem.Ui
         private IPOSTransactionService _posTransactionService;
         private IProductService _productService;
         private ITransactionProductService _transactionProductService;
+        private ICustomerService _customerService;
         private int transactionProductID;
+        private int customerID;
 
         public frmPointofSale(IPOSTransactionService posTransactionService, 
-            IProductService productService, ITransactionProductService transactionProductService)
+            IProductService productService, ITransactionProductService transactionProductService,
+            ICustomerService customerService)
         {
 
             InitializeComponent();
             _posTransactionService = posTransactionService;
             _productService = productService;
             _transactionProductService = transactionProductService;
+            _customerService = customerService;
             gridList.CellValueChanged += GridList_CellValueChanged;
         }
 
-        private  void frmPointofSale_Load(object sender, EventArgs e)
+        private async void frmPointofSale_Load(object sender, EventArgs e)
 
         {
 
              loadAutoCompleteData();
-            GenerateNewOrLoadUnFinishedPOSTransaction();
+            await LoadAutoCompleteCustomersData();
+            await GenerateNewOrLoadUnFinishedPOSTransaction();
          
 
         }
 
-        private void GenerateNewOrLoadUnFinishedPOSTransaction()
+        private async Task GenerateNewOrLoadUnFinishedPOSTransaction()
         {
             try
             {
                 var previousPOSTransaction = _posTransactionService.GetUnFinishedTransaction();
+                txtCost.Text = previousPOSTransaction.Cost;
+                txtCustomerName.Text = previousPOSTransaction.CustomerFullName;
+                txtSIDR.Text = previousPOSTransaction.SIDR;
+                posTransactionID = previousPOSTransaction.POSTransactionID;
+                await LoadProductsOnTransaction();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                //no unfinished point of sale transaction found.
+                //create new transaction
+                MetroMessageBox.Show(this, "No unfinished transaction found, please create new transaction!","New Transaction",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
             }
             catch (Exception ex)
             {
@@ -103,6 +120,21 @@ namespace SVFHardwareSystem.Ui
             }
             
         }
+        //AutoCompleteData Method
+        private async Task LoadAutoCompleteCustomersData()
+        {
+
+            //Set AutoCompleteSource property of txt_StateName as CustomSource
+            txtCustomerName.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
+            txtCustomerName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            var customerNames = await _customerService.GetAll();
+            foreach (var item in customerNames)
+            {
+                txtCustomerName.AutoCompleteCustomSource.Add(item.FullName);
+            }
+
+        }
 
         private void txtProductName_KeyDown(object sender, KeyEventArgs e)
         {
@@ -127,7 +159,7 @@ namespace SVFHardwareSystem.Ui
                 transactionProductModel.Quantity = 1;
                 transactionProductModel.UpdateTimeStamp = DateTime.Now;
                 await _transactionProductService.Add(transactionProductModel);
-                LoadProductsOnTransaction();
+                await LoadProductsOnTransaction();
 
 
             }
@@ -210,7 +242,7 @@ namespace SVFHardwareSystem.Ui
                         }
                        
                     }
-                    LoadProductsOnTransaction();
+                    await LoadProductsOnTransaction();
 
                 }
                 else
@@ -396,6 +428,58 @@ namespace SVFHardwareSystem.Ui
         private void txtProductName_ButtonClick(object sender, EventArgs e)
         {
 
+        }
+
+        private async void btnNewTransaction_Click(object sender, EventArgs e)
+        {
+            await AddNewPOSTransaction();
+        }
+
+        private async Task AddNewPOSTransaction()
+        {
+            try
+            {
+                var newPOSTransaction = new POSTransactionModel();
+                newPOSTransaction.Cost = txtCost.Text;
+                newPOSTransaction.CreateTimeStamp = DateTime.Now;
+                newPOSTransaction.CustomerID = customerID;
+                newPOSTransaction.SIDR = txtSIDR.Text;
+                await _posTransactionService.Add(newPOSTransaction);
+                
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString());
+            }
+        }
+
+        private void txtCustomerName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SetCustomerIDField();
+            }
+        }
+
+        private void SetCustomerIDField()
+        {
+          
+                try
+                {
+
+                    //get the custmer id according to its name
+                    customerID = _customerService.GetCustomerID(txtCustomerName.Text);
+                    
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    MetroMessageBox.Show(this, ex.ToString());
+                }
+            
         }
     }
 }

@@ -10,5 +10,6 @@ namespace SVFHardwareSystem.Services.Interfaces
     public interface ICustomerService : IService<CustomerModel>
     {
         Task<IList<CustomerModel>> GetAll(string criteria);
+        int GetCustomerID(string customerName);
     }
 }

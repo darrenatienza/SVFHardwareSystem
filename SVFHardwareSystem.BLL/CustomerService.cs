@@ -25,5 +25,14 @@ namespace SVFHardwareSystem.Services
                 return models;
             }
         }
+
+        public int GetCustomerID(string customerName)
+        {
+            using (var db = new DataContext())
+            {
+                var customer = db.Customers.FirstOrDefault(x => x.FullName == customerName);
+                return customer == null ? 0 : customer.CustomerID;
+            }
+        }
     }
 }

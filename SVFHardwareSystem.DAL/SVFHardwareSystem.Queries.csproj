@@ -70,13 +70,13 @@
     <Compile Include="Migrations\202009200528330_AddedPOSTables.designer.cs">
       <DependentUpon>202009200528330_AddedPOSTables.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202009220849200_AddIFinishColumnOnPOSTransaction.cs" />
-    <Compile Include="Migrations\202009220849200_AddIFinishColumnOnPOSTransaction.designer.cs">
-      <DependentUpon>202009220849200_AddIFinishColumnOnPOSTransaction.cs</DependentUpon>
+    <Compile Include="Migrations\202009221428375_AddIsToPayOnPOSTransaction.cs" />
+    <Compile Include="Migrations\202009221428375_AddIsToPayOnPOSTransaction.designer.cs">
+      <DependentUpon>202009221428375_AddIsToPayOnPOSTransaction.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202009221710439_AddIsToPayColumnOnTransactionProduct.cs" />
-    <Compile Include="Migrations\202009221710439_AddIsToPayColumnOnTransactionProduct.designer.cs">
-      <DependentUpon>202009221710439_AddIsToPayColumnOnTransactionProduct.cs</DependentUpon>
+    <Compile Include="Migrations\202009221429303_AddIsFinishedOnPOSTransaction.cs" />
+    <Compile Include="Migrations\202009221429303_AddIsFinishedOnPOSTransaction.designer.cs">
+      <DependentUpon>202009221429303_AddIsFinishedOnPOSTransaction.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -92,11 +92,11 @@
     <EmbeddedResource Include="Migrations\202009200528330_AddedPOSTables.resx">
       <DependentUpon>202009200528330_AddedPOSTables.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009220849200_AddIFinishColumnOnPOSTransaction.resx">
-      <DependentUpon>202009220849200_AddIFinishColumnOnPOSTransaction.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202009221428375_AddIsToPayOnPOSTransaction.resx">
+      <DependentUpon>202009221428375_AddIsToPayOnPOSTransaction.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009221710439_AddIsToPayColumnOnTransactionProduct.resx">
-      <DependentUpon>202009221710439_AddIsToPayColumnOnTransactionProduct.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202009221429303_AddIsFinishedOnPOSTransaction.resx">
+      <DependentUpon>202009221429303_AddIsFinishedOnPOSTransaction.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
