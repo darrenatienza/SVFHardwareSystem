@@ -139,8 +139,7 @@
             this.txtFullName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtFullName.CustomButton.UseSelectable = true;
             this.txtFullName.CustomButton.Visible = false;
-            this.txtFullName.Lines = new string[] {
-        " "};
+            this.txtFullName.Lines = new string[0];
             this.txtFullName.Location = new System.Drawing.Point(23, 125);
             this.txtFullName.MaxLength = 32767;
             this.txtFullName.Name = "txtFullName";
@@ -152,7 +151,6 @@
             this.txtFullName.ShortcutsEnabled = true;
             this.txtFullName.Size = new System.Drawing.Size(360, 23);
             this.txtFullName.TabIndex = 5;
-            this.txtFullName.Text = " ";
             this.txtFullName.UseSelectable = true;
             this.txtFullName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtFullName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);

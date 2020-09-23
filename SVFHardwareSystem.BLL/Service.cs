@@ -17,13 +17,24 @@ namespace SVFHardwareSystem.Services
     /// <typeparam name="TEntity">Data Entity</typeparam>
     public class Service<TModel,TEntity> : IService<TModel> where TModel : class where TEntity : class
     {
-        public async Task Add(TModel model)
+        public  async Task Add(TModel model)
         {
             using (var db = new DataContext())
             {
                 var entity = Mapping.Mapper.Map<TEntity>(model);
                 db.Set<TEntity>().Add(entity);
                 await db.SaveChangesAsync();
+            }
+        }
+
+        public async Task<TModel> AddNew(TModel model)
+        {
+            using (var db = new DataContext())
+            {
+                var entity = Mapping.Mapper.Map<TEntity>(model);
+                db.Set<TEntity>().Add(entity);
+                await db.SaveChangesAsync();
+                return Mapping.Mapper.Map<TModel>(entity);
             }
         }
 

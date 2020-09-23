@@ -12,5 +12,7 @@ namespace SVFHardwareSystem.Services.Interfaces
     {
         Task<POSTransactionModel> Get(string code);
         POSTransactionModel GetUnFinishedTransaction();
+        void EditCustomerIDOnCurrentPOSTransaction(int posTransactionID, int customerID);
+        decimal GetTotalAmount(int posTransactionID);
     }
 }

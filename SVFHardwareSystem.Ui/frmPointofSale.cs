@@ -43,9 +43,13 @@ namespace SVFHardwareSystem.Ui
 
         {
 
-             loadAutoCompleteData();
-            await LoadAutoCompleteCustomersData();
+            LoadAutoCompleteCustomersData();
+            loadAutoCompleteData();
             await GenerateNewOrLoadUnFinishedPOSTransaction();
+
+           
+            
+           
          
 
         }
@@ -57,6 +61,7 @@ namespace SVFHardwareSystem.Ui
                 var previousPOSTransaction = _posTransactionService.GetUnFinishedTransaction();
                 txtCost.Text = previousPOSTransaction.Cost;
                 txtCustomerName.Text = previousPOSTransaction.CustomerFullName;
+                customerID = previousPOSTransaction.CustomerID;
                 txtSIDR.Text = previousPOSTransaction.SIDR;
                 posTransactionID = previousPOSTransaction.POSTransactionID;
                 await LoadProductsOnTransaction();
@@ -110,18 +115,28 @@ namespace SVFHardwareSystem.Ui
         {
             
             //Set AutoCompleteSource property of txt_StateName as CustomSource
-            txtProductName.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtProductName2.AutoCompleteSource = AutoCompleteSource.CustomSource;
             //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
-            txtProductName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtProductName2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             var productNames = await _productService.GetAll();
             foreach (var item in productNames)
             {
-                txtProductName.AutoCompleteCustomSource.Add(item.Name);
+                txtProductName2.AutoCompleteCustomSource.Add(item.Name);
             }
-            
+            //Set AutoCompleteSource property of txt_StateName as CustomSource
+            txtCustomerName.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
+            txtCustomerName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            var customerNames = await _customerService.GetAll();
+            foreach (var item in customerNames)
+            {
+                txtCustomerName.AutoCompleteCustomSource.Add(item.FullName.ToString());
+
+            }
+
         }
         //AutoCompleteData Method
-        private async Task LoadAutoCompleteCustomersData()
+        private async void LoadAutoCompleteCustomersData()
         {
 
             //Set AutoCompleteSource property of txt_StateName as CustomSource
@@ -131,7 +146,8 @@ namespace SVFHardwareSystem.Ui
             var customerNames = await _customerService.GetAll();
             foreach (var item in customerNames)
             {
-                txtCustomerName.AutoCompleteCustomSource.Add(item.FullName);
+                txtCustomerName.AutoCompleteCustomSource.Add(item.FullName.ToString());
+                
             }
 
         }
@@ -150,12 +166,12 @@ namespace SVFHardwareSystem.Ui
             {
 
                 //get the product id according to its name
-                var productID = _productService.GetProductID(txtProductName.Text);
+                var productID = _productService.GetProductID(txtProductName2.Text);
                 var transactionProductModel = new TransactionProductModel();
                 transactionProductModel.ProductID = productID;
                 transactionProductModel.IsPaid = false;
                 transactionProductModel.IsToPay = true;
-                transactionProductModel.POSTransactionID = 2;
+                transactionProductModel.POSTransactionID = posTransactionID;
                 transactionProductModel.Quantity = 1;
                 transactionProductModel.UpdateTimeStamp = DateTime.Now;
                 await _transactionProductService.Add(transactionProductModel);
@@ -207,7 +223,7 @@ namespace SVFHardwareSystem.Ui
                     total += item.Total;
                 }
 
-                txtTotal.Text = total.ToString();
+                txtTotal.Text = _posTransactionService.GetTotalAmount(posTransactionID).ToString();
 
                 //select all check box state must be update to avoid confusion on current state of list
                 UpdateSelecAllCheckboxState();
@@ -282,6 +298,7 @@ namespace SVFHardwareSystem.Ui
 
                 }
             }
+            txtTotal.Text = _posTransactionService.GetTotalAmount(posTransactionID).ToString();
             gridList.CellValueChanged += GridList_CellValueChanged; // subscribe for future manual action
             gridList.CellMouseUp += gridList_CellMouseUp;
         }
@@ -341,6 +358,7 @@ namespace SVFHardwareSystem.Ui
 
         private void frmPointofSale_Shown(object sender, EventArgs e)
         {
+          
             //load only after all objects and event initialized to avoid
             //recursive action on updating the state of select all checkbox
             chkSelectAll.CheckedChanged += ChkSelectAll_CheckedChanged;
@@ -352,7 +370,6 @@ namespace SVFHardwareSystem.Ui
             {
                 SelectAllProducts();
             }
-            
         }
 
         private void GridList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -368,6 +385,7 @@ namespace SVFHardwareSystem.Ui
                         var rows = gridList.SelectedRows[0];
                         var chkValue = bool.Parse(rows.Cells[checkboxColumnIndex].Value.ToString());
                         _transactionProductService.EditIsToPay(transactionProductID, chkValue);
+                        txtTotal.Text = _posTransactionService.GetTotalAmount(posTransactionID).ToString();
                     }
 
                 }
@@ -439,12 +457,28 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                var newPOSTransaction = new POSTransactionModel();
-                newPOSTransaction.Cost = txtCost.Text;
-                newPOSTransaction.CreateTimeStamp = DateTime.Now;
-                newPOSTransaction.CustomerID = customerID;
-                newPOSTransaction.SIDR = txtSIDR.Text;
-                await _posTransactionService.Add(newPOSTransaction);
+                if (posTransactionID == 0)
+                {
+
+
+                    if(ValidatePOSTransactionFields())
+                    {
+                        var newPOSTransaction = new POSTransactionModel();
+                        newPOSTransaction.Cost = txtCost.Text;
+                        newPOSTransaction.CreateTimeStamp = DateTime.Now;
+                        newPOSTransaction.CustomerID = customerID;
+                        newPOSTransaction.SIDR = txtSIDR.Text;
+                        newPOSTransaction = await _posTransactionService.AddNew(newPOSTransaction);
+                        posTransactionID = newPOSTransaction.POSTransactionID;
+                        MetroMessageBox.Show(this, "New Point of Sale Transaction has been generated!", "New Point of Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                   
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "A Transaction is currently loaded. Generating new Transaction is not required.", "New Point of Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                
                 
             }
             catch (Exception ex)
@@ -452,6 +486,32 @@ namespace SVFHardwareSystem.Ui
 
                 MetroMessageBox.Show(this, ex.ToString());
             }
+        }
+
+        private bool ValidatePOSTransactionFields()
+        {
+
+            //form validation
+            if (txtCost.Text == "")
+            {
+                MetroMessageBox.Show(this, "Cost is required!", "New Point of Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtCost.WithError = true;
+                return false;
+            }
+            if (txtSIDR.Text == "")
+            {
+                MetroMessageBox.Show(this, "SI/DR is required!", "New Point of Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSIDR.WithError = true;
+                return false;
+            }
+            if (txtCustomerName.Text == "" || customerID == 0)
+            {
+                MetroMessageBox.Show(this, "Customer is required!", "New Point of Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtCustomerName.WithError = true;
+                return false;
+            }
+
+            return true ;
         }
 
         private void txtCustomerName_KeyDown(object sender, KeyEventArgs e)
@@ -464,22 +524,58 @@ namespace SVFHardwareSystem.Ui
 
         private void SetCustomerIDField()
         {
-          
-                try
-                {
 
-                    //get the custmer id according to its name
-                    customerID = _customerService.GetCustomerID(txtCustomerName.Text);
+            try
+            {
+                //if an update to customer is executed and a pos transaction is currently loaded
+                // the customer id must be updated in the current pos transaction record
+                //if no pos transaction is loaded, just set it to the customer id
+
+                //get the custmer id according to its name
+                customerID = _customerService.GetCustomerID(txtCustomerName.Text);
+                
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString());
+            }
+
+        }
+
+        private void txtCustomerName_ButtonClick(object sender, EventArgs e)
+        {
+            FormHandler.OpenCustomersForm().ShowDialog();
+            LoadAutoCompleteCustomersData();
+        }
+
+        private async void btnUpdatePOSTransactionDetails_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (posTransactionID > 0)
+                {
+                    if (ValidatePOSTransactionFields())
+                    {
+                        var posTransaction = await _posTransactionService.Get(posTransactionID);
+                        posTransaction.Cost = txtCost.Text;
+                        posTransaction.CustomerID = customerID;
+                        posTransaction.SIDR = txtSIDR.Text;
+                        await _posTransactionService.Edit(posTransactionID, posTransaction);
+                        MetroMessageBox.Show(this, "Point of Sale Details has been updated", "Update Point of Sale Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                     
-
-
                 }
-                catch (Exception ex)
+                else
                 {
-
-                    MetroMessageBox.Show(this, ex.ToString());
+                    MetroMessageBox.Show(this, "No Point of Sale Transaction is loaded!", "Update Point of Sale Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString());
+            }
         }
     }
 }
