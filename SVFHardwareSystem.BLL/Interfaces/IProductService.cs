@@ -10,5 +10,9 @@ namespace SVFHardwareSystem.Services.Interfaces
     public interface IProductService : IService<ProductModel>
     {
         int GetProductID(string productName);
+        int GetQuantityByProductName(string productName);
+        ProductModel GetByProductName(string productName);
+        int GetRemainingQuantity(int productID, int quantityToBuy);
+        void DeductQuantityOnProduct(int productID, int quantityToBuy);
     }
 }

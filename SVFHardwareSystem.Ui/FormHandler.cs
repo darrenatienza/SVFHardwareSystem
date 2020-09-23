@@ -1,9 +1,11 @@
-﻿using System;
+﻿using SVFHardwareSystem.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unity;
+using Unity.Injection;
 
 namespace SVFHardwareSystem.Ui
 {
@@ -11,5 +13,20 @@ namespace SVFHardwareSystem.Ui
     {
         public static frmCustomers OpenCustomersForm() => UnityConfig
                             .Register().Resolve<frmCustomers>();
+
+        /// <summary>
+        /// Dependency Inject with parameter on frmPointofSaleQuantityEdit
+        /// </summary>
+        /// <param name="posTransactionID"></param>
+        /// <returns></returns>
+        public static frmPointofSaleQuantityEdit OpenPointOfSaleQuantityEditForm(int posTransactionID) {
+            return UnityConfig
+                .Register()
+                .RegisterType<frmPointofSaleQuantityEdit>(new InjectionConstructor(new object[] { new ProductService(), new TransactionProductService(), posTransactionID }))
+                .Resolve<frmPointofSaleQuantityEdit>();
+            
+        }
+
+       
     }
 }

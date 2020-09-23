@@ -1,6 +1,7 @@
 ﻿using AutoMap;
 using SVFHardwareSystem.DAL.Entities;
 using SVFHardwareSystem.Queries;
+using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
 using System;
@@ -15,6 +16,29 @@ namespace SVFHardwareSystem.Services
     public class TransactionProductService : Service<TransactionProductModel,TransactionProduct>, ITransactionProductService
     {
         public TransactionProductService() { }
+
+        public async Task AddNewTransactionProductAsync(TransactionProductModel model)
+        {
+
+            using (var db = new DataContext())
+            {
+
+                var transactionProduct = Mapping.Mapper.Map<TransactionProduct>(model);
+
+                var product = db.Products.Find(model.ProductID);
+                var remainingQuantity = product.Quantity - model.Quantity;
+                if (remainingQuantity < product.Limit)
+                {
+                    throw new LimitMustNoReachException(product.Limit);
+                }
+                product.Quantity = remainingQuantity;
+                db.Entry(product).State = EntityState.Modified;
+
+                db.TransactionProducts.Add(transactionProduct);
+
+                await db.SaveChangesAsync();
+            }
+        }
 
         public void EditIsToPay(int id, bool isToPay)
         {
@@ -34,6 +58,21 @@ namespace SVFHardwareSystem.Services
                 var productsOnTransactions = await db.TransactionProducts.Where(x => x.POSTransactionID == id).OrderByDescending(x => x.TransactionProductID).ToListAsync();
                 var models = Mapping.Mapper.Map<List<TransactionProductModel>>(productsOnTransactions);
                 return models;
+            }
+        }
+
+        public async Task RemoveProductAsync(int transactionProductID)
+        {
+            using (var db = new DataContext())
+            {
+                var transactionProduct = db.TransactionProducts.Find(transactionProductID);
+                var product = db.Products.Find(transactionProduct.ProductID);
+
+                var addedQuantity = product.Quantity + transactionProduct.Quantity;
+                product.Quantity = addedQuantity;
+                db.Entry(product).State = EntityState.Modified;
+                db.TransactionProducts.Remove(transactionProduct);
+                await db.SaveChangesAsync();
             }
         }
     }

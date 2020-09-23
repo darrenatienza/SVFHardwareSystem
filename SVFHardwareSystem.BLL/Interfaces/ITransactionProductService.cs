@@ -16,5 +16,12 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// <param name="id">The Product on Transaction ID</param>
         /// <param name="isToPay">The value of isToPay</param>
         void EditIsToPay(int id, bool isToPay);
+        /// <summary>
+        /// Remove the product on TransactionProducts then add the quantity to product of removed transaction product
+        /// </summary>
+        /// <param name="transactionProductID"></param>
+        /// <returns></returns>
+        Task RemoveProductAsync(int transactionProductID);
+        Task AddNewTransactionProductAsync(TransactionProductModel transactionProduct);
     }
 }

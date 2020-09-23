@@ -78,6 +78,14 @@
     <Compile Include="Migrations\202009221429303_AddIsFinishedOnPOSTransaction.designer.cs">
       <DependentUpon>202009221429303_AddIsFinishedOnPOSTransaction.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009231341333_addQuantityOnProduct.cs" />
+    <Compile Include="Migrations\202009231341333_addQuantityOnProduct.designer.cs">
+      <DependentUpon>202009231341333_addQuantityOnProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009231441072_AddLimitColumnToProduct.cs" />
+    <Compile Include="Migrations\202009231441072_AddLimitColumnToProduct.designer.cs">
+      <DependentUpon>202009231441072_AddLimitColumnToProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -97,6 +105,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009221429303_AddIsFinishedOnPOSTransaction.resx">
       <DependentUpon>202009221429303_AddIsFinishedOnPOSTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009231341333_addQuantityOnProduct.resx">
+      <DependentUpon>202009231341333_addQuantityOnProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009231441072_AddLimitColumnToProduct.resx">
+      <DependentUpon>202009231441072_AddLimitColumnToProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

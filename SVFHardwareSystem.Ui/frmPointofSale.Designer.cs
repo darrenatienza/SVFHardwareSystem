@@ -50,7 +50,7 @@
             this.btnRemove = new MetroFramework.Controls.MetroButton();
             this.metroGrid1 = new MetroFramework.Controls.MetroGrid();
             this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
-            this.txtProductName2 = new MetroFramework.Controls.MetroTextBox();
+            this.txtProductName = new MetroFramework.Controls.MetroTextBox();
             this.chkSelectAll = new MetroFramework.Controls.MetroCheckBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
@@ -295,7 +295,7 @@
             // 
             // metroPanel3
             // 
-            this.metroPanel3.Controls.Add(this.txtProductName2);
+            this.metroPanel3.Controls.Add(this.txtProductName);
             this.metroPanel3.Controls.Add(this.chkSelectAll);
             this.metroPanel3.Controls.Add(this.metroLabel2);
             this.metroPanel3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -312,38 +312,38 @@
             this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel3.VerticalScrollbarSize = 10;
             // 
-            // txtProductName2
+            // txtProductName
             // 
             // 
             // 
             // 
-            this.txtProductName2.CustomButton.Image = global::SVFHardwareSystem.Ui.Properties.Resources.edit_3_48;
-            this.txtProductName2.CustomButton.Location = new System.Drawing.Point(156, 1);
-            this.txtProductName2.CustomButton.Name = "";
-            this.txtProductName2.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtProductName2.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtProductName2.CustomButton.TabIndex = 1;
-            this.txtProductName2.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtProductName2.CustomButton.UseSelectable = true;
-            this.txtProductName2.Lines = new string[0];
-            this.txtProductName2.Location = new System.Drawing.Point(298, 9);
-            this.txtProductName2.MaxLength = 32767;
-            this.txtProductName2.Name = "txtProductName2";
-            this.txtProductName2.PasswordChar = '\0';
-            this.txtProductName2.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtProductName2.SelectedText = "";
-            this.txtProductName2.SelectionLength = 0;
-            this.txtProductName2.SelectionStart = 0;
-            this.txtProductName2.ShortcutsEnabled = true;
-            this.txtProductName2.ShowButton = true;
-            this.txtProductName2.ShowClearButton = true;
-            this.txtProductName2.Size = new System.Drawing.Size(178, 23);
-            this.txtProductName2.TabIndex = 3;
-            this.txtProductName2.UseSelectable = true;
-            this.txtProductName2.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtProductName2.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.txtProductName2.ButtonClick += new MetroFramework.Controls.MetroTextBox.ButClick(this.txtProductName_ButtonClick);
-            this.txtProductName2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtProductName_KeyDown);
+            this.txtProductName.CustomButton.Image = global::SVFHardwareSystem.Ui.Properties.Resources.edit_3_48;
+            this.txtProductName.CustomButton.Location = new System.Drawing.Point(156, 1);
+            this.txtProductName.CustomButton.Name = "";
+            this.txtProductName.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtProductName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtProductName.CustomButton.TabIndex = 1;
+            this.txtProductName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtProductName.CustomButton.UseSelectable = true;
+            this.txtProductName.Lines = new string[0];
+            this.txtProductName.Location = new System.Drawing.Point(298, 9);
+            this.txtProductName.MaxLength = 32767;
+            this.txtProductName.Name = "txtProductName";
+            this.txtProductName.PasswordChar = '\0';
+            this.txtProductName.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtProductName.SelectedText = "";
+            this.txtProductName.SelectionLength = 0;
+            this.txtProductName.SelectionStart = 0;
+            this.txtProductName.ShortcutsEnabled = true;
+            this.txtProductName.ShowButton = true;
+            this.txtProductName.ShowClearButton = true;
+            this.txtProductName.Size = new System.Drawing.Size(178, 23);
+            this.txtProductName.TabIndex = 3;
+            this.txtProductName.UseSelectable = true;
+            this.txtProductName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtProductName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtProductName.ButtonClick += new MetroFramework.Controls.MetroTextBox.ButClick(this.txtProductName_ButtonClick);
+            this.txtProductName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtProductName_KeyDown);
             // 
             // chkSelectAll
             // 
@@ -668,7 +668,7 @@
         private MetroFramework.Controls.MetroCheckBox chkSelectAll;
         private MetroFramework.Controls.MetroTile btnPayment;
         private MetroFramework.Controls.MetroTile btnNewTransaction;
-        private MetroFramework.Controls.MetroTextBox txtProductName2;
+        private MetroFramework.Controls.MetroTextBox txtProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;

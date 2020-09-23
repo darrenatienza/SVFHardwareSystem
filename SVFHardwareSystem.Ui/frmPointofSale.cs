@@ -115,13 +115,13 @@ namespace SVFHardwareSystem.Ui
         {
             
             //Set AutoCompleteSource property of txt_StateName as CustomSource
-            txtProductName2.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtProductName.AutoCompleteSource = AutoCompleteSource.CustomSource;
             //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
-            txtProductName2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtProductName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             var productNames = await _productService.GetAll();
             foreach (var item in productNames)
             {
-                txtProductName2.AutoCompleteCustomSource.Add(item.Name);
+                txtProductName.AutoCompleteCustomSource.Add(item.Name);
             }
             //Set AutoCompleteSource property of txt_StateName as CustomSource
             txtCustomerName.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -166,7 +166,7 @@ namespace SVFHardwareSystem.Ui
             {
 
                 //get the product id according to its name
-                var productID = _productService.GetProductID(txtProductName2.Text);
+                var productID = _productService.GetProductID(txtProductName.Text);
                 var transactionProductModel = new TransactionProductModel();
                 transactionProductModel.ProductID = productID;
                 transactionProductModel.IsPaid = false;
@@ -174,7 +174,7 @@ namespace SVFHardwareSystem.Ui
                 transactionProductModel.POSTransactionID = posTransactionID;
                 transactionProductModel.Quantity = 1;
                 transactionProductModel.UpdateTimeStamp = DateTime.Now;
-                await _transactionProductService.Add(transactionProductModel);
+                await _transactionProductService.AddNewTransactionProductAsync(transactionProductModel);
                 await LoadProductsOnTransaction();
 
 
@@ -249,7 +249,8 @@ namespace SVFHardwareSystem.Ui
                         var transactionProduct = await _transactionProductService.Get(transactionProductID);
                         if (!transactionProduct.IsPaid)
                         {
-                            await _transactionProductService.Remove(transactionProductID);
+                            
+                            await _transactionProductService.RemoveProductAsync(transactionProductID);
                             transactionProductID = 0;
                         }
                         else
@@ -443,9 +444,10 @@ namespace SVFHardwareSystem.Ui
 
         }
 
-        private void txtProductName_ButtonClick(object sender, EventArgs e)
+        private async void txtProductName_ButtonClick(object sender, EventArgs e)
         {
-
+            FormHandler.OpenPointOfSaleQuantityEditForm(posTransactionID).ShowDialog();
+            await LoadProductsOnTransaction();
         }
 
         private async void btnNewTransaction_Click(object sender, EventArgs e)
