@@ -27,6 +27,14 @@ namespace SVFHardwareSystem.Ui
             
         }
 
-       
+        public static frmPointOfSalePayment OpenPointOfSalePaymentForm(int posTransactionID)
+        {
+            return UnityConfig
+                .Register()
+                .RegisterType<frmPointOfSalePayment>(new InjectionConstructor(new object[] { new POSPaymentService(), new POSTransactionService(), posTransactionID }))
+                .Resolve<frmPointOfSalePayment>();
+
+        }
+
     }
 }

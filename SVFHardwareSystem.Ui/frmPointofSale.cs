@@ -1,5 +1,6 @@
 ﻿using MetroFramework;
 using MetroFramework.Forms;
+using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
 using System;
@@ -25,6 +26,7 @@ namespace SVFHardwareSystem.Ui
         private ICustomerService _customerService;
         private int transactionProductID;
         private int customerID;
+        private bool isFinishedPosTransaction;
 
         public frmPointofSale(IPOSTransactionService posTransactionService, 
             IProductService productService, ITransactionProductService transactionProductService,
@@ -64,13 +66,25 @@ namespace SVFHardwareSystem.Ui
                 customerID = previousPOSTransaction.CustomerID;
                 txtSIDR.Text = previousPOSTransaction.SIDR;
                 posTransactionID = previousPOSTransaction.POSTransactionID;
+                txtReceivable.Text = "0.00"; // all unfinished transactions have 0.00 value
+                isFinishedPosTransaction = previousPOSTransaction.IsFinished;
                 await LoadProductsOnTransaction();
             }
             catch (KeyNotFoundException ex)
             {
+                
+                txtCost.Text = "";
+                txtCustomerName.Text = "";
+                customerID = 0;
+                txtSIDR.Text = "";
+                posTransactionID = 0;
+                txtTotal.Text = "0.00";
+                txtReceivable.Text = "0.00";
+                gridList.Rows.Clear();
+                this.ActiveControl = txtCost;                                         
                 //no unfinished point of sale transaction found.
                 //create new transaction
-                MetroMessageBox.Show(this, "No unfinished transaction found, please create new transaction!","New Transaction",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MetroMessageBox.Show(this, "No unfinished transaction found, please create new transaction!", "New Transaction", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             catch (Exception ex)
             {
@@ -164,20 +178,35 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
+                if (posTransactionID > 0)
+                {
+                    //get the product id according to its name
+                    var productID = _productService.GetProductID(txtProductName.Text);
+                    var transactionProductModel = new TransactionProductModel();
+                    transactionProductModel.ProductID = productID;
+                    transactionProductModel.IsPaid = false;
+                    transactionProductModel.IsToPay = true;
+                    transactionProductModel.POSTransactionID = posTransactionID;
+                    transactionProductModel.Quantity = 1;
+                    transactionProductModel.UpdateTimeStamp = DateTime.Now;
+                    await _transactionProductService.AddNewTransactionProductAsync(transactionProductModel);
+                    await LoadProductsOnTransaction();
+                }
+                else
+                {
+                    MetroMessageBox.Show(this,"No Point of Sale Transaction Found!", "Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
 
-                //get the product id according to its name
-                var productID = _productService.GetProductID(txtProductName.Text);
-                var transactionProductModel = new TransactionProductModel();
-                transactionProductModel.ProductID = productID;
-                transactionProductModel.IsPaid = false;
-                transactionProductModel.IsToPay = true;
-                transactionProductModel.POSTransactionID = posTransactionID;
-                transactionProductModel.Quantity = 1;
-                transactionProductModel.UpdateTimeStamp = DateTime.Now;
-                await _transactionProductService.AddNewTransactionProductAsync(transactionProductModel);
-                await LoadProductsOnTransaction();
 
-
+            }
+            catch(RecordNotFoundException ex)
+            {
+                MetroMessageBox.Show(this, string.Format("{0} for {1}",ex.Message,txtProductName.Text),"Product", MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+            catch(LimitMustNoReachException ex)
+            {
+                MetroMessageBox.Show(this, ex.Message);
             }
             catch (Exception ex)
             {
@@ -223,7 +252,7 @@ namespace SVFHardwareSystem.Ui
                     total += item.Total;
                 }
 
-                txtTotal.Text = _posTransactionService.GetTotalAmount(posTransactionID).ToString();
+                txtTotal.Text = _posTransactionService.GetTotalAmount(posTransactionID).ToString("N"); // currency format no symbol
 
                 //select all check box state must be update to avoid confusion on current state of list
                 UpdateSelecAllCheckboxState();
@@ -243,23 +272,32 @@ namespace SVFHardwareSystem.Ui
             {
                 if (transactionProductID > 0)
                 {
-                    var dialogResult = MetroMessageBox.Show(this, "Do you want to remove this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (dialogResult == DialogResult.Yes)
+                    if (!isFinishedPosTransaction)
                     {
-                        var transactionProduct = await _transactionProductService.Get(transactionProductID);
-                        if (!transactionProduct.IsPaid)
+
+
+                        var dialogResult = MetroMessageBox.Show(this, "Do you want to remove this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dialogResult == DialogResult.Yes)
                         {
-                            
-                            await _transactionProductService.RemoveProductAsync(transactionProductID);
-                            transactionProductID = 0;
+                            var transactionProduct = await _transactionProductService.Get(transactionProductID);
+                            if (!transactionProduct.IsPaid)
+                            {
+
+                                await _transactionProductService.RemoveTransactionProductAsync(transactionProductID);
+                                transactionProductID = 0;
+                            }
+                            else
+                            {
+                                MetroMessageBox.Show(this, "Product is already paid. You cannot remove the product!", "Remove Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+
                         }
-                        else
-                        {
-                            MetroMessageBox.Show(this, "Product is already paid. You cannot remove the product!","Remove Product",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                        }
-                       
+                        await LoadProductsOnTransaction();
                     }
-                    await LoadProductsOnTransaction();
+                    else
+                    {
+                        MetroMessageBox.Show(this, "You cannot delete products with finished Point of Sale Transaction!", "Remove Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
 
                 }
                 else
@@ -386,7 +424,7 @@ namespace SVFHardwareSystem.Ui
                         var rows = gridList.SelectedRows[0];
                         var chkValue = bool.Parse(rows.Cells[checkboxColumnIndex].Value.ToString());
                         _transactionProductService.EditIsToPay(transactionProductID, chkValue);
-                        txtTotal.Text = _posTransactionService.GetTotalAmount(posTransactionID).ToString();
+                        txtTotal.Text = _posTransactionService.GetTotalAmount(posTransactionID).ToString("N");
                     }
 
                 }
@@ -413,6 +451,9 @@ namespace SVFHardwareSystem.Ui
                     posTransactionID = posTransaction.POSTransactionID;
                    txtCost.Text = posTransaction.Cost;
                     txtCustomerName.Text = posTransaction.CustomerFullName;
+                    customerID = posTransaction.CustomerID;
+                    txtReceivable.Text = posTransaction.Receivable.ToString();
+                    isFinishedPosTransaction = posTransaction.IsFinished;
                     await LoadProductsOnTransaction();
                 }
                 else
@@ -429,6 +470,7 @@ namespace SVFHardwareSystem.Ui
                 txtCost.Text = "";
                 txtCustomerName.Text = "";
                 txtTotal.Text = "0.00";
+                isFinishedPosTransaction = true; // just for disabling buttons to avoid futher actions
             }
             catch (Exception ex)
             {
@@ -478,7 +520,11 @@ namespace SVFHardwareSystem.Ui
                 }
                 else
                 {
-                    MetroMessageBox.Show(this, "A Transaction is currently loaded. Generating new Transaction is not required.", "New Point of Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    DialogResult d = MetroMessageBox.Show(this, "A Transaction is currently loaded. Do you want to reload unfinished Point of Sale Transaction?", "New Point of Sale Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (d == DialogResult.Yes)
+                    {
+                        await GenerateNewOrLoadUnFinishedPOSTransaction();
+                    }
                 }
                 
                 
@@ -537,6 +583,13 @@ namespace SVFHardwareSystem.Ui
                 customerID = _customerService.GetCustomerID(txtCustomerName.Text);
                 
             }
+            catch (RecordNotFoundException ex)
+            {
+                
+                MetroMessageBox.Show(this, string.Format("{0} for {1}", ex.Message, txtCustomerName.Text), "Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtCustomerName.Text = "";
+                txtCustomerName.Focus();
+            }
             catch (Exception ex)
             {
 
@@ -557,15 +610,25 @@ namespace SVFHardwareSystem.Ui
             {
                 if (posTransactionID > 0)
                 {
-                    if (ValidatePOSTransactionFields())
+                    if (!isFinishedPosTransaction)
                     {
-                        var posTransaction = await _posTransactionService.Get(posTransactionID);
-                        posTransaction.Cost = txtCost.Text;
-                        posTransaction.CustomerID = customerID;
-                        posTransaction.SIDR = txtSIDR.Text;
-                        await _posTransactionService.Edit(posTransactionID, posTransaction);
-                        MetroMessageBox.Show(this, "Point of Sale Details has been updated", "Update Point of Sale Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                        if (ValidatePOSTransactionFields())
+                        {
+                            var posTransaction = await _posTransactionService.Get(posTransactionID);
+                            posTransaction.Cost = txtCost.Text;
+                            posTransaction.CustomerID = customerID;
+                            posTransaction.SIDR = txtSIDR.Text;
+                            await _posTransactionService.Edit(posTransactionID, posTransaction);
+                            MetroMessageBox.Show(this, "Point of Sale Details has been updated", "Update Point of Sale Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
+                    else
+                    {
+                        MetroMessageBox.Show(this, "You cannot update a finished Point of Sale Transaction!", "Update Point of Sale Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    
                     
                 }
                 else
@@ -577,6 +640,59 @@ namespace SVFHardwareSystem.Ui
             {
 
                 MetroMessageBox.Show(this, ex.ToString());
+            }
+        }
+
+        private async void btnPayment_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (posTransactionID > 0)
+                {
+                    var total =  _posTransactionService.GetTotalAmount(posTransactionID);
+                    var receivableAmout = _posTransactionService.GetReceivableAmount(posTransactionID);
+                    if (total > 0 || receivableAmout > 0)
+                    {
+                        FormHandler.OpenPointOfSalePaymentForm(posTransactionID).ShowDialog();
+                        await GenerateNewOrLoadUnFinishedPOSTransaction();
+                    }
+                    else
+                    {
+                        MetroMessageBox.Show(this, "Total Amount or Receivable must be greater than 0!", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "No Point of Sale Transaction is loaded!", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString());
+            }
+            
+        }
+
+        private void tmrControlState(object sender, EventArgs e)
+        {
+            ManageControlState();
+        }
+
+        private void ManageControlState()
+        {
+            if (isFinishedPosTransaction)
+            {
+                btnRemove.Enabled = false;
+                btnUpdatePOSTransactionDetails.Enabled = false;
+                txtProductName.Enabled = false;
+            }
+            else
+            {
+                btnRemove.Enabled = true;
+                btnUpdatePOSTransactionDetails.Enabled = true;
+                txtProductName.Enabled = true;
             }
         }
     }

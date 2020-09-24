@@ -113,6 +113,12 @@
     <Compile Include="frmPointofSale.Designer.cs">
       <DependentUpon>frmPointofSale.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPointOfSalePayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPointOfSalePayment.Designer.cs">
+      <DependentUpon>frmPointOfSalePayment.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPointofSaleQuantityEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPointofSale.resx">
       <DependentUpon>frmPointofSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPointOfSalePayment.resx">
+      <DependentUpon>frmPointOfSalePayment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPointofSaleQuantityEdit.resx">
       <DependentUpon>frmPointofSaleQuantityEdit.cs</DependentUpon>

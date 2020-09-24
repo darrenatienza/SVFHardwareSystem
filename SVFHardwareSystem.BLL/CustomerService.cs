@@ -1,6 +1,7 @@
 ﻿using AutoMap;
 using SVFHardwareSystem.DAL.Entities;
 using SVFHardwareSystem.Queries;
+using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
 using System;
@@ -31,7 +32,7 @@ namespace SVFHardwareSystem.Services
             using (var db = new DataContext())
             {
                 var customer = db.Customers.FirstOrDefault(x => x.FullName == customerName);
-                return customer == null ? 0 : customer.CustomerID;
+                return customer == null ? throw new RecordNotFoundException() : customer.CustomerID;
             }
         }
     }

@@ -8,5 +8,10 @@ namespace SVFHardwareSystem.Services.ServiceModels
 {
     public class POSPaymentModel
     {
+        public POSPaymentModel() { }
+        public int POSPaymentID { get; set; }
+        public int POSTransactionID { get; set; }
+        public DateTime PaymentDate { get; set; }
+        public decimal Amount { get; set; }
     }
 }

@@ -26,17 +26,26 @@ namespace SVFHardwareSystem.Services
                 var transactionProduct = Mapping.Mapper.Map<TransactionProduct>(model);
 
                 var product = db.Products.Find(model.ProductID);
-                var remainingQuantity = product.Quantity - model.Quantity;
-                if (remainingQuantity < product.Limit)
+                if (product != null)
                 {
-                    throw new LimitMustNoReachException(product.Limit);
+                    // ramaining quantity must not less than or equal to limit.
+                    var remainingQuantity = product.Quantity - model.Quantity;
+                    if (remainingQuantity <= product.Limit)
+                    {
+                        throw new LimitMustNoReachException(product.Limit);
+                    }
+                    product.Quantity = remainingQuantity;
+                    db.Entry(product).State = EntityState.Modified;
+
+                    db.TransactionProducts.Add(transactionProduct);
+
+                    await db.SaveChangesAsync();
                 }
-                product.Quantity = remainingQuantity;
-                db.Entry(product).State = EntityState.Modified;
-
-                db.TransactionProducts.Add(transactionProduct);
-
-                await db.SaveChangesAsync();
+                else
+                {
+                    throw new RecordNotFoundException();
+                }
+                
             }
         }
 
@@ -61,7 +70,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public async Task RemoveProductAsync(int transactionProductID)
+        public async Task RemoveTransactionProductAsync(int transactionProductID)
         {
             using (var db = new DataContext())
             {

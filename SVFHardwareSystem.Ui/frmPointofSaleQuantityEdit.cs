@@ -67,7 +67,7 @@ namespace SVFHardwareSystem.Ui
 
                 }
             }
-            catch (KeyNotFoundException)
+            catch (RecordNotFoundException)
             {
                 // no record found on selected product name
                 productID = 0;

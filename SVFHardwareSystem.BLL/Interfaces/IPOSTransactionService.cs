@@ -13,6 +13,12 @@ namespace SVFHardwareSystem.Services.Interfaces
         Task<POSTransactionModel> Get(string code);
         POSTransactionModel GetUnFinishedTransaction();
         void EditCustomerIDOnCurrentPOSTransaction(int posTransactionID, int customerID);
+        /// <summary>
+        /// Get total amount of current POS Transaction where IsToPay = true and IsPaid = false.
+        /// </summary>
+        /// <param name="posTransactionID"></param>
+        /// <returns></returns>
         decimal GetTotalAmount(int posTransactionID);
+        decimal GetReceivableAmount(int posTransactionID);
     }
 }

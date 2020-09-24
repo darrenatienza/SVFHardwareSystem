@@ -14,5 +14,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public string SIDR { get; set; }
         public int CustomerID { get; set; }
         public int POSTransactionID { get; set; }
+        public decimal Receivable { get; set; }
+        public bool IsFinished { get; set; }
     }
 }

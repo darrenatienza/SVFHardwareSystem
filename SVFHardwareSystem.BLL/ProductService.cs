@@ -42,7 +42,7 @@ namespace SVFHardwareSystem.Services
             using (var db = new DataContext())
             {
                 var product = db.Products.FirstOrDefault(x => x.Name == productName);
-                var model = product != null ? Mapping.Mapper.Map<ProductModel>(product) : throw new KeyNotFoundException();
+                var model = product != null ? Mapping.Mapper.Map<ProductModel>(product) : throw new RecordNotFoundException();
                 return model;
             }
         }
@@ -52,7 +52,7 @@ namespace SVFHardwareSystem.Services
             using (var db = new DataContext())
             {
                 var product = db.Products.FirstOrDefault(x => x.Name == productName);
-                return product == null ? 0 : product.ProductID;
+                return product == null ? throw new RecordNotFoundException() : product.ProductID;
             }
         }
 
