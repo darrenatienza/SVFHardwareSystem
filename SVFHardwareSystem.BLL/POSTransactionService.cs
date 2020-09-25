@@ -32,18 +32,23 @@ namespace SVFHardwareSystem.Services
             {
                 decimal total = 0;
                 decimal cash = 0;
-                
-                var entity = await db.POSTransactions.FirstOrDefaultAsync(x => x.SIDR == code && x.IsFinished == true) ;
+                decimal receivable = 0;
+                var entity = await db.POSTransactions.FirstOrDefaultAsync(x => x.SIDR == code);
                 var model = entity != null ? Mapping.Mapper.Map<POSTransactionModel>(entity) : throw new KeyNotFoundException();
+                //get total and receivables list
                 var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == entity.POSTransactionID);
                 var posPayments = db.POSPayments.Where(x => x.POSTransactionID == entity.POSTransactionID);
-                if (transactionProducts.Count() > 0 && posPayments.Count() > 0)
-                {
-                    total = transactionProducts.Sum(y => y.Quantity * y.Product.Price);
-                    cash = posPayments.Sum(y => y.Amount);
-                    model.Receivable = total - cash;
-                }
-               
+                // compute for total amount of products
+                total = transactionProducts.Count() > 0 ? transactionProducts.Sum(y => y.Quantity * y.Product.Price) : 0;
+                //compute for  total amount of cash payments
+                cash = posPayments.Count() > 0 ? posPayments.Sum(y => y.Amount) : 0;
+
+                // peform operation && set values
+               receivable = total - cash;
+                model.IsFullyPaid = receivable == 0 ? true : false;
+                model.TotalAmount = total;
+                model.TotalPayment = cash;
+
                 return model;
             }
 
@@ -78,7 +83,7 @@ namespace SVFHardwareSystem.Services
             using (var db = new DataContext())
             {
                 decimal total = 0;
-                var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == posTransactionID && x.IsToPay == true && !x.IsPaid);
+                var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == posTransactionID);
                 if (transactionProducts.Count() > 0)
                 {
                     total = transactionProducts.Sum(y => y.Quantity * y.Product.Price);
@@ -94,8 +99,18 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
+                decimal total = 0;
+                decimal cash = 0;
                 var entity = db.POSTransactions.FirstOrDefault(x => x.IsFinished == false);
                 var model = entity != null ? Mapping.Mapper.Map<POSTransactionModel>(entity) : throw new KeyNotFoundException();
+                var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == entity.POSTransactionID);
+                var posPayments = db.POSPayments.Where(x => x.POSTransactionID == entity.POSTransactionID);
+               
+                if (transactionProducts.Count() > 0)
+                {
+                    total = transactionProducts.Sum(y => y.Quantity * y.Product.Price);
+                    model.TotalAmount = total;
+                }
                 return model;
   
             }

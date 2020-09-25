@@ -28,15 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtTotal = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.lblTotal = new MetroFramework.Controls.MetroLabel();
             this.btnPay = new MetroFramework.Controls.MetroButton();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.txtAmountTendered = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.txtChange = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+            this.lblReceivable = new MetroFramework.Controls.MetroLabel();
             this.txtReceivable = new MetroFramework.Controls.MetroTextBox();
+            this.tmrControlState = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // txtTotal
@@ -73,14 +75,14 @@
             this.txtTotal.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtTotal.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // metroLabel1
+            // lblTotal
             // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(23, 84);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(36, 19);
-            this.metroLabel1.TabIndex = 1;
-            this.metroLabel1.Text = "Total";
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(23, 84);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(36, 19);
+            this.lblTotal.TabIndex = 1;
+            this.lblTotal.Text = "Total";
             // 
             // btnPay
             // 
@@ -179,14 +181,14 @@
             this.txtChange.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtChange.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // metroLabel4
+            // lblReceivable
             // 
-            this.metroLabel4.AutoSize = true;
-            this.metroLabel4.Location = new System.Drawing.Point(143, 84);
-            this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(71, 19);
-            this.metroLabel4.TabIndex = 7;
-            this.metroLabel4.Text = "Receivable";
+            this.lblReceivable.AutoSize = true;
+            this.lblReceivable.Location = new System.Drawing.Point(143, 84);
+            this.lblReceivable.Name = "lblReceivable";
+            this.lblReceivable.Size = new System.Drawing.Size(71, 19);
+            this.lblReceivable.TabIndex = 7;
+            this.lblReceivable.Text = "Receivable";
             // 
             // txtReceivable
             // 
@@ -222,19 +224,24 @@
             this.txtReceivable.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtReceivable.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
+            // tmrControlState
+            // 
+            this.tmrControlState.Enabled = true;
+            this.tmrControlState.Tick += new System.EventHandler(this.tmrControlState_Tick);
+            // 
             // frmPointOfSalePayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(275, 295);
-            this.Controls.Add(this.metroLabel4);
+            this.Controls.Add(this.lblReceivable);
             this.Controls.Add(this.txtReceivable);
             this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.txtChange);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.txtAmountTendered);
             this.Controls.Add(this.btnPay);
-            this.Controls.Add(this.metroLabel1);
+            this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.txtTotal);
             this.Name = "frmPointOfSalePayment";
             this.Style = MetroFramework.MetroColorStyle.Red;
@@ -248,13 +255,14 @@
         #endregion
 
         private MetroFramework.Controls.MetroTextBox txtTotal;
-        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroLabel lblTotal;
         private MetroFramework.Controls.MetroButton btnPay;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroTextBox txtAmountTendered;
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroTextBox txtChange;
-        private MetroFramework.Controls.MetroLabel metroLabel4;
+        private MetroFramework.Controls.MetroLabel lblReceivable;
         private MetroFramework.Controls.MetroTextBox txtReceivable;
+        private System.Windows.Forms.Timer tmrControlState;
     }
 }

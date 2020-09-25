@@ -26,9 +26,16 @@ namespace SVFHardwareSystem.DAL.Entities
         /// Indicates the product that will be paid in the future
         /// </summary>
         public bool IsToPay { get; set; }
+        
         /// <summary>
         /// Indicates the time when the product transaction updated
         /// </summary>
         public DateTime UpdateTimeStamp { get; set; }
+        public bool IsReplace { get; set; }
+        public DateTime ReplaceDate { get; set; } = DateTime.Now;
+        public string ReplaceReason { get; set; }
+        public bool IsCancel { get; set; }
+        public DateTime CancelDate { get; set; } = DateTime.Now;
+        public string CancelReason { get; set; }
     }
 }

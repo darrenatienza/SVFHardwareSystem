@@ -20,5 +20,6 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// <returns></returns>
         decimal GetTotalAmount(int posTransactionID);
         decimal GetReceivableAmount(int posTransactionID);
+ 
     }
 }

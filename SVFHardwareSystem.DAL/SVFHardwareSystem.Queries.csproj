@@ -86,6 +86,10 @@
     <Compile Include="Migrations\202009231441072_AddLimitColumnToProduct.designer.cs">
       <DependentUpon>202009231441072_AddLimitColumnToProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009250858401_AddIsReplace_ReplaceDate_IsCancel_CancelDate_ReplaceReason_CancelReason_OnTransactionProduct.cs" />
+    <Compile Include="Migrations\202009250858401_AddIsReplace_ReplaceDate_IsCancel_CancelDate_ReplaceReason_CancelReason_OnTransactionProduct.designer.cs">
+      <DependentUpon>202009250858401_AddIsReplace_ReplaceDate_IsCancel_CancelDate_ReplaceReason_CancelReason_OnTransactionProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -111,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009231441072_AddLimitColumnToProduct.resx">
       <DependentUpon>202009231441072_AddLimitColumnToProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009250858401_AddIsReplace_ReplaceDate_IsCancel_CancelDate_ReplaceReason_CancelReason_OnTransactionProduct.resx">
+      <DependentUpon>202009250858401_AddIsReplace_ReplaceDate_IsCancel_CancelDate_ReplaceReason_CancelReason_OnTransactionProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
