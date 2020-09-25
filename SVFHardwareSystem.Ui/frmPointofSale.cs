@@ -467,6 +467,7 @@ namespace SVFHardwareSystem.Ui
                     _isFullyPaid = posTransaction.IsFullyPaid;
                     txtTotal.Text = posTransaction.TotalAmount.ToString("N"); // currency format no symbol
                     txtPayment.Text = posTransaction.TotalPayment.ToString();
+                    txtCancelAmount.Text = posTransaction.CancelAmount.ToString();
                     await LoadProductsOnTransaction();
                 }
                 else
@@ -483,7 +484,10 @@ namespace SVFHardwareSystem.Ui
                 txtCost.Text = "";
                 txtCustomerName.Text = "";
                 txtTotal.Text = "0.00";
-                _isFinishedPosTransaction = true; // just for disabling buttons to avoid futher actions
+                _isFinishedPosTransaction = false;
+                _isFullyPaid = false;
+                _posTransactionID = 0;
+                
             }
             catch (Exception ex)
             {
@@ -668,7 +672,17 @@ namespace SVFHardwareSystem.Ui
                     if (total > 0 || receivableAmout > 0)
                     {
                         FormHandler.OpenPointOfSalePaymentForm(_posTransactionID).ShowDialog();
-                        await GenerateNewOrLoadUnFinishedPOSTransaction();
+                        if (_isFullyPaid )
+                        {
+                            await GenerateNewOrLoadUnFinishedPOSTransaction();
+                        }
+                        else
+                        {
+                            // this means that a pos transaction is loaded and if payment commited, it will reload the computation
+                            // and update the interface
+                            await SetTransactionData();
+                        }
+                       
                     }
                     else
                     {
@@ -722,7 +736,7 @@ namespace SVFHardwareSystem.Ui
             {
                 pnlSummary.Visible = true;
             }
-            if (_isFullyPaid)
+            if (_isFullyPaid || _posTransactionID == 0)
             {
                 btnPayment.Enabled = false;
 

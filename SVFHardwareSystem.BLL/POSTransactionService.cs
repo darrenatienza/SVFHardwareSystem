@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Runtime.CompilerServices;
+
 namespace SVFHardwareSystem.Services
 {
     public class POSTransactionService : Service<POSTransactionModel,POSTransaction>, IPOSTransactionService
@@ -33,6 +35,7 @@ namespace SVFHardwareSystem.Services
                 decimal total = 0;
                 decimal cash = 0;
                 decimal receivable = 0;
+                decimal cancel = 0;
                 var entity = await db.POSTransactions.FirstOrDefaultAsync(x => x.SIDR == code);
                 var model = entity != null ? Mapping.Mapper.Map<POSTransactionModel>(entity) : throw new KeyNotFoundException();
                 //get total and receivables list
@@ -42,13 +45,16 @@ namespace SVFHardwareSystem.Services
                 total = transactionProducts.Count() > 0 ? transactionProducts.Sum(y => y.Quantity * y.Product.Price) : 0;
                 //compute for  total amount of cash payments
                 cash = posPayments.Count() > 0 ? posPayments.Sum(y => y.Amount) : 0;
-
+                // compute for cancel items amount
+                var cancelItems = transactionProducts.Where(a => a.IsCancel && a.IsPaid);
+                cancel = cancelItems.Count() > 0 ? cancelItems.Sum(z => z.Quantity * z.Product.Price) : 0;
                 // peform operation && set values
                receivable = total - cash;
                 model.IsFullyPaid = receivable == 0 ? true : false;
                 model.TotalAmount = total;
                 model.TotalPayment = cash;
-
+                model.Receivable = receivable;
+                model.CancelAmount = cancel;
                 return model;
             }
 
