@@ -39,13 +39,13 @@ namespace SVFHardwareSystem.Services
                 var entity = await db.POSTransactions.FirstOrDefaultAsync(x => x.SIDR == code);
                 var model = entity != null ? Mapping.Mapper.Map<POSTransactionModel>(entity) : throw new KeyNotFoundException();
                 //get total and receivables list
-                var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == entity.POSTransactionID);
+                var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == entity.POSTransactionID && !x.IsCancel);
                 var posPayments = db.POSPayments.Where(x => x.POSTransactionID == entity.POSTransactionID);
                 // compute for total amount of products
                 total = transactionProducts.Count() > 0 ? transactionProducts.Sum(y => y.Quantity * y.Product.Price) : 0;
                 //compute for  total amount of cash payments
                 cash = posPayments.Count() > 0 ? posPayments.Sum(y => y.Amount) : 0;
-                // compute for cancel items amount
+                // cancel items are computed where is cancel is true and is paid is true
                 var cancelItems = transactionProducts.Where(a => a.IsCancel && a.IsPaid);
                 cancel = cancelItems.Count() > 0 ? cancelItems.Sum(z => z.Quantity * z.Product.Price) : 0;
                 // peform operation && set values

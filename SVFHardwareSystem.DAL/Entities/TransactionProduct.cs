@@ -16,7 +16,7 @@ namespace SVFHardwareSystem.DAL.Entities
         public int ProductID { get; set; }
         public virtual Product Product { get; set; }
         public int POSTransactionID { get; set; }
-        public virtual POSTransaction POSTransaction{get; set;}
+        public virtual POSTransaction POSTransaction { get; set; }
         public int Quantity { get; set; }
         /// <summary>
         /// Indicates the product that is paid by customer
@@ -26,7 +26,7 @@ namespace SVFHardwareSystem.DAL.Entities
         /// Indicates the product that will be paid in the future
         /// </summary>
         public bool IsToPay { get; set; }
-        
+
         /// <summary>
         /// Indicates the time when the product transaction updated
         /// </summary>
@@ -37,5 +37,9 @@ namespace SVFHardwareSystem.DAL.Entities
         public bool IsCancel { get; set; }
         public DateTime CancelDate { get; set; } = DateTime.Now;
         public string CancelReason { get; set; }
+        /// <summary>
+        /// This indicates if the quantity of the replace or cancel product is added to current product inventory 
+        /// </summary>
+        public bool IsQuantityAddedToInventoryAfterReplaceOrCancel { get; set; }
     }
 }

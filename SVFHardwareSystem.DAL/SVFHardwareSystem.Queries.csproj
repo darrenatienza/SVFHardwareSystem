@@ -90,6 +90,10 @@
     <Compile Include="Migrations\202009250858401_AddIsReplace_ReplaceDate_IsCancel_CancelDate_ReplaceReason_CancelReason_OnTransactionProduct.designer.cs">
       <DependentUpon>202009250858401_AddIsReplace_ReplaceDate_IsCancel_CancelDate_ReplaceReason_CancelReason_OnTransactionProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009270256230_AddIsQuantityAddedToInventoryAfterReplaceOrCancelToTransactionProduct.cs" />
+    <Compile Include="Migrations\202009270256230_AddIsQuantityAddedToInventoryAfterReplaceOrCancelToTransactionProduct.designer.cs">
+      <DependentUpon>202009270256230_AddIsQuantityAddedToInventoryAfterReplaceOrCancelToTransactionProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -118,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009250858401_AddIsReplace_ReplaceDate_IsCancel_CancelDate_ReplaceReason_CancelReason_OnTransactionProduct.resx">
       <DependentUpon>202009250858401_AddIsReplace_ReplaceDate_IsCancel_CancelDate_ReplaceReason_CancelReason_OnTransactionProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009270256230_AddIsQuantityAddedToInventoryAfterReplaceOrCancelToTransactionProduct.resx">
+      <DependentUpon>202009270256230_AddIsQuantityAddedToInventoryAfterReplaceOrCancelToTransactionProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

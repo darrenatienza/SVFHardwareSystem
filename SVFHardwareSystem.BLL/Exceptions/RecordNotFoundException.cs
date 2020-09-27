@@ -12,5 +12,7 @@ namespace SVFHardwareSystem.Services.Exceptions
         public RecordNotFoundException() : base(String.Format("Record not found")) { }
 
         
+
+
     }
 }

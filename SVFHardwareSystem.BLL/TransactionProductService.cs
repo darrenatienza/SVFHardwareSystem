@@ -49,6 +49,33 @@ namespace SVFHardwareSystem.Services
             }
         }
 
+        public void CancelProduct(int transactionProductID, string reason, bool isAddQuantity)
+        {
+            using (var db = new DataContext())
+            {
+                var transactionProduct = db.TransactionProducts.Find(transactionProductID);
+                var product = db.Products.Find(transactionProduct.ProductID);
+                // product where isCancel is true must not update the status because it was returned
+                if (transactionProduct.IsCancel)
+                {
+                    throw new ReturnedProductMustNotUpdateStatusException();
+                }
+                //if isAddQuantity is true, add the quantity of transaction product to the current quantity of the product
+                if (isAddQuantity)
+                {
+                    product.Quantity += transactionProduct.Quantity;
+                    transactionProduct.IsQuantityAddedToInventoryAfterReplaceOrCancel = true;
+                }
+                db.Entry(product).State = EntityState.Modified;
+                transactionProduct.IsCancel = true;
+                transactionProduct.ReplaceReason = reason;
+                transactionProduct.ReplaceDate = DateTime.Now;
+                db.Entry(transactionProduct).State = EntityState.Modified;
+                db.SaveChanges();
+
+            }
+        }
+
         public void EditIsToPay(int id, bool isToPay)
         {
             using (var db = new DataContext())
@@ -84,5 +111,32 @@ namespace SVFHardwareSystem.Services
                 await db.SaveChangesAsync();
             }
         }
+
+        public void ReplaceProduct(int transactionProductID, string reason, bool isAddQuantity)
+        {
+            using (var db = new DataContext())
+            {
+                var transactionProduct = db.TransactionProducts.Find(transactionProductID);
+                var product = db.Products.Find(transactionProduct.ProductID);
+                // product where isReplace is true must not update the status because it was returned
+                if (transactionProduct.IsReplace)
+                {
+                    throw new ReturnedProductMustNotUpdateStatusException();
+                }
+                //if isAddQuantity is true, add the quantity of transaction product to the current quantity of the product
+                if (isAddQuantity)
+                {
+                    product.Quantity += transactionProduct.Quantity;
+                    transactionProduct.IsQuantityAddedToInventoryAfterReplaceOrCancel = true;
+                }
+                db.Entry(product).State = EntityState.Modified;
+                transactionProduct.IsReplace = true;
+                transactionProduct.ReplaceReason = reason;
+                transactionProduct.ReplaceDate = DateTime.Now;
+                db.Entry(transactionProduct).State = EntityState.Modified;
+                db.SaveChanges();
+
+            }
+        }   
     }
 }

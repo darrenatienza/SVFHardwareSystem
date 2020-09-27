@@ -1,5 +1,6 @@
 ﻿using AutoMap;
 using SVFHardwareSystem.Queries;
+using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -54,7 +55,7 @@ namespace SVFHardwareSystem.Services
             using (var db = new DataContext())
             {
                 var entity = await db.Set<TEntity>().FindAsync(id);
-                var model = entity != null ? Mapping.Mapper.Map<TModel>(entity) : throw new KeyNotFoundException();
+                var model = entity != null ? Mapping.Mapper.Map<TModel>(entity) : throw new RecordNotFoundException();
                 return model;
             }
         }

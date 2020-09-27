@@ -28,5 +28,7 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// <param name="transactionProduct"></param>
         /// <returns></returns>
         Task AddNewTransactionProductAsync(TransactionProductModel transactionProduct);
+        void ReplaceProduct(int transactionProductID, string reason, bool isAddQuantity);
+        void CancelProduct(int transactionProductID, string reason, bool isAddQuantity);
     }
 }

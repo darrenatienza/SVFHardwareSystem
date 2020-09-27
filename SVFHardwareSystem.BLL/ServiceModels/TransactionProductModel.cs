@@ -24,5 +24,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
 
         public decimal ProductPrice { get; set; }
         public int TransactionProductID { get; set; }
+        public bool IsCancel { get; set; }
+        public bool IsReplace { get; set; }
     }
 }

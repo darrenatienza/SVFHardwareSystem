@@ -124,11 +124,12 @@
             // lblavailable
             // 
             this.lblavailable.AutoSize = true;
-            this.lblavailable.Location = new System.Drawing.Point(161, 120);
+            this.lblavailable.Location = new System.Drawing.Point(148, 120);
             this.lblavailable.Name = "lblavailable";
             this.lblavailable.Size = new System.Drawing.Size(76, 19);
             this.lblavailable.TabIndex = 4;
             this.lblavailable.Text = "Available: 0";
+            this.lblavailable.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // metroPanel1
             // 

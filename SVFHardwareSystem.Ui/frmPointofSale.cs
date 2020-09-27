@@ -24,7 +24,7 @@ namespace SVFHardwareSystem.Ui
         private IProductService _productService;
         private ITransactionProductService _transactionProductService;
         private ICustomerService _customerService;
-        private int transactionProductID;
+        private int _transactionProductID;
         private int customerID;
         private bool _isFinishedPosTransaction;
         private bool _isFullyPaid;
@@ -243,7 +243,11 @@ namespace SVFHardwareSystem.Ui
                             item.TransactionProductID.ToString(),
                            item.IsToPay,
                           count.ToString(),
-                            item.ProductName,
+                           item.IsReplace && item.IsCancel ? item.ProductName + " [replaced] [cancelled]"
+                           //:
+                            item.IsCancel ? item.ProductName + " [cancelled] " 
+                            :  item.IsReplace ?  item.ProductName + " [replaced] " 
+                             : item.ProductName,
                             item.ProductPrice.ToString(),
                     item.Quantity.ToString(),
                     item.Total.ToString()}) ;
@@ -278,7 +282,7 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                if (transactionProductID > 0)
+                if (_transactionProductID > 0)
                 {
                     if (!_isFinishedPosTransaction)
                     {
@@ -287,12 +291,12 @@ namespace SVFHardwareSystem.Ui
                         var dialogResult = MetroMessageBox.Show(this, "Do you want to remove this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (dialogResult == DialogResult.Yes)
                         {
-                            var transactionProduct = await _transactionProductService.Get(transactionProductID);
+                            var transactionProduct = await _transactionProductService.Get(_transactionProductID);
                             if (!transactionProduct.IsPaid)
                             {
 
-                                await _transactionProductService.RemoveTransactionProductAsync(transactionProductID);
-                                transactionProductID = 0;
+                                await _transactionProductService.RemoveTransactionProductAsync(_transactionProductID);
+                                _transactionProductID = 0;
                             }
                             else
                             {
@@ -331,7 +335,7 @@ namespace SVFHardwareSystem.Ui
             var rows = gridList.Rows;
             int checkboxColumnIndex = 1;
 
-            transactionProductID = 0;
+            _transactionProductID = 0;
             gridList.CellValueChanged -= GridList_CellValueChanged; // subscribe for future manual action
             gridList.CellMouseUp -= gridList_CellMouseUp;
             foreach (DataGridViewRow item in rows)
@@ -400,7 +404,7 @@ namespace SVFHardwareSystem.Ui
 
             if (grid.SelectedRows.Count > 0)
             {
-                transactionProductID = int.Parse(grid.SelectedRows[0].Cells[0].Value.ToString());
+                _transactionProductID = int.Parse(grid.SelectedRows[0].Cells[0].Value.ToString());
 
             }
         }
@@ -429,11 +433,11 @@ namespace SVFHardwareSystem.Ui
                 int checkboxColumnIndex = 1;
                 if (e.ColumnIndex == checkboxColumnIndex && e.RowIndex != -1)
                 {
-                    if (transactionProductID > 0)
+                    if (_transactionProductID > 0)
                     {
                         var rows = gridList.SelectedRows[0];
                         var chkValue = bool.Parse(rows.Cells[checkboxColumnIndex].Value.ToString());
-                        _transactionProductService.EditIsToPay(transactionProductID, chkValue);
+                        _transactionProductService.EditIsToPay(_transactionProductID, chkValue);
                         txtTotal.Text = _posTransactionService.GetTotalAmount(_posTransactionID).ToString("N");
                     }
 
@@ -672,16 +676,18 @@ namespace SVFHardwareSystem.Ui
                     if (total > 0 || receivableAmout > 0)
                     {
                         FormHandler.OpenPointOfSalePaymentForm(_posTransactionID).ShowDialog();
+
+                        // this means that a pos transaction is loaded and if payment commited, it will reload the computation
+                        // and update the interface
+                        await SetTransactionData();
+
                         if (_isFullyPaid )
                         {
                             await GenerateNewOrLoadUnFinishedPOSTransaction();
                         }
-                        else
-                        {
-                            // this means that a pos transaction is loaded and if payment commited, it will reload the computation
-                            // and update the interface
-                            await SetTransactionData();
-                        }
+                       
+                            
+                        
                        
                     }
                     else
@@ -726,17 +732,19 @@ namespace SVFHardwareSystem.Ui
                 txtReceivable.Visible = true;
               
             }
-
+            // when transaction is finish
             if (!_isFinishedPosTransaction)
             {
                 pnlSummary.Visible = false;
-                
+                btnCancelReplace.Enabled = false;
             }
             else
             {
                 pnlSummary.Visible = true;
+                btnCancelReplace.Enabled = true;
             }
-            if (_isFullyPaid || _posTransactionID == 0)
+            // when transaction is fully paid or when the grid list has no product
+            if (_isFullyPaid || gridList.Rows.Count == 0)
             {
                 btnPayment.Enabled = false;
 
@@ -746,6 +754,15 @@ namespace SVFHardwareSystem.Ui
                 btnPayment.Enabled = true;
             }
 
+        }
+
+        private void btnCancelReplace_Click(object sender, EventArgs e)
+        {
+            if (_isFinishedPosTransaction)
+            {
+                FormHandler.OpenSalesReplaceCancelForm(_transactionProductID).ShowDialog();
+            }
+           
         }
     }
 }

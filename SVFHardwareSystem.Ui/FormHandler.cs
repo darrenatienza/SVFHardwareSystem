@@ -35,6 +35,14 @@ namespace SVFHardwareSystem.Ui
                 .Resolve<frmPointOfSalePayment>();
 
         }
+        public static frmSalesReplaceCancel OpenSalesReplaceCancelForm(int posTransactionID)
+        {
+            return UnityConfig
+                .Register()
+                .RegisterType<frmSalesReplaceCancel>(new InjectionConstructor(new object[] { new TransactionProductService(), posTransactionID }))
+                .Resolve<frmSalesReplaceCancel>();
+
+        }
 
     }
 }

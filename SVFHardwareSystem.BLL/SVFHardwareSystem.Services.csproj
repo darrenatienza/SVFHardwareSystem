@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerService.cs" />
+    <Compile Include="Exceptions\ReturnedProductMustNotUpdateStatusException.cs" />
     <Compile Include="Exceptions\RecordNotFoundException.cs" />
     <Compile Include="Exceptions\AmountTenderMustBeGreaterThanOrEqualException.cs" />
     <Compile Include="Exceptions\LimitMustNoReachException.cs" />
