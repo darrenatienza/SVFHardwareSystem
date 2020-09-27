@@ -244,7 +244,7 @@ namespace SVFHardwareSystem.Ui
                            item.IsToPay,
                           count.ToString(),
                            item.IsReplace && item.IsCancel ? item.ProductName + " [replaced] [cancelled]"
-                           //:
+                           :
                             item.IsCancel ? item.ProductName + " [cancelled] " 
                             :  item.IsReplace ?  item.ProductName + " [replaced] " 
                              : item.ProductName,
