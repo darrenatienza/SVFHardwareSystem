@@ -19,18 +19,18 @@ namespace SVFHardwareSystem.Ui
         private ITransactionProductService _transactionProductService;
         private int _transactionProductID;
 
-        public frmSalesReplaceCancel(ITransactionProductService transactionProductService,int transactionProductID)
+        public frmSalesReplaceCancel(ITransactionProductService transactionProductService, int transactionProductID)
         {
             InitializeComponent();
             _transactionProductService = transactionProductService;
             _transactionProductID = transactionProductID;
         }
 
-        private async  void frmSalesReturned_Load(object sender, EventArgs e)
+        private async void frmSalesReturned_Load(object sender, EventArgs e)
         {
             await SetTransactionProductData();
-           
-           
+
+
         }
 
         private async Task SetTransactionProductData()
@@ -41,7 +41,7 @@ namespace SVFHardwareSystem.Ui
                 lblProductName.Text = "Product Name: " + transactionProduct.ProductName;
                 lblQuantity.Text = "Quantity: " + transactionProduct.Quantity;
             }
-            catch(RecordNotFoundException ex)
+            catch (RecordNotFoundException ex)
             {
                 MetroMessageBox.Show(this, "No product selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
@@ -51,7 +51,7 @@ namespace SVFHardwareSystem.Ui
 
                 MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
 
         private void btnApplyReplace_Click(object sender, EventArgs e)
@@ -61,11 +61,11 @@ namespace SVFHardwareSystem.Ui
                 var reason = txtReplaceReason.Text;
                 var isAddQuantity = chkAddQuantity.Checked;
 
-                _transactionProductService.ReplaceProduct(_transactionProductID,reason,isAddQuantity);
+                _transactionProductService.ReplaceProduct(_transactionProductID, reason);
                 this.Close();
-                
+
             }
-            catch(ReturnedProductMustNotUpdateStatusException ex)
+            catch (ReturnedProductMustNotUpdateStatusException ex)
             {
                 MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();

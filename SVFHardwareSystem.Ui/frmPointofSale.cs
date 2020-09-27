@@ -29,7 +29,7 @@ namespace SVFHardwareSystem.Ui
         private bool _isFinishedPosTransaction;
         private bool _isFullyPaid;
 
-        public frmPointofSale(IPOSTransactionService posTransactionService, 
+        public frmPointofSale(IPOSTransactionService posTransactionService,
             IProductService productService, ITransactionProductService transactionProductService,
             ICustomerService customerService)
         {
@@ -50,10 +50,10 @@ namespace SVFHardwareSystem.Ui
             loadAutoCompleteData();
             await GenerateNewOrLoadUnFinishedPOSTransaction();
 
-           
-            
-           
-         
+
+
+
+
 
         }
 
@@ -69,12 +69,12 @@ namespace SVFHardwareSystem.Ui
                 _posTransactionID = previousPOSTransaction.POSTransactionID;
                 txtReceivable.Text = "0.00"; // all unfinished transactions have 0.00 value
                 _isFinishedPosTransaction = previousPOSTransaction.IsFinished;
-                txtTotal.Text = previousPOSTransaction.TotalAmount.ToString() ;
+                txtTotal.Text = previousPOSTransaction.TotalAmount.ToString();
                 await LoadProductsOnTransaction();
             }
             catch (KeyNotFoundException ex)
             {
-                
+
                 txtCost.Text = "";
                 txtCustomerName.Text = "";
                 customerID = 0;
@@ -83,9 +83,9 @@ namespace SVFHardwareSystem.Ui
                 _isFinishedPosTransaction = false;
                 txtTotal.Text = "0.00";
                 txtReceivable.Text = "0.00";
-                
+
                 gridList.Rows.Clear();
-                this.ActiveControl = txtCost;                                         
+                this.ActiveControl = txtCost;
                 //no unfinished point of sale transaction found.
                 //create new transaction
                 MetroMessageBox.Show(this, "No unfinished transaction found, please create new transaction!", "New Transaction", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -118,7 +118,7 @@ namespace SVFHardwareSystem.Ui
                     await _posTransactionService.Add(posTransaction);
                 }
 
-               // await LoadCategories();
+                // await LoadCategories();
             }
             catch (Exception ex)
             {
@@ -127,11 +127,11 @@ namespace SVFHardwareSystem.Ui
             }
         }
 
-        
+
         //AutoCompleteData Method
         private async void loadAutoCompleteData()
         {
-            
+
             //Set AutoCompleteSource property of txt_StateName as CustomSource
             txtProductName.AutoCompleteSource = AutoCompleteSource.CustomSource;
             //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
@@ -165,7 +165,7 @@ namespace SVFHardwareSystem.Ui
             foreach (var item in customerNames)
             {
                 txtCustomerName.AutoCompleteCustomSource.Add(item.FullName.ToString());
-                
+
             }
 
         }
@@ -178,7 +178,7 @@ namespace SVFHardwareSystem.Ui
             }
         }
 
-        private async  void AddProductOnTransaction()
+        private async void AddProductOnTransaction()
         {
             try
             {
@@ -199,17 +199,17 @@ namespace SVFHardwareSystem.Ui
                 }
                 else
                 {
-                    MetroMessageBox.Show(this,"No Point of Sale Transaction Found!", "Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this, "No Point of Sale Transaction Found!", "Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
+
 
 
             }
-            catch(RecordNotFoundException ex)
+            catch (RecordNotFoundException ex)
             {
-                MetroMessageBox.Show(this, string.Format("{0} for {1}",ex.Message,txtProductName.Text),"Product", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, string.Format("{0} for {1}", ex.Message, txtProductName.Text), "Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch(LimitMustNoReachException ex)
+            catch (LimitMustNoReachException ex)
             {
                 MetroMessageBox.Show(this, ex.Message);
             }
@@ -222,7 +222,7 @@ namespace SVFHardwareSystem.Ui
 
         private void txtProductName_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private async Task LoadProductsOnTransaction()
@@ -230,7 +230,7 @@ namespace SVFHardwareSystem.Ui
             try
             {
                 var productsOnTransaction = await _transactionProductService.GetProductsByTransactionID(_posTransactionID);
-                
+
                 int rowIndex = 0; // index of rows
                 int checkboxColumnIndex = 1;
                 gridList.Rows.Clear();
@@ -239,18 +239,19 @@ namespace SVFHardwareSystem.Ui
                 foreach (var item in productsOnTransaction)
                 {
                     count++;
-                    gridList.Rows.Add(new object[] {
-                            item.TransactionProductID.ToString(),
-                           item.IsToPay,
+                    gridList.Rows.Add(new object[] {item.TransactionProductID.ToString(),item.IsToPay,
                           count.ToString(),
-                           item.IsReplace && item.IsCancel ? item.ProductName + " [replaced] [cancelled]"
-                           :
-                            item.IsCancel ? item.ProductName + " [cancelled] " 
-                            :  item.IsReplace ?  item.ProductName + " [replaced] " 
+                          //IsReplace and IsCancel = true then show productName [replace] [cancelled]
+                            item.IsReplace && item.IsCancel ? item.ProductName + " [replaced] [cancelled]"
+                             //IsCancel = true then show productName [cancelled]
+                           :item.IsCancel ? item.ProductName + " [cancelled] "
+                            //IsReplace = true then show productName [replace]
+                            :  item.IsReplace ?  item.ProductName + " [replaced] "
+                            //show product name only
                              : item.ProductName,
                             item.ProductPrice.ToString(),
                     item.Quantity.ToString(),
-                    item.Total.ToString()}) ;
+                    item.Total.ToString()});
                     DataGridViewCheckBoxCell chk = gridList.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
                     if (item.IsPaid)
                     {
@@ -264,7 +265,7 @@ namespace SVFHardwareSystem.Ui
                     total += item.Total;
                 }
 
-               
+
 
                 //select all check box state must be update to avoid confusion on current state of list
                 UpdateSelecAllCheckboxState();
@@ -278,7 +279,7 @@ namespace SVFHardwareSystem.Ui
             }
         }
 
-        private async  void btnRemove_Click(object sender, EventArgs e)
+        private async void btnRemove_Click(object sender, EventArgs e)
         {
             try
             {
@@ -306,7 +307,7 @@ namespace SVFHardwareSystem.Ui
                         }
                         await SetTransactionData();
                         await LoadProductsOnTransaction();
-                        
+
                     }
                     else
                     {
@@ -324,12 +325,12 @@ namespace SVFHardwareSystem.Ui
 
                 MetroMessageBox.Show(this, ex.ToString());
             }
-           
+
         }
 
-       
 
-        
+
+
         private void SelectAllProducts()
         {
             var rows = gridList.Rows;
@@ -359,7 +360,7 @@ namespace SVFHardwareSystem.Ui
         {
             // unsubcribe on checkbox event to avoid multiple event occurences 
             // on checkbox while updating the state of select all checkbox
-            chkSelectAll.CheckedChanged -= ChkSelectAll_CheckedChanged; 
+            chkSelectAll.CheckedChanged -= ChkSelectAll_CheckedChanged;
 
             int totalRows = gridList.Rows.Count;
             int unCheckRows = 0;
@@ -372,7 +373,7 @@ namespace SVFHardwareSystem.Ui
                     unCheckRows++;
                 }
             }
-           
+
             if (unCheckRows == totalRows)
             {
                 chkSelectAll.CheckState = CheckState.Unchecked;
@@ -411,7 +412,7 @@ namespace SVFHardwareSystem.Ui
 
         private void frmPointofSale_Shown(object sender, EventArgs e)
         {
-          
+
             //load only after all objects and event initialized to avoid
             //recursive action on updating the state of select all checkbox
             chkSelectAll.CheckedChanged += ChkSelectAll_CheckedChanged;
@@ -459,11 +460,11 @@ namespace SVFHardwareSystem.Ui
             {
                 if (txtSIDR.Text != "")
                 {
-                   
+
                     var code = txtSIDR.Text;
                     var posTransaction = await _posTransactionService.Get(code);
                     _posTransactionID = posTransaction.POSTransactionID;
-                   txtCost.Text = posTransaction.Cost;
+                    txtCost.Text = posTransaction.Cost;
                     txtCustomerName.Text = posTransaction.CustomerFullName;
                     customerID = posTransaction.CustomerID;
                     txtReceivable.Text = posTransaction.Receivable.ToString();
@@ -479,11 +480,11 @@ namespace SVFHardwareSystem.Ui
                     MetroMessageBox.Show(this, "Please provide SI/DR!", "SI/DR is empty!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtSIDR.WithError = true;
                 }
-                
+
             }
             catch (KeyNotFoundException)
             {
-                MetroMessageBox.Show(this, "No Record Found on SI/DR!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "No Record Found on SI/DR!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 gridList.Rows.Clear();
                 txtCost.Text = "";
                 txtCustomerName.Text = "";
@@ -491,7 +492,7 @@ namespace SVFHardwareSystem.Ui
                 _isFinishedPosTransaction = false;
                 _isFullyPaid = false;
                 _posTransactionID = 0;
-                
+
             }
             catch (Exception ex)
             {
@@ -503,7 +504,7 @@ namespace SVFHardwareSystem.Ui
         private async void txtSIDR_ButtonClick(object sender, EventArgs e)
         {
             await SetTransactionData();
-            
+
 
         }
 
@@ -527,7 +528,7 @@ namespace SVFHardwareSystem.Ui
                 {
 
 
-                    if(ValidatePOSTransactionFields())
+                    if (ValidatePOSTransactionFields())
                     {
                         var newPOSTransaction = new POSTransactionModel();
                         newPOSTransaction.Cost = txtCost.Text;
@@ -538,7 +539,7 @@ namespace SVFHardwareSystem.Ui
                         _posTransactionID = newPOSTransaction.POSTransactionID;
                         MetroMessageBox.Show(this, "New Point of Sale Transaction has been generated!", "New Point of Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                   
+
                 }
                 else
                 {
@@ -548,8 +549,8 @@ namespace SVFHardwareSystem.Ui
                         await GenerateNewOrLoadUnFinishedPOSTransaction();
                     }
                 }
-                
-                
+
+
             }
             catch (Exception ex)
             {
@@ -581,7 +582,7 @@ namespace SVFHardwareSystem.Ui
                 return false;
             }
 
-            return true ;
+            return true;
         }
 
         private void txtCustomerName_KeyDown(object sender, KeyEventArgs e)
@@ -603,11 +604,11 @@ namespace SVFHardwareSystem.Ui
 
                 //get the custmer id according to its name
                 customerID = _customerService.GetCustomerID(txtCustomerName.Text);
-                
+
             }
             catch (RecordNotFoundException ex)
             {
-                
+
                 MetroMessageBox.Show(this, string.Format("{0} for {1}", ex.Message, txtCustomerName.Text), "Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtCustomerName.Text = "";
                 txtCustomerName.Focus();
@@ -650,8 +651,8 @@ namespace SVFHardwareSystem.Ui
                     {
                         MetroMessageBox.Show(this, "You cannot update a finished Point of Sale Transaction!", "Update Point of Sale Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    
-                    
+
+
                 }
                 else
                 {
@@ -671,7 +672,7 @@ namespace SVFHardwareSystem.Ui
             {
                 if (_posTransactionID > 0)
                 {
-                    var total =  _posTransactionService.GetTotalAmount(_posTransactionID);
+                    var total = _posTransactionService.GetTotalAmount(_posTransactionID);
                     var receivableAmout = _posTransactionService.GetReceivableAmount(_posTransactionID);
                     if (total > 0 || receivableAmout > 0)
                     {
@@ -681,14 +682,14 @@ namespace SVFHardwareSystem.Ui
                         // and update the interface
                         await SetTransactionData();
 
-                        if (_isFullyPaid )
+                        if (_isFullyPaid)
                         {
                             await GenerateNewOrLoadUnFinishedPOSTransaction();
                         }
-                       
-                            
-                        
-                       
+
+
+
+
                     }
                     else
                     {
@@ -706,7 +707,7 @@ namespace SVFHardwareSystem.Ui
 
                 MetroMessageBox.Show(this, ex.ToString());
             }
-            
+
         }
 
         private void tmrControlState(object sender, EventArgs e)
@@ -716,13 +717,13 @@ namespace SVFHardwareSystem.Ui
 
         private void ManageControlState()
         {
-           
+
             if (_posTransactionID == 0 || _isFinishedPosTransaction)
             {
                 btnRemove.Enabled = false;
                 btnUpdatePOSTransactionDetails.Enabled = false;
                 txtProductName.Enabled = false;
-               
+
             }
             else
             {
@@ -730,7 +731,7 @@ namespace SVFHardwareSystem.Ui
                 btnUpdatePOSTransactionDetails.Enabled = true;
                 txtProductName.Enabled = true;
                 txtReceivable.Visible = true;
-              
+
             }
             // when transaction is finish
             if (!_isFinishedPosTransaction)
@@ -756,13 +757,14 @@ namespace SVFHardwareSystem.Ui
 
         }
 
-        private void btnCancelReplace_Click(object sender, EventArgs e)
+        private async void btnCancelReplace_Click(object sender, EventArgs e)
         {
             if (_isFinishedPosTransaction)
             {
                 FormHandler.OpenSalesReplaceCancelForm(_transactionProductID).ShowDialog();
+                await SetTransactionData();
             }
-           
+
         }
     }
 }

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace SVFHardwareSystem.Services
 {
-    public class TransactionProductService : Service<TransactionProductModel,TransactionProduct>, ITransactionProductService
+    public class TransactionProductService : Service<TransactionProductModel, TransactionProduct>, ITransactionProductService
     {
         public TransactionProductService() { }
 
@@ -45,7 +45,7 @@ namespace SVFHardwareSystem.Services
                 {
                     throw new RecordNotFoundException();
                 }
-                
+
             }
         }
 
@@ -112,22 +112,16 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public void ReplaceProduct(int transactionProductID, string reason, bool isAddQuantity)
+        public void ReplaceProduct(int transactionProductID, string reason)
         {
             using (var db = new DataContext())
             {
                 var transactionProduct = db.TransactionProducts.Find(transactionProductID);
                 var product = db.Products.Find(transactionProduct.ProductID);
                 // product where isReplace is true must not update the status because it was returned
-                if (transactionProduct.IsReplace)
+                if (transactionProduct.IsReplace || transactionProduct.IsCancel)
                 {
                     throw new ReturnedProductMustNotUpdateStatusException();
-                }
-                //if isAddQuantity is true, add the quantity of transaction product to the current quantity of the product
-                if (isAddQuantity)
-                {
-                    product.Quantity += transactionProduct.Quantity;
-                    transactionProduct.IsQuantityAddedToInventoryAfterReplaceOrCancel = true;
                 }
                 db.Entry(product).State = EntityState.Modified;
                 transactionProduct.IsReplace = true;
@@ -137,6 +131,6 @@ namespace SVFHardwareSystem.Services
                 db.SaveChanges();
 
             }
-        }   
+        }
     }
 }

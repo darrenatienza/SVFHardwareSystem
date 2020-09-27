@@ -35,11 +35,11 @@
             this.txtReplaceReason = new MetroFramework.Controls.MetroTextBox();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.btnApplyCancel = new MetroFramework.Controls.MetroButton();
+            this.chkAddQuantity = new MetroFramework.Controls.MetroCheckBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.txtCancelReason = new MetroFramework.Controls.MetroTextBox();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.lblQuantity = new MetroFramework.Controls.MetroLabel();
-            this.chkAddQuantity = new MetroFramework.Controls.MetroCheckBox();
             this.lblProductName = new MetroFramework.Controls.MetroLabel();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.metroTabControl1.SuspendLayout();
@@ -55,7 +55,7 @@
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(10, 141);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 1;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(491, 236);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
@@ -157,6 +157,18 @@
             this.btnApplyCancel.UseSelectable = true;
             this.btnApplyCancel.Click += new System.EventHandler(this.btnApplyCancel_Click);
             // 
+            // chkAddQuantity
+            // 
+            this.chkAddQuantity.AutoSize = true;
+            this.chkAddQuantity.Location = new System.Drawing.Point(324, 9);
+            this.chkAddQuantity.Name = "chkAddQuantity";
+            this.chkAddQuantity.Size = new System.Drawing.Size(156, 30);
+            this.chkAddQuantity.TabIndex = 5;
+            this.chkAddQuantity.Text = "Add Quantity to Product \r\nInventory";
+            this.metroToolTip1.SetToolTip(this.chkAddQuantity, "If check, the quantity of the product that will replace / remove \r\nwill be added " +
+        "to current product inventory quantity");
+            this.chkAddQuantity.UseSelectable = true;
+            // 
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
@@ -228,18 +240,6 @@
             this.lblQuantity.Text = "Quantity:";
             this.lblQuantity.UseCustomBackColor = true;
             this.lblQuantity.UseStyleColors = true;
-            // 
-            // chkAddQuantity
-            // 
-            this.chkAddQuantity.AutoSize = true;
-            this.chkAddQuantity.Location = new System.Drawing.Point(324, 9);
-            this.chkAddQuantity.Name = "chkAddQuantity";
-            this.chkAddQuantity.Size = new System.Drawing.Size(156, 30);
-            this.chkAddQuantity.TabIndex = 5;
-            this.chkAddQuantity.Text = "Add Quantity to Product \r\nInventory";
-            this.metroToolTip1.SetToolTip(this.chkAddQuantity, "If check, the quantity of the product that will replace / remove \r\nwill be added " +
-        "to current product inventory quantity");
-            this.chkAddQuantity.UseSelectable = true;
             // 
             // lblProductName
             // 
