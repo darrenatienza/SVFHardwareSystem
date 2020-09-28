@@ -16,6 +16,8 @@ namespace SVFHardwareSystem.DAL.Entities
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public int Limit { get; set; }
+        public int? SupplierID { get; set; }
+        public virtual Supplier Supplier { get; set; }
 
     }
 }

@@ -41,5 +41,15 @@ namespace SVFHardwareSystem.DAL.Entities
         /// This indicates if the quantity of the replace or cancel product is added to current product inventory 
         /// </summary>
         public bool IsQuantityAddedToInventoryAfterReplaceOrCancel { get; set; }
+        public bool IsForReturnToSupplierAfterReplace { get; set; }
+        public bool IsForReturnToSupplierAfterCancel { get; set; }
+        /// <summary>
+        /// Number of Quantity that is replace
+        /// </summary>
+        public int QuantityToReplace { get; set; }
+        /// <summary>
+        /// Number of Quantity that is Cancel
+        /// </summary>
+        public int QuantityToCancel { get; set; }
     }
 }

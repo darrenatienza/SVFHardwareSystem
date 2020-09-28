@@ -26,5 +26,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public int TransactionProductID { get; set; }
         public bool IsCancel { get; set; }
         public bool IsReplace { get; set; }
+        public bool IsForReturnToSupplierAfterReplace { get; set; }
+        public bool IsForReturnToSupplierAfterCancel { get; set; }
     }
 }

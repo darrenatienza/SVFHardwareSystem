@@ -209,7 +209,7 @@ namespace SVFHardwareSystem.Ui
             {
                 MetroMessageBox.Show(this, string.Format("{0} for {1}", ex.Message, txtProductName.Text), "Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (LimitMustNoReachException ex)
+            catch (LimitMustNotReachException ex)
             {
                 MetroMessageBox.Show(this, ex.Message);
             }

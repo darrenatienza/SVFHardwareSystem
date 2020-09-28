@@ -109,7 +109,7 @@ namespace SVFHardwareSystem.Ui
                 await _transactionProductService.AddNewTransactionProductAsync(transactionProduct);
                 this.Close();
             }
-            catch(LimitMustNoReachException ex)
+            catch(LimitMustNotReachException ex)
             {
                 MetroMessageBox.Show(this, ex.Message);
             }

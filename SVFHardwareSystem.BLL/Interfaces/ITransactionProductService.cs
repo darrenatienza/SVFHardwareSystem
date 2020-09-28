@@ -28,7 +28,14 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// <param name="transactionProduct"></param>
         /// <returns></returns>
         Task AddNewTransactionProductAsync(TransactionProductModel transactionProduct);
-        void ReplaceProduct(int transactionProductID, string reason);
-        void CancelProduct(int transactionProductID, string reason, bool isAddQuantity);
+        /// <summary>
+        /// Replace product
+        /// </summary>
+        /// <param name="transactionProductID">Transaction Product ID of record</param>
+        /// <param name="reason">Reason for Replacement</param>
+        /// <param name="isForReturnToSupplier">Is the purchase product needs to return to supplier</param>
+        /// <param name="quantityToReplace">Number of product that will be replace</param>
+        void ReplaceProduct(int transactionProductID, string reason, bool isForReturnToSupplier, int quantityToReplace);
+        void CancelProduct(int transactionProductID, string reason, bool isAddQuantity, bool isForReturnToSupplier, int quantityToCancel);
     }
 }

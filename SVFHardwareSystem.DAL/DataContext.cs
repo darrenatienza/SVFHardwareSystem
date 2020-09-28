@@ -20,6 +20,8 @@ namespace SVFHardwareSystem.Queries
         public virtual DbSet<POSPayment> POSPayments { get; set; }
         public virtual DbSet<POSTransaction> POSTransactions { get; set; }
         public virtual DbSet<TransactionProduct> TransactionProducts { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<SupplierProductToReturn> SupplierProductsToReturn { get; set; }
 
 
     }

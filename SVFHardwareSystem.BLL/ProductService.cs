@@ -29,7 +29,7 @@ namespace SVFHardwareSystem.Services
                 var remainingQuantity = product.Quantity - quantityToBuy;
                 if (remainingQuantity < product.Limit)
                 {
-                    throw new LimitMustNoReachException(product.Limit);
+                    throw new LimitMustNotReachException(product.Limit);
                 }
                 product.Quantity = remainingQuantity;
                 db.Entry(product).State = EntityState.Modified;
@@ -73,7 +73,7 @@ namespace SVFHardwareSystem.Services
                 var remainingQuantity = product.Quantity - quantityToBuy;
                 if (remainingQuantity < product.Limit)
                 {
-                    throw new LimitMustNoReachException(product.Limit);
+                    throw new LimitMustNotReachException(product.Limit);
                 }
                 return product == null ? 0 : remainingQuantity;
             }

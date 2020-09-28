@@ -32,7 +32,7 @@ namespace SVFHardwareSystem.Services
                     var remainingQuantity = product.Quantity - model.Quantity;
                     if (remainingQuantity <= product.Limit)
                     {
-                        throw new LimitMustNoReachException(product.Limit);
+                        throw new LimitMustNotReachException(product.Limit);
                     }
                     product.Quantity = remainingQuantity;
                     db.Entry(product).State = EntityState.Modified;
@@ -49,7 +49,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public void CancelProduct(int transactionProductID, string reason, bool isAddQuantity)
+        public void CancelProduct(int transactionProductID, string reason, bool isAddQuantity, bool isForReturnToSupplier, int quantityToCancel)
         {
             using (var db = new DataContext())
             {
@@ -66,7 +66,13 @@ namespace SVFHardwareSystem.Services
                     product.Quantity += transactionProduct.Quantity;
                     transactionProduct.IsQuantityAddedToInventoryAfterReplaceOrCancel = true;
                 }
+                // add to SupplierProductsToReturn
+                if (isForReturnToSupplier)
+                {
+
+                }
                 db.Entry(product).State = EntityState.Modified;
+                transactionProduct.IsForReturnToSupplierAfterCancel = isForReturnToSupplier;
                 transactionProduct.IsCancel = true;
                 transactionProduct.ReplaceReason = reason;
                 transactionProduct.ReplaceDate = DateTime.Now;
@@ -112,21 +118,53 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public void ReplaceProduct(int transactionProductID, string reason)
+        public void ReplaceProduct(int transactionProductID, string reason, bool isForReturnToSupplier, int quantityToReplace)
         {
             using (var db = new DataContext())
             {
+
+                
+
                 var transactionProduct = db.TransactionProducts.Find(transactionProductID);
                 var product = db.Products.Find(transactionProduct.ProductID);
-                // product where isReplace is true must not update the status because it was returned
+                // if isReplace or iscancel is true, record must not update the status because it was replace
                 if (transactionProduct.IsReplace || transactionProduct.IsCancel)
                 {
                     throw new ReturnedProductMustNotUpdateStatusException();
                 }
+                if (reason == string.Empty)
+                {
+                    throw new InvalidEmptyFieldException("Reason");
+                }
+
+                // check limit of quantity to replace
+                if (quantityToReplace > transactionProduct.Quantity)
+                {
+                    throw new LimitMustNotExceedException(transactionProduct.Quantity);
+                }
+                // add to SupplierProductsToReturn
+                if (isForReturnToSupplier)
+                {
+                    var supplierProductToReturn = new SupplierProductToReturn();
+                    supplierProductToReturn.Code = ""; // temporary put empty string
+                    supplierProductToReturn.IsProductFromCancelReplace = true;
+                    supplierProductToReturn.ProductID = product.ProductID;
+                    supplierProductToReturn.Quantity = quantityToReplace;
+                    supplierProductToReturn.Reason = reason;
+                    db.SupplierProductsToReturn.Add(supplierProductToReturn);
+                }
+
+                //product inventory quantity must subtract the quantity that will be replace because this will be given back to 
+                //customer
+                product.Quantity -= quantityToReplace;
                 db.Entry(product).State = EntityState.Modified;
+
+                //Mark the product as return to supplier
+                transactionProduct.IsForReturnToSupplierAfterReplace = isForReturnToSupplier;
                 transactionProduct.IsReplace = true;
                 transactionProduct.ReplaceReason = reason;
                 transactionProduct.ReplaceDate = DateTime.Now;
+                transactionProduct.QuantityToReplace = quantityToReplace;
                 db.Entry(transactionProduct).State = EntityState.Modified;
                 db.SaveChanges();
 

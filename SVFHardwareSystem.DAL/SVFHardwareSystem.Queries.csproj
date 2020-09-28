@@ -58,6 +58,8 @@
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\POSPayment.cs" />
     <Compile Include="Entities\POSTransaction.cs" />
+    <Compile Include="Entities\Supplier.cs" />
+    <Compile Include="Entities\SupplierProductToReturn.cs" />
     <Compile Include="Entities\TransactionProduct.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductInventory.cs" />
@@ -94,6 +96,22 @@
     <Compile Include="Migrations\202009270256230_AddIsQuantityAddedToInventoryAfterReplaceOrCancelToTransactionProduct.designer.cs">
       <DependentUpon>202009270256230_AddIsQuantityAddedToInventoryAfterReplaceOrCancelToTransactionProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009280245552_AddIsForReturnToSupplierAfterReplaceCancelOnTransactionProduct.cs" />
+    <Compile Include="Migrations\202009280245552_AddIsForReturnToSupplierAfterReplaceCancelOnTransactionProduct.designer.cs">
+      <DependentUpon>202009280245552_AddIsForReturnToSupplierAfterReplaceCancelOnTransactionProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009280355466_AddSupplierAndSupplierProductToReturn.cs" />
+    <Compile Include="Migrations\202009280355466_AddSupplierAndSupplierProductToReturn.designer.cs">
+      <DependentUpon>202009280355466_AddSupplierAndSupplierProductToReturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009280359109_AddSupplierToProduct.cs" />
+    <Compile Include="Migrations\202009280359109_AddSupplierToProduct.designer.cs">
+      <DependentUpon>202009280359109_AddSupplierToProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009280648322_AddQuantityToReplaceAndCancelOnTransactionProduct.cs" />
+    <Compile Include="Migrations\202009280648322_AddQuantityToReplaceAndCancelOnTransactionProduct.designer.cs">
+      <DependentUpon>202009280648322_AddQuantityToReplaceAndCancelOnTransactionProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -125,6 +143,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009270256230_AddIsQuantityAddedToInventoryAfterReplaceOrCancelToTransactionProduct.resx">
       <DependentUpon>202009270256230_AddIsQuantityAddedToInventoryAfterReplaceOrCancelToTransactionProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009280245552_AddIsForReturnToSupplierAfterReplaceCancelOnTransactionProduct.resx">
+      <DependentUpon>202009280245552_AddIsForReturnToSupplierAfterReplaceCancelOnTransactionProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009280355466_AddSupplierAndSupplierProductToReturn.resx">
+      <DependentUpon>202009280355466_AddSupplierAndSupplierProductToReturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009280359109_AddSupplierToProduct.resx">
+      <DependentUpon>202009280359109_AddSupplierToProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009280648322_AddQuantityToReplaceAndCancelOnTransactionProduct.resx">
+      <DependentUpon>202009280648322_AddQuantityToReplaceAndCancelOnTransactionProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

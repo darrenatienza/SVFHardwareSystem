@@ -40,6 +40,10 @@ namespace SVFHardwareSystem.Ui
                 var transactionProduct = await _transactionProductService.Get(_transactionProductID);
                 lblProductName.Text = "Product Name: " + transactionProduct.ProductName;
                 lblQuantity.Text = "Quantity: " + transactionProduct.Quantity;
+                lblOfQuantityOnCancel.Text = "of " + transactionProduct.Quantity;
+                lblOfQuantityOnReplace.Text = "of " + transactionProduct.Quantity;
+                txtQuantityToCancel.Text = transactionProduct.Quantity.ToString();
+                txtQuantityToReplace.Text = transactionProduct.Quantity.ToString();
             }
             catch (RecordNotFoundException ex)
             {
@@ -58,10 +62,11 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
+                int quantityToReplace = 0;
                 var reason = txtReplaceReason.Text;
-                var isAddQuantity = chkAddQuantity.Checked;
-
-                _transactionProductService.ReplaceProduct(_transactionProductID, reason);
+                var isForReturnToSupplier = chkReturnToSupplierAfterReplace.Checked;
+                _= !int.TryParse(txtQuantityToReplace.Text, out quantityToReplace) ? throw new FormatException() : quantityToReplace;
+                _transactionProductService.ReplaceProduct(_transactionProductID, reason, isForReturnToSupplier,quantityToReplace);
                 this.Close();
 
             }
@@ -86,10 +91,12 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
+                int quantityToCancel = 0;
                 var reason = txtReplaceReason.Text;
                 var isAddQuantity = chkAddQuantity.Checked;
-
-                _transactionProductService.CancelProduct(_transactionProductID, reason, isAddQuantity);
+                var isForReturnToSupplier = chkReturnToSupplierAfterReplace.Checked;
+                _ = int.TryParse(txtQuantityToCancel.Text, out quantityToCancel) ? throw new FormatException() : quantityToCancel;
+                _transactionProductService.CancelProduct(_transactionProductID, reason, isAddQuantity, isForReturnToSupplier,quantityToCancel);
                 this.Close();
 
             }
