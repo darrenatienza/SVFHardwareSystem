@@ -38,9 +38,9 @@ namespace SVFHardwareSystem.Ui
                 var from = dtFrom.Value;
                 var to = dtTo.Value;
                 var criteria = txtCriteria.Text;
-                var sales = _salesService.GetSales(from, to,criteria);
+                var sales = _salesService.GetSales(from, to, criteria);
 
-              
+
                 gridList.Rows.Clear();
                 int count = 0;
                 foreach (var item in sales)
@@ -53,9 +53,15 @@ namespace SVFHardwareSystem.Ui
                     item.Quantity + " "+ item.ProductUnit,
                     item.ProductName.ToString(),
                     item.POSTransactionCost,
-                    item.POSTransactionSIDR }); ;
-                   
-                   
+                    item.POSTransactionSIDR,
+                    item.SaleDebit,
+                    item.SaleCredit,
+                    item.CashDebit,
+                    item.CashCredit,
+                    item.ReceivableDebit,
+                    item.ReceivablesCredit}); ;
+
+
                 }
             }
             catch (Exception ex)
@@ -67,7 +73,7 @@ namespace SVFHardwareSystem.Ui
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void txtCriteria_ButtonClick(object sender, EventArgs e)

@@ -13,12 +13,12 @@ using System.Threading.Tasks;
 
 namespace SVFHardwareSystem.Services
 {
-    public class ProductService : Service<ProductModel,Product>, IProductService
+    public class ProductService : Service<ProductModel, Product>, IProductService
     {
 
         public ProductService()
         {
-           
+
         }
 
         public void DeductQuantityOnProduct(int productID, int quantityToBuy)
