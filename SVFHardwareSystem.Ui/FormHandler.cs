@@ -14,6 +14,10 @@ namespace SVFHardwareSystem.Ui
         public static frmCustomers OpenCustomersForm() => UnityConfig
                             .Register().Resolve<frmCustomers>();
 
+
+        public static frmSales OpenSalesForm() => UnityConfig
+                           .Register().Resolve<frmSales>();
+
         /// <summary>
         /// Dependency Inject with parameter on frmPointofSaleQuantityEdit
         /// </summary>

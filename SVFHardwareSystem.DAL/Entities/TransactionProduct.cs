@@ -51,5 +51,6 @@ namespace SVFHardwareSystem.DAL.Entities
         /// Number of Quantity that is Cancel
         /// </summary>
         public int QuantityToCancel { get; set; }
+        public DateTime CreateTimeStamp { get; set; } = DateTime.Now;
     }
 }

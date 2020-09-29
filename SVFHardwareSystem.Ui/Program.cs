@@ -23,12 +23,8 @@ namespace SVFHardwareSystem.Ui
 
             
 
-            Application.Run(CallPointofSale());
+            Application.Run(FormHandler.OpenSalesForm());
         }
-        static frmPointofSale CallPointofSale()
-        {
-            return UnityConfig
-                            .Register().Resolve<frmPointofSale>();
-        }
+        
     }
 }

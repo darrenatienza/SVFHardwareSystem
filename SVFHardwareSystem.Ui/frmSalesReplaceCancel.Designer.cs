@@ -39,6 +39,8 @@
             this.btnApplyReplace = new MetroFramework.Controls.MetroButton();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+            this.chkIsReturnToSupplierAfterCancel = new MetroFramework.Controls.MetroRadioButton();
+            this.chkAddQuantity = new MetroFramework.Controls.MetroRadioButton();
             this.txtCancelReason = new MetroFramework.Controls.MetroTextBox();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.lblOfQuantityOnCancel = new MetroFramework.Controls.MetroLabel();
@@ -50,8 +52,6 @@
             this.lblQuantity = new MetroFramework.Controls.MetroLabel();
             this.lblProductName = new MetroFramework.Controls.MetroLabel();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            this.chkAddQuantity = new MetroFramework.Controls.MetroRadioButton();
-            this.chkIsReturnToSupplierAfterCancel = new MetroFramework.Controls.MetroRadioButton();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroPanel3.SuspendLayout();
@@ -224,6 +224,29 @@
             this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage2.VerticalScrollbarSize = 10;
             // 
+            // chkIsReturnToSupplierAfterCancel
+            // 
+            this.chkIsReturnToSupplierAfterCancel.AutoSize = true;
+            this.chkIsReturnToSupplierAfterCancel.Location = new System.Drawing.Point(272, 54);
+            this.chkIsReturnToSupplierAfterCancel.Name = "chkIsReturnToSupplierAfterCancel";
+            this.chkIsReturnToSupplierAfterCancel.Size = new System.Drawing.Size(134, 15);
+            this.chkIsReturnToSupplierAfterCancel.TabIndex = 15;
+            this.chkIsReturnToSupplierAfterCancel.Text = "For return to supplier";
+            this.metroToolTip1.SetToolTip(this.chkIsReturnToSupplierAfterCancel, "If check, the product will be tag as return to supplier");
+            this.chkIsReturnToSupplierAfterCancel.UseSelectable = true;
+            // 
+            // chkAddQuantity
+            // 
+            this.chkAddQuantity.AutoSize = true;
+            this.chkAddQuantity.Location = new System.Drawing.Point(272, 33);
+            this.chkAddQuantity.Name = "chkAddQuantity";
+            this.chkAddQuantity.Size = new System.Drawing.Size(206, 15);
+            this.chkAddQuantity.TabIndex = 14;
+            this.chkAddQuantity.Text = "Add Quantity to Product Inventory";
+            this.metroToolTip1.SetToolTip(this.chkAddQuantity, "If check, the quantity of the product that cancel will add\r\nto the product invent" +
+        "ory.");
+            this.chkAddQuantity.UseSelectable = true;
+            // 
             // txtCancelReason
             // 
             // 
@@ -373,28 +396,6 @@
             this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
-            // 
-            // chkAddQuantity
-            // 
-            this.chkAddQuantity.AutoSize = true;
-            this.chkAddQuantity.Location = new System.Drawing.Point(272, 33);
-            this.chkAddQuantity.Name = "chkAddQuantity";
-            this.chkAddQuantity.Size = new System.Drawing.Size(206, 15);
-            this.chkAddQuantity.TabIndex = 14;
-            this.chkAddQuantity.Text = "Add Quantity to Product Inventory";
-            this.metroToolTip1.SetToolTip(this.chkAddQuantity, "If check, the quantity of the product that will replace / remove ");
-            this.chkAddQuantity.UseSelectable = true;
-            // 
-            // chkIsReturnToSupplierAfterCancel
-            // 
-            this.chkIsReturnToSupplierAfterCancel.AutoSize = true;
-            this.chkIsReturnToSupplierAfterCancel.Location = new System.Drawing.Point(272, 54);
-            this.chkIsReturnToSupplierAfterCancel.Name = "chkIsReturnToSupplierAfterCancel";
-            this.chkIsReturnToSupplierAfterCancel.Size = new System.Drawing.Size(134, 15);
-            this.chkIsReturnToSupplierAfterCancel.TabIndex = 15;
-            this.chkIsReturnToSupplierAfterCancel.Text = "For return to supplier";
-            this.metroToolTip1.SetToolTip(this.chkIsReturnToSupplierAfterCancel, "If check, the product will be tag as return to supplier");
-            this.chkIsReturnToSupplierAfterCancel.UseSelectable = true;
             // 
             // frmSalesReplaceCancel
             // 

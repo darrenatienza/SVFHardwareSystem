@@ -47,7 +47,8 @@ namespace AutoMap
             //
             CreateMap<TransactionProduct, TransactionProductModel>();
             CreateMap<TransactionProductModel, TransactionProduct>();
-
+            CreateMap<TransactionProductModel, TransactionProduct>();
+            CreateMap<TransactionProduct, SalesModel>();
             // Additional mappings here...
         }
     }

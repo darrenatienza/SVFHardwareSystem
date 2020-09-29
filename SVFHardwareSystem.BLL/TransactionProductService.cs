@@ -60,6 +60,10 @@ namespace SVFHardwareSystem.Services
                 {
                     throw new ReturnedProductMustNotUpdateStatusException();
                 }
+                if (reason == string.Empty)
+                {
+                    throw new InvalidEmptyFieldException("Reason");
+                }
                 //if isAddQuantity is true, add the quantity of transaction product to the current quantity of the product
                 if (isAddQuantity)
                 {
@@ -69,9 +73,13 @@ namespace SVFHardwareSystem.Services
                 // add to SupplierProductsToReturn
                 if (isForReturnToSupplier)
                 {
-
+                    AddSupplierProductToReturnOnReplaceCancel(db, product.ProductID, quantityToCancel, reason);
                 }
+
+                //Notes: No need to subtract quantity on product inventory after adding it to the supplier product to return because the
+                // product is purchased.
                 db.Entry(product).State = EntityState.Modified;
+                
                 transactionProduct.IsForReturnToSupplierAfterCancel = isForReturnToSupplier;
                 transactionProduct.IsCancel = true;
                 transactionProduct.ReplaceReason = reason;
@@ -138,20 +146,15 @@ namespace SVFHardwareSystem.Services
                 }
 
                 // check limit of quantity to replace
-                if (quantityToReplace > transactionProduct.Quantity)
+                if (quantityToReplace < 0 || quantityToReplace > transactionProduct.Quantity)
                 {
                     throw new LimitMustNotExceedException(transactionProduct.Quantity);
                 }
                 // add to SupplierProductsToReturn
                 if (isForReturnToSupplier)
                 {
-                    var supplierProductToReturn = new SupplierProductToReturn();
-                    supplierProductToReturn.Code = ""; // temporary put empty string
-                    supplierProductToReturn.IsProductFromCancelReplace = true;
-                    supplierProductToReturn.ProductID = product.ProductID;
-                    supplierProductToReturn.Quantity = quantityToReplace;
-                    supplierProductToReturn.Reason = reason;
-                    db.SupplierProductsToReturn.Add(supplierProductToReturn);
+                    AddSupplierProductToReturnOnReplaceCancel(db, product.ProductID, quantityToReplace,reason);
+                    
                 }
 
                 //product inventory quantity must subtract the quantity that will be replace because this will be given back to 
@@ -161,7 +164,9 @@ namespace SVFHardwareSystem.Services
 
                 //Mark the product as return to supplier
                 transactionProduct.IsForReturnToSupplierAfterReplace = isForReturnToSupplier;
+                //indicates the product is already replace
                 transactionProduct.IsReplace = true;
+
                 transactionProduct.ReplaceReason = reason;
                 transactionProduct.ReplaceDate = DateTime.Now;
                 transactionProduct.QuantityToReplace = quantityToReplace;
@@ -169,6 +174,17 @@ namespace SVFHardwareSystem.Services
                 db.SaveChanges();
 
             }
+        }
+
+        private void AddSupplierProductToReturnOnReplaceCancel(DataContext db, int productID, int quantityToCancelReplace, string reason)
+        {
+            var supplierProductToReturn = new SupplierProductToReturn();
+            supplierProductToReturn.Code = ""; // temporary put empty string
+            supplierProductToReturn.IsProductFromCancelReplace = true;
+            supplierProductToReturn.ProductID = productID;
+            supplierProductToReturn.Quantity = quantityToCancelReplace;
+            supplierProductToReturn.Reason = reason;
+            db.SupplierProductsToReturn.Add(supplierProductToReturn);
         }
     }
 }

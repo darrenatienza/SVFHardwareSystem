@@ -19,7 +19,7 @@ namespace SVFHardwareSystem.Ui
             container.RegisterType<ICustomerService, CustomerService>();
             container.RegisterType<IPOSTransactionService, POSTransactionService>();
             container.RegisterType<ITransactionProductService, TransactionProductService>();
-           
+            container.RegisterType<ISalesService, SalesService>();
             return container;
         }
     }

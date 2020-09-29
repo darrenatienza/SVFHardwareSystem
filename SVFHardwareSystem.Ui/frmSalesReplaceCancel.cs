@@ -92,10 +92,10 @@ namespace SVFHardwareSystem.Ui
             try
             {
                 int quantityToCancel = 0;
-                var reason = txtReplaceReason.Text;
+                var reason = txtCancelReason.Text;
                 var isAddQuantity = chkAddQuantity.Checked;
                 var isForReturnToSupplier = chkReturnToSupplierAfterReplace.Checked;
-                _ = int.TryParse(txtQuantityToCancel.Text, out quantityToCancel) ? throw new FormatException() : quantityToCancel;
+                _ = !int.TryParse(txtQuantityToCancel.Text, out quantityToCancel) ? throw new FormatException() : quantityToCancel;
                 _transactionProductService.CancelProduct(_transactionProductID, reason, isAddQuantity, isForReturnToSupplier,quantityToCancel);
                 this.Close();
 
