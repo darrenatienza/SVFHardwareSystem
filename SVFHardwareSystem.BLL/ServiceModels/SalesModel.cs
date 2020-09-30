@@ -14,6 +14,9 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public string ProductName { get; set; }
         public string POSTransactionCost { get; set; }
         public string POSTransactionSIDR { get; set; }
+        /// <summary>
+        /// Total Purchase Count
+        /// </summary>
         public int Quantity { get; set; }
         public decimal ProductPrice { get; set; }
         public string ProductUnit { get; set; }
@@ -43,5 +46,6 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public bool IsCancel { get; internal set; }
         public bool IsPaid { get; internal set; }
         public int POSTransactionID { get; internal set; }
+        public DateTime UpdateTimeStamp { get; internal set; }
     }
 }

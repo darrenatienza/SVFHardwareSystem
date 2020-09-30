@@ -54,7 +54,7 @@ namespace SVFHardwareSystem.Services
                 var cash = this.GetCashAmount(db, model.POSTransactionID);
                 var cancel = this.GetCancelAmount(db, model.POSTransactionID);
                 var receivable = this.GetReceivableAmount(model.POSTransactionID);
-                model.IsFullyPaid = receivable <= 0 ? true : false;
+                model.IsFullyPaid = receivable <= 0 && entity.IsFinished ? true : false;
                 model.TotalAmount = total;
                 model.TotalPayment = cash;
                 model.Receivable = receivable;
@@ -152,6 +152,6 @@ namespace SVFHardwareSystem.Services
             var cash = posPayments.Count() > 0 ? posPayments.Sum(y => y.Amount) : 0;
             return cash;
         }
-        
+
     }
 }

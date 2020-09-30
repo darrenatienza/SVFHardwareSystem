@@ -79,11 +79,12 @@ namespace SVFHardwareSystem.Services
                 //Notes: No need to subtract quantity on product inventory after adding it to the supplier product to return because the
                 // product is purchased.
                 db.Entry(product).State = EntityState.Modified;
-                
+
                 transactionProduct.IsForReturnToSupplierAfterCancel = isForReturnToSupplier;
                 transactionProduct.IsCancel = true;
                 transactionProduct.ReplaceReason = reason;
                 transactionProduct.ReplaceDate = DateTime.Now;
+                transactionProduct.QuantityToCancel = quantityToCancel;
                 db.Entry(transactionProduct).State = EntityState.Modified;
                 db.SaveChanges();
 
@@ -131,7 +132,7 @@ namespace SVFHardwareSystem.Services
             using (var db = new DataContext())
             {
 
-                
+
 
                 var transactionProduct = db.TransactionProducts.Find(transactionProductID);
                 var product = db.Products.Find(transactionProduct.ProductID);
@@ -153,8 +154,8 @@ namespace SVFHardwareSystem.Services
                 // add to SupplierProductsToReturn
                 if (isForReturnToSupplier)
                 {
-                    AddSupplierProductToReturnOnReplaceCancel(db, product.ProductID, quantityToReplace,reason);
-                    
+                    AddSupplierProductToReturnOnReplaceCancel(db, product.ProductID, quantityToReplace, reason);
+
                 }
 
                 //product inventory quantity must subtract the quantity that will be replace because this will be given back to 
