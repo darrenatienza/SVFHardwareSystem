@@ -78,13 +78,18 @@ namespace SVFHardwareSystem.Services
 
         public decimal GetReceivableAmount(int posTransactionID)
         {
+            decimal recievable = 0;
             using (var db = new DataContext())
             {
-
-                var total = this.GetTotalAmount(db, posTransactionID);
-                var cash = this.GetCashAmount(db, posTransactionID);
-                var cancel = this.GetCancelAmount(db, posTransactionID);
-                return total - cash;
+                var isFinished = db.POSTransactions.Find(posTransactionID).IsFinished;
+                if (isFinished)
+                {
+                    var total = this.GetTotalAmount(db, posTransactionID);
+                    var cash = this.GetCashAmount(db, posTransactionID);
+                    var cancel = this.GetCancelAmount(db, posTransactionID);
+                    recievable = total - cash;
+                }
+                return recievable;
             }
         }
 
@@ -147,5 +152,6 @@ namespace SVFHardwareSystem.Services
             var cash = posPayments.Count() > 0 ? posPayments.Sum(y => y.Amount) : 0;
             return cash;
         }
+        
     }
 }

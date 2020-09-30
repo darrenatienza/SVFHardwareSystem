@@ -15,7 +15,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public string POSTransactionCost { get; set; }
         public string POSTransactionSIDR { get; set; }
         public int Quantity { get; set; }
-        public int ProductPrice { get; set; }
+        public decimal ProductPrice { get; set; }
         public string ProductUnit { get; set; }
         /// <summary>
         /// Amount of returned product

@@ -116,6 +116,10 @@
     <Compile Include="Migrations\202009290749395_AddCreateTimeStampOnTransactionProduct.designer.cs">
       <DependentUpon>202009290749395_AddCreateTimeStampOnTransactionProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009300830249_AddDateFinishedOnPosTransaction.cs" />
+    <Compile Include="Migrations\202009300830249_AddDateFinishedOnPosTransaction.designer.cs">
+      <DependentUpon>202009300830249_AddDateFinishedOnPosTransaction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -162,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009290749395_AddCreateTimeStampOnTransactionProduct.resx">
       <DependentUpon>202009290749395_AddCreateTimeStampOnTransactionProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009300830249_AddDateFinishedOnPosTransaction.resx">
+      <DependentUpon>202009300830249_AddDateFinishedOnPosTransaction.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

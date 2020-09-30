@@ -25,27 +25,28 @@ namespace SVFHardwareSystem.Services
                 //{
 
 
-                    // add new pospayment
-                    var posPayment = new POSPayment();
-                    posPayment.Amount = amountTendered;
-                    posPayment.PaymentDate = DateTime.Now;
-                    posPayment.POSTransactionID = posTransactionID;
-                    db.POSPayments.Add(posPayment);
+                // add new pospayment
+                var posPayment = new POSPayment();
+                posPayment.Amount = amountTendered;
+                posPayment.PaymentDate = DateTime.Now;
+                posPayment.POSTransactionID = posTransactionID;
+                db.POSPayments.Add(posPayment);
 
-                    // update isFinish of Pos Transaction
-                    var posTransaction = db.POSTransactions.Find(posTransactionID);
-                    posTransaction.IsFinished = true;
-                    db.Entry(posTransaction).State = EntityState.Modified;
+                // update isFinish of Pos Transaction
+                var posTransaction = db.POSTransactions.Find(posTransactionID);
+                posTransaction.IsFinished = true;
+                posTransaction.DateFinished = DateTime.Now;
+                db.Entry(posTransaction).State = EntityState.Modified;
 
-                    // update isPaid of products on transaction products
-                    var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == posTransactionID && x.IsToPay == true && x.IsPaid == false);
-                    foreach (var item in transactionProducts)
-                    {
-                        item.IsPaid = true;
+                // update isPaid of products on transaction products
+                var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == posTransactionID && x.IsToPay == true && x.IsPaid == false);
+                foreach (var item in transactionProducts)
+                {
+                    item.IsPaid = true;
 
-                        db.Entry(item).State = EntityState.Modified;
-                    }
-                    db.SaveChanges();
+                    db.Entry(item).State = EntityState.Modified;
+                }
+                db.SaveChanges();
                 //}
                 //else
                 //{

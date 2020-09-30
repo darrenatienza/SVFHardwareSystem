@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.XPath;
@@ -15,60 +16,49 @@ namespace SVFHardwareSystem.Services
 {
     public class SalesService : ISalesService
     {
-        private IPOSTransactionService _pOSTransactionService;
+        private IPOSTransactionService _posTransaction;
 
-        public SalesService(IPOSTransactionService pOSTransactionService)
+        public SalesService(IPOSTransactionService posTransaction)
         {
-            _pOSTransactionService = pOSTransactionService;
+            _posTransaction = posTransaction;
         }
 
         public IList<SalesModel> GetSales(DateTime from, DateTime to, string criteria)
         {
             using (var db = new DataContext())
             {
-                // get products on transactions from date to date
-                var transactionProducts = db.TransactionProducts.Where(x => (DbFunctions.TruncateTime(x.CreateTimeStamp) >= DbFunctions.TruncateTime(from)
-                && DbFunctions.TruncateTime(x.CreateTimeStamp) <= DbFunctions.TruncateTime(to))
-                && (x.POSTransaction.Cost.Contains(criteria) || x.POSTransaction.SIDR.Contains(criteria))).ToList();
-                var models = Mapping.Mapper.Map<List<SalesModel>>(transactionProducts);
 
-                foreach (var item in models)
+
+                var postransactions = db.POSTransactions.Include(x => x.TransactionProducts).Where(x => DbFunctions.TruncateTime(x.DateFinished) >= DbFunctions.TruncateTime(from)
+                && DbFunctions.TruncateTime(x.DateFinished) <= DbFunctions.TruncateTime(to)
+                && (x.Cost.Contains(criteria) || x.SIDR.Contains(criteria))
+                && (x.IsFinished)).ToList();
+                IList<SalesModel> saleModels = new List<SalesModel>();
+                foreach (var item in postransactions)
                 {
-
-                    item.SaleDebit = item.IsCancel ? item.SaleCredit : 0;
-                    //cash credit = amount paid - total amount
-
-                    foreach (var tProd in transactionProducts.Where(x => x.POSTransactionID == item.POSTransactionID))
+                    // this is the total amout of payment and being subtracted for every product of this transaction
+                    var amountPaid = _posTransaction.GetCashAmount(item.POSTransactionID);
+                    var _saleModels = Mapping.Mapper.Map<List<SalesModel>>(item.TransactionProducts);
+                    foreach (var saleModel in _saleModels)
                     {
-                        // this is the total amout of transaction and being subtracted every transaction product
-                        var currentAmountPaid = _pOSTransactionService.GetTotalAmount(item.POSTransactionID);
-                        if (tProd.TransactionProductID != item.TransactionProductID)
+                        amountPaid -= saleModel.SaleCredit;
+                        if (amountPaid >= 0)
                         {
-
-                            currentAmountPaid = currentAmountPaid - item.SaleCredit;
+                            saleModel.CashDebit = saleModel.SaleCredit;
                         }
                         else
                         {
-                            var credit = currentAmountPaid - item.SaleCredit;
-                            if (credit > 0)
-                            {
-                                item.CashCredit = credit;
-                            }
-                            else
-                            {
-                                //if negative number convert the negative to positive
-                                item.ReceivableDebit = Math.Abs(credit);
-                                currentAmountPaid = 0; // set to zero to avoid wrong computation for later amount
-                            }
-
+                            //if negative credit, convert the negative to positive, put this as receivable credit
+                            saleModel.ReceivableDebit = Math.Abs(amountPaid);
+                            //get portion of cash debit paid
+                            saleModel.CashDebit = saleModel.SaleCredit - saleModel.ReceivableDebit;
+                            amountPaid = 0; // set to zero to avoid wrong computation for later amount
                         }
+                        saleModels.Add(saleModel);
                     }
-                    //item.CashCredit = item.IsPaid ? item.SaleCredit : 0;
-                    //item.CashDebit = item.IsCancel ? 0 : item.SaleCredit;
-                    //item.ReceivableDebit = item.IsPaid ? 0 : item.SaleCredit;
-                    //item.ReceivablesCredit = item.IsCancel ? item.SaleCredit : 0;
+                   
                 }
-                return models;
+                return saleModels;
             }
         }
 

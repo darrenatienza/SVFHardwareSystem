@@ -69,6 +69,7 @@ namespace SVFHardwareSystem.Ui
                 _posTransactionID = previousPOSTransaction.POSTransactionID;
                 txtReceivable.Text = "0.00"; // all unfinished transactions have 0.00 value
                 _isFinishedPosTransaction = previousPOSTransaction.IsFinished;
+                _isFullyPaid = previousPOSTransaction.IsFullyPaid;
                 txtTotal.Text = previousPOSTransaction.TotalAmount.ToString();
                 await LoadProductsOnTransaction();
             }

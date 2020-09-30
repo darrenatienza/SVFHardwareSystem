@@ -22,6 +22,6 @@ namespace SVFHardwareSystem.DAL.Entities
         public bool IsFinished { get; set; }
         public ICollection<POSPayment> POSPayments { get; set; } = new HashSet<POSPayment>();
         public ICollection<TransactionProduct> TransactionProducts { get; set; } = new HashSet<TransactionProduct>();
-        
+        public DateTime? DateFinished { get; set; }
     }
 }
