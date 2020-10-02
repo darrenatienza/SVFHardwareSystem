@@ -27,5 +27,20 @@ namespace SVFHardwareSystem.Ui
         {
             FormHandler.OpenSalesForm().Show();
         }
+
+        private void btnCategory_Click(object sender, EventArgs e)
+        {
+            FormHandler.OpenCategoriesForm().ShowDialog();
+        }
+
+        private void btnProduct_Click(object sender, EventArgs e)
+        {
+            FormHandler.OpenProductsForm().ShowDialog();
+        }
+
+        private void btnCustomer_Click(object sender, EventArgs e)
+        {
+            FormHandler.OpenCustomersForm().ShowDialog();
+        }
     }
 }

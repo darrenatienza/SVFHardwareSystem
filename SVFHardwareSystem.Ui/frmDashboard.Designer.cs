@@ -30,6 +30,10 @@
         {
             this.btnPointOfSale = new MetroFramework.Controls.MetroTile();
             this.btnSales = new MetroFramework.Controls.MetroTile();
+            this.btnCategory = new MetroFramework.Controls.MetroTile();
+            this.btnProduct = new MetroFramework.Controls.MetroTile();
+            this.btnCustomer = new MetroFramework.Controls.MetroTile();
+            this.metroTile1 = new MetroFramework.Controls.MetroTile();
             this.SuspendLayout();
             // 
             // btnPointOfSale
@@ -54,11 +58,58 @@
             this.btnSales.UseSelectable = true;
             this.btnSales.Click += new System.EventHandler(this.btnSales_Click);
             // 
+            // btnCategory
+            // 
+            this.btnCategory.ActiveControl = null;
+            this.btnCategory.Location = new System.Drawing.Point(414, 126);
+            this.btnCategory.Name = "btnCategory";
+            this.btnCategory.Size = new System.Drawing.Size(140, 95);
+            this.btnCategory.TabIndex = 2;
+            this.btnCategory.Text = "Categories";
+            this.btnCategory.UseSelectable = true;
+            this.btnCategory.Click += new System.EventHandler(this.btnCategory_Click);
+            // 
+            // btnProduct
+            // 
+            this.btnProduct.ActiveControl = null;
+            this.btnProduct.Location = new System.Drawing.Point(560, 126);
+            this.btnProduct.Name = "btnProduct";
+            this.btnProduct.Size = new System.Drawing.Size(140, 95);
+            this.btnProduct.TabIndex = 3;
+            this.btnProduct.Text = "Products";
+            this.btnProduct.UseSelectable = true;
+            this.btnProduct.Click += new System.EventHandler(this.btnProduct_Click);
+            // 
+            // btnCustomer
+            // 
+            this.btnCustomer.ActiveControl = null;
+            this.btnCustomer.Location = new System.Drawing.Point(122, 227);
+            this.btnCustomer.Name = "btnCustomer";
+            this.btnCustomer.Size = new System.Drawing.Size(140, 95);
+            this.btnCustomer.TabIndex = 4;
+            this.btnCustomer.Text = "Customers";
+            this.btnCustomer.UseSelectable = true;
+            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
+            // 
+            // metroTile1
+            // 
+            this.metroTile1.ActiveControl = null;
+            this.metroTile1.Location = new System.Drawing.Point(268, 227);
+            this.metroTile1.Name = "metroTile1";
+            this.metroTile1.Size = new System.Drawing.Size(140, 95);
+            this.metroTile1.TabIndex = 5;
+            this.metroTile1.Text = "Suppliers";
+            this.metroTile1.UseSelectable = true;
+            // 
             // frmDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.metroTile1);
+            this.Controls.Add(this.btnCustomer);
+            this.Controls.Add(this.btnProduct);
+            this.Controls.Add(this.btnCategory);
             this.Controls.Add(this.btnSales);
             this.Controls.Add(this.btnPointOfSale);
             this.Name = "frmDashboard";
@@ -71,5 +122,9 @@
 
         private MetroFramework.Controls.MetroTile btnPointOfSale;
         private MetroFramework.Controls.MetroTile btnSales;
+        private MetroFramework.Controls.MetroTile btnCategory;
+        private MetroFramework.Controls.MetroTile btnProduct;
+        private MetroFramework.Controls.MetroTile btnCustomer;
+        private MetroFramework.Controls.MetroTile metroTile1;
     }
 }

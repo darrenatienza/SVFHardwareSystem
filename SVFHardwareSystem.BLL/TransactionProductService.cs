@@ -60,6 +60,10 @@ namespace SVFHardwareSystem.Services
                 {
                     throw new ReturnedProductMustNotUpdateStatusException();
                 }
+                if (quantityToCancel <= 0 || quantityToCancel > transactionProduct.Quantity)
+                {
+                    throw new LimitMustNotExceedOrLessException(transactionProduct.Quantity,1);
+                }
                 if (reason == string.Empty)
                 {
                     throw new InvalidEmptyFieldException("Reason");
@@ -149,7 +153,7 @@ namespace SVFHardwareSystem.Services
                 // check limit of quantity to replace
                 if (quantityToReplace < 0 || quantityToReplace > transactionProduct.Quantity)
                 {
-                    throw new LimitMustNotExceedException(transactionProduct.Quantity);
+                    throw new LimitMustNotExceedOrLessException(transactionProduct.Quantity,1);
                 }
                 // add to SupplierProductsToReturn
                 if (isForReturnToSupplier)

@@ -17,6 +17,13 @@ namespace SVFHardwareSystem.Ui
 
         public static frmSales OpenSalesForm() => UnityConfig
                            .Register().Resolve<frmSales>();
+        public static frmCategory OpenCategoriesForm() => UnityConfig
+                           .Register().Resolve<frmCategory>();
+
+
+        public static frmProducts OpenProductsForm() => UnityConfig
+                          .Register().Resolve<frmProducts>();
+
         public static frmPointofSale OpenPointofSaleForm() => UnityConfig
                           .Register().Resolve<frmPointofSale>();
         /// <summary>
@@ -49,5 +56,12 @@ namespace SVFHardwareSystem.Ui
 
         }
 
+        internal static frmProductForm OpenProductForm(int productID) => UnityConfig
+                .Register()
+                .RegisterType<frmProductForm>(new InjectionConstructor(new object[] { new ProductService(),new CategoryService(),new SupplierService(), productID }))
+                .Resolve<frmProductForm>();
+
+        public static frmProductForm OpenProductForm() => UnityConfig
+                         .Register().Resolve<frmProductForm>();
     }
 }

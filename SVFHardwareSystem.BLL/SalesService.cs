@@ -33,65 +33,52 @@ namespace SVFHardwareSystem.Services
                 && DbFunctions.TruncateTime(x.DateFinished) <= DbFunctions.TruncateTime(to)
                 && (x.Cost.Contains(criteria) || x.SIDR.Contains(criteria))
                 && (x.IsFinished)).ToList();
-                IList<SalesModel> saleModels = new List<SalesModel>();
+
+                var sales = new List<SalesModel>();
                 foreach (var item in postransactions)
                 {
-                    // this is the total amout of payment and being subtracted for every product of this transaction
+                    var sale = Mapping.Mapper.Map<SalesModel>(item);
+                    
+
+
+
+                    // this is the total amout of payment and being subtracted for every product on this transaction
                     var amountPaid = _posTransaction.GetCashAmount(item.POSTransactionID);
-                    var _saleModels = Mapping.Mapper.Map<List<SalesModel>>(item.TransactionProducts);
+                    var _salesProducts = Mapping.Mapper.Map<List<SalesProductModel>>(item.TransactionProducts);
                     // cash debit and receivable debit computation
-                    foreach (var saleModel in _saleModels)
+                    foreach (var salesProduct in _salesProducts)
                     {
                         //sales debit and cash credit computation
-                        //get all cancelled products
-                        if (saleModel.IsCancel)
-                        {
-                            // compute base on how many item is cancelled
-                            var remainingQuantity = saleModel.Quantity - saleModel.QuantityToCancel;
-                            decimal remainingQuantityAmount = saleModel.ProductPrice * remainingQuantity;
-                            saleModel.SaleDebit = remainingQuantityAmount;
-                            saleModel.CashCredit = remainingQuantityAmount;
-                            //testing -- wrong output
-                            amountPaid -= saleModel.SaleCredit;
 
-                            if (amountPaid >= 0)
-                            {
-                                saleModel.CashDebit = saleModel.SaleCredit;
-                            }
-                            else
-                            {
-                                //if negative credit, convert the negative to positive, put this as receivable credit
-                                saleModel.ReceivableDebit = Math.Abs(amountPaid);
-                                //get portion of cash debit paid
-                                saleModel.CashDebit = saleModel.SaleCredit - saleModel.ReceivableDebit;
-                                amountPaid = 0; // set to zero to avoid wrong computation for later amount
-                            }
+                        // compute the remaining quantity by subtracting total quantity purchase and quantity cancel
+                        // get the remaining quantity amount by subtracting the product price and the remaining quantity
+                        // get the cancel amount by subtracting product price to quantity cancel
+                        // the cancel amount will be the SALE Debit And CASH Debit because these are the amount that will be
+                        // given back to the customer
+                        var remainingQuantity = salesProduct.Quantity - salesProduct.QuantityToCancel;
+                        decimal remainingQuantityAmount = salesProduct.ProductPrice * remainingQuantity;
+                        decimal cancelAmount = salesProduct.ProductPrice * salesProduct.QuantityToCancel;
+                        salesProduct.SaleDebit = cancelAmount;
+                        salesProduct.CashCredit = cancelAmount;
+                        amountPaid -= remainingQuantityAmount;
+                        if (amountPaid >= 0)
+                        {
+                            salesProduct.CashDebit = remainingQuantityAmount;
                         }
                         else
                         {
-                            amountPaid -= saleModel.SaleCredit;
-
-                            if (amountPaid >= 0)
-                            {
-                                saleModel.CashDebit = saleModel.SaleCredit;
-                            }
-                            else
-                            {
-                                //if negative credit, convert the negative to positive, put this as receivable credit
-                                saleModel.ReceivableDebit = Math.Abs(amountPaid);
-                                //get portion of cash debit paid
-                                saleModel.CashDebit = saleModel.SaleCredit - saleModel.ReceivableDebit;
-                                amountPaid = 0; // set to zero to avoid wrong computation for later amount
-                            }
+                            //if negative credit, convert the negative to positive, put this as receivable credit
+                            salesProduct.ReceivableDebit = Math.Abs(amountPaid);
+                            //get portion of cash debit paid
+                            salesProduct.CashDebit = remainingQuantityAmount - salesProduct.ReceivableDebit;
+                            amountPaid = 0; // set to zero to avoid wrong computation for later amount
                         }
-                        //subtract amount paid to sale credit
-
-                        saleModels.Add(saleModel);
+                        sale.SalesProducts.Add(salesProduct);
                     }
+                    sales.Add(sale);
                 }
                 // order sales according on update time
-                var orderedSaleModels = saleModels;
-                return saleModels;
+                return sales;
             }
         }
 

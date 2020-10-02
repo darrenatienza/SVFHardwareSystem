@@ -42,24 +42,68 @@ namespace SVFHardwareSystem.Ui
 
 
                 gridList.Rows.Clear();
-                int count = 0;
-                foreach (var item in sales)
+                
+                foreach (var sale in sales)
                 {
+                    int count = 0;
                     count++;
+
                     gridList.Rows.Add(new object[] {"",
                           count.ToString(),
 
-                    item.CreateTimeStamp.ToShortDateString(),
+                    sale.CreateTimeStamp.ToShortDateString(),
+                    sale.Cost,
+                    sale.SIDR,
+                   "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                        "",sale.CustomerFullName});
+
+                    foreach (var item in sale.SalesProducts)
+                    {
+                        gridList.Rows.Add(new object[] {"",
+                        
+                            "",
+                    "",
+                    "",
+                    "",
                     item.Quantity + " "+ item.ProductUnit,
-                    item.ProductName.ToString(),
-                    item.POSTransactionCost,
-                    item.POSTransactionSIDR,
+                   //IsReplace and IsCancel = true then show productName [replace] [cancelled]
+                            
+                             //IsCancel = true then show productName [cancelled]
+                           item.IsCancel ?string.Format("{0} [{1} {2}]", item.ProductName ,item.QuantityToCancel.ToString(),"cancelled")
+
+                            //show product name only
+                             : item.ProductName,
+
+
                     item.SaleDebit,
                     item.SaleCredit,
                     item.CashDebit,
                     item.CashCredit,
                     item.ReceivableDebit,
-                    item.ReceivablesCredit}); ;
+                    item.ReceivablesCredit}) ;
+                    }
+
+                    // footer total
+                    gridList.Rows.Add(new object[] {"",
+                          "",
+"",
+                   "",
+                    "",
+                    "",
+                   "Total",
+                    sale.TotalSaleDebit,
+                    sale.TotalSaleCredit,
+                    sale.TotalCashDebit,
+                    sale.TotalCashCredit,
+                    sale.TotalReceivableDebit,
+                    sale.TotalReceivableCredit});
+
 
 
                 }

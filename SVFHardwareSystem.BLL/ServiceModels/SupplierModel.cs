@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace SVFHardwareSystem.Services.ServiceModels
 {
-    public class CategoryModel
+    public class SupplierModel
     {
-        public int CategoryID { get; set; }
-        public string Name { get; set; }
+        public object Name { get; set; }
     }
 }

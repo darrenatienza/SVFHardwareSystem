@@ -59,16 +59,18 @@
   <ItemGroup>
     <Compile Include="CustomerService.cs" />
     <Compile Include="Exceptions\InvalidEmptyFieldException.cs" />
-    <Compile Include="Exceptions\LimitMustNotExceedException.cs" />
+    <Compile Include="Exceptions\LimitMustNotExceedOrLessException.cs" />
     <Compile Include="Exceptions\ReturnedProductMustNotUpdateStatusException.cs" />
     <Compile Include="Exceptions\RecordNotFoundException.cs" />
     <Compile Include="Exceptions\AmountTenderMustBeGreaterThanOrEqualException.cs" />
     <Compile Include="Exceptions\LimitMustNotReachException.cs" />
+    <Compile Include="Extensions\ConvertionExtensions.cs" />
     <Compile Include="Interfaces\ICustomerService.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
     <Compile Include="Interfaces\IPOSPaymentService.cs" />
     <Compile Include="Interfaces\IPOSTransactionService.cs" />
     <Compile Include="Interfaces\ISalesService.cs" />
+    <Compile Include="Interfaces\ISupplierService.cs" />
     <Compile Include="Interfaces\ITransactionProductService.cs" />
     <Compile Include="Mapping.cs" />
     <Compile Include="CategoryService.cs" />
@@ -86,7 +88,10 @@
     <Compile Include="ServiceModels\POSTransactionModel.cs" />
     <Compile Include="ServiceModels\ProductModel.cs" />
     <Compile Include="ServiceModels\SalesModel.cs" />
+    <Compile Include="ServiceModels\SalesProductModel.cs" />
+    <Compile Include="ServiceModels\SupplierModel.cs" />
     <Compile Include="ServiceModels\TransactionProductModel.cs" />
+    <Compile Include="SupplierService.cs" />
     <Compile Include="TransactionProductService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -243,11 +243,11 @@ namespace SVFHardwareSystem.Ui
                     gridList.Rows.Add(new object[] {item.TransactionProductID.ToString(),item.IsToPay,
                           count.ToString(),
                           //IsReplace and IsCancel = true then show productName [replace] [cancelled]
-                            item.IsReplace && item.IsCancel ? item.ProductName + " [replaced] [cancelled]"
+                            item.IsReplace && item.IsCancel ? string.Format("{0} [{1} {2}, {3} {4}]", item.ProductName ,item.QuantityToReplace.ToString(),"replaced", item.QuantityToCancel.ToString(),"cancelled")
                              //IsCancel = true then show productName [cancelled]
-                           :item.IsCancel ? item.ProductName + " [cancelled] "
+                           :item.IsCancel ?string.Format("{0} [{1} {2}]", item.ProductName ,item.QuantityToCancel.ToString(),"cancelled")
                             //IsReplace = true then show productName [replace]
-                            :  item.IsReplace ?  item.ProductName + " [replaced] "
+                            :  item.IsReplace ?  string.Format("{0} [{1} {2}]", item.ProductName ,item.QuantityToReplace.ToString(),"replaced")
                             //show product name only
                              : item.ProductName,
                             item.ProductPrice.ToString(),

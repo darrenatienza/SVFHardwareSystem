@@ -18,7 +18,7 @@ namespace SVFHardwareSystem.Services
     /// <typeparam name="TEntity">Data Entity</typeparam>
     public class Service<TModel,TEntity> : IService<TModel> where TModel : class where TEntity : class
     {
-        public  async Task Add(TModel model)
+        public  virtual async Task Add(TModel model)
         {
             using (var db = new DataContext())
             {
@@ -28,7 +28,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public async Task<TModel> AddNew(TModel model)
+        public virtual async Task<TModel> AddNew(TModel model)
         {
             using (var db = new DataContext())
             {
@@ -39,7 +39,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public async Task Edit(int id, TModel model)
+        public virtual async Task Edit(int id, TModel model)
         {
             using (var db = new DataContext())
             {

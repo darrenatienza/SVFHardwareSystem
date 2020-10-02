@@ -71,7 +71,7 @@ namespace SVFHardwareSystem.Services
             var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == pOSTransactionID);
             // cancel items are computed where is cancel is true and is paid is true
             var cancelItems = transactionProducts.Where(a => a.IsCancel == true && a.IsPaid == true);
-            cancel = cancelItems.Count() > 0 ? cancelItems.Sum(z => z.Quantity * z.Product.Price) : 0;
+            cancel = cancelItems.Count() > 0 ? cancelItems.Sum(z => z.QuantityToCancel * z.Product.Price) : 0;
 
             return cancel;
         }
@@ -107,10 +107,14 @@ namespace SVFHardwareSystem.Services
         private decimal GetTotalAmount(DataContext db, int posTransactionID)
         {
             decimal total = 0;
-            var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == posTransactionID && !x.IsCancel);
+            
+            var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == posTransactionID);
             if (transactionProducts.Count() > 0)
             {
-                total = transactionProducts.Sum(y => y.Quantity * y.Product.Price);
+                //subtract the quantity cancelled to purchase quantity then multiply the result on product price to get
+                // the total amount
+                // all cancelled quantity must not included to computation
+                total = transactionProducts.Sum(y => (y.Quantity-y.QuantityToCancel) * y.Product.Price);
 
             }
             return total;

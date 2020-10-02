@@ -47,8 +47,12 @@ namespace AutoMap
             //
             CreateMap<TransactionProduct, TransactionProductModel>();
             CreateMap<TransactionProductModel, TransactionProduct>();
-            CreateMap<TransactionProductModel, TransactionProduct>();
-            CreateMap<TransactionProduct, SalesModel>();
+            CreateMap<TransactionProduct, SalesProductModel>();
+            CreateMap<POSTransaction, SalesModel>();
+            CreateMap<Supplier, SupplierModel>();
+            // ignoring category id for updating entity
+            CreateMap<SupplierModel, Supplier>().ForMember(dest => dest.SupplierID, act => act.Ignore()); ;
+
             // Additional mappings here...
         }
     }

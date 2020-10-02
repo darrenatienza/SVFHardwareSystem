@@ -11,41 +11,16 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public SalesModel() { }
 
         public DateTime CreateTimeStamp { get; set; }
-        public string ProductName { get; set; }
-        public string POSTransactionCost { get; set; }
-        public string POSTransactionSIDR { get; set; }
-        /// <summary>
-        /// Total Purchase Count
-        /// </summary>
-        public int Quantity { get; set; }
-        public decimal ProductPrice { get; set; }
-        public string ProductUnit { get; set; }
-        /// <summary>
-        /// Amount of returned product
-        /// </summary>
-        public decimal SaleDebit { get; set; }
-        /// <summary>
-        /// Amount of product
-        /// </summary>
-        public decimal SaleCredit
-        {
-            get
-            {
-                return Quantity * ProductPrice;
-            }
-        }
-        public decimal CashDebit { get; set; }
-        public decimal CashCredit { get; set; }
-        public decimal ReceivablesCredit { get; set; }
-        public decimal ReceivableDebit { get; set; }
-        public int TransactionProductID { get; internal set; }
-        /// <summary>
-        /// Number of Quantity that is Cancel
-        /// </summary>
-        public int QuantityToCancel { get; set; }
-        public bool IsCancel { get; internal set; }
-        public bool IsPaid { get; internal set; }
-        public int POSTransactionID { get; internal set; }
-        public DateTime UpdateTimeStamp { get; internal set; }
+        public string Cost { get; set; }
+        public string SIDR { get; set; }
+        public decimal TotalSaleDebit { get { return SalesProducts.Sum(x => x.SaleDebit); } }
+        public decimal TotalSaleCredit { get { return SalesProducts.Sum(x => x.SaleCredit); } }
+        public decimal TotalCashDebit { get { return SalesProducts.Sum(x => x.CashDebit); } }
+        public decimal TotalCashCredit { get { return SalesProducts.Sum(x => x.CashCredit); } }
+        public decimal TotalReceivableDebit { get { return SalesProducts.Sum(x => x.ReceivableDebit); } }
+        public decimal TotalReceivableCredit { get { return SalesProducts.Sum(x => x.ReceivablesCredit); } }
+
+        public IList<SalesProductModel> SalesProducts { get; set; } = new List<SalesProductModel>();
+        public object CustomerFullName { get; set; }
     }
 }

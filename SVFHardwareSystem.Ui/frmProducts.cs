@@ -1,5 +1,7 @@
 ﻿using MetroFramework;
 using MetroFramework.Forms;
+using SVFHardwareSystem.Services.Interfaces;
+using SVFHardwareSystem.Services.ServiceModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,17 +16,112 @@ namespace SVFHardwareSystem.Ui
 {
     public partial class frmProducts : MetroForm
     {
-        public frmProducts()
+        private ICategoryService _categoryService;
+        private IProductService _productService;
+        private int _productID;
+
+        public frmProducts(ICategoryService categoryService, IProductService productService)
         {
             InitializeComponent();
             this.MinimizeBox = false;
             this.MaximizeBox = false;
             this.Resizable = false;
+            _categoryService = categoryService;
+            _productService = productService;
         }
 
-        private void metroTextBox1_ButtonClick(object sender, EventArgs e)
+        
+        //AutoCompleteData Method
+        private async void LoadAutoCompleteCategoriesData()
         {
-            MetroMessageBox.Show(this, "Click");
+
+            //Set AutoCompleteSource property of txt_StateName as CustomSource
+            txtCategories.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
+            txtCategories.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            var customerNames = await _categoryService.GetAll();
+            foreach (var item in customerNames)
+            {
+                txtCategories.AutoCompleteCustomSource.Add(item.Name.ToString());
+
+            }
+
+        }
+        private  void frmProducts_Load(object sender, EventArgs e)
+        {
+            LoadAutoCompleteCategoriesData();
+            LoadProducts();
+        }
+        private  void LoadProducts()
+        {
+            try
+            {
+                var category = txtCategories.Text;
+                var criteria = txtSearch.Text;
+                var products =  _productService.GetAll(category,criteria);
+                int count = 0;
+                gridProducts.Rows.Clear();
+                foreach (var item in products)
+                {
+                    count++;
+                    gridProducts.Rows.Add(new object[] {
+                            item.ProductID.ToString(),
+                            count.ToString(),
+                            item.CategoryName,
+                            item.Code,
+                            item.Name,
+                    item.Unit,
+                    item.Price,
+                    item.DealersPrice,
+                    item.Quantity,
+                    item.Limit});
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString());
+            }
+        }
+
+        private void txtSearch_ButtonClick(object sender, EventArgs e)
+        {
+            LoadProducts();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            FormHandler.OpenProductForm(_productID).ShowDialog();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            FormHandler.OpenProductForm().ShowDialog();
+        }
+
+        private void AddProduct()
+        {
+            
+        }
+
+        private void gridProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SetProductID();
+        }
+
+        private void SetProductID()
+        {
+            var grid = gridProducts;
+
+            if (grid.SelectedRows.Count > 0)
+            {
+                _productID = int.Parse(grid.SelectedRows[0].Cells[0].Value.ToString());
+
+
+
+            }
         }
     }
 }

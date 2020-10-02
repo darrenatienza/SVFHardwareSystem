@@ -37,6 +37,17 @@ namespace SVFHardwareSystem.Services
             }
         }
 
+        public IList<ProductModel> GetAll(string category, string criteria)
+        {
+            using (var db = new DataContext())
+            {
+                var products = db.Products.Where(x => x.Category.Name.Contains(category) && x.Name.Contains(criteria)).ToList();
+                var models = Mapping.Mapper.Map<IList<ProductModel>>(products);
+                return models;
+
+            }
+        }
+
         public ProductModel GetByProductName(string productName)
         {
             using (var db = new DataContext())
@@ -77,6 +88,21 @@ namespace SVFHardwareSystem.Services
                 }
                 return product == null ? 0 : remainingQuantity;
             }
+        }
+
+        public override  Task Add(ProductModel model)
+        {
+            
+            using (var db = new DataContext())
+            {
+                var supplier = db.Suppliers.FirstOrDefault(x => x.Name == model.SupplierName);
+                var category = db.Categories.FirstOrDefault(x => x.Name == model.CategoryName);
+                model.SupplierID = supplier == null ? throw new RecordNotFoundException("Supplier") :  supplier.SupplierID;
+                model.CategoryID = category == null ? throw new RecordNotFoundException("Category") : category.CategoryID;
+            }
+
+            
+            return  base.Add(model);
         }
     }
 }

@@ -14,5 +14,6 @@ namespace SVFHardwareSystem.Services.Interfaces
         ProductModel GetByProductName(string productName);
         int GetRemainingQuantity(int productID, int quantityToBuy);
         void DeductQuantityOnProduct(int productID, int quantityToBuy);
+        IList<ProductModel> GetAll(string category, string criteria);
     }
 }
