@@ -90,19 +90,45 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public override  Task Add(ProductModel model)
+        public override Task Add(ProductModel model)
         {
-            
-            using (var db = new DataContext())
+
+            ValidateModel(model);
+            return base.Add(model);
+        }
+        private void ValidateModel(ProductModel model)
+        {
+            //validation ignores updating quantity, product inventory service handle this
+            if (model.SupplierID == 0)
             {
-                var supplier = db.Suppliers.FirstOrDefault(x => x.Name == model.SupplierName);
-                var category = db.Categories.FirstOrDefault(x => x.Name == model.CategoryName);
-                model.SupplierID = supplier == null ? throw new RecordNotFoundException("Supplier") :  supplier.SupplierID;
-                model.CategoryID = category == null ? throw new RecordNotFoundException("Category") : category.CategoryID;
+                throw new RecordNotFoundException("Supplier");
+            }
+            if (model.CategoryID == 0)
+            {
+                throw new RecordNotFoundException("Category");
+            }
+            if (model.DealersPrice == 0)
+            {
+                throw new InvalidFieldException("Dealers Price");
+            }
+            if (model.Limit == 0)
+            {
+                throw new InvalidFieldException("Limit");
+            }
+            if (model.Price == 0)
+            {
+                throw new InvalidFieldException("Price");
             }
 
-            
-            return  base.Add(model);
+            if (model.Name == "")
+            {
+                throw new InvalidFieldException("Product Name");
+            }
+        }
+        public override Task Edit(int id, ProductModel model)
+        {
+            ValidateModel(model);
+            return base.Edit(id, model);
         }
     }
 }

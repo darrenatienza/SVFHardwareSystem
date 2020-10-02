@@ -124,6 +124,10 @@
     <Compile Include="Migrations\202010020221335_AddCategoryDealersPriceOnProducts.designer.cs">
       <DependentUpon>202010020221335_AddCategoryDealersPriceOnProducts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010022201422_UpdateSupplier.cs" />
+    <Compile Include="Migrations\202010022201422_UpdateSupplier.designer.cs">
+      <DependentUpon>202010022201422_UpdateSupplier.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -176,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010020221335_AddCategoryDealersPriceOnProducts.resx">
       <DependentUpon>202010020221335_AddCategoryDealersPriceOnProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010022201422_UpdateSupplier.resx">
+      <DependentUpon>202010022201422_UpdateSupplier.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

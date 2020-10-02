@@ -26,17 +26,31 @@ namespace SVFHardwareSystem.Ui
 
         public static frmPointofSale OpenPointofSaleForm() => UnityConfig
                           .Register().Resolve<frmPointofSale>();
+        public static frmSuppliers OpenSuppliersForm() => UnityConfig
+                         .Register().Resolve<frmSuppliers>();
+        public static frmSupplierForm OpenSupplierForm() => UnityConfig
+                       .Register().Resolve<frmSupplierForm>();
+        public static frmSupplierForm OpenSupplierForm(int supplierID)
+        {
+            return UnityConfig
+                .Register()
+                .RegisterType<frmSupplierForm>(new InjectionConstructor(new object[] { new SupplierService(), supplierID }))
+                .Resolve<frmSupplierForm>();
+
+        }
+
         /// <summary>
         /// Dependency Inject with parameter on frmPointofSaleQuantityEdit
         /// </summary>
         /// <param name="posTransactionID"></param>
         /// <returns></returns>
-        public static frmPointofSaleQuantityEdit OpenPointOfSaleQuantityEditForm(int posTransactionID) {
+        public static frmPointofSaleQuantityEdit OpenPointOfSaleQuantityEditForm(int posTransactionID)
+        {
             return UnityConfig
                 .Register()
                 .RegisterType<frmPointofSaleQuantityEdit>(new InjectionConstructor(new object[] { new ProductService(), new TransactionProductService(), posTransactionID }))
                 .Resolve<frmPointofSaleQuantityEdit>();
-            
+
         }
 
         public static frmPointOfSalePayment OpenPointOfSalePaymentForm(int posTransactionID)
@@ -58,7 +72,7 @@ namespace SVFHardwareSystem.Ui
 
         internal static frmProductForm OpenProductForm(int productID) => UnityConfig
                 .Register()
-                .RegisterType<frmProductForm>(new InjectionConstructor(new object[] { new ProductService(),new CategoryService(),new SupplierService(), productID }))
+                .RegisterType<frmProductForm>(new InjectionConstructor(new object[] { new ProductService(), new CategoryService(), new SupplierService(), productID }))
                 .Resolve<frmProductForm>();
 
         public static frmProductForm OpenProductForm() => UnityConfig

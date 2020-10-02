@@ -30,7 +30,7 @@ namespace SVFHardwareSystem.Ui
             _productService = productService;
         }
 
-        
+
         //AutoCompleteData Method
         private async void LoadAutoCompleteCategoriesData()
         {
@@ -47,18 +47,18 @@ namespace SVFHardwareSystem.Ui
             }
 
         }
-        private  void frmProducts_Load(object sender, EventArgs e)
+        private void frmProducts_Load(object sender, EventArgs e)
         {
             LoadAutoCompleteCategoriesData();
             LoadProducts();
         }
-        private  void LoadProducts()
+        private void LoadProducts()
         {
             try
             {
                 var category = txtCategories.Text;
                 var criteria = txtSearch.Text;
-                var products =  _productService.GetAll(category,criteria);
+                var products = _productService.GetAll(category, criteria);
                 int count = 0;
                 gridProducts.Rows.Clear();
                 foreach (var item in products)
@@ -103,7 +103,7 @@ namespace SVFHardwareSystem.Ui
 
         private void AddProduct()
         {
-            
+
         }
 
         private void gridProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -121,6 +121,39 @@ namespace SVFHardwareSystem.Ui
 
 
 
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DeleteProduct();
+        }
+
+        private async void DeleteProduct()
+        {
+            try
+            {
+                if (_productID > 0)
+                {
+                    var dialogResult = MetroMessageBox.Show(this, "Do you want to delete this record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        await _productService.Remove(_productID);
+
+                    }
+                    _productID = 0;
+                    LoadProducts();
+
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "No record selected to remove", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString());
             }
         }
     }

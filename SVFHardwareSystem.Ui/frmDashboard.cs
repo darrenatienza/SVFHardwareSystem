@@ -42,5 +42,10 @@ namespace SVFHardwareSystem.Ui
         {
             FormHandler.OpenCustomersForm().ShowDialog();
         }
+
+        private void btnSupplier_Click(object sender, EventArgs e)
+        {
+            FormHandler.OpenSuppliersForm().ShowDialog();
+        }
     }
 }

@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerService.cs" />
-    <Compile Include="Exceptions\InvalidEmptyFieldException.cs" />
+    <Compile Include="Exceptions\InvalidFieldException.cs" />
     <Compile Include="Exceptions\LimitMustNotExceedOrLessException.cs" />
     <Compile Include="Exceptions\ReturnedProductMustNotUpdateStatusException.cs" />
     <Compile Include="Exceptions\RecordNotFoundException.cs" />

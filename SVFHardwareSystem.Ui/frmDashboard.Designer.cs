@@ -33,7 +33,7 @@
             this.btnCategory = new MetroFramework.Controls.MetroTile();
             this.btnProduct = new MetroFramework.Controls.MetroTile();
             this.btnCustomer = new MetroFramework.Controls.MetroTile();
-            this.metroTile1 = new MetroFramework.Controls.MetroTile();
+            this.btnSupplier = new MetroFramework.Controls.MetroTile();
             this.SuspendLayout();
             // 
             // btnPointOfSale
@@ -91,22 +91,23 @@
             this.btnCustomer.UseSelectable = true;
             this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
             // 
-            // metroTile1
+            // btnSupplier
             // 
-            this.metroTile1.ActiveControl = null;
-            this.metroTile1.Location = new System.Drawing.Point(268, 227);
-            this.metroTile1.Name = "metroTile1";
-            this.metroTile1.Size = new System.Drawing.Size(140, 95);
-            this.metroTile1.TabIndex = 5;
-            this.metroTile1.Text = "Suppliers";
-            this.metroTile1.UseSelectable = true;
+            this.btnSupplier.ActiveControl = null;
+            this.btnSupplier.Location = new System.Drawing.Point(268, 227);
+            this.btnSupplier.Name = "btnSupplier";
+            this.btnSupplier.Size = new System.Drawing.Size(140, 95);
+            this.btnSupplier.TabIndex = 5;
+            this.btnSupplier.Text = "Suppliers";
+            this.btnSupplier.UseSelectable = true;
+            this.btnSupplier.Click += new System.EventHandler(this.btnSupplier_Click);
             // 
             // frmDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.metroTile1);
+            this.Controls.Add(this.btnSupplier);
             this.Controls.Add(this.btnCustomer);
             this.Controls.Add(this.btnProduct);
             this.Controls.Add(this.btnCategory);
@@ -125,6 +126,6 @@
         private MetroFramework.Controls.MetroTile btnCategory;
         private MetroFramework.Controls.MetroTile btnProduct;
         private MetroFramework.Controls.MetroTile btnCustomer;
-        private MetroFramework.Controls.MetroTile metroTile1;
+        private MetroFramework.Controls.MetroTile btnSupplier;
     }
 }

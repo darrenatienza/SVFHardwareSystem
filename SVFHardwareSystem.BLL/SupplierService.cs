@@ -11,5 +11,9 @@ namespace SVFHardwareSystem.Services
 {
     public class SupplierService : Service<SupplierModel, Supplier>, ISupplierService
     {
+        public async Task<IList<SupplierModel>> GetAll(string criteria)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

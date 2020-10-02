@@ -11,12 +11,12 @@ namespace SVFHardwareSystem.Services.Extensions
         public static decimal ToDecimal(this String str)
         {
             decimal result = 0;
-            return str == "" && !decimal.TryParse(str, out result) ? 0 : result;
+            return !decimal.TryParse(str, out result) ? 0 : result;
         }
         public static int ToInt(this String str)
         {
             int result = 0;
-            return str == "" && !int.TryParse(str, out  result) ? 0 : result;
+            return !int.TryParse(str, out result) ? 0 : result;
         }
     }
 }

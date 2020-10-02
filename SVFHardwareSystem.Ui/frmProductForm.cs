@@ -1,9 +1,12 @@
 ﻿using MetroFramework;
 using MetroFramework.Forms;
 using SVFHardwareSystem.Services;
+using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.Extensions;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
+using SVFHardwareSystem.Ui.Extensions;
+using SVFHardwareSystem.Ui.Misc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -66,13 +69,15 @@ namespace SVFHardwareSystem.Ui
 
 
                     var product = await _productService.Get(_productID);
-                    txtCategory.Text = product.CategoryName;
+
                     txtCode.Text = product.Code;
                     txtDealersPrice.Text = product.DealersPrice.ToString();
                     txtLimit.Text = product.Limit.ToString();
                     txtName.Text = product.Name;
                     txtPrice.Text = product.Price.ToString();
-                    txtSupplier.Text = product.SupplierName;
+                    txtQuantity.Text = product.Quantity.ToString();
+                    cboCategory.SelectedItem = cboCategory.Items.SelectItemByID(product.CategoryID);
+                    cboSupplier.SelectedItem = cboSupplier.Items.SelectItemByID(product.SupplierID);
                     txtUnit.Text = product.Unit;
                 }
             }
@@ -85,39 +90,30 @@ namespace SVFHardwareSystem.Ui
 
         private async void LoadSupplierAutoComplete()
         {
-            //Set AutoCompleteSource property of txt_StateName as CustomSource
-            txtSupplier.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
-            txtSupplier.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            var customerNames = await _supplierService.GetAll();
-            foreach (var item in customerNames)
+
+            var suppliers = await _supplierService.GetAll();
+            foreach (var item in suppliers)
             {
-                txtSupplier.AutoCompleteCustomSource.Add(item.Name.ToString());
+                cboSupplier.Items.Add(new ItemX(item.Name, item.SupplierID.ToString()));
 
             }
         }
 
         private async void LoadAutoCompleteCategoriesData()
         {
-
-            //Set AutoCompleteSource property of txt_StateName as CustomSource
-            txtCategory.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
-            txtCategory.AutoCompleteMode = AutoCompleteMode.Suggest;
-            var customerNames = await _categoryService.GetAll();
-            foreach (var item in customerNames)
+            var suppliers = await _categoryService.GetAll();
+            foreach (var item in suppliers)
             {
-                txtCategory.AutoCompleteCustomSource.Add(item.Name.ToString());
+                cboCategory.Items.Add(new ItemX(item.Name, item.CategoryID.ToString()));
 
             }
-
         }
 
-        private  void btnSave_ClickAsync(object sender, EventArgs e)
+        private void btnSave_ClickAsync(object sender, EventArgs e)
         {
 
             Save();
-           
+
         }
 
         private async void Save()
@@ -125,14 +121,15 @@ namespace SVFHardwareSystem.Ui
             try
             {
                 var productModel = new ProductModel();
+                productModel.ProductID = _productID;
                 productModel.Code = txtCode.Text;
                 productModel.Name = txtName.Text;
                 productModel.Price = txtPrice.Text.ToDecimal();
                 productModel.Unit = txtUnit.Text;
-                productModel.SupplierName = txtSupplier.Text;
-                productModel.CategoryName= txtCategory.Text;
+                productModel.SupplierID = _supplierID;
+                productModel.CategoryID = _categoryID;
                 productModel.Limit = txtLimit.Text.ToInt();
-                productModel.DealersPrice = txtLimit.Text.ToDecimal();
+                productModel.DealersPrice = txtDealersPrice.Text.ToDecimal();
                 //edit
                 if (_productID > 0)
                 {
@@ -145,6 +142,10 @@ namespace SVFHardwareSystem.Ui
                 }
                 this.Close();
             }
+            catch (InvalidFieldException ex)
+            {
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
 
@@ -154,7 +155,17 @@ namespace SVFHardwareSystem.Ui
 
         private void txtCategory_Click(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void cboSupplier_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _supplierID = ((ItemX)cboSupplier.SelectedItem).Value.ToInt();
+        }
+
+        private void cboCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _categoryID = ((ItemX)cboCategory.SelectedItem).Value.ToInt();
         }
     }
 }

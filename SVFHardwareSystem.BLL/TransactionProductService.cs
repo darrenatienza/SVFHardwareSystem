@@ -62,11 +62,11 @@ namespace SVFHardwareSystem.Services
                 }
                 if (quantityToCancel <= 0 || quantityToCancel > transactionProduct.Quantity)
                 {
-                    throw new LimitMustNotExceedOrLessException(transactionProduct.Quantity,1);
+                    throw new LimitMustNotExceedOrLessException(transactionProduct.Quantity, 1);
                 }
                 if (reason == string.Empty)
                 {
-                    throw new InvalidEmptyFieldException("Reason");
+                    throw new InvalidFieldException("Reason");
                 }
                 //if isAddQuantity is true, add the quantity of transaction product to the current quantity of the product
                 if (isAddQuantity)
@@ -147,13 +147,13 @@ namespace SVFHardwareSystem.Services
                 }
                 if (reason == string.Empty)
                 {
-                    throw new InvalidEmptyFieldException("Reason");
+                    throw new InvalidFieldException("Reason");
                 }
 
                 // check limit of quantity to replace
                 if (quantityToReplace < 0 || quantityToReplace > transactionProduct.Quantity)
                 {
-                    throw new LimitMustNotExceedOrLessException(transactionProduct.Quantity,1);
+                    throw new LimitMustNotExceedOrLessException(transactionProduct.Quantity, 1);
                 }
                 // add to SupplierProductsToReturn
                 if (isForReturnToSupplier)

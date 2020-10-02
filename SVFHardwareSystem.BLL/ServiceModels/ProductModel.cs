@@ -8,6 +8,8 @@ namespace SVFHardwareSystem.Services.ServiceModels
 {
     public class ProductModel
     {
+
+
         public string Code { get; set; }
         public string Name { get; set; }
         public string Unit { get; set; }
@@ -16,9 +18,12 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public int ProductID { get; set; }
         public string CategoryName { get; set; }
         public int Limit { get; set; }
-        public decimal DealersPrice { get; set; }
+        public decimal DealersPrice
+        {
+            get; set;
+        }
         public string SupplierName { get; set; }
-        public int SupplierID { get; internal set; }
-        public int CategoryID { get; internal set; }
+        public int SupplierID { get; set; }
+        public int CategoryID { get; set; }
     }
 }
