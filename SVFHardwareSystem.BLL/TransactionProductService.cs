@@ -71,7 +71,7 @@ namespace SVFHardwareSystem.Services
                 //if isAddQuantity is true, add the quantity of transaction product to the current quantity of the product
                 if (isAddQuantity)
                 {
-                    product.Quantity += transactionProduct.Quantity;
+                    product.Quantity += quantityToCancel;
                     transactionProduct.IsQuantityAddedToInventoryAfterReplaceOrCancel = true;
                 }
                 // add to SupplierProductsToReturn
@@ -151,7 +151,7 @@ namespace SVFHardwareSystem.Services
                 }
 
                 // check limit of quantity to replace
-                if (quantityToReplace < 0 || quantityToReplace > transactionProduct.Quantity)
+                if (quantityToReplace <= 0 || quantityToReplace > transactionProduct.Quantity)
                 {
                     throw new LimitMustNotExceedOrLessException(transactionProduct.Quantity, 1);
                 }
