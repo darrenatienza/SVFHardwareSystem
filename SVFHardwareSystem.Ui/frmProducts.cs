@@ -93,17 +93,24 @@ namespace SVFHardwareSystem.Ui
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            EditProduct();
+        }
+
+        private void EditProduct()
+        {
             FormHandler.OpenProductForm(_productID).ShowDialog();
+            LoadProducts();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            FormHandler.OpenProductForm().ShowDialog();
+            AddProduct();
         }
 
         private void AddProduct()
         {
-
+            FormHandler.OpenProductForm().ShowDialog();
+            LoadProducts();
         }
 
         private void gridProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
