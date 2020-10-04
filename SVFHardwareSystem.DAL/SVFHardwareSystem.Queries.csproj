@@ -58,6 +58,9 @@
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\POSPayment.cs" />
     <Compile Include="Entities\POSTransaction.cs" />
+    <Compile Include="Entities\Purchase.cs" />
+    <Compile Include="Entities\PurchasePayment.cs" />
+    <Compile Include="Entities\PurchaseProduct.cs" />
     <Compile Include="Entities\Supplier.cs" />
     <Compile Include="Entities\SupplierProductToReturn.cs" />
     <Compile Include="Entities\TransactionProduct.cs" />
@@ -129,6 +132,7 @@
       <DependentUpon>202010022201422_UpdateSupplier.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Misc\PaymentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
