@@ -193,6 +193,36 @@ namespace SVFHardwareSystem.Ui.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap tear_of_calendar_16 {
+            get {
+                object obj = ResourceManager.GetObject("tear-of-calendar-16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tear_of_calendar_16__1_ {
+            get {
+                object obj = ResourceManager.GetObject("tear-of-calendar-16 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tear_of_calendar_161 {
+            get {
+                object obj = ResourceManager.GetObject("tear-of-calendar-161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap trash_2_16 {
             get {
                 object obj = ResourceManager.GetObject("trash-2-16", resourceCulture);
@@ -203,9 +233,29 @@ namespace SVFHardwareSystem.Ui.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap trash_2_161 {
+            get {
+                object obj = ResourceManager.GetObject("trash-2-161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap trash_2_48 {
             get {
                 object obj = ResourceManager.GetObject("trash-2-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap upload_16 {
+            get {
+                object obj = ResourceManager.GetObject("upload-16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

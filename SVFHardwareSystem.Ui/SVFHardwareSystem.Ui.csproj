@@ -144,6 +144,12 @@
     <Compile Include="frmProducts.Designer.cs">
       <DependentUpon>frmProducts.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPurchases.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPurchases.Designer.cs">
+      <DependentUpon>frmPurchases.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSaleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmProducts.resx">
       <DependentUpon>frmProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPurchases.resx">
+      <DependentUpon>frmPurchases.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSaleForm.resx">
       <DependentUpon>frmSaleForm.cs</DependentUpon>
@@ -307,6 +316,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\search-3-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tear-of-calendar-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash-2-161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tear-of-calendar-161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tear-of-calendar-16 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\upload-16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

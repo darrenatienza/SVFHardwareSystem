@@ -4,19 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SVFHardwareSystem.DAL.Entities
+namespace SVFHardwareSystem.Services.ServiceModels
 {
-    public class Purchase
+    public class PurchaseModel
     {
-        public Purchase() { }
+        public PurchaseModel() { }
         public int PurchaseID { get; set; }
         public DateTime CreateTimeStamp { get; set; }
 
         public DateTime DatePurchase { get; set; }
         public int SupplierID { get; set; }
-        public virtual Supplier Supplier { get; set; }
-
+        public string SupplierName { get; set; }
         public string Remarks { get; set; }
-
     }
 }

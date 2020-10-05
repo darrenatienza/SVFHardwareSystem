@@ -54,6 +54,9 @@ namespace AutoMap
             // ignoring category id for updating entity
             CreateMap<SupplierModel, Supplier>();
 
+            CreateMap<PurchaseModel, Purchase>();
+            CreateMap<Purchase, PurchaseModel>();
+
             // Additional mappings here...
         }
     }
