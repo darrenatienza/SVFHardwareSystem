@@ -9,5 +9,7 @@ namespace SVFHardwareSystem.Services.Interfaces
 {
     public interface IPurchaseService : IService<PurchaseModel>
     {
+        Task EditAsync(object purchaseID, PurchaseModel purchaseModel);
+        Task<IList<PurchaseModel>> GetAllAsync(int supplierID);
     }
 }

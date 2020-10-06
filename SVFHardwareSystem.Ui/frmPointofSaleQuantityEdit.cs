@@ -43,7 +43,7 @@ namespace SVFHardwareSystem.Ui
             txtProductName.AutoCompleteSource = AutoCompleteSource.CustomSource;
             //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
             txtProductName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            var productNames = await _productService.GetAll();
+            var productNames = await _productService.GetAllAsync();
             foreach (var item in productNames)
             {
                 txtProductName.AutoCompleteCustomSource.Add(item.Name);

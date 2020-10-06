@@ -18,7 +18,7 @@ namespace SVFHardwareSystem.Services
     /// <typeparam name="TEntity">Data Entity</typeparam>
     public class Service<TModel,TEntity> : IService<TModel> where TModel : class where TEntity : class
     {
-        public  virtual async Task Add(TModel model)
+        public  virtual async Task AddAsync(TModel model)
         {
             using (var db = new DataContext())
             {
@@ -28,7 +28,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public virtual async Task<TModel> AddNew(TModel model)
+        public virtual async Task<TModel> AddNewAsync(TModel model)
         {
             using (var db = new DataContext())
             {
@@ -39,7 +39,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public virtual async Task Edit(int id, TModel model)
+        public virtual async Task EditAsync(int id, TModel model)
         {
             using (var db = new DataContext())
             {
@@ -50,7 +50,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public async Task<TModel> Get(int id)
+        public async Task<TModel> GetAsync(int id)
         {
             using (var db = new DataContext())
             {
@@ -60,7 +60,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public async Task<IList<TModel>> GetAll()
+        public async Task<IList<TModel>> GetAllAsync()
         {
             using (var db = new DataContext())
             {
@@ -70,7 +70,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public async Task Remove(int id)
+        public async Task RemoveAsync(int id)
         {
             using (var db = new DataContext())
             {

@@ -25,6 +25,6 @@ namespace SVFHardwareSystem.DAL.Entities
         /// Indicates if product its came from cancel or return of point of sale
         /// </summary>
         public bool IsProductFromCancelReplace { get; set; }
-        public DateTime CreateTimeStamp { get; set; } = DateTime.Now;
+        public DateTime CreateTimeStamp { get; set; }
     }
 }

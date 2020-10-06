@@ -68,7 +68,7 @@ namespace SVFHardwareSystem.Ui
                 {
 
 
-                    var product = await _productService.Get(_productID);
+                    var product = await _productService.GetAsync(_productID);
 
                     txtCode.Text = product.Code;
                     txtDealersPrice.Text = product.DealersPrice.ToString();
@@ -91,7 +91,7 @@ namespace SVFHardwareSystem.Ui
         private async void LoadSupplierAutoComplete()
         {
 
-            var suppliers = await _supplierService.GetAll();
+            var suppliers = await _supplierService.GetAllAsync();
             foreach (var item in suppliers)
             {
                 cboSupplier.Items.Add(new ItemX(item.Name, item.SupplierID.ToString()));
@@ -101,7 +101,7 @@ namespace SVFHardwareSystem.Ui
 
         private async void LoadAutoCompleteCategoriesData()
         {
-            var suppliers = await _categoryService.GetAll();
+            var suppliers = await _categoryService.GetAllAsync();
             foreach (var item in suppliers)
             {
                 cboCategory.Items.Add(new ItemX(item.Name, item.CategoryID.ToString()));
@@ -133,12 +133,12 @@ namespace SVFHardwareSystem.Ui
                 //edit
                 if (_productID > 0)
                 {
-                    await _productService.Edit(_productID, productModel);
+                    await _productService.EditAsync(_productID, productModel);
                 }
                 else
                 {
                     //add
-                    await _productService.Add(productModel);
+                    await _productService.AddAsync(productModel);
                 }
                 this.Close();
             }

@@ -131,6 +131,10 @@
     <Compile Include="Migrations\202010022201422_UpdateSupplier.designer.cs">
       <DependentUpon>202010022201422_UpdateSupplier.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010060731510_AddPurchases.cs" />
+    <Compile Include="Migrations\202010060731510_AddPurchases.designer.cs">
+      <DependentUpon>202010060731510_AddPurchases.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Misc\PaymentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -187,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010022201422_UpdateSupplier.resx">
       <DependentUpon>202010022201422_UpdateSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010060731510_AddPurchases.resx">
+      <DependentUpon>202010060731510_AddPurchases.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

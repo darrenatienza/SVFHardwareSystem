@@ -43,7 +43,7 @@ namespace SVFHardwareSystem.Ui
             {
                 if (_supplierID > 0)
                 {
-                    var supplierModel = await _supplierService.Get(_supplierID);
+                    var supplierModel = await _supplierService.GetAsync(_supplierID);
                     txtFullName.Text = supplierModel.Name;
                     txtAddress.Text = supplierModel.Address;
                     txtContactNum.Text = supplierModel.ContactNumber;
@@ -72,12 +72,12 @@ namespace SVFHardwareSystem.Ui
                 //edit
                 if (_supplierID > 0)
                 {
-                    await _supplierService.Edit(_supplierID, supplierModel);
+                    await _supplierService.EditAsync(_supplierID, supplierModel);
                 }
                 else
                 {
                     //add
-                    await _supplierService.Add(supplierModel);
+                    await _supplierService.AddAsync(supplierModel);
                 }
                 this.Close();
             }

@@ -21,6 +21,7 @@ namespace SVFHardwareSystem.Ui
             container.RegisterType<ITransactionProductService, TransactionProductService>();
             container.RegisterType<ISalesService, SalesService>();
             container.RegisterType<ISupplierService, SupplierService>();
+            container.RegisterType<IPurchaseService, PurchaseService>();
 
             return container;
         }

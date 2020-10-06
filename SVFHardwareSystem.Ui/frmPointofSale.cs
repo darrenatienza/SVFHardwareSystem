@@ -111,12 +111,12 @@ namespace SVFHardwareSystem.Ui
                 //edit
                 if (_posTransactionID > 0)
                 {
-                    await _posTransactionService.Edit(_posTransactionID, posTransaction);
+                    await _posTransactionService.EditAsync(_posTransactionID, posTransaction);
                 }
                 else
                 {
                     //add
-                    await _posTransactionService.Add(posTransaction);
+                    await _posTransactionService.AddAsync(posTransaction);
                 }
 
                 // await LoadCategories();
@@ -137,7 +137,7 @@ namespace SVFHardwareSystem.Ui
             txtProductName.AutoCompleteSource = AutoCompleteSource.CustomSource;
             //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
             txtProductName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            var productNames = await _productService.GetAll();
+            var productNames = await _productService.GetAllAsync();
             foreach (var item in productNames)
             {
                 txtProductName.AutoCompleteCustomSource.Add(item.Name);
@@ -146,7 +146,7 @@ namespace SVFHardwareSystem.Ui
             txtCustomerName.AutoCompleteSource = AutoCompleteSource.CustomSource;
             //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
             txtCustomerName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            var customerNames = await _customerService.GetAll();
+            var customerNames = await _customerService.GetAllAsync();
             foreach (var item in customerNames)
             {
                 txtCustomerName.AutoCompleteCustomSource.Add(item.FullName.ToString());
@@ -162,7 +162,7 @@ namespace SVFHardwareSystem.Ui
             txtCustomerName.AutoCompleteSource = AutoCompleteSource.CustomSource;
             //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
             txtCustomerName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            var customerNames = await _customerService.GetAll();
+            var customerNames = await _customerService.GetAllAsync();
             foreach (var item in customerNames)
             {
                 txtCustomerName.AutoCompleteCustomSource.Add(item.FullName.ToString());
@@ -293,7 +293,7 @@ namespace SVFHardwareSystem.Ui
                         var dialogResult = MetroMessageBox.Show(this, "Do you want to remove this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (dialogResult == DialogResult.Yes)
                         {
-                            var transactionProduct = await _transactionProductService.Get(_transactionProductID);
+                            var transactionProduct = await _transactionProductService.GetAsync(_transactionProductID);
                             if (!transactionProduct.IsPaid)
                             {
 
@@ -536,7 +536,7 @@ namespace SVFHardwareSystem.Ui
                         newPOSTransaction.CreateTimeStamp = DateTime.Now;
                         newPOSTransaction.CustomerID = customerID;
                         newPOSTransaction.SIDR = txtSIDR.Text;
-                        newPOSTransaction = await _posTransactionService.AddNew(newPOSTransaction);
+                        newPOSTransaction = await _posTransactionService.AddNewAsync(newPOSTransaction);
                         _posTransactionID = newPOSTransaction.POSTransactionID;
                         MetroMessageBox.Show(this, "New Point of Sale Transaction has been generated!", "New Point of Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -640,11 +640,11 @@ namespace SVFHardwareSystem.Ui
 
                         if (ValidatePOSTransactionFields())
                         {
-                            var posTransaction = await _posTransactionService.Get(_posTransactionID);
+                            var posTransaction = await _posTransactionService.GetAsync(_posTransactionID);
                             posTransaction.Cost = txtCost.Text;
                             posTransaction.CustomerID = customerID;
                             posTransaction.SIDR = txtSIDR.Text;
-                            await _posTransactionService.Edit(_posTransactionID, posTransaction);
+                            await _posTransactionService.EditAsync(_posTransactionID, posTransaction);
                             MetroMessageBox.Show(this, "Point of Sale Details has been updated", "Update Point of Sale Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }

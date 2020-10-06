@@ -37,7 +37,7 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                var transactionProduct = await _transactionProductService.Get(_transactionProductID);
+                var transactionProduct = await _transactionProductService.GetAsync(_transactionProductID);
                 lblProductName.Text = "Product Name: " + transactionProduct.ProductName;
                 lblQuantity.Text = "Quantity: " + transactionProduct.Quantity;
                 lblOfQuantityOnCancel.Text = "of " + transactionProduct.Quantity;

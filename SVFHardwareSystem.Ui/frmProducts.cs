@@ -39,7 +39,7 @@ namespace SVFHardwareSystem.Ui
             txtCategories.AutoCompleteSource = AutoCompleteSource.CustomSource;
             //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
             txtCategories.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            var customerNames = await _categoryService.GetAll();
+            var customerNames = await _categoryService.GetAllAsync();
             foreach (var item in customerNames)
             {
                 txtCategories.AutoCompleteCustomSource.Add(item.Name.ToString());
@@ -145,7 +145,7 @@ namespace SVFHardwareSystem.Ui
                     var dialogResult = MetroMessageBox.Show(this, "Do you want to delete this record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        await _productService.Remove(_productID);
+                        await _productService.RemoveAsync(_productID);
 
                     }
                     _productID = 0;

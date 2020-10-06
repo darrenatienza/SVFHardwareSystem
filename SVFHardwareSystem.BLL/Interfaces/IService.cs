@@ -12,11 +12,11 @@ namespace SVFHardwareSystem.Services.Interfaces
     /// <typeparam name="T">T is model</typeparam>
     public interface IService<T> where T : class
     {
-        Task<T> Get(int id);
-        Task <IList<T>> GetAll();
-        Task Add(T model);
-        Task<T> AddNew(T model);
-        Task Edit(int id, T model);
-        Task Remove(int id);
+        Task<T> GetAsync(int id);
+        Task <IList<T>> GetAllAsync();
+        Task AddAsync(T model);
+        Task<T> AddNewAsync(T model);
+        Task EditAsync(int id, T model);
+        Task RemoveAsync(int id);
     }
 }

@@ -10,7 +10,7 @@ namespace SVFHardwareSystem.DAL.Entities
     {
         public Purchase() { }
         public int PurchaseID { get; set; }
-        public DateTime CreateTimeStamp { get; set; }
+        public DateTime CreateTimeStamp { get; set; } = DateTime.Now;
 
         public DateTime DatePurchase { get; set; }
         public int SupplierID { get; set; }

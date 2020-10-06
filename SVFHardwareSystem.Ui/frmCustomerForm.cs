@@ -43,7 +43,7 @@ namespace SVFHardwareSystem.Ui
             {
                 if(_id > 0)
                 {
-                    var customer = await _customerService.Get(_id);
+                    var customer = await _customerService.GetAsync(_id);
                     txtFullName.Text = customer.FullName;
                     txtAddress.Text = customer.Address;
                     txtContactNum.Text = customer.ContactNumber;
@@ -71,12 +71,12 @@ namespace SVFHardwareSystem.Ui
                 //edit
                 if (_id > 0)
                 {
-                    await _customerService.Edit(_id, customer);
+                    await _customerService.EditAsync(_id, customer);
                 }
                 else
                 {
                     //add
-                    await _customerService.Add(customer);
+                    await _customerService.AddAsync(customer);
                 }
                 this.Close();
             }

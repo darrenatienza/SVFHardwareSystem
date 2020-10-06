@@ -34,7 +34,7 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                var categories = await _categoryService.GetAll();
+                var categories = await _categoryService.GetAllAsync();
                 int count = 0;
                 lvCategories.Items.Clear();
                 foreach (var item in categories)
@@ -66,12 +66,12 @@ namespace SVFHardwareSystem.Ui
                 //edit
                 if (id > 0)
                 {
-                    await _categoryService.Edit(id,category);
+                    await _categoryService.EditAsync(id,category);
                 }
                 else
                 {
                     //add
-                    await _categoryService.Add(category);
+                    await _categoryService.AddAsync(category);
                 }
                 
                 await LoadCategories();
@@ -92,7 +92,7 @@ namespace SVFHardwareSystem.Ui
                 id = lvCategories.SelectedItems.Count > 0 ? int.Parse(lvCategories.SelectedItems[0].Tag.ToString()) : 0;
                 if(id > 0)
                 {
-                    var category = await _categoryService.Get(id);
+                    var category = await _categoryService.GetAsync(id);
                     txtName.Text = category.Name;
                 }
                 
@@ -113,7 +113,7 @@ namespace SVFHardwareSystem.Ui
                     var dialogResult = MetroMessageBox.Show(this, "Do you want to delete this record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dialogResult == DialogResult.Yes)
                     {
-                       await _categoryService.Remove(id);
+                       await _categoryService.RemoveAsync(id);
                         id = 0;
                         ResetInputValues();
                     }

@@ -90,11 +90,11 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public override Task Add(ProductModel model)
+        public override Task AddAsync(ProductModel model)
         {
 
             ValidateModel(model);
-            return base.Add(model);
+            return base.AddAsync(model);
         }
         private void ValidateModel(ProductModel model)
         {
@@ -125,10 +125,10 @@ namespace SVFHardwareSystem.Services
                 throw new InvalidFieldException("Product Name");
             }
         }
-        public override Task Edit(int id, ProductModel model)
+        public override Task EditAsync(int id, ProductModel model)
         {
             ValidateModel(model);
-            return base.Edit(id, model);
+            return base.EditAsync(id, model);
         }
     }
 }

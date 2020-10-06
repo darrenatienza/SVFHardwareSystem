@@ -38,7 +38,7 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                var customers = await _customerService.GetAll();
+                var customers = await _customerService.GetAllAsync();
                 int count = 0;
                 gridCustomers.Rows.Clear();
                 foreach (var item in customers)
@@ -108,7 +108,7 @@ namespace SVFHardwareSystem.Ui
                     var dialogResult = MetroMessageBox.Show(this, "Do you want to delete this record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        await _customerService.Remove(id);
+                        await _customerService.RemoveAsync(id);
                         id = 0;
                     }
                     await LoadCustomers();
