@@ -21,10 +21,10 @@ namespace SVFHardwareSystem.Ui
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            
+
 
             Application.Run(FormHandler.OpenPurchasesForm());
         }
-        
+
     }
 }

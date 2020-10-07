@@ -60,6 +60,7 @@
     <Compile Include="CustomerService.cs" />
     <Compile Include="Exceptions\InvalidFieldException.cs" />
     <Compile Include="Exceptions\LimitMustNotExceedOrLessException.cs" />
+    <Compile Include="Exceptions\RecordAlreadyExistsException.cs" />
     <Compile Include="Exceptions\ReturnedProductMustNotUpdateStatusException.cs" />
     <Compile Include="Exceptions\RecordNotFoundException.cs" />
     <Compile Include="Exceptions\AmountTenderMustBeGreaterThanOrEqualException.cs" />

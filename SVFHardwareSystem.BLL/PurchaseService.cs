@@ -20,9 +20,17 @@ namespace SVFHardwareSystem.Services
 
             if (model.SupplierID == 0)
             {
-                throw new  InvalidFieldException("Supplier");
+                throw new InvalidFieldException("Supplier");
             }
-
+            using (var db = new DataContext())
+            {
+                var purchase = db.Purchases.FirstOrDefault(x => DbFunctions.TruncateTime(x.DatePurchase) == DbFunctions.TruncateTime(model.DatePurchase) && x.SupplierID == model.SupplierID);
+                if (purchase != null)
+                {
+                    var identifier = string.Format("the date of {0}", model.DatePurchase.ToShortDateString());
+                    throw new RecordAlreadyExistsException(identifier);
+                }
+            }
             await base.AddAsync(model);
         }
 
@@ -39,10 +47,6 @@ namespace SVFHardwareSystem.Services
             return base.EditAsync(id, model);
         }
 
-        public Task EditAsync(object purchaseID, PurchaseModel purchaseModel)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<IList<PurchaseModel>> GetAllAsync(int supplierID)
         {

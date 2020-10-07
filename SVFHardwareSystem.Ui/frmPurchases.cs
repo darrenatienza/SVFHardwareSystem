@@ -23,6 +23,7 @@ namespace SVFHardwareSystem.Ui
         private IPurchaseService _purchaseService;
         private int _supplierID;
         private int _purchaseID;
+        private int _productID;
 
         public frmPurchases(ISupplierService supplierService, IPurchaseService purchaseService)
         {
@@ -61,9 +62,13 @@ namespace SVFHardwareSystem.Ui
                 purchaseModel.SupplierID = _supplierID;
                 await _purchaseService.AddAsync(purchaseModel);
                 LoadPurchaseDates();
-                MetroMessageBox.Show(this, "New Purchase has been generated.", "New Purchase", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "New Purchase has been generated.", "New Purchase", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch(InvalidFieldException ex)
+            catch (RecordAlreadyExistsException ex)
+            {
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (InvalidFieldException ex)
             {
                 MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -72,8 +77,8 @@ namespace SVFHardwareSystem.Ui
 
                 MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
-          
+
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -90,7 +95,7 @@ namespace SVFHardwareSystem.Ui
                 purchaseModel.DatePurchase = dtDatePurchase.Value;
                 purchaseModel.Remarks = txtRemarks.Text;
                 purchaseModel.SupplierID = _supplierID;
-                await _purchaseService.EditAsync(_purchaseID,purchaseModel);
+                await _purchaseService.EditAsync(_purchaseID, purchaseModel);
                 MetroMessageBox.Show(this, "Changes has been saved.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (InvalidFieldException ex)
@@ -116,14 +121,14 @@ namespace SVFHardwareSystem.Ui
 
         private void dtDatePurchase_ValueChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void cboSupplier_SelectedIndexChanged(object sender, EventArgs e)
         {
             _supplierID = ((ItemX)cboSupplier.SelectedItem).Value.ToInt();
             LoadPurchaseDates();
-            
+
         }
 
         private async void SetPurchaseData()
@@ -183,6 +188,16 @@ namespace SVFHardwareSystem.Ui
 
                 MetroMessageBox.Show(this, ex.ToString());
             }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            FormHandler.OpenPurchaseProductForm(_purchaseID).ShowDialog();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            FormHandler.OpenPurchaseProductForm(_purchaseID, _productID).ShowDialog();
         }
     }
 }

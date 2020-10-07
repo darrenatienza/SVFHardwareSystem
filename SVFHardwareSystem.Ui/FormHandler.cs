@@ -40,7 +40,22 @@ namespace SVFHardwareSystem.Ui
                 .Resolve<frmSupplierForm>();
 
         }
+        public static frmPurchaseProductForm OpenPurchaseProductForm(int purchaseID)
+        {
+            return UnityConfig
+                .Register()
+                .RegisterType<frmPurchaseProductForm>(new InjectionConstructor(new object[] { new ProductService(), purchaseID }))
+                .Resolve<frmPurchaseProductForm>();
 
+        }
+        public static frmPurchaseProductForm OpenPurchaseProductForm(int purchaseID, int productID)
+        {
+            return UnityConfig
+                .Register()
+                .RegisterType<frmPurchaseProductForm>(new InjectionConstructor(new object[] { new ProductService(), purchaseID, productID }))
+                .Resolve<frmPurchaseProductForm>();
+
+        }
         /// <summary>
         /// Dependency Inject with parameter on frmPointofSaleQuantityEdit
         /// </summary>
@@ -79,5 +94,7 @@ namespace SVFHardwareSystem.Ui
 
         public static frmProductForm OpenProductForm() => UnityConfig
                          .Register().Resolve<frmProductForm>();
+
+
     }
 }
