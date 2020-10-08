@@ -135,6 +135,14 @@
     <Compile Include="Migrations\202010060731510_AddPurchases.designer.cs">
       <DependentUpon>202010060731510_AddPurchases.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010080112251_AddPurchaseProductsTable.cs" />
+    <Compile Include="Migrations\202010080112251_AddPurchaseProductsTable.designer.cs">
+      <DependentUpon>202010080112251_AddPurchaseProductsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010080206547_AddIsUploadedOnPurchaseProduct.cs" />
+    <Compile Include="Migrations\202010080206547_AddIsUploadedOnPurchaseProduct.designer.cs">
+      <DependentUpon>202010080206547_AddIsUploadedOnPurchaseProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Misc\PaymentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -194,6 +202,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010060731510_AddPurchases.resx">
       <DependentUpon>202010060731510_AddPurchases.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010080112251_AddPurchaseProductsTable.resx">
+      <DependentUpon>202010080112251_AddPurchaseProductsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010080206547_AddIsUploadedOnPurchaseProduct.resx">
+      <DependentUpon>202010080206547_AddIsUploadedOnPurchaseProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

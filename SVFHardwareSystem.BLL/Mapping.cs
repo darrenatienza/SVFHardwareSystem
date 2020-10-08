@@ -57,6 +57,9 @@ namespace AutoMap
             CreateMap<PurchaseModel, Purchase>();
             CreateMap<Purchase, PurchaseModel>();
 
+            CreateMap<PurchaseProduct, PurchaseProductModel>();
+            CreateMap<PurchaseProductModel,PurchaseProduct> ();
+
             // Additional mappings here...
         }
     }

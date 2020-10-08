@@ -56,7 +56,7 @@ namespace SVFHardwareSystem.Ui
         private void frmProductForm_Load(object sender, EventArgs e)
         {
             LoadSupplierAutoComplete();
-            LoadAutoCompleteCategoriesData();
+            LoadCategories();
             SetProductData();
         }
 
@@ -99,7 +99,7 @@ namespace SVFHardwareSystem.Ui
             }
         }
 
-        private async void LoadAutoCompleteCategoriesData()
+        private async void LoadCategories()
         {
             var suppliers = await _categoryService.GetAllAsync();
             foreach (var item in suppliers)

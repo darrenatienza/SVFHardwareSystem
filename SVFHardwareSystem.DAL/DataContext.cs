@@ -24,6 +24,7 @@ namespace SVFHardwareSystem.Queries
         public virtual DbSet<SupplierProductToReturn> SupplierProductsToReturn { get; set; }
 
         public virtual DbSet<Purchase> Purchases { get; set; }
+        public virtual DbSet<PurchaseProduct> PurchaseProducts { get; set; }
 
     }
 }

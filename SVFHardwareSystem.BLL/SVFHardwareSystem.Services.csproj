@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerService.cs" />
+    <Compile Include="Exceptions\EditNotPermittedException.cs" />
     <Compile Include="Exceptions\InvalidFieldException.cs" />
     <Compile Include="Exceptions\LimitMustNotExceedOrLessException.cs" />
     <Compile Include="Exceptions\RecordAlreadyExistsException.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="ServiceModels\POSTransactionModel.cs" />
     <Compile Include="ServiceModels\ProductModel.cs" />
     <Compile Include="ServiceModels\PurchaseModel.cs" />
+    <Compile Include="ServiceModels\PurchaseProductModel.cs" />
     <Compile Include="ServiceModels\SalesModel.cs" />
     <Compile Include="ServiceModels\SalesProductModel.cs" />
     <Compile Include="ServiceModels\SupplierModel.cs" />

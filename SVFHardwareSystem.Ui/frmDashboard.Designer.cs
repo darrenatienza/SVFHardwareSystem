@@ -34,6 +34,7 @@
             this.btnProduct = new MetroFramework.Controls.MetroTile();
             this.btnCustomer = new MetroFramework.Controls.MetroTile();
             this.btnSupplier = new MetroFramework.Controls.MetroTile();
+            this.btnPurchase = new MetroFramework.Controls.MetroTile();
             this.SuspendLayout();
             // 
             // btnPointOfSale
@@ -102,11 +103,23 @@
             this.btnSupplier.UseSelectable = true;
             this.btnSupplier.Click += new System.EventHandler(this.btnSupplier_Click);
             // 
+            // btnPurchase
+            // 
+            this.btnPurchase.ActiveControl = null;
+            this.btnPurchase.Location = new System.Drawing.Point(414, 227);
+            this.btnPurchase.Name = "btnPurchase";
+            this.btnPurchase.Size = new System.Drawing.Size(140, 95);
+            this.btnPurchase.TabIndex = 6;
+            this.btnPurchase.Text = "Purchases";
+            this.btnPurchase.UseSelectable = true;
+            this.btnPurchase.Click += new System.EventHandler(this.btnPurchase_Click);
+            // 
             // frmDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnPurchase);
             this.Controls.Add(this.btnSupplier);
             this.Controls.Add(this.btnCustomer);
             this.Controls.Add(this.btnProduct);
@@ -127,5 +140,6 @@
         private MetroFramework.Controls.MetroTile btnProduct;
         private MetroFramework.Controls.MetroTile btnCustomer;
         private MetroFramework.Controls.MetroTile btnSupplier;
+        private MetroFramework.Controls.MetroTile btnPurchase;
     }
 }

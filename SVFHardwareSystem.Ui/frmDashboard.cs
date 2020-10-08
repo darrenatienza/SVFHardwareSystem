@@ -47,5 +47,10 @@ namespace SVFHardwareSystem.Ui
         {
             FormHandler.OpenSuppliersForm().ShowDialog();
         }
+
+        private void btnPurchase_Click(object sender, EventArgs e)
+        {
+            FormHandler.OpenPurchasesForm().ShowDialog();
+        }
     }
 }

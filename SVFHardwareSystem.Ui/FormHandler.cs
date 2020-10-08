@@ -44,7 +44,7 @@ namespace SVFHardwareSystem.Ui
         {
             return UnityConfig
                 .Register()
-                .RegisterType<frmPurchaseProductForm>(new InjectionConstructor(new object[] { new ProductService(), purchaseID }))
+                .RegisterType<frmPurchaseProductForm>(new InjectionConstructor(new object[] { new ProductService(),new CategoryService(),new PurchaseService(), purchaseID }))
                 .Resolve<frmPurchaseProductForm>();
 
         }
@@ -52,7 +52,7 @@ namespace SVFHardwareSystem.Ui
         {
             return UnityConfig
                 .Register()
-                .RegisterType<frmPurchaseProductForm>(new InjectionConstructor(new object[] { new ProductService(), purchaseID, productID }))
+                .RegisterType<frmPurchaseProductForm>(new InjectionConstructor(new object[] { new ProductService(), new CategoryService(), new PurchaseService(), purchaseID, productID }))
                 .Resolve<frmPurchaseProductForm>();
 
         }

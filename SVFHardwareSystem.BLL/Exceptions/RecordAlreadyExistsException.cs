@@ -6,10 +6,19 @@ using System.Threading.Tasks;
 
 namespace SVFHardwareSystem.Services.Exceptions
 {
+    /// <summary>
+    /// Throw this exception for records that are exists
+    /// </summary>
     public class RecordAlreadyExistsException : Exception
     {
+        /// <summary>
+        /// Initializer
+        /// </summary>
         public RecordAlreadyExistsException() { }
-
+        /// <summary>
+        /// Initializer
+        /// </summary>
+        /// <param name="recordIdentifier">Record Already exists for {recordIdentifier}</param>
         public RecordAlreadyExistsException(string recordIdentifier) : base(String.Format("Record Already exists for {0}", recordIdentifier))
         {
         }

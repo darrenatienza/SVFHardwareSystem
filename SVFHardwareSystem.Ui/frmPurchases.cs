@@ -56,13 +56,17 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                var purchaseModel = new PurchaseModel();
-                purchaseModel.DatePurchase = dtDatePurchase.Value;
-                purchaseModel.Remarks = txtRemarks.Text;
-                purchaseModel.SupplierID = _supplierID;
-                await _purchaseService.AddAsync(purchaseModel);
-                LoadPurchaseDates();
-                MetroMessageBox.Show(this, "New Purchase has been generated.", "New Purchase", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult d = MetroMessageBox.Show(this, "Do you want to generate new purchase?", "Generate New Purchase", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (d == DialogResult.Yes)
+                {
+                    var purchaseModel = new PurchaseModel();
+                    purchaseModel.DatePurchase = dtDatePurchase.Value;
+                    purchaseModel.SupplierID = _supplierID;
+                    await _purchaseService.AddAsync(purchaseModel);
+                    LoadPurchaseDates();
+                    MetroMessageBox.Show(this, "New Purchase has been generated.", "New Purchase", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                
             }
             catch (RecordAlreadyExistsException ex)
             {
@@ -96,7 +100,7 @@ namespace SVFHardwareSystem.Ui
                 purchaseModel.Remarks = txtRemarks.Text;
                 purchaseModel.SupplierID = _supplierID;
                 await _purchaseService.EditAsync(_purchaseID, purchaseModel);
-                MetroMessageBox.Show(this, "Changes has been saved.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "Changes has been saved.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (InvalidFieldException ex)
             {
@@ -148,9 +152,41 @@ namespace SVFHardwareSystem.Ui
 
         private void gridPurchaseDate_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            SetPurchaseID();
-            SetPurchaseData();
+            
         }
+
+        private async void LoadPurchaseProducts()
+        {
+            try
+            {
+                var purchases = await _purchaseService.GetPurchaseProducts(_purchaseID);
+                var grid = gridPurchaseProduct;
+                int count = 0;
+                grid.Rows.Clear();
+                foreach (var item in purchases)
+                {
+                    count++;
+                    grid.Rows.Add(new object[] {
+                            item.ProductID.ToString(),
+                            count.ToString(),
+                            item.Quantity,
+                            item.ProductUnit,
+                            item.ProductName,
+                            item.ProductDealersPrice,
+                            item.Total,
+                            item.IsQuantityUploaded
+                    });
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void SetPurchaseID()
         {
             var grid = gridPurchaseDate;
@@ -171,7 +207,7 @@ namespace SVFHardwareSystem.Ui
                 var grid = gridPurchaseDate;
                 int count = 0;
                 grid.Rows.Clear();
-                foreach (var item in purchases)
+                foreach (var item in purchases.OrderByDescending(x => x.DatePurchase))
                 {
                     count++;
                     grid.Rows.Add(new object[] {
@@ -192,12 +228,60 @@ namespace SVFHardwareSystem.Ui
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            FormHandler.OpenPurchaseProductForm(_purchaseID).ShowDialog();
+            if (_purchaseID == 0)
+            {
+                MetroMessageBox.Show(this, "Please select Purchase on list before adding!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                FormHandler.OpenPurchaseProductForm(_purchaseID).ShowDialog();
+            }
+           
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            FormHandler.OpenPurchaseProductForm(_purchaseID, _productID).ShowDialog();
+            if (_purchaseID == 0 || _productID == 0)
+            {
+                MetroMessageBox.Show(this, "Please select Purchase and Product on list before editing!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                FormHandler.OpenPurchaseProductForm(_purchaseID, _productID).ShowDialog();
+            }
+               
+            
+            
+        }
+
+        private void gridPurchaseProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SetProductID();
+        }
+
+        private void SetProductID()
+        {
+            var grid = gridPurchaseProduct;
+
+            if (grid.SelectedRows.Count > 0)
+            {
+                _productID = int.Parse(grid.SelectedRows[0].Cells[0].Value.ToString());
+
+
+
+            }
+        }
+
+        private void gridPurchaseProduct_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SetProductID();
+        }
+
+        private void gridPurchaseDate_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SetPurchaseID();
+            SetPurchaseData();
+            LoadPurchaseProducts();
         }
     }
 }

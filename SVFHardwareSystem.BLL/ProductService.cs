@@ -130,5 +130,15 @@ namespace SVFHardwareSystem.Services
             ValidateModel(model);
             return base.EditAsync(id, model);
         }
+
+        public async Task<IList<ProductModel>> GetAllByCategoryID(int categoryID)
+        {
+            using (var db = new DataContext())
+            {
+                var products = await db.Products.Where(x => x.CategoryID == categoryID).ToListAsync();
+                var models = Mapping.Mapper.Map<IList<ProductModel>>(products);
+                return models;
+            }
+        }
     }
 }
