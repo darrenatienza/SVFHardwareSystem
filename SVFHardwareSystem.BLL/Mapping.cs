@@ -60,6 +60,10 @@ namespace AutoMap
             CreateMap<PurchaseProduct, PurchaseProductModel>();
             CreateMap<PurchaseProductModel,PurchaseProduct> ();
 
+            CreateMap<PaymentMethod, PaymentMethodModel>();
+
+            CreateMap<PurchasePayment, PurchasePaymentModel>();
+            CreateMap<PurchasePaymentModel, PurchasePayment>();
             // Additional mappings here...
         }
     }

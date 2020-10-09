@@ -125,11 +125,19 @@ namespace SVFHardwareSystem.Services
             {
                 var objs = await db.Purchases.Where(x => x.Supplier.SupplierID == supplierID).ToListAsync();
                 var models = Mapping.Mapper.Map<List<PurchaseModel>>(objs);
-                return models;
+                var newModels = new List<PurchaseModel>();
+                foreach (var model in models)
+                {
+                    model.Total = GetPurchaseProducts(model.PurchaseID).Sum(r => r.Total);
+                    model.TotalPayment = GetAllPurchasePayments(model.PurchaseID).Sum(r => r.Amount);
+                    model.Balance = model.Total - model.TotalPayment;
+                    newModels.Add(model);
+                }
+                return newModels;
             }
         }
 
-        public async Task<IList<PurchaseProductModel>> GetPurchaseProducts(int purchaseID)
+        public async Task<IList<PurchaseProductModel>> GetPurchaseProductsAsync(int purchaseID)
         {
             using (var db = new DataContext())
             {
@@ -138,7 +146,15 @@ namespace SVFHardwareSystem.Services
                 return models;
             }
         }
-
+        public IList<PurchaseProductModel> GetPurchaseProducts(int purchaseID)
+        {
+            using (var db = new DataContext())
+            {
+                var objs = db.PurchaseProducts.Where(x => x.PurchaseID == purchaseID).ToList();
+                var models = Mapping.Mapper.Map<List<PurchaseProductModel>>(objs);
+                return models;
+            }
+        }
         public async Task<PurchaseProductModel> GetPurchaseProduct(int purchaseID, int productID)
         {
             using (var db = new DataContext())
@@ -192,6 +208,78 @@ namespace SVFHardwareSystem.Services
                 db.Entry(product).State = EntityState.Modified;
                 db.Entry(purchasePRoduct).State = EntityState.Modified;
                 db.SaveChanges();
+            }
+        
+    }
+        public override PurchaseModel Get(int id)
+        {
+            var model =  base.Get(id);
+            model.Total = GetPurchaseProducts(id).Sum(r => r.Total);
+            model.TotalPayment = GetAllPurchasePayments(id).Sum(r => r.Amount);
+            model.Balance = model.Total - model.TotalPayment;
+            return model;
+        }
+
+        public void AddPurchasePayment(PurchasePaymentModel model)
+        {
+            using (var db = new DataContext())
+            {
+                CheckDecimalIfLessThanOrEqual(model.Amount, 0, "Amount");
+                
+                var paymentMethod = db.PaymentMethods.FirstOrDefault(x => x.PaymentMethodID == model.PaymentMethodID);
+                CheckObjectIfExists(paymentMethod,"Payment Method");
+
+                var total = GetPurchaseProducts(model.PurchaseID).Sum(r => r.Total);
+                var totalPayment = GetAllPurchasePayments(model.PurchaseID).Sum(r => r.Amount);
+                var balance = total - totalPayment - model.Amount;
+                if (balance < 0)
+                {
+                    throw new OverPaymentException("Payment for Purchase Product Exceeded to total amount!");
+                }
+                var purchasePayment = Mapping.Mapper.Map<PurchasePayment>(model);
+                db.PurchasePayments.Add(purchasePayment);
+                db.SaveChanges();
+            }
+        }
+        private void CheckDecimalIfLessThanOrEqual(decimal value, decimal lessThanOrEqualTo,string fieldName)
+        {
+            if (value <= lessThanOrEqualTo)
+            {
+                throw new InvalidFieldException(fieldName);
+            }
+        }
+        private void CheckObjectIfAlreadyExists(object value, string fieldName)
+        {
+            if (value != null)
+            {
+                throw new RecordAlreadyExistsException(fieldName);
+            }
+        }
+
+        private void CheckObjectIfExists(object value, string fieldName)
+        {
+            if (value == null)
+            {
+                throw new RecordNotFoundException(fieldName);
+            }
+        }
+
+        public async Task<IList<PurchasePaymentModel>> GetAllPurchasePaymentsAsync(int purchaseID)
+        {
+            using (var db = new DataContext())
+            {
+                var purchasePayments = await db.PurchasePayments.Where(x => x.PurchaseID == purchaseID).ToListAsync();
+                var models = Mapping.Mapper.Map<IList<PurchasePaymentModel>>(purchasePayments);
+                return models;
+            }
+        }
+        public IList<PurchasePaymentModel> GetAllPurchasePayments(int purchaseID)
+        {
+            using (var db = new DataContext())
+            {
+                var purchasePayments = db.PurchasePayments.Where(x => x.PurchaseID == purchaseID).ToList();
+                var models = Mapping.Mapper.Map<IList<PurchasePaymentModel>>(purchasePayments);
+                return models;
             }
         }
     }

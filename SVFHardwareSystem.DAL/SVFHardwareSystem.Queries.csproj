@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\PaymentMethod.cs" />
     <Compile Include="Entities\POSPayment.cs" />
     <Compile Include="Entities\POSTransaction.cs" />
     <Compile Include="Entities\Purchase.cs" />
@@ -143,6 +144,14 @@
     <Compile Include="Migrations\202010080206547_AddIsUploadedOnPurchaseProduct.designer.cs">
       <DependentUpon>202010080206547_AddIsUploadedOnPurchaseProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010090602003_AddPaymentMethodTable.cs" />
+    <Compile Include="Migrations\202010090602003_AddPaymentMethodTable.designer.cs">
+      <DependentUpon>202010090602003_AddPaymentMethodTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010090642020_AddPurchasePaymentTable.cs" />
+    <Compile Include="Migrations\202010090642020_AddPurchasePaymentTable.designer.cs">
+      <DependentUpon>202010090642020_AddPurchasePaymentTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Misc\PaymentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -208,6 +217,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010080206547_AddIsUploadedOnPurchaseProduct.resx">
       <DependentUpon>202010080206547_AddIsUploadedOnPurchaseProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010090602003_AddPaymentMethodTable.resx">
+      <DependentUpon>202010090602003_AddPaymentMethodTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010090642020_AddPurchasePaymentTable.resx">
+      <DependentUpon>202010090642020_AddPurchasePaymentTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

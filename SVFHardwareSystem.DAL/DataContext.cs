@@ -25,6 +25,9 @@ namespace SVFHardwareSystem.Queries
 
         public virtual DbSet<Purchase> Purchases { get; set; }
         public virtual DbSet<PurchaseProduct> PurchaseProducts { get; set; }
+        public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
+
+        public virtual DbSet<PurchasePayment> PurchasePayments { get; set; }
 
     }
 }

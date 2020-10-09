@@ -50,11 +50,7 @@
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.gridPurchaseProduct = new MetroFramework.Controls.MetroGrid();
             this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
-            this.btnUploadQuantity = new System.Windows.Forms.Button();
             this.txtSearch = new MetroFramework.Controls.MetroTextBox();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,6 +60,11 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnUploadQuantity = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridPurchaseDate)).BeginInit();
             this.metroPanel2.SuspendLayout();
@@ -74,6 +75,7 @@
             // metroPanel1
             // 
             this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
+            this.metroPanel1.Controls.Add(this.metroButton1);
             this.metroPanel1.Controls.Add(this.dtDatePurchase);
             this.metroPanel1.Controls.Add(this.btnPayments);
             this.metroPanel1.Controls.Add(this.btnSave);
@@ -109,7 +111,7 @@
             // 
             this.btnPayments.Location = new System.Drawing.Point(14, 437);
             this.btnPayments.Name = "btnPayments";
-            this.btnPayments.Size = new System.Drawing.Size(274, 32);
+            this.btnPayments.Size = new System.Drawing.Size(140, 32);
             this.btnPayments.TabIndex = 11;
             this.btnPayments.Text = "View Payments";
             this.btnPayments.UseSelectable = true;
@@ -361,20 +363,6 @@
             this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel3.VerticalScrollbarSize = 10;
             // 
-            // btnUploadQuantity
-            // 
-            this.btnUploadQuantity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
-            this.btnUploadQuantity.FlatAppearance.BorderSize = 0;
-            this.btnUploadQuantity.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUploadQuantity.Image = global::SVFHardwareSystem.Ui.Properties.Resources.upload_16;
-            this.btnUploadQuantity.Location = new System.Drawing.Point(88, 4);
-            this.btnUploadQuantity.Name = "btnUploadQuantity";
-            this.btnUploadQuantity.Size = new System.Drawing.Size(35, 24);
-            this.btnUploadQuantity.TabIndex = 6;
-            this.metroToolTip1.SetToolTip(this.btnUploadQuantity, "Upload Quantity");
-            this.btnUploadQuantity.UseVisualStyleBackColor = false;
-            this.btnUploadQuantity.Click += new System.EventHandler(this.btnUploadQuantity_Click);
-            // 
             // txtSearch
             // 
             this.txtSearch.BackColor = System.Drawing.Color.White;
@@ -410,49 +398,6 @@
             this.txtSearch.WaterMark = "Search";
             this.txtSearch.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtSearch.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
-            this.btnDelete.FlatAppearance.BorderSize = 0;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Image = global::SVFHardwareSystem.Ui.Properties.Resources.trash_2_16;
-            this.btnDelete.Location = new System.Drawing.Point(47, 3);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(35, 24);
-            this.btnDelete.TabIndex = 4;
-            this.metroToolTip1.SetToolTip(this.btnDelete, "Delete Purchase Product");
-            this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
-            this.btnEdit.FlatAppearance.BorderSize = 0;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Image = global::SVFHardwareSystem.Ui.Properties.Resources.pencil_16;
-            this.btnEdit.Location = new System.Drawing.Point(129, 3);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(35, 24);
-            this.btnEdit.TabIndex = 3;
-            this.metroToolTip1.SetToolTip(this.btnEdit, "Edit Purchase");
-            this.btnEdit.UseVisualStyleBackColor = false;
-            this.btnEdit.Visible = false;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
-            this.btnAdd.FlatAppearance.BorderSize = 0;
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Image = global::SVFHardwareSystem.Ui.Properties.Resources.plus_4_16;
-            this.btnAdd.Location = new System.Drawing.Point(6, 3);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(35, 24);
-            this.btnAdd.TabIndex = 2;
-            this.metroToolTip1.SetToolTip(this.btnAdd, "Add New Product to Purchase");
-            this.btnAdd.UseVisualStyleBackColor = false;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // metroToolTip1
             // 
@@ -519,6 +464,72 @@
             this.Column7.ReadOnly = true;
             this.Column7.Width = 75;
             // 
+            // btnUploadQuantity
+            // 
+            this.btnUploadQuantity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
+            this.btnUploadQuantity.FlatAppearance.BorderSize = 0;
+            this.btnUploadQuantity.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUploadQuantity.Image = global::SVFHardwareSystem.Ui.Properties.Resources.upload_16;
+            this.btnUploadQuantity.Location = new System.Drawing.Point(88, 4);
+            this.btnUploadQuantity.Name = "btnUploadQuantity";
+            this.btnUploadQuantity.Size = new System.Drawing.Size(35, 24);
+            this.btnUploadQuantity.TabIndex = 6;
+            this.metroToolTip1.SetToolTip(this.btnUploadQuantity, "Upload Quantity");
+            this.btnUploadQuantity.UseVisualStyleBackColor = false;
+            this.btnUploadQuantity.Click += new System.EventHandler(this.btnUploadQuantity_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Image = global::SVFHardwareSystem.Ui.Properties.Resources.trash_2_16;
+            this.btnDelete.Location = new System.Drawing.Point(47, 3);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(35, 24);
+            this.btnDelete.TabIndex = 4;
+            this.metroToolTip1.SetToolTip(this.btnDelete, "Delete Purchase Product");
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
+            this.btnEdit.FlatAppearance.BorderSize = 0;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Image = global::SVFHardwareSystem.Ui.Properties.Resources.pencil_16;
+            this.btnEdit.Location = new System.Drawing.Point(129, 3);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(35, 24);
+            this.btnEdit.TabIndex = 3;
+            this.metroToolTip1.SetToolTip(this.btnEdit, "Edit Purchase");
+            this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Visible = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Image = global::SVFHardwareSystem.Ui.Properties.Resources.plus_4_16;
+            this.btnAdd.Location = new System.Drawing.Point(6, 3);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(35, 24);
+            this.btnAdd.TabIndex = 2;
+            this.metroToolTip1.SetToolTip(this.btnAdd, "Add New Product to Purchase");
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // metroButton1
+            // 
+            this.metroButton1.Location = new System.Drawing.Point(160, 437);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(128, 32);
+            this.metroButton1.TabIndex = 13;
+            this.metroButton1.Text = "Print";
+            this.metroButton1.UseSelectable = true;
+            // 
             // frmPurchases
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -571,5 +582,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private MetroFramework.Controls.MetroButton metroButton1;
     }
 }

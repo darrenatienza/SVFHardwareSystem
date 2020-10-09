@@ -167,5 +167,10 @@ namespace SVFHardwareSystem.Ui
         {
             _categoryID = ((ItemX)cboCategory.SelectedItem).Value.ToInt();
         }
+
+        private void txtQuantity_ButtonClick(object sender, EventArgs e)
+        {
+            MetroMessageBox.Show(this, "For updating quantity of this product, please go to Purchases.", "Adding Product Quantity", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

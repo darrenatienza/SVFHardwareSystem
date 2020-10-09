@@ -11,7 +11,7 @@ namespace SVFHardwareSystem.Services.Interfaces
     {
 
         Task<IList<PurchaseModel>> GetAllAsync(int supplierID);
-        Task<IList<PurchaseProductModel>>  GetPurchaseProducts(int purchaseID);
+        Task<IList<PurchaseProductModel>>  GetPurchaseProductsAsync(int purchaseID);
         /// <summary>
         /// Edit the Purchase Product
         /// </summary>
@@ -28,11 +28,14 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// <param name="purchaseProductID">ID of the Purchase Product</param>
         /// <exception cref="CustomBaseException">Thrown when a purchase products quantity was uploaded to the product inventory</exception>
         void DeletePurchaseProduct(int purchaseProductID);
+        Task<IList<PurchasePaymentModel>> GetAllPurchasePaymentsAsync(int purchaseID);
+
         /// <summary>
         /// Uploads the quantity of the product purchase
         /// </summary>
         /// <param name="purchaseProductID">Id of the purchase product</param>
-         /// <exception cref="CustomBaseException">Thrown when an invalid logic occurs</exception>
+        /// <exception cref="CustomBaseException">Thrown when an invalid logic occurs</exception>
         void UploadPurchaseQuantity(int purchaseProductID);
+        void AddPurchasePayment(PurchasePaymentModel purchasePayment);
     }
 }

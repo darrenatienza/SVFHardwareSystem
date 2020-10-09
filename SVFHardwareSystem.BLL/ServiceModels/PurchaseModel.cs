@@ -16,5 +16,9 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public int SupplierID { get; set; }
         public string SupplierName { get; set; }
         public string Remarks { get; set; }
+        public decimal Total { get; internal set; }
+        public IList<PurchaseProductModel> PurchaseProducts { get; set; } = new List<PurchaseProductModel>();
+        public decimal TotalPayment { get; set; }
+        public decimal Balance { get; set; }
     }
 }

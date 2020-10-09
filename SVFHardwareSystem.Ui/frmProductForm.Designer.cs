@@ -363,6 +363,7 @@
             this.txtQuantity.UseSelectable = true;
             this.txtQuantity.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtQuantity.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtQuantity.ButtonClick += new MetroFramework.Controls.MetroTextBox.ButClick(this.txtQuantity_ButtonClick);
             // 
             // metroLabel9
             // 

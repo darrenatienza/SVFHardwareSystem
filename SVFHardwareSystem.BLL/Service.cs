@@ -79,5 +79,25 @@ namespace SVFHardwareSystem.Services
                 await db.SaveChangesAsync();
             }
         }
+
+        public virtual TModel Get(int id)
+        {
+            using (var db = new DataContext())
+            {
+                var entity = db.Set<TEntity>().Find(id);
+                var model = entity != null ? Mapping.Mapper.Map<TModel>(entity) : throw new RecordNotFoundException();
+                return model;
+            }
+        }
+
+        public IList<TModel> GetAll()
+        {
+            using (var db = new DataContext())
+            {
+                List<TEntity> entities = db.Set<TEntity>().ToList();
+                var models = Mapping.Mapper.Map<List<TModel>>(entities);
+                return models;
+            }
+        }
     }
 }

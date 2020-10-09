@@ -120,7 +120,7 @@ namespace SVFHardwareSystem.Ui
 
         private void ViewPayments()
         {
-            throw new NotImplementedException();
+            FormHandler.OpenPurchasePayments(_purchaseID).ShowDialog();
         }
 
         private void dtDatePurchase_ValueChanged(object sender, EventArgs e)
@@ -159,7 +159,7 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                var purchases = await _purchaseService.GetPurchaseProducts(_purchaseID);
+                var purchases = await _purchaseService.GetPurchaseProductsAsync(_purchaseID);
                 var grid = gridPurchaseProduct;
                 int count = 0;
                 int rowIndex = 0;
@@ -230,7 +230,7 @@ namespace SVFHardwareSystem.Ui
                     grid.Rows.Add(new object[] {
                             item.PurchaseID.ToString(),
                             count.ToString(),
-                            item.DatePurchase.ToShortDateString()
+                            item.Balance <= 0  && item.TotalPayment > 0 ? string.Format("{0} {1}",item.DatePurchase.ToShortDateString(), "[paid]") : item.DatePurchase.ToShortDateString()
                     });
                 }
 

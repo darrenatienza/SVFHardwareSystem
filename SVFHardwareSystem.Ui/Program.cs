@@ -23,7 +23,7 @@ namespace SVFHardwareSystem.Ui
 
 
 
-            Application.Run(new frmDashboard());
+            Application.Run(new frmDashboard()); ;
         }
 
     }

@@ -57,6 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\OverPaymentException.cs" />
+    <Compile Include="PaymentMethodService.cs" />
     <Compile Include="CustomerService.cs" />
     <Compile Include="Exceptions\PurchaseProductUploadAlreadyException.cs" />
     <Compile Include="Exceptions\CustomBaseException.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="Exceptions\AmountTenderMustBeGreaterThanOrEqualException.cs" />
     <Compile Include="Exceptions\LimitMustNotReachException.cs" />
     <Compile Include="Extensions\ConvertionExtensions.cs" />
+    <Compile Include="Interfaces\IPaymentMethodService.cs" />
     <Compile Include="Interfaces\ICustomerService.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
     <Compile Include="Interfaces\IPOSPaymentService.cs" />
@@ -89,12 +92,14 @@
     <Compile Include="PurchaseService.cs" />
     <Compile Include="SalesService.cs" />
     <Compile Include="Service.cs" />
+    <Compile Include="ServiceModels\PaymentMethodModel.cs" />
     <Compile Include="ServiceModels\CategoryModel.cs" />
     <Compile Include="ServiceModels\CustomerModel.cs" />
     <Compile Include="ServiceModels\POSPaymentModel.cs" />
     <Compile Include="ServiceModels\POSTransactionModel.cs" />
     <Compile Include="ServiceModels\ProductModel.cs" />
     <Compile Include="ServiceModels\PurchaseModel.cs" />
+    <Compile Include="ServiceModels\PurchasePaymentModel.cs" />
     <Compile Include="ServiceModels\PurchaseProductModel.cs" />
     <Compile Include="ServiceModels\SalesModel.cs" />
     <Compile Include="ServiceModels\SalesProductModel.cs" />

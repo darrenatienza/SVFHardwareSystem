@@ -86,8 +86,8 @@ namespace SVFHardwareSystem.Services
 
                 transactionProduct.IsForReturnToSupplierAfterCancel = isForReturnToSupplier;
                 transactionProduct.IsCancel = true;
-                transactionProduct.ReplaceReason = reason;
-                transactionProduct.ReplaceDate = DateTime.Now;
+                transactionProduct.CancelReason = reason;
+                transactionProduct.CancelDate = DateTime.Now;
                 transactionProduct.QuantityToCancel = quantityToCancel;
                 db.Entry(transactionProduct).State = EntityState.Modified;
                 db.SaveChanges();

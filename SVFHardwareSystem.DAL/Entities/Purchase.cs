@@ -18,5 +18,7 @@ namespace SVFHardwareSystem.DAL.Entities
 
         public string Remarks { get; set; }
 
+        public ICollection<PurchaseProduct> PurchaseProducts { get; set; } = new HashSet<PurchaseProduct>();
+
     }
 }

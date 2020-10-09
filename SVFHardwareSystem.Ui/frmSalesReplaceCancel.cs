@@ -1,6 +1,7 @@
 ﻿using MetroFramework;
 using MetroFramework.Forms;
 using SVFHardwareSystem.Services.Exceptions;
+using SVFHardwareSystem.Services.Extensions;
 using SVFHardwareSystem.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -62,10 +63,10 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                int quantityToReplace = 0;
+                int quantityToReplace = txtQuantityToReplace.Text.ToInt();
                 var reason = txtReplaceReason.Text;
                 var isForReturnToSupplier = chkReturnToSupplierAfterReplace.Checked;
-                _= !int.TryParse(txtQuantityToReplace.Text, out quantityToReplace) ? throw new FormatException() : quantityToReplace;
+                
                 _transactionProductService.ReplaceProduct(_transactionProductID, reason, isForReturnToSupplier,quantityToReplace);
                 this.Close();
 
@@ -91,11 +92,11 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                int quantityToCancel = 0;
+                int quantityToCancel = txtQuantityToCancel.Text.ToInt();
                 var reason = txtCancelReason.Text;
                 var isAddQuantity = chkAddQuantity.Checked;
                 var isForReturnToSupplier = chkReturnToSupplierAfterReplace.Checked;
-                _ = !int.TryParse(txtQuantityToCancel.Text, out quantityToCancel) ? throw new FormatException() : quantityToCancel;
+               
                 _transactionProductService.CancelProduct(_transactionProductID, reason, isAddQuantity, isForReturnToSupplier,quantityToCancel);
                 this.Close();
 

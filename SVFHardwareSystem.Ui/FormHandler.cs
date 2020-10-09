@@ -56,6 +56,14 @@ namespace SVFHardwareSystem.Ui
                 .Resolve<frmPurchaseProductForm>();
 
         }
+        public static frmPurchasePayments OpenPurchasePayments(int purchaseID)
+        {
+            return UnityConfig
+                .Register()
+                .RegisterType<frmPurchasePayments>(new InjectionConstructor(new object[] { new PurchaseService(), new PaymentMethodService(),purchaseID }))
+                .Resolve<frmPurchasePayments>();
+
+        }
         /// <summary>
         /// Dependency Inject with parameter on frmPointofSaleQuantityEdit
         /// </summary>

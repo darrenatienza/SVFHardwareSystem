@@ -13,7 +13,9 @@ namespace SVFHardwareSystem.Services.Interfaces
     public interface IService<T> where T : class
     {
         Task<T> GetAsync(int id);
+        T Get(int id);
         Task <IList<T>> GetAllAsync();
+        IList<T> GetAll();
         Task AddAsync(T model);
         Task<T> AddNewAsync(T model);
         /// <summary>
