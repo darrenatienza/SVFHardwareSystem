@@ -36,6 +36,8 @@ namespace SVFHardwareSystem.Services
             await base.AddAsync(model);
         }
 
+        
+
         public async Task AddPurchaseProductAsync(int purchaseID, PurchaseProductModel model)
         {
             using (var db = new DataContext())
@@ -71,6 +73,15 @@ namespace SVFHardwareSystem.Services
             if (model.SupplierID == 0)
             {
                 throw new InvalidFieldException("Supplier");
+            }
+            using (var db = new DataContext())
+            {
+                var purchase = db.Purchases.FirstOrDefault(r => DbFunctions.TruncateTime(r.DatePurchase) == DbFunctions.TruncateTime(model.DatePurchase));
+                // thrown an error only for changing purchase date but already exists
+                if (purchase != null && purchase.DatePurchase != model.DatePurchase)
+                {
+                    throw new RecordAlreadyExistsException(string.Format("the date of {0}", model.DatePurchase.ToShortDateString()));
+                }
             }
             return base.EditAsync(id, model);
         }
@@ -135,6 +146,52 @@ namespace SVFHardwareSystem.Services
                 var obj =  await db.PurchaseProducts.FirstOrDefaultAsync(x => x.PurchaseID == purchaseID && x.ProductID == productID);
                 var model = Mapping.Mapper.Map<PurchaseProductModel>(obj);
                 return model;
+            }
+        }
+
+        public void DeletePurchaseProduct(int purchaseProductID)
+        {
+            using (var db = new DataContext())
+            {
+                var purchaseProduct = db.PurchaseProducts.Find(purchaseProductID);
+                if (purchaseProduct == null)
+                {
+                    throw new RecordNotFoundException("Purchase Product");
+                }
+                if (purchaseProduct.IsQuantityUploaded)
+                {
+                    throw new RemoveNotPermittedException("Remove is not permitted for Purchase Products where the quantity was uploaded to the Product Inventory.");
+
+                }
+                db.PurchaseProducts.Remove(purchaseProduct);
+                db.SaveChanges();
+
+            }
+        }
+
+        public void UploadPurchaseQuantity(int purchaseProductID)
+        {
+            using (var db = new DataContext())
+            {
+                var purchasePRoduct = db.PurchaseProducts.Find(purchaseProductID);
+                if (purchasePRoduct == null)
+                {
+                    throw new RecordNotFoundException("Purchase Product");
+                }
+                var product = db.Products.Find(purchasePRoduct.ProductID);
+                if (product == null)
+                {
+                    throw new RecordNotFoundException("Product");
+                }
+                if (purchasePRoduct.IsQuantityUploaded)
+                {
+                    throw new PurchaseProductUploadAlreadyException(); 
+                }
+                product.Quantity += purchasePRoduct.Quantity;
+                purchasePRoduct.IsQuantityUploaded = true;
+                db.Entry(product).State = EntityState.Modified;
+                db.Entry(purchasePRoduct).State = EntityState.Modified;
+                db.SaveChanges();
             }
         }
     }

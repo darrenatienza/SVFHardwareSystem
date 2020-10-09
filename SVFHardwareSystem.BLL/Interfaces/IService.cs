@@ -16,6 +16,13 @@ namespace SVFHardwareSystem.Services.Interfaces
         Task <IList<T>> GetAllAsync();
         Task AddAsync(T model);
         Task<T> AddNewAsync(T model);
+        /// <summary>
+        /// Edit the record
+        /// </summary>
+        /// <param name="id">primary key of the record</param>
+        /// <param name="model">object that contains the record</param>
+        /// <returns>Async void</returns>
+        /// <exception cref="Exceptions.CustomBaseException">Application logic exceptions</exception>
         Task EditAsync(int id, T model);
         Task RemoveAsync(int id);
     }

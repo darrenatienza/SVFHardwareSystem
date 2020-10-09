@@ -9,7 +9,7 @@ namespace SVFHardwareSystem.Services.Exceptions
     /// <summary>
     /// Throw this exception for records that are exists
     /// </summary>
-    public class RecordAlreadyExistsException : Exception
+    public class RecordAlreadyExistsException : CustomBaseException
     {
         /// <summary>
         /// Initializer

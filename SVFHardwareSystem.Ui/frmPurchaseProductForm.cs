@@ -156,7 +156,7 @@ namespace SVFHardwareSystem.Ui
                     // add
                     await _purchaseService.AddPurchaseProductAsync(_purchaseID,purchaseProduct);
                 }
-
+                this.Close();
             }
             catch (InvalidFieldException ex)
             {

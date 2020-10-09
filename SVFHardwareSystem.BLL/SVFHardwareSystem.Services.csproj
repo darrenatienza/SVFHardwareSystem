@@ -58,6 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerService.cs" />
+    <Compile Include="Exceptions\PurchaseProductUploadAlreadyException.cs" />
+    <Compile Include="Exceptions\CustomBaseException.cs" />
+    <Compile Include="Exceptions\RemoveNotPermittedException.cs" />
     <Compile Include="Exceptions\EditNotPermittedException.cs" />
     <Compile Include="Exceptions\InvalidFieldException.cs" />
     <Compile Include="Exceptions\LimitMustNotExceedOrLessException.cs" />

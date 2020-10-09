@@ -150,7 +150,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(322, 321);
+            this.ClientSize = new System.Drawing.Size(330, 321);
             this.Controls.Add(this.chkUploadQuantity);
             this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.cboCategory);

@@ -22,5 +22,17 @@ namespace SVFHardwareSystem.Services.Interfaces
         Task EditPurchaseProduct(PurchaseProductModel purchaseProduct);
         Task AddPurchaseProductAsync(int purchaseID,PurchaseProductModel purchaseProduct);
         Task<PurchaseProductModel> GetPurchaseProduct(int purchaseID, int productID);
+        /// <summary>
+        /// Removes the Purchase Product
+        /// </summary>
+        /// <param name="purchaseProductID">ID of the Purchase Product</param>
+        /// <exception cref="CustomBaseException">Thrown when a purchase products quantity was uploaded to the product inventory</exception>
+        void DeletePurchaseProduct(int purchaseProductID);
+        /// <summary>
+        /// Uploads the quantity of the product purchase
+        /// </summary>
+        /// <param name="purchaseProductID">Id of the purchase product</param>
+         /// <exception cref="CustomBaseException">Thrown when an invalid logic occurs</exception>
+        void UploadPurchaseQuantity(int purchaseProductID);
     }
 }

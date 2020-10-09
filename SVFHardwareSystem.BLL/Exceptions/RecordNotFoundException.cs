@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 namespace SVFHardwareSystem.Services.Exceptions
 {
     [Serializable]
-    public class RecordNotFoundException : Exception
+    public class RecordNotFoundException : CustomBaseException
     {
-        public RecordNotFoundException() : base(String.Format("Record not found")) { }
+        
+        public RecordNotFoundException() : base(String.Format("Record not found")) { Code = "100"; }
 
         public RecordNotFoundException(string field) : base(String.Format("Record not found for " + field)) { }
 

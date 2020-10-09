@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SVFHardwareSystem.Services.Exceptions
 {
     [Serializable]
-    public class InvalidFieldException : Exception
+    public class InvalidFieldException : CustomBaseException
     {
         public InvalidFieldException() { }
 

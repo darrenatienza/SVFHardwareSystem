@@ -23,7 +23,7 @@ namespace SVFHardwareSystem.Ui
         private IPurchaseService _purchaseService;
         private int _supplierID;
         private int _purchaseID;
-        private int _productID;
+        private int _purchaseProductID;
 
         public frmPurchases(ISupplierService supplierService, IPurchaseService purchaseService)
         {
@@ -102,7 +102,7 @@ namespace SVFHardwareSystem.Ui
                 await _purchaseService.EditAsync(_purchaseID, purchaseModel);
                 MetroMessageBox.Show(this, "Changes has been saved.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (InvalidFieldException ex)
+            catch (CustomBaseException ex)
             {
                 MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -162,20 +162,37 @@ namespace SVFHardwareSystem.Ui
                 var purchases = await _purchaseService.GetPurchaseProducts(_purchaseID);
                 var grid = gridPurchaseProduct;
                 int count = 0;
+                int rowIndex = 0;
+                int checkboxColumnIndex = 2; // index of isquantityuploaded on grid
                 grid.Rows.Clear();
                 foreach (var item in purchases)
                 {
                     count++;
                     grid.Rows.Add(new object[] {
-                            item.ProductID.ToString(),
+                            item.PurchaseProductID.ToString(),
                             count.ToString(),
+                            item.IsQuantityUploaded,
                             item.Quantity,
                             item.ProductUnit,
                             item.ProductName,
                             item.ProductDealersPrice,
                             item.Total,
-                            item.IsQuantityUploaded
+                            
                     });
+                    
+                    
+                    DataGridViewCheckBoxCell chk = grid.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
+                    chk.ReadOnly = true;
+                    if (item.IsQuantityUploaded)
+                    {
+                       
+                        chk.ToolTipText = "This product quantity was uploaded to the product inventory!";
+                    }
+                    else
+                    {
+                        chk.ToolTipText = "This product quantity is not yet uploaded to the product inventory!";
+                    }
+                    rowIndex++; // increment for proceeding to new row;
                 }
 
 
@@ -235,19 +252,20 @@ namespace SVFHardwareSystem.Ui
             else
             {
                 FormHandler.OpenPurchaseProductForm(_purchaseID).ShowDialog();
+                LoadPurchaseProducts();
             }
            
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (_purchaseID == 0 || _productID == 0)
+            if (_purchaseID == 0 || _purchaseProductID == 0)
             {
                 MetroMessageBox.Show(this, "Please select Purchase and Product on list before editing!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                FormHandler.OpenPurchaseProductForm(_purchaseID, _productID).ShowDialog();
+                FormHandler.OpenPurchaseProductForm(_purchaseID, _purchaseProductID).ShowDialog();
             }
                
             
@@ -265,7 +283,7 @@ namespace SVFHardwareSystem.Ui
 
             if (grid.SelectedRows.Count > 0)
             {
-                _productID = int.Parse(grid.SelectedRows[0].Cells[0].Value.ToString());
+                _purchaseProductID = int.Parse(grid.SelectedRows[0].Cells[0].Value.ToString());
 
 
 
@@ -282,6 +300,53 @@ namespace SVFHardwareSystem.Ui
             SetPurchaseID();
             SetPurchaseData();
             LoadPurchaseProducts();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult d = MetroMessageBox.Show(this, "Are you sure you want to delete this purchase product?", "Delete Purchase Product", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (d == DialogResult.Yes)
+                {
+                    _purchaseService.DeletePurchaseProduct(_purchaseProductID);
+                    LoadPurchaseProducts();
+                }
+            }
+                
+            catch (CustomBaseException ex)
+            {
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnUploadQuantity_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult d = MetroMessageBox.Show(this, "Are you sure you want to upload purchase product quantity to product inventory? \n" +
+                    "If Yes, the purchase product quantity will be added to the current product inventry quantity \n" +
+                    "Removing the uploaded purchase product quantity will not be permitted in the future.", "Delete Purchase Product", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (d == DialogResult.Yes)
+                {
+                    _purchaseService.UploadPurchaseQuantity(_purchaseProductID);
+                    LoadPurchaseProducts();
+                }
+            }
+            catch (CustomBaseException ex)
+            {
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                // other exceptions
+                MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
