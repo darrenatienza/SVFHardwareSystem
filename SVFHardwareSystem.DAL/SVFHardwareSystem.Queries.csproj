@@ -152,6 +152,26 @@
     <Compile Include="Migrations\202010090642020_AddPurchasePaymentTable.designer.cs">
       <DependentUpon>202010090642020_AddPurchasePaymentTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010101214536_AddPriceOnTransactionProducts.cs" />
+    <Compile Include="Migrations\202010101214536_AddPriceOnTransactionProducts.designer.cs">
+      <DependentUpon>202010101214536_AddPriceOnTransactionProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010101228114_ChangePriceColumnInTransactionProductsToDecimal.cs" />
+    <Compile Include="Migrations\202010101228114_ChangePriceColumnInTransactionProductsToDecimal.designer.cs">
+      <DependentUpon>202010101228114_ChangePriceColumnInTransactionProductsToDecimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010101307407_SetDealersPriceOnProductToNullable.cs" />
+    <Compile Include="Migrations\202010101307407_SetDealersPriceOnProductToNullable.designer.cs">
+      <DependentUpon>202010101307407_SetDealersPriceOnProductToNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010101312108_RemoveConstraintOfSupplierOnProducts.cs" />
+    <Compile Include="Migrations\202010101312108_RemoveConstraintOfSupplierOnProducts.designer.cs">
+      <DependentUpon>202010101312108_RemoveConstraintOfSupplierOnProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010101323168_AddIsReceivablePaymentOnPosPayment.cs" />
+    <Compile Include="Migrations\202010101323168_AddIsReceivablePaymentOnPosPayment.designer.cs">
+      <DependentUpon>202010101323168_AddIsReceivablePaymentOnPosPayment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Misc\PaymentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -223,6 +243,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010090642020_AddPurchasePaymentTable.resx">
       <DependentUpon>202010090642020_AddPurchasePaymentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010101214536_AddPriceOnTransactionProducts.resx">
+      <DependentUpon>202010101214536_AddPriceOnTransactionProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010101228114_ChangePriceColumnInTransactionProductsToDecimal.resx">
+      <DependentUpon>202010101228114_ChangePriceColumnInTransactionProductsToDecimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010101307407_SetDealersPriceOnProductToNullable.resx">
+      <DependentUpon>202010101307407_SetDealersPriceOnProductToNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010101312108_RemoveConstraintOfSupplierOnProducts.resx">
+      <DependentUpon>202010101312108_RemoveConstraintOfSupplierOnProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010101323168_AddIsReceivablePaymentOnPosPayment.resx">
+      <DependentUpon>202010101323168_AddIsReceivablePaymentOnPosPayment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

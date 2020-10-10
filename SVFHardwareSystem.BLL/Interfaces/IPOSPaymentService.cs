@@ -16,6 +16,7 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// </summary>
         /// <param name="posTransactionID"></param>
         /// <param name="change"></param>
+        [Obsolete("This method has been move to PaymentService")]
         void Pay(int posTransactionID, decimal amountTendered, decimal total);
     }
 }

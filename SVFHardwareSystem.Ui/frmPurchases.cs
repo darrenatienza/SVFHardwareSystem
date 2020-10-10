@@ -35,6 +35,7 @@ namespace SVFHardwareSystem.Ui
         private void frmPurchases_Load(object sender, EventArgs e)
         {
             LoadSuppliers();
+
         }
         private async void LoadSuppliers()
         {
@@ -66,7 +67,7 @@ namespace SVFHardwareSystem.Ui
                     LoadPurchaseDates();
                     MetroMessageBox.Show(this, "New Purchase has been generated.", "New Purchase", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                
+
             }
             catch (RecordAlreadyExistsException ex)
             {
@@ -152,7 +153,7 @@ namespace SVFHardwareSystem.Ui
 
         private void gridPurchaseDate_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
 
         private async void LoadPurchaseProducts()
@@ -177,15 +178,15 @@ namespace SVFHardwareSystem.Ui
                             item.ProductName,
                             item.ProductDealersPrice,
                             item.Total,
-                            
+
                     });
-                    
-                    
+
+
                     DataGridViewCheckBoxCell chk = grid.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
                     chk.ReadOnly = true;
                     if (item.IsQuantityUploaded)
                     {
-                       
+
                         chk.ToolTipText = "This product quantity was uploaded to the product inventory!";
                     }
                     else
@@ -254,7 +255,7 @@ namespace SVFHardwareSystem.Ui
                 FormHandler.OpenPurchaseProductForm(_purchaseID).ShowDialog();
                 LoadPurchaseProducts();
             }
-           
+
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -267,9 +268,9 @@ namespace SVFHardwareSystem.Ui
             {
                 FormHandler.OpenPurchaseProductForm(_purchaseID, _purchaseProductID).ShowDialog();
             }
-               
-            
-            
+
+
+
         }
 
         private void gridPurchaseProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -313,7 +314,7 @@ namespace SVFHardwareSystem.Ui
                     LoadPurchaseProducts();
                 }
             }
-                
+
             catch (CustomBaseException ex)
             {
                 MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

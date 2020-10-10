@@ -52,5 +52,11 @@ namespace SVFHardwareSystem.DAL.Entities
         /// </summary>
         public int QuantityToCancel { get; set; }
         public DateTime CreateTimeStamp { get; set; } = DateTime.Now;
+        /// <summary>
+        /// Amount of Item paid.
+        /// Not relying on product price
+        /// Change of product price may affect the daily sales if relying on Product Price
+        /// </summary>
+        public decimal Price { get; set; }
     }
 }

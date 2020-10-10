@@ -36,7 +36,7 @@ namespace SVFHardwareSystem.Services
                     }
                     product.Quantity = remainingQuantity;
                     db.Entry(product).State = EntityState.Modified;
-
+                    transactionProduct.Price = product.Price;
                     db.TransactionProducts.Add(transactionProduct);
 
                     await db.SaveChangesAsync();

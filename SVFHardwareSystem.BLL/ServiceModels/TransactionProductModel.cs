@@ -29,6 +29,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public bool IsForReturnToSupplierAfterReplace { get; set; }
         public bool IsForReturnToSupplierAfterCancel { get; set; }
         public int QuantityToCancel { get; set; }
-        public object QuantityToReplace { get; set; }
+        public int QuantityToReplace { get; set; }
+        public decimal Price { get; set; }
     }
 }

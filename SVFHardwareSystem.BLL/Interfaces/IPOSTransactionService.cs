@@ -21,7 +21,17 @@ namespace SVFHardwareSystem.Services.Interfaces
         decimal GetTotalAmount(int posTransactionID);
         decimal GetReceivableAmount(int posTransactionID);
         decimal GetCashAmount(int postransactionID);
+        decimal GetTotalCashOnlyAmount(int postransactionID);
+        decimal GetTotalReceivablePayment(int posTransactionID);
 
+        /// <summary>
+        /// Adds new record of payment for current pos transaction.
+        /// Set isPaid = true of  transactions products where isToPay = true.
+        /// Set isFinish = true of current pos transaction.
+        /// </summary>
+        /// <param name="posTransactionID"></param>
+        /// <param name="change"></param>
+        void Pay(int posTransactionID, decimal amountTendered, decimal total);
 
     }
 }

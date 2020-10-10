@@ -17,6 +17,7 @@ namespace SVFHardwareSystem.DAL.Entities
         public virtual POSTransaction POSTransaction { get; set; }
         public DateTime PaymentDate { get; set; }
         public decimal Amount { get; set; }
+        public bool IsReceivablePayment { get; set; }
 
 
     }

@@ -23,5 +23,6 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public decimal TotalAmount { get; internal set; }
         public decimal TotalPayment { get; set; }
         public decimal CancelAmount { get; internal set; }
+        public decimal Price { get; set; }
     }
 }

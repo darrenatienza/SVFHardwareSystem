@@ -94,23 +94,24 @@ namespace SVFHardwareSystem.Services
         {
 
             ValidateModel(model);
+
             return base.AddAsync(model);
         }
         private void ValidateModel(ProductModel model)
         {
             //validation ignores updating quantity, product inventory service handle this
-            if (model.SupplierID == 0)
-            {
-                throw new RecordNotFoundException("Supplier");
-            }
+            //if (model.SupplierID == 0)
+            //{
+            //    throw new RecordNotFoundException("Supplier");
+            //}
             if (model.CategoryID == 0)
             {
                 throw new RecordNotFoundException("Category");
             }
-            if (model.DealersPrice == 0)
-            {
-                throw new InvalidFieldException("Dealers Price");
-            }
+            //if (model.DealersPrice == 0)
+            //{
+            //    throw new InvalidFieldException("Dealers Price");
+            //}
             if (model.Limit == 0)
             {
                 throw new InvalidFieldException("Limit");

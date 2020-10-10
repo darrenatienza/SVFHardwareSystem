@@ -36,18 +36,18 @@ namespace SVFHardwareSystem.Ui
         {
             _total = _pOSTransactionService.GetTotalAmount(_posTransactionID);
             txtTotal.Text = _total.ToString();
-           
+
             _receivable = _pOSTransactionService.GetReceivableAmount(_posTransactionID);
             txtReceivable.Text = _receivable.ToString();
-            
-            
-         
-            
+
+
+
+
         }
 
         private void txtAmountTendered_KeyDown(object sender, KeyEventArgs e)
         {
-            
+
         }
 
         private void txtAmountTendered_TextChanged(object sender, EventArgs e)
@@ -75,17 +75,17 @@ namespace SVFHardwareSystem.Ui
                 }
             }
 
-           
+
         }
 
         private void btnPay_Click(object sender, EventArgs e)
         {
             try
             {
-                _posPaymentService.Pay(_posTransactionID, _amount,_total);
+                _pOSTransactionService.Pay(_posTransactionID, _amount, _total);
                 this.Close();
             }
-            catch(AmountTenderMustBeGreaterThanOrEqualException ex)
+            catch (AmountTenderMustBeGreaterThanOrEqualException ex)
             {
                 MetroMessageBox.Show(this, ex.Message);
             }

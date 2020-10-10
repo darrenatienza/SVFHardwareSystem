@@ -26,7 +26,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         {
             get
             {
-                return Quantity * ProductPrice;
+                return Quantity * Price;
             }
         }
         public decimal CashDebit { get; set; }
@@ -42,5 +42,9 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public bool IsPaid { get; internal set; }
         public int POSTransactionID { get; internal set; }
         public bool IsReplace { get; set; }
+        /// <summary>
+        /// Amount of Product after being purchase
+        /// </summary>
+        public decimal Price { get; set; }
     }
 }

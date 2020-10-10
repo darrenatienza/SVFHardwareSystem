@@ -71,7 +71,7 @@ namespace SVFHardwareSystem.Services
             var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == pOSTransactionID);
             // cancel items are computed where is cancel is true and is paid is true
             var cancelItems = transactionProducts.Where(a => a.IsCancel == true && a.IsPaid == true);
-            cancel = cancelItems.Count() > 0 ? cancelItems.Sum(z => z.QuantityToCancel * z.Product.Price) : 0;
+            cancel = cancelItems.Count() > 0 ? cancelItems.Sum(z => z.QuantityToCancel * z.Price) : 0;
 
             return cancel;
         }
@@ -107,14 +107,14 @@ namespace SVFHardwareSystem.Services
         private decimal GetTotalAmount(DataContext db, int posTransactionID)
         {
             decimal total = 0;
-            
+
             var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == posTransactionID);
             if (transactionProducts.Count() > 0)
             {
                 //subtract the quantity cancelled to purchase quantity then multiply the result on product price to get
                 // the total amount
                 // all cancelled quantity must not included to computation
-                total = transactionProducts.Sum(y => (y.Quantity-y.QuantityToCancel) * y.Product.Price);
+                total = transactionProducts.Sum(y => (y.Quantity - y.QuantityToCancel) * y.Price);
 
             }
             return total;
@@ -149,13 +149,73 @@ namespace SVFHardwareSystem.Services
             }
         }
 
+        public decimal GetTotalReceivablePayment(int posTransactionID)
+        {
+            using (var db = new DataContext())
+            {
+                var posPayments = db.POSPayments.Where(x => x.POSTransactionID == posTransactionID && x.IsReceivablePayment == true).ToList();
+                return ComputeTotalPaymentAmount(posPayments);
+            }
+        }
+
         private decimal GetCashAmount(DataContext db, int postransactionID)
         {
-            var posPayments = db.POSPayments.Where(x => x.POSTransactionID == postransactionID);
+            var posPayments = db.POSPayments.Where(x => x.POSTransactionID == postransactionID); ;
             //compute for  total amount of cash payments
             var cash = posPayments.Count() > 0 ? posPayments.Sum(y => y.Amount) : 0;
             return cash;
         }
+        private decimal ComputeTotalPaymentAmount(IList<POSPayment> posPayments)
+        {
+            //compute for  total amount of cash payments
+            var cash = posPayments.Count() > 0 ? posPayments.Sum(y => y.Amount) : 0;
+            return cash;
+        }
+        public void Pay(int posTransactionID, decimal amountTendered, decimal total)
+        {
+            using (var db = new DataContext())
+            {
 
+                var receivable = GetReceivableAmount(posTransactionID);
+
+                // add new pospayment
+                var posPayment = new POSPayment();
+                posPayment.Amount = amountTendered;
+                posPayment.PaymentDate = DateTime.Now;
+                posPayment.POSTransactionID = posTransactionID;
+                posPayment.IsReceivablePayment = receivable > 0 ? true : false;
+                db.POSPayments.Add(posPayment);
+
+                if (receivable == 0)
+                {
+                    // update isFinish of Pos Transaction for first payment
+                    var posTransaction = db.POSTransactions.Find(posTransactionID);
+                    posTransaction.IsFinished = true;
+                    posTransaction.DateFinished = DateTime.Now;
+                    db.Entry(posTransaction).State = EntityState.Modified;
+                }
+                // update isPaid of products on transaction products
+                var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == posTransactionID && x.IsToPay == true && x.IsPaid == false);
+                foreach (var item in transactionProducts)
+                {
+                    item.IsPaid = true;
+
+                    db.Entry(item).State = EntityState.Modified;
+                }
+                db.SaveChanges();
+
+            }
+        }
+
+        public decimal GetTotalCashOnlyAmount(int postransactionID)
+        {
+            using (var db = new DataContext())
+            {
+                var posPayments = db.POSPayments.Where(x => x.POSTransactionID == postransactionID && x.IsReceivablePayment == false).ToList();
+                return ComputeTotalPaymentAmount(posPayments);
+            }
+
+
+        }
     }
 }

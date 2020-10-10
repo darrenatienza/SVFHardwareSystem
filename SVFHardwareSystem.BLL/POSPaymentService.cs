@@ -16,13 +16,11 @@ namespace SVFHardwareSystem.Services
     {
         public POSPaymentService() { }
 
-        public void Pay(int posTransactionID, decimal amountTendered,decimal total)
+        public void Pay(int posTransactionID, decimal amountTendered, decimal total)
         {
             using (var db = new DataContext())
             {
-                // amount tendered must be greater than or equal to total
-                //if (amountTendered = total)
-                //{
+
 
 
                 // add new pospayment
@@ -47,11 +45,7 @@ namespace SVFHardwareSystem.Services
                     db.Entry(item).State = EntityState.Modified;
                 }
                 db.SaveChanges();
-                //}
-                //else
-                //{
-                //    throw new AmountTenderMustBeGreaterThanOrEqualException();
-                //}
+
             }
         }
     }
