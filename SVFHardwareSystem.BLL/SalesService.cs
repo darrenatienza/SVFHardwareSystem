@@ -43,7 +43,7 @@ namespace SVFHardwareSystem.Services
 
 
                     // this is the total amout of payment and being subtracted for every product on this transaction
-                    var amountPaid = _posTransaction.GetTotalCashOnlyAmount(item.POSTransactionID);
+                    var amountPaidOnCash = _posTransaction.GetTotalCashOnlyAmount(item.POSTransactionID);
 
                     // this is the total amout of payment and being subtracted for every product on this transaction
                     var amountCashOnly = _posTransaction.GetTotalCashOnlyAmount(item.POSTransactionID);
@@ -67,19 +67,20 @@ namespace SVFHardwareSystem.Services
                         decimal cancelAmount = salesProduct.Price * salesProduct.QuantityToCancel;
                         salesProduct.SaleDebit = cancelAmount;
                         salesProduct.CashCredit = cancelAmount;
-
-                        amountPaid -= remainingQuantityAmount;
-                        if (amountPaid >= 0)
+                        //subtract first the amount paid on cash (first payment)
+                        amountPaidOnCash -= remainingQuantityAmount;
+                        if (amountPaidOnCash >= 0)
                         {
                             salesProduct.CashDebit = remainingQuantityAmount;
                         }
 
                         else
                         {
-                            receivablePayment -= Math.Abs(amountPaid);
+                            //then subtract the amount paid on receivables
+                            receivablePayment -= Math.Abs(amountPaidOnCash);
                             if (receivablePayment >= 0)
                             {
-                                salesProduct.ReceivablesCredit = Math.Abs(amountPaid);
+                                salesProduct.ReceivablesCredit = Math.Abs(amountPaidOnCash);
                                 salesProduct.CashDebit = remainingQuantityAmount - salesProduct.ReceivablesCredit;
                             }
                             else
@@ -90,7 +91,7 @@ namespace SVFHardwareSystem.Services
                                 salesProduct.CashDebit = remainingQuantityAmount - salesProduct.ReceivableDebit;
                             }
 
-                            amountPaid = 0; // set to zero to avoid wrong computation for later amount
+                            amountPaidOnCash = 0; // set to zero to avoid wrong computation for later amount
 
 
 
