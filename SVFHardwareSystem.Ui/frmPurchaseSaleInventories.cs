@@ -1,6 +1,7 @@
 ﻿using MetroFramework;
 using MetroFramework.Forms;
 using SVFHardwareSystem.Services;
+using SVFHardwareSystem.Services.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +32,8 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                var inventories = _purchaseSaleInventoryService.GetYearlyInventory(2020);
+                var year = cboYear.Text.ToInt();
+                var inventories = _purchaseSaleInventoryService.GetYearlyInventory(year);
                 int count = 0;
                 var grid = gridInventory;
                 grid.Rows.Clear();
@@ -66,6 +68,25 @@ namespace SVFHardwareSystem.Ui
 
                 MetroMessageBox.Show(this, ex.ToString());
             }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var year = cboYear.Text.ToInt();
+                _purchaseSaleInventoryService.Save(year);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadPurchaseSaleInventories();
         }
     }
 }

@@ -103,7 +103,7 @@
     <Compile Include="ServiceModels\PurchaseModel.cs" />
     <Compile Include="ServiceModels\PurchasePaymentModel.cs" />
     <Compile Include="ServiceModels\PurchaseProductModel.cs" />
-    <Compile Include="ServiceModels\PurchaseSaleInventoryModel.cs" />
+    <Compile Include="ServiceModels\PurchaseSaleInventoryProductModel.cs" />
     <Compile Include="ServiceModels\SalesModel.cs" />
     <Compile Include="ServiceModels\SalesProductModel.cs" />
     <Compile Include="ServiceModels\SupplierModel.cs" />

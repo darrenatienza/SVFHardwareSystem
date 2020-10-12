@@ -58,15 +58,16 @@ namespace AutoMap
             CreateMap<Purchase, PurchaseModel>();
 
             CreateMap<PurchaseProduct, PurchaseProductModel>();
-            CreateMap<PurchaseProductModel,PurchaseProduct> ();
+            CreateMap<PurchaseProductModel, PurchaseProduct>();
 
             CreateMap<PaymentMethod, PaymentMethodModel>();
 
             CreateMap<PurchasePayment, PurchasePaymentModel>();
             CreateMap<PurchasePaymentModel, PurchasePayment>();
 
-            CreateMap<Product, PurchaseSaleInventoryModel>();
-            CreateMap<PurchaseSaleInventoryModel, PurchaseSaleInventoryProduct>();
+            CreateMap<Product, PurchaseSaleInventoryProductModel>();
+            CreateMap<PurchaseSaleInventoryProductModel, PurchaseSaleInventoryProduct>();
+            CreateMap<PurchaseSaleInventoryProduct, PurchaseSaleInventoryProductModel>();
             // Additional mappings here...
         }
     }

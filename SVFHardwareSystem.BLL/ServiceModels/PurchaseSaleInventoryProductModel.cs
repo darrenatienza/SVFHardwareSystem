@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SVFHardwareSystem.Services.ServiceModels
 {
-    public class PurchaseSaleInventoryModel
+    public class PurchaseSaleInventoryProductModel
     {
         public string  CategoryName { get; set; }
 
