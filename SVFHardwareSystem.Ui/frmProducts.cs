@@ -72,7 +72,6 @@ namespace SVFHardwareSystem.Ui
                             item.Name,
                     item.Unit,
                     item.Price,
-                    item.DealersPrice,
                     item.Quantity,
                     item.Limit});
                 }

@@ -62,6 +62,8 @@
     <Compile Include="Entities\Purchase.cs" />
     <Compile Include="Entities\PurchasePayment.cs" />
     <Compile Include="Entities\PurchaseProduct.cs" />
+    <Compile Include="Entities\PurchaseSaleInventory.cs" />
+    <Compile Include="Entities\PurchaseSaleInventoryProduct.cs" />
     <Compile Include="Entities\Supplier.cs" />
     <Compile Include="Entities\SupplierProductToReturn.cs" />
     <Compile Include="Entities\TransactionProduct.cs" />
@@ -172,6 +174,14 @@
     <Compile Include="Migrations\202010101323168_AddIsReceivablePaymentOnPosPayment.designer.cs">
       <DependentUpon>202010101323168_AddIsReceivablePaymentOnPosPayment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010120129035_AddPriceToPurchaseProduct.cs" />
+    <Compile Include="Migrations\202010120129035_AddPriceToPurchaseProduct.designer.cs">
+      <DependentUpon>202010120129035_AddPriceToPurchaseProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010120738467_AddPurchaseSaleInventoryTables.cs" />
+    <Compile Include="Migrations\202010120738467_AddPurchaseSaleInventoryTables.designer.cs">
+      <DependentUpon>202010120738467_AddPurchaseSaleInventoryTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Misc\PaymentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -258,6 +268,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010101323168_AddIsReceivablePaymentOnPosPayment.resx">
       <DependentUpon>202010101323168_AddIsReceivablePaymentOnPosPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010120129035_AddPriceToPurchaseProduct.resx">
+      <DependentUpon>202010120129035_AddPriceToPurchaseProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010120738467_AddPurchaseSaleInventoryTables.resx">
+      <DependentUpon>202010120738467_AddPurchaseSaleInventoryTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

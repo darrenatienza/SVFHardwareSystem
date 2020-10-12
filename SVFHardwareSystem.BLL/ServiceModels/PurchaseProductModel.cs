@@ -12,10 +12,15 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public string ProductName { get; internal set; }
         public int Quantity { get; set; }
         public string ProductUnit { get; internal set; }
+        [Obsolete("Delears Price cannot be set on product",true)]
         public decimal ProductDealersPrice { get; internal set; }
-        public decimal Total { get { return ProductDealersPrice * Quantity; } }
+        public decimal Total { get { return Price * Quantity; } }
         public bool IsQuantityUploaded { get; set; }
         public int PurchaseProductID { get; set; }
         public int ProductCategoryID { get; set; }
+        /// <summary>
+        /// Dealers Price
+        /// </summary>
+        public decimal Price { get; set; }
     }
 }

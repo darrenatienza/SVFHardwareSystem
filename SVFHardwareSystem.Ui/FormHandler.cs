@@ -32,6 +32,9 @@ namespace SVFHardwareSystem.Ui
                        .Register().Resolve<frmSupplierForm>();
         public static frmPurchases OpenPurchasesForm() => UnityConfig
                       .Register().Resolve<frmPurchases>();
+
+        public static frmPurchaseSaleInventories OpenPurchaseSaleInventoriesForm() => UnityConfig
+                     .Register().Resolve<frmPurchaseSaleInventories>();
         public static frmSupplierForm OpenSupplierForm(int supplierID)
         {
             return UnityConfig

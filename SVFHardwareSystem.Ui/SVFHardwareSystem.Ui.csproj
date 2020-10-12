@@ -180,6 +180,12 @@
     <Compile Include="frmPurchases.Designer.cs">
       <DependentUpon>frmPurchases.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPurchaseSaleInventories.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPurchaseSaleInventories.Designer.cs">
+      <DependentUpon>frmPurchaseSaleInventories.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSaleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -267,6 +273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPurchases.resx">
       <DependentUpon>frmPurchases.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPurchaseSaleInventories.resx">
+      <DependentUpon>frmPurchaseSaleInventories.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSaleForm.resx">
       <DependentUpon>frmSaleForm.cs</DependentUpon>
@@ -391,6 +400,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="Resources\save-as-16.png" />
+    <None Include="Resources\search-3-16 %281%29.png" />
     <Content Include="SqlServerTypes\readme.htm" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -16,6 +16,6 @@ namespace SVFHardwareSystem.DAL.Entities
         public virtual Purchase Purchase { get; set; }
         public int Quantity { get; set; }
         public bool IsQuantityUploaded { get; set; }
-        public decimal PurchasePrice { get; set; }
+        public decimal Price { get; set; }
     }
 }

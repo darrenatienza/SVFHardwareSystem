@@ -145,7 +145,7 @@ namespace SVFHardwareSystem.Ui
                 purchaseProduct.ProductID = _productID;
                 purchaseProduct.Quantity = txtQuantity.Text.ToInt();
                 purchaseProduct.IsQuantityUploaded = chkUploadQuantity.Checked;
-
+                purchaseProduct.Price = txtPrice.Text.ToDecimal();
                 if (_purchaseProductID > 0)
                 {
                     // edit
@@ -187,6 +187,26 @@ namespace SVFHardwareSystem.Ui
         private void cboProduct_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetProductID();
+            SetProductData();
+        }
+
+        private void SetProductData()
+        {
+            try
+            {
+                var product = _productService.Get(_productID);
+                txtUnit.Text = product.Unit;
+            }
+            catch (CustomBaseException ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void SetProductID()

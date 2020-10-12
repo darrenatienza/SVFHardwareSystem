@@ -153,6 +153,16 @@ namespace SVFHardwareSystem.Ui.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap save_as_16 {
+            get {
+                object obj = ResourceManager.GetObject("save-as-16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap search {
             get {
                 object obj = ResourceManager.GetObject("search", resourceCulture);
@@ -166,6 +176,16 @@ namespace SVFHardwareSystem.Ui.Properties {
         internal static System.Drawing.Bitmap search_3_16 {
             get {
                 object obj = ResourceManager.GetObject("search-3-16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap search_3_16__1_ {
+            get {
+                object obj = ResourceManager.GetObject("search-3-16 (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -176,7 +176,7 @@ namespace SVFHardwareSystem.Ui
                             item.Quantity,
                             item.ProductUnit,
                             item.ProductName,
-                            item.ProductDealersPrice,
+                            item.Price,
                             item.Total,
 
                     });
