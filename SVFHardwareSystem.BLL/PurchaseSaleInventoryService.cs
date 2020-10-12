@@ -16,6 +16,7 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
+                //validation
                 var products = db.Products.ToList();
 
                 var purchaseSales = Mapping.Mapper.Map<List<PurchaseSaleInventoryProductModel>>(products);
@@ -71,6 +72,7 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
+                // validation
                 var models = GetYearlyInventory(year);
                 var inventoryproducts = Mapping.Mapper.Map<List<PurchaseSaleInventoryProduct>>(models);
 
