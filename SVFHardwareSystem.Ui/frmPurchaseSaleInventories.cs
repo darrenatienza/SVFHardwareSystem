@@ -26,7 +26,7 @@ namespace SVFHardwareSystem.Ui
 
         private void frmPurchaseSaleInventories_Load(object sender, EventArgs e)
         {
-            LoadPurchaseSaleInventories();
+           
         }
         private void LoadPurchaseSaleInventories()
         {

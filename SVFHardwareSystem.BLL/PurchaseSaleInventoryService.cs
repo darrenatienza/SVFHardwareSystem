@@ -1,6 +1,7 @@
 ﻿using AutoMap;
 using SVFHardwareSystem.DAL.Entities;
 using SVFHardwareSystem.Queries;
+using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.ServiceModels;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,11 @@ namespace SVFHardwareSystem.Services
             using (var db = new DataContext())
             {
                 //validation
+                if (year == 0)
+                {
+                    throw new InvalidFieldException("Year");
+                }
+
                 var products = db.Products.ToList();
 
                 var purchaseSales = Mapping.Mapper.Map<List<PurchaseSaleInventoryProductModel>>(products);
@@ -49,12 +55,12 @@ namespace SVFHardwareSystem.Services
                         purchaseSaleInventory.PurchaseUnitCost = Math.Round(totalAmountPurchase / totalQuantityPurchase, 2);
                     }
 
-                    var sales = db.TransactionProducts.Where(x => x.CreateTimeStamp.Year == year && x.IsCancel == false && x.ProductID == purchaseSaleInventory.ProductID).ToList();
+                    var sales = db.TransactionProducts.Where(x => x.CreateTimeStamp.Year == year && x.ProductID == purchaseSaleInventory.ProductID).ToList();
                     //get total purchase quantity according to the year
-                    var totalSalesQuantity = sales.Count() > 0 ? sales.Sum(x => x.Quantity) : 0;
+                    var totalSalesQuantity = sales.Count() > 0 ? sales.Sum(x => x.Quantity) - sales.Sum(x => x.QuantityToCancel): 0;
 
                     //get total purchase amount purchase according to the year
-                    var totalAmountSale = sales.Count() > 0 ? sales.Sum(x => x.Price) : 0;
+                    var totalAmountSale = sales.Count() > 0 ? sales.Sum(x => x.Price * totalSalesQuantity) : 0;
                     if (totalSalesQuantity > 0 && totalAmountSale > 0)
                     {
                         purchaseSaleInventory.SalesQuantity = totalSalesQuantity;
@@ -73,6 +79,10 @@ namespace SVFHardwareSystem.Services
             using (var db = new DataContext())
             {
                 // validation
+                if (year == 0)
+                {
+                    throw new InvalidFieldException("Year");
+                }
                 var models = GetYearlyInventory(year);
                 var inventoryproducts = Mapping.Mapper.Map<List<PurchaseSaleInventoryProduct>>(models);
 
