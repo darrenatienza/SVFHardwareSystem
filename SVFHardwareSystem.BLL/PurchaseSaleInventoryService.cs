@@ -31,7 +31,7 @@ namespace SVFHardwareSystem.Services
                 {
                     var previousYear = year - 1;
                     purchaseSaleInventory.Year = year;
-                    // last previous inventory of the product;
+                    // last previous inventory of the product from db;
                     var previousPurchaseSaleInventory = db.PurchaseSaleInventoryProducts.FirstOrDefault(x => x.ProductID == purchaseSaleInventory.ProductID && x.Year == previousYear);
                     var previousPurchaseSaleInventoryModel = Mapping.Mapper.Map<PurchaseSaleInventoryProductModel>(previousPurchaseSaleInventory);
                     if (previousPurchaseSaleInventory != null)
@@ -56,10 +56,10 @@ namespace SVFHardwareSystem.Services
                     }
 
                     var sales = db.TransactionProducts.Where(x => x.CreateTimeStamp.Year == year && x.ProductID == purchaseSaleInventory.ProductID).ToList();
-                    //get total purchase quantity according to the year
+                    //get total sale quantity according to the year
                     var totalSalesQuantity = sales.Count() > 0 ? sales.Sum(x => x.Quantity) - sales.Sum(x => x.QuantityToCancel): 0;
 
-                    //get total purchase amount purchase according to the year
+                    //get total sale amount purchase according to the year
                     var totalAmountSale = sales.Count() > 0 ? sales.Sum(x => x.Price * totalSalesQuantity) : 0;
                     if (totalSalesQuantity > 0 && totalAmountSale > 0)
                     {

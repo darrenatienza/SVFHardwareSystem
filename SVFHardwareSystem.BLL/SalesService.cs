@@ -105,6 +105,19 @@ namespace SVFHardwareSystem.Services
             }
         }
 
+        public IList<SalesReceivableDetailModel> GetCustomersWithReceivables(int year)
+        {
+            using (var db = new DataContext())
+            {
+                // all sales transaction where isfullypaid = false is a receivable sales
+
+                var customers = db.Customers.Where(x => x.PosTransactions.All(y => y.IsFullyPaid == false)).ToList();
+                var models = Mapping.Mapper.Map<List<SalesReceivableDetailModel>>(customers);
+                return models;
+
+            }
+        }
+
         public decimal GetTotalAmount(string sidr)
         {
             throw new NotImplementedException();

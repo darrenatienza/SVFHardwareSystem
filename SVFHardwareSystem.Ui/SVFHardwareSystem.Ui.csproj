@@ -100,6 +100,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmCustomerReceivable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCustomerReceivable.Designer.cs">
+      <DependentUpon>frmCustomerReceivable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\ComboBoxExtensions.cs" />
     <Compile Include="FormHandler.cs" />
     <Compile Include="frmCategory.cs">
@@ -235,6 +241,9 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="UnityConfig.cs" />
+    <EmbeddedResource Include="frmCustomerReceivable.resx">
+      <DependentUpon>frmCustomerReceivable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCategory.resx">
       <DependentUpon>frmCategory.cs</DependentUpon>
     </EmbeddedResource>
@@ -305,6 +314,7 @@
     <EmbeddedResource Include="frmSalesReceivablesForm.resx">
       <DependentUpon>frmSalesReceivablesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CustomerReceivable.rdlc" />
     <EmbeddedResource Include="Reports\PurchaseReport.rdlc" />
     <None Include=".editorconfig" />
     <None Include="packages.config" />

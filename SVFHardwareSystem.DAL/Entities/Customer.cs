@@ -13,5 +13,7 @@ namespace SVFHardwareSystem.DAL.Entities
         public string FullName { get; set; }
         public string Address { get; set; }
         public string ContactNumber { get; set; }
+
+        public ICollection<POSTransaction> PosTransactions { get; set; } = new HashSet<POSTransaction>();
     }
 }

@@ -12,7 +12,7 @@ namespace SVFHardwareSystem.DAL.Entities
     public class POSTransaction
     {
         public POSTransaction() { }
-        
+
         public int POSTransactionID { get; set; }
         public DateTime CreateTimeStamp { get; set; }
         public int CustomerID { get; set; }
@@ -23,5 +23,6 @@ namespace SVFHardwareSystem.DAL.Entities
         public ICollection<POSPayment> POSPayments { get; set; } = new HashSet<POSPayment>();
         public ICollection<TransactionProduct> TransactionProducts { get; set; } = new HashSet<TransactionProduct>();
         public DateTime? DateFinished { get; set; }
+        public bool IsFullyPaid { get; set; }
     }
 }

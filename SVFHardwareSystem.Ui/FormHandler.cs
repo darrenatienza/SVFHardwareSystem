@@ -35,6 +35,9 @@ namespace SVFHardwareSystem.Ui
 
         public static frmPurchaseSaleInventories OpenPurchaseSaleInventoriesForm() => UnityConfig
                      .Register().Resolve<frmPurchaseSaleInventories>();
+
+        public static frmCustomerReceivable OpenCustomerReceivableForm() => UnityConfig
+                     .Register().Resolve<frmCustomerReceivable>();
         public static frmSupplierForm OpenSupplierForm(int supplierID)
         {
             return UnityConfig
@@ -47,7 +50,7 @@ namespace SVFHardwareSystem.Ui
         {
             return UnityConfig
                 .Register()
-                .RegisterType<frmPurchaseProductForm>(new InjectionConstructor(new object[] { new ProductService(),new CategoryService(),new PurchaseService(), purchaseID }))
+                .RegisterType<frmPurchaseProductForm>(new InjectionConstructor(new object[] { new ProductService(), new CategoryService(), new PurchaseService(), purchaseID }))
                 .Resolve<frmPurchaseProductForm>();
 
         }
@@ -63,7 +66,7 @@ namespace SVFHardwareSystem.Ui
         {
             return UnityConfig
                 .Register()
-                .RegisterType<frmPurchasePayments>(new InjectionConstructor(new object[] { new PurchaseService(), new PaymentMethodService(),purchaseID }))
+                .RegisterType<frmPurchasePayments>(new InjectionConstructor(new object[] { new PurchaseService(), new PaymentMethodService(), purchaseID }))
                 .Resolve<frmPurchasePayments>();
 
         }

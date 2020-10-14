@@ -192,6 +192,7 @@ namespace SVFHardwareSystem.Services
                     var posTransaction = db.POSTransactions.Find(posTransactionID);
                     posTransaction.IsFinished = true;
                     posTransaction.DateFinished = DateTime.Now;
+
                     db.Entry(posTransaction).State = EntityState.Modified;
                 }
                 // update isPaid of products on transaction products
@@ -216,6 +217,20 @@ namespace SVFHardwareSystem.Services
             }
 
 
+        }
+
+        public void CheckAndUpdateIfPosTransactionIsFullyPaid(int posTransactionID)
+        {
+            using (var db = new DataContext())
+            {
+                var receivable = GetReceivableAmount(posTransactionID);
+                var posTransaction = db.POSTransactions.Find(posTransactionID);
+
+                posTransaction.IsFullyPaid = receivable == 0 ? true : false;
+                db.Entry(posTransaction).State = EntityState.Modified;
+                db.SaveChanges();
+
+            }
         }
     }
 }

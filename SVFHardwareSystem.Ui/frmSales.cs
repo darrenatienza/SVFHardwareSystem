@@ -42,7 +42,7 @@ namespace SVFHardwareSystem.Ui
 
 
                 gridList.Rows.Clear();
-                
+
                 foreach (var sale in sales)
                 {
                     int count = 0;
@@ -66,7 +66,7 @@ namespace SVFHardwareSystem.Ui
                     foreach (var item in sale.SalesProducts)
                     {
                         gridList.Rows.Add(new object[] {"",
-                        
+
                             "",
                     "",
                     "",
@@ -86,7 +86,7 @@ namespace SVFHardwareSystem.Ui
                     item.CashDebit,
                     item.CashCredit,
                     item.ReceivableDebit,
-                    item.ReceivablesCredit}) ;
+                    item.ReceivablesCredit});
                     }
 
                     // footer total
@@ -123,6 +123,11 @@ namespace SVFHardwareSystem.Ui
         private void txtCriteria_ButtonClick(object sender, EventArgs e)
         {
             LoadSales();
+        }
+
+        private void btnCustomersWithReceivables_Click(object sender, EventArgs e)
+        {
+            FormHandler.OpenCustomerReceivableForm().ShowDialog();
         }
     }
 }

@@ -28,10 +28,12 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// Adds new record of payment for current pos transaction.
         /// Set isPaid = true of  transactions products where isToPay = true.
         /// Set isFinish = true of current pos transaction.
+        /// Set isFullyPaid = true of sales if the receivable = 0
         /// </summary>
         /// <param name="posTransactionID"></param>
         /// <param name="change"></param>
         void Pay(int posTransactionID, decimal amountTendered, decimal total);
 
+        void CheckAndUpdateIfPosTransactionIsFullyPaid(int posTransactionID);
     }
 }
