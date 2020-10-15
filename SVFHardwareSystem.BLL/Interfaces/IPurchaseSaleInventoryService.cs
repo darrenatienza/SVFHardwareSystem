@@ -9,11 +9,11 @@ namespace SVFHardwareSystem.Services
 {
     public interface IPurchaseSaleInventoryService
     {
-        IList<PurchaseSaleInventoryProductModel> GetYearlyInventory(int year);
+        Task<IList<PurchaseSaleInventoryProductModel>> GetYearlyInventory(int year);
         /// <summary>
         /// Saves new Purchase and Sale Inventory
         /// </summary>
         /// <param name="year">Year of the inventory to save</param>
-        void Save(int year);
+        Task SaveAsync(int year);
     }
 }

@@ -11,6 +11,7 @@ namespace SVFHardwareSystem.Services.Interfaces
     {
         IList<SalesModel> GetSales(DateTime from, DateTime to, string criteria);
         decimal GetTotalAmount(string sidr);
-        IList<SalesReceivableDetailModel> GetCustomersWithReceivables(int year);
+        IList<CustomerReceivableModel> GetCustomersWithReceivables(int year);
+        CustomerReceivableModel GetCustomerWithReceivables(int customerID);
     }
 }

@@ -78,6 +78,8 @@
             this.btnPayment = new MetroFramework.Controls.MetroTile();
             this.tooltip = new MetroFramework.Components.MetroToolTip();
             this.trmControlState = new System.Windows.Forms.Timer(this.components);
+            this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
+            this.dtSalesTransactionDate = new MetroFramework.Controls.MetroDateTime();
             this.metroPanel1.SuspendLayout();
             this.metroPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridList)).BeginInit();
@@ -424,6 +426,8 @@
             // metroPanel6
             // 
             this.metroPanel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
+            this.metroPanel6.Controls.Add(this.dtSalesTransactionDate);
+            this.metroPanel6.Controls.Add(this.metroLabel9);
             this.metroPanel6.Controls.Add(this.pnlSummary);
             this.metroPanel6.Controls.Add(this.btnUpdatePOSTransactionDetails);
             this.metroPanel6.Controls.Add(this.txtCustomerName);
@@ -437,9 +441,9 @@
             this.metroPanel6.HorizontalScrollbarBarColor = true;
             this.metroPanel6.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel6.HorizontalScrollbarSize = 10;
-            this.metroPanel6.Location = new System.Drawing.Point(5, 44);
+            this.metroPanel6.Location = new System.Drawing.Point(5, 14);
             this.metroPanel6.Name = "metroPanel6";
-            this.metroPanel6.Size = new System.Drawing.Size(304, 320);
+            this.metroPanel6.Size = new System.Drawing.Size(304, 350);
             this.metroPanel6.TabIndex = 16;
             this.metroPanel6.UseCustomBackColor = true;
             this.metroPanel6.VerticalScrollbarBarColor = true;
@@ -458,7 +462,7 @@
             this.pnlSummary.HorizontalScrollbarBarColor = true;
             this.pnlSummary.HorizontalScrollbarHighlightOnWheel = false;
             this.pnlSummary.HorizontalScrollbarSize = 10;
-            this.pnlSummary.Location = new System.Drawing.Point(15, 223);
+            this.pnlSummary.Location = new System.Drawing.Point(15, 249);
             this.pnlSummary.Name = "pnlSummary";
             this.pnlSummary.Size = new System.Drawing.Size(183, 94);
             this.pnlSummary.TabIndex = 17;
@@ -563,7 +567,7 @@
             // btnUpdatePOSTransactionDetails
             // 
             this.btnUpdatePOSTransactionDetails.BackColor = System.Drawing.Color.SlateBlue;
-            this.btnUpdatePOSTransactionDetails.Location = new System.Drawing.Point(232, 237);
+            this.btnUpdatePOSTransactionDetails.Location = new System.Drawing.Point(232, 263);
             this.btnUpdatePOSTransactionDetails.Name = "btnUpdatePOSTransactionDetails";
             this.btnUpdatePOSTransactionDetails.Size = new System.Drawing.Size(60, 28);
             this.btnUpdatePOSTransactionDetails.Style = MetroFramework.MetroColorStyle.White;
@@ -588,7 +592,7 @@
             this.txtCustomerName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtCustomerName.CustomButton.UseSelectable = true;
             this.txtCustomerName.Lines = new string[0];
-            this.txtCustomerName.Location = new System.Drawing.Point(16, 117);
+            this.txtCustomerName.Location = new System.Drawing.Point(16, 143);
             this.txtCustomerName.MaxLength = 32767;
             this.txtCustomerName.Name = "txtCustomerName";
             this.txtCustomerName.PasswordChar = '\0';
@@ -612,7 +616,7 @@
             this.metroLabel5.AutoSize = true;
             this.metroLabel5.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel5.ForeColor = System.Drawing.Color.Black;
-            this.metroLabel5.Location = new System.Drawing.Point(16, 36);
+            this.metroLabel5.Location = new System.Drawing.Point(16, 62);
             this.metroLabel5.Name = "metroLabel5";
             this.metroLabel5.Size = new System.Drawing.Size(38, 19);
             this.metroLabel5.Style = MetroFramework.MetroColorStyle.White;
@@ -625,7 +629,7 @@
             // 
             this.metroLabel4.AutoSize = true;
             this.metroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.metroLabel4.Location = new System.Drawing.Point(16, 148);
+            this.metroLabel4.Location = new System.Drawing.Point(16, 174);
             this.metroLabel4.Name = "metroLabel4";
             this.metroLabel4.Size = new System.Drawing.Size(42, 19);
             this.metroLabel4.Style = MetroFramework.MetroColorStyle.Blue;
@@ -638,7 +642,7 @@
             // 
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.metroLabel1.Location = new System.Drawing.Point(16, 95);
+            this.metroLabel1.Location = new System.Drawing.Point(16, 121);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(117, 19);
             this.metroLabel1.TabIndex = 2;
@@ -660,7 +664,7 @@
             this.txtCost.CustomButton.UseSelectable = true;
             this.txtCost.CustomButton.Visible = false;
             this.txtCost.Lines = new string[0];
-            this.txtCost.Location = new System.Drawing.Point(16, 58);
+            this.txtCost.Location = new System.Drawing.Point(16, 84);
             this.txtCost.MaxLength = 32767;
             this.txtCost.Name = "txtCost";
             this.txtCost.PasswordChar = '\0';
@@ -682,7 +686,7 @@
             this.txtTotal.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtTotal.Font = new System.Drawing.Font("Segoe UI Semibold", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotal.ForeColor = System.Drawing.Color.Gainsboro;
-            this.txtTotal.Location = new System.Drawing.Point(15, 170);
+            this.txtTotal.Location = new System.Drawing.Point(15, 196);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
             this.txtTotal.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -706,7 +710,7 @@
             this.txtSIDR.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtSIDR.CustomButton.UseSelectable = true;
             this.txtSIDR.Lines = new string[0];
-            this.txtSIDR.Location = new System.Drawing.Point(128, 58);
+            this.txtSIDR.Location = new System.Drawing.Point(128, 84);
             this.txtSIDR.MaxLength = 32767;
             this.txtSIDR.Name = "txtSIDR";
             this.txtSIDR.PasswordChar = '\0';
@@ -729,7 +733,7 @@
             // 
             this.metroLabel3.AutoSize = true;
             this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.metroLabel3.Location = new System.Drawing.Point(128, 36);
+            this.metroLabel3.Location = new System.Drawing.Point(128, 62);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(54, 19);
             this.metroLabel3.TabIndex = 13;
@@ -778,6 +782,28 @@
             // 
             this.trmControlState.Enabled = true;
             this.trmControlState.Tick += new System.EventHandler(this.tmrControlState);
+            // 
+            // metroLabel9
+            // 
+            this.metroLabel9.AutoSize = true;
+            this.metroLabel9.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel9.ForeColor = System.Drawing.Color.Black;
+            this.metroLabel9.Location = new System.Drawing.Point(15, 6);
+            this.metroLabel9.Name = "metroLabel9";
+            this.metroLabel9.Size = new System.Drawing.Size(40, 19);
+            this.metroLabel9.Style = MetroFramework.MetroColorStyle.White;
+            this.metroLabel9.TabIndex = 18;
+            this.metroLabel9.Text = "Date";
+            this.metroLabel9.UseCustomBackColor = true;
+            this.metroLabel9.UseCustomForeColor = true;
+            // 
+            // dtSalesTransactionDate
+            // 
+            this.dtSalesTransactionDate.Location = new System.Drawing.Point(15, 30);
+            this.dtSalesTransactionDate.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dtSalesTransactionDate.Name = "dtSalesTransactionDate";
+            this.dtSalesTransactionDate.Size = new System.Drawing.Size(277, 29);
+            this.dtSalesTransactionDate.TabIndex = 19;
             // 
             // frmPointofSale
             // 
@@ -849,5 +875,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel8;
         private System.Windows.Forms.TextBox txtCancelAmount;
         private MetroFramework.Controls.MetroButton btnCancelReplace;
+        private MetroFramework.Controls.MetroDateTime dtSalesTransactionDate;
+        private MetroFramework.Controls.MetroLabel metroLabel9;
     }
 }

@@ -105,14 +105,14 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public IList<SalesReceivableDetailModel> GetCustomersWithReceivables(int year)
+        public IList<CustomerReceivableModel> GetCustomersWithReceivables(int year)
         {
             using (var db = new DataContext())
             {
                 // all sales transaction where isfullypaid = false is a receivable sales
 
-                var customers = db.Customers.Where(x => x.PosTransactions.All(y => y.IsFullyPaid == false)).ToList();
-                var models = Mapping.Mapper.Map<List<SalesReceivableDetailModel>>(customers);
+                var customers = db.Customers.Where(x => x.PosTransactions.Where(y => y.IsFullyPaid == false).ToList().Count() >  0).ToList();
+                var models = Mapping.Mapper.Map<List<CustomerReceivableModel>>(customers);
                 return models;
 
             }
@@ -121,6 +121,55 @@ namespace SVFHardwareSystem.Services
         public decimal GetTotalAmount(string sidr)
         {
             throw new NotImplementedException();
+        }
+        private decimal GetTotalPurchaseAmount(int posTransactionID)
+        {
+            using (var db = new DataContext())
+            {
+                var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == posTransactionID).ToList();
+                // here quantity to cancel must subtract to actual quantity purchase because they are quantities that the
+                // customers was not pay.
+                return transactionProducts.Sum(y => (y.Quantity - y.QuantityToCancel) * y.Price);
+            }
+        }
+        private decimal GetTotalPaymentAmount(int posTransactionID)
+        {
+            using (var db = new DataContext())
+            {
+                var posPayments = db.POSPayments.Where(x => x.POSTransactionID == posTransactionID); ;
+                //compute for  total amount of cash payments
+                var cash = posPayments.Count() > 0 ? posPayments.Sum(y => y.Amount) : 0;
+                return cash;
+            }
+           
+        }
+        public CustomerReceivableModel GetCustomerWithReceivables(int customerID)
+        {
+            using (var db = new DataContext())
+            {
+                var customer = db.Customers.Find(customerID);
+                var customerReceivableModel = Mapping.Mapper.Map<CustomerReceivableModel>(customer);
+
+                var salesTransctions = db.POSTransactions.Where(x => x.CustomerID == customerID && x.IsFullyPaid == false).ToList();
+
+                foreach (var item in salesTransctions)
+                {
+                    var totalPurchaseAmount = GetTotalPurchaseAmount(item.POSTransactionID);
+                    var totalPaymentAmount = GetTotalPaymentAmount(item.POSTransactionID);
+
+                    var model = new CustomerSalesReceivableModel();
+                    model.Credit = totalPurchaseAmount;
+                    model.SalesTransactionDate = item.SalesTransactionDate;
+                    model.Debit = totalPaymentAmount;
+                    model.SI = item.SIDR;
+                    customerReceivableModel.SalesReceivables.Add(model);
+                }
+                return customerReceivableModel;
+               
+            }
+            
+
+
         }
     }
 }

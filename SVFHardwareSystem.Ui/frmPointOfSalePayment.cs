@@ -83,12 +83,12 @@ namespace SVFHardwareSystem.Ui
             try
             {
                 _pOSTransactionService.Pay(_posTransactionID, _amount, _total);
-                _pOSTransactionService.CheckAndUpdateIfPosTransactionIsFullyPaid(_posTransactionID);
+               
                 this.Close();
             }
-            catch (AmountTenderMustBeGreaterThanOrEqualException ex)
+            catch (CustomBaseException ex)
             {
-                MetroMessageBox.Show(this, ex.Message);
+                MetroMessageBox.Show(this, ex.Message,"Error", MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {

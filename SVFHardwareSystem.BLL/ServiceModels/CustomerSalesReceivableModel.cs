@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace SVFHardwareSystem.Services.ServiceModels
 {
-    public class SalesReceivableModel
+    public class CustomerSalesReceivableModel
     {
 
-        public string Date { get; set; }
+        public DateTime SalesTransactionDate { get; set; }
         public string SI { get; set; }
         /// <summary>
         /// Total Amount Paid by Customers

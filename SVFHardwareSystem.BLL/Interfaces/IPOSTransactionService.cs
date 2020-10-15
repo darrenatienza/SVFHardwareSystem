@@ -21,6 +21,11 @@ namespace SVFHardwareSystem.Services.Interfaces
         decimal GetTotalAmount(int posTransactionID);
         decimal GetReceivableAmount(int posTransactionID);
         decimal GetCashAmount(int postransactionID);
+        /// <summary>
+        /// Returns Total Cash Payment of a transaction where payments with receivables definition are ignores.
+        /// </summary>
+        /// <param name="postransactionID">Primary key id of the sales transaction</param>
+        /// <returns>Total cash payment of a particular sales transaction</returns>
         decimal GetTotalCashOnlyAmount(int postransactionID);
         decimal GetTotalReceivablePayment(int posTransactionID);
 
@@ -33,7 +38,7 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// <param name="posTransactionID"></param>
         /// <param name="change"></param>
         void Pay(int posTransactionID, decimal amountTendered, decimal total);
-
+        
         void CheckAndUpdateIfPosTransactionIsFullyPaid(int posTransactionID);
     }
 }

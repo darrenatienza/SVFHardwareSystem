@@ -11,7 +11,7 @@ namespace SVFHardwareSystem.DAL.Entities
         public int PurchaseSaleInventoryProductID { get; set; }
 
         public int PurchaseSaleInventoryID { get; set; }
-        public virtual PurchaseSaleInventory PurchaseSaleInventories { get; set; }
+        public virtual PurchaseSaleInventory PurchaseSaleInventory { get; set; }
         public int ProductID { get; set; }
        public virtual Product Product { get; set; }
         public int Year { get; set; }

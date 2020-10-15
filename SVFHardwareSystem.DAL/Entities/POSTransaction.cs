@@ -24,5 +24,9 @@ namespace SVFHardwareSystem.DAL.Entities
         public ICollection<TransactionProduct> TransactionProducts { get; set; } = new HashSet<TransactionProduct>();
         public DateTime? DateFinished { get; set; }
         public bool IsFullyPaid { get; set; }
+        /// <summary>
+        /// Date when the transaction happens
+        /// </summary>
+        public DateTime SalesTransactionDate { get; set; }
     }
 }

@@ -186,6 +186,10 @@
     <Compile Include="Migrations\202010141315429_AddIsFullyPaidOnPosTransactions.designer.cs">
       <DependentUpon>202010141315429_AddIsFullyPaidOnPosTransactions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010150348484_AddSalesTransactionDateToSales.cs" />
+    <Compile Include="Migrations\202010150348484_AddSalesTransactionDateToSales.designer.cs">
+      <DependentUpon>202010150348484_AddSalesTransactionDateToSales.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Misc\PaymentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -281,6 +285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010141315429_AddIsFullyPaidOnPosTransactions.resx">
       <DependentUpon>202010141315429_AddIsFullyPaidOnPosTransactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010150348484_AddSalesTransactionDateToSales.resx">
+      <DependentUpon>202010150348484_AddSalesTransactionDateToSales.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

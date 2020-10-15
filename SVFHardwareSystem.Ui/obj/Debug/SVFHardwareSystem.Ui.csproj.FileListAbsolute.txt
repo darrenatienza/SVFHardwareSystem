@@ -154,6 +154,10 @@ C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVF
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.exe
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.pdb
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmPurchaseSaleInventories.resources
-C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\RdlCompile.cache
-C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\RdlCompile.compiled
 C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmCustomerReceivable.resources
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\RdlCompile.cache
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\RdlCompile.compiled
+C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SqlServerTypes\x64\msvcr120.dll
+C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SqlServerTypes\x64\SqlServerSpatial140.dll
+C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SqlServerTypes\x86\msvcr120.dll
+C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SqlServerTypes\x86\SqlServerSpatial140.dll

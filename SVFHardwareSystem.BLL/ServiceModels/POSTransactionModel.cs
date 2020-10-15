@@ -24,5 +24,6 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public decimal TotalPayment { get; set; }
         public decimal CancelAmount { get; internal set; }
         public decimal Price { get; set; }
+        public DateTime SalesTransactionDate { get; set; }
     }
 }

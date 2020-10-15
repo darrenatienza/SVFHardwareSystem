@@ -532,6 +532,7 @@ namespace SVFHardwareSystem.Ui
                     if (ValidatePOSTransactionFields())
                     {
                         var newPOSTransaction = new POSTransactionModel();
+                        newPOSTransaction.SalesTransactionDate = dtSalesTransactionDate.Value;
                         newPOSTransaction.Cost = txtCost.Text;
                         newPOSTransaction.CreateTimeStamp = DateTime.Now;
                         newPOSTransaction.CustomerID = customerID;

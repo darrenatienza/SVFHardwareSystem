@@ -5,6 +5,7 @@ using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.ServiceModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace SVFHardwareSystem.Services
 {
     public class PurchaseSaleInventoryService : IPurchaseSaleInventoryService
     {
-        public IList<PurchaseSaleInventoryProductModel> GetYearlyInventory(int year)
+        public async Task<IList<PurchaseSaleInventoryProductModel>> GetYearlyInventory(int year)
         {
             using (var db = new DataContext())
             {
@@ -23,7 +24,7 @@ namespace SVFHardwareSystem.Services
                     throw new InvalidFieldException("Year");
                 }
 
-                var products = db.Products.ToList();
+                var products = await db.Products.ToListAsync();
 
                 var purchaseSales = Mapping.Mapper.Map<List<PurchaseSaleInventoryProductModel>>(products);
                 var newPurchaseSaleInventories = new List<PurchaseSaleInventoryProductModel>();
@@ -42,7 +43,7 @@ namespace SVFHardwareSystem.Services
                         purchaseSaleInventory.BeginningUnitCost = previousPurchaseSaleInventoryModel.EndingUnitCost;
                     }
 
-                    var purchases = db.PurchaseProducts.Where(x => x.Purchase.DatePurchase.Year == year && x.ProductID == purchaseSaleInventory.ProductID).ToList();
+                    var purchases = await db.PurchaseProducts.Where(x => x.Purchase.DatePurchase.Year == year && x.ProductID == purchaseSaleInventory.ProductID).ToListAsync();
                     //get total purchase quantity according to the year
                     var totalQuantityPurchase = purchases.Sum(x => x.Quantity);
 
@@ -55,7 +56,7 @@ namespace SVFHardwareSystem.Services
                         purchaseSaleInventory.PurchaseUnitCost = Math.Round(totalAmountPurchase / totalQuantityPurchase, 2);
                     }
 
-                    var sales = db.TransactionProducts.Where(x => x.CreateTimeStamp.Year == year && x.ProductID == purchaseSaleInventory.ProductID).ToList();
+                    var sales = await db.TransactionProducts.Where(x => x.CreateTimeStamp.Year == year && x.ProductID == purchaseSaleInventory.ProductID).ToListAsync();
                     //get total sale quantity according to the year
                     var totalSalesQuantity = sales.Count() > 0 ? sales.Sum(x => x.Quantity) - sales.Sum(x => x.QuantityToCancel): 0;
 
@@ -74,24 +75,50 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public void Save(int year)
+        public async Task SaveAsync(int year)
         {
             using (var db = new DataContext())
             {
+                var startYear = year;
+                var endYear = year;
+
                 // validation
                 if (year == 0)
                 {
                     throw new InvalidFieldException("Year");
                 }
-                var models = GetYearlyInventory(year);
-                var inventoryproducts = Mapping.Mapper.Map<List<PurchaseSaleInventoryProduct>>(models);
 
-                var purchaseSaleInventory = new PurchaseSaleInventory();
-                purchaseSaleInventory.Year = year;
-                db.PurchaseSaleInventories.Add(purchaseSaleInventory);
+               
+                var latest = db.PurchaseSaleInventories.OrderByDescending(x => x.PurchaseSaleInventoryID).FirstOrDefault();
+                if (latest != null)
+                {
+                    endYear = latest.Year > startYear ? latest.Year : startYear;
+                }
 
-                db.PurchaseSaleInventoryProducts.AddRange(inventoryproducts);
-                db.SaveChanges();
+                for (int __year = startYear; __year <= endYear; __year++)
+                {
+                    var inventories = db.PurchaseSaleInventoryProducts.Where(x => x.PurchaseSaleInventory.Year == __year);
+
+                    if (inventories.Count() > 0)
+                    {
+                        db.PurchaseSaleInventoryProducts.RemoveRange(inventories);
+                    }
+                    var models = await GetYearlyInventory(year);
+                    var inventoryproducts = Mapping.Mapper.Map<List<PurchaseSaleInventoryProduct>>(models);
+                    if (startYear == endYear)
+                    {
+                        var purchaseSaleInventory = new PurchaseSaleInventory();
+                        purchaseSaleInventory.Year = year;
+                        db.PurchaseSaleInventories.Add(purchaseSaleInventory);
+                    }
+                   
+
+                    db.PurchaseSaleInventoryProducts.AddRange(inventoryproducts);
+                }
+                await db.SaveChangesAsync();
+               
+                
+               
             }
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SVFHardwareSystem.Services.ServiceModels
 {
-    public class SalesReceivableDetailModel
+    public class CustomerReceivableModel
     {
 
         public string FullName { get; set; }
@@ -17,7 +17,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         /// </summary>
         public decimal TotalBalance { get { return SalesReceivables.Sum(x => x.Balance); } }
 
-        public IList<SalesReceivableModel> SalesReceivables { get; set; } = new List<SalesReceivableModel>();
+        public IList<CustomerSalesReceivableModel> SalesReceivables { get; set; } = new List<CustomerSalesReceivableModel>();
         public object CustomerID { get; set; }
     }
 }

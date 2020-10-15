@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SVFHardwareSystem.Services.Exceptions
 {
     [Serializable]
-    public class AmountTenderMustBeGreaterThanOrEqualException :Exception
+    public class AmountTenderMustBeGreaterThanOrEqualException :CustomBaseException
     {
         public AmountTenderMustBeGreaterThanOrEqualException() : base(String.Format("Amount Tender must be greater than or equal to the payable amount!")) { }
 

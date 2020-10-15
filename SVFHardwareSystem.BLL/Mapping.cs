@@ -69,8 +69,8 @@ namespace AutoMap
             CreateMap<PurchaseSaleInventoryProductModel, PurchaseSaleInventoryProduct>();
             CreateMap<PurchaseSaleInventoryProduct, PurchaseSaleInventoryProductModel>();
 
-            CreateMap<POSTransaction, SalesReceivableDetailModel>();
-            CreateMap<Customer, SalesReceivableDetailModel>();
+            CreateMap<POSTransaction, CustomerReceivableModel>();
+            CreateMap<Customer, CustomerReceivableModel>();
             // Additional mappings here...
         }
     }

@@ -119,7 +119,21 @@ namespace SVFHardwareSystem.Services
             }
             return total;
         }
-
+        /// <summary>
+        /// Computes for the Total purchase of a particular sales transaction
+        /// </summary>
+        /// <param name="posTransactionID">primary key of the sales transaction</param>
+        /// <returns></returns>
+        private decimal GetTotalPurchaseAmount(int posTransactionID)
+        {
+            using (var db = new DataContext())
+            {
+                var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == posTransactionID).ToList();
+                // here quantity to cancel must subtract to actual quantity purchase because they are quantities that the
+                // customers was not pay.
+                return transactionProducts.Sum(y => (y.Quantity - y.QuantityToCancel) * y.Price);
+            }
+        }
         public POSTransactionModel GetUnFinishedTransaction()
         {
             using (var db = new DataContext())
@@ -165,6 +179,12 @@ namespace SVFHardwareSystem.Services
             var cash = posPayments.Count() > 0 ? posPayments.Sum(y => y.Amount) : 0;
             return cash;
         }
+
+        /// <summary>
+        /// Computes for the total amount of payments
+        /// </summary>
+        /// <param name="posPayments">List of Payments</param>
+        /// <returns>Sum of all Payments</returns>
         private decimal ComputeTotalPaymentAmount(IList<POSPayment> posPayments)
         {
             //compute for  total amount of cash payments
@@ -176,9 +196,16 @@ namespace SVFHardwareSystem.Services
             using (var db = new DataContext())
             {
 
-                var receivable = GetReceivableAmount(posTransactionID);
+               
+                // used on first payment transaction
+                var totalPaymentsOnCash = GetTotalCashOnlyAmount(posTransactionID);
 
-                // add new pospayment
+                
+                var receivable = GetReceivableAmount(posTransactionID);
+                var totalPurchase = GetTotalPurchaseAmount(posTransactionID);
+
+
+                // add new payment
                 var posPayment = new POSPayment();
                 posPayment.Amount = amountTendered;
                 posPayment.PaymentDate = DateTime.Now;
@@ -186,15 +213,27 @@ namespace SVFHardwareSystem.Services
                 posPayment.IsReceivablePayment = receivable > 0 ? true : false;
                 db.POSPayments.Add(posPayment);
 
-                if (receivable == 0)
+
+                var posTransaction = db.POSTransactions.Find(posTransactionID);
+                //total payment on cash with 0 value indicates first payment 
+                //for first payments, compute the receivable by subtracting the totalPurchase to amount tendered.
+                if (totalPaymentsOnCash == 0)
                 {
+                    var initialReceivables = totalPurchase - amountTendered;
+
                     // update isFinish of Pos Transaction for first payment
-                    var posTransaction = db.POSTransactions.Find(posTransactionID);
+                  
                     posTransaction.IsFinished = true;
                     posTransaction.DateFinished = DateTime.Now;
-
-                    db.Entry(posTransaction).State = EntityState.Modified;
+                    posTransaction.IsFullyPaid = initialReceivables > 0 ? false : true;
                 }
+                else
+                {
+                    // if receivables and amount tender are equal, this means that the transaction is fully paid
+                    posTransaction.IsFullyPaid = receivable == amountTendered ? true : false;
+                }
+                db.Entry(posTransaction).State = EntityState.Modified;
+
                 // update isPaid of products on transaction products
                 var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == posTransactionID && x.IsToPay == true && x.IsPaid == false);
                 foreach (var item in transactionProducts)
@@ -218,7 +257,7 @@ namespace SVFHardwareSystem.Services
 
 
         }
-
+        
         public void CheckAndUpdateIfPosTransactionIsFullyPaid(int posTransactionID)
         {
             using (var db = new DataContext())
