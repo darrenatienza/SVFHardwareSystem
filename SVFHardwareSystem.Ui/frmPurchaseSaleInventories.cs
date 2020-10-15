@@ -26,14 +26,15 @@ namespace SVFHardwareSystem.Ui
 
         private void frmPurchaseSaleInventories_Load(object sender, EventArgs e)
         {
-           
+
         }
         private async Task LoadPurchaseSaleInventories()
         {
             try
             {
                 var year = cboYear.Text.ToInt();
-                var inventories =   await _purchaseSaleInventoryService.GetYearlyInventory(year);
+
+                var inventories = await Task.Run(() => _purchaseSaleInventoryService.GetYearlyInventory(year));
                 int count = 0;
                 var grid = gridInventory;
                 grid.Rows.Clear();
@@ -72,14 +73,18 @@ namespace SVFHardwareSystem.Ui
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
+            spinnerLoading.Visible = true;
             await Save();
+            spinnerLoading.Visible = false;
         }
         private async Task Save()
         {
             try
             {
                 var year = cboYear.Text.ToInt();
-                await _purchaseSaleInventoryService.SaveAsync(year);
+
+                await Task.Run(() => _purchaseSaleInventoryService.SaveAsync(year));
+
                 MetroMessageBox.Show(this, "Record has been saved.", "Purchase and sale Inventory", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -90,7 +95,9 @@ namespace SVFHardwareSystem.Ui
         }
         private async void btnSearch_Click(object sender, EventArgs e)
         {
+            spinnerLoading.Visible = true;
             await LoadPurchaseSaleInventories();
+            spinnerLoading.Visible = false;
         }
     }
 }

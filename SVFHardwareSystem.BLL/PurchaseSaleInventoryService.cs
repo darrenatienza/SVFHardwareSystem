@@ -58,7 +58,7 @@ namespace SVFHardwareSystem.Services
 
                     var sales = await db.TransactionProducts.Where(x => x.CreateTimeStamp.Year == year && x.ProductID == purchaseSaleInventory.ProductID).ToListAsync();
                     //get total sale quantity according to the year
-                    var totalSalesQuantity = sales.Count() > 0 ? sales.Sum(x => x.Quantity) - sales.Sum(x => x.QuantityToCancel): 0;
+                    var totalSalesQuantity = sales.Count() > 0 ? sales.Sum(x => x.Quantity) - sales.Sum(x => x.QuantityToCancel) : 0;
 
                     //get total sale amount purchase according to the year
                     var totalAmountSale = sales.Count() > 0 ? sales.Sum(x => x.Price * totalSalesQuantity) : 0;
@@ -88,7 +88,7 @@ namespace SVFHardwareSystem.Services
                     throw new InvalidFieldException("Year");
                 }
 
-               
+
                 var latest = db.PurchaseSaleInventories.OrderByDescending(x => x.PurchaseSaleInventoryID).FirstOrDefault();
                 if (latest != null)
                 {
@@ -105,20 +105,26 @@ namespace SVFHardwareSystem.Services
                     }
                     var models = await GetYearlyInventory(year);
                     var inventoryproducts = Mapping.Mapper.Map<List<PurchaseSaleInventoryProduct>>(models);
-                    if (startYear == endYear)
+
+                    var inventory = db.PurchaseSaleInventories.FirstOrDefault(x => x.Year == __year);
+
+                    if (inventory == null)
                     {
                         var purchaseSaleInventory = new PurchaseSaleInventory();
                         purchaseSaleInventory.Year = year;
                         db.PurchaseSaleInventories.Add(purchaseSaleInventory);
                     }
-                   
-
+                    else
+                    {
+                        inventoryproducts.ForEach(x => x.PurchaseSaleInventoryID = inventory.PurchaseSaleInventoryID);
+                    }
                     db.PurchaseSaleInventoryProducts.AddRange(inventoryproducts);
+                    await db.SaveChangesAsync();
                 }
-                await db.SaveChangesAsync();
-               
-                
-               
+
+
+
+
             }
         }
     }
