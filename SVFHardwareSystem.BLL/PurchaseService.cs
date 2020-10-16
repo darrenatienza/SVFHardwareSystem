@@ -24,6 +24,10 @@ namespace SVFHardwareSystem.Services
             {
                 throw new InvalidFieldException("Supplier");
             }
+            if (model.SIDR == "")
+            {
+                throw new InvalidFieldException("SIDR");
+            }
             using (var db = new DataContext())
             {
                 var purchase = db.Purchases.FirstOrDefault(x => DbFunctions.TruncateTime(x.DatePurchase) == DbFunctions.TruncateTime(model.DatePurchase) && x.SupplierID == model.SupplierID);
@@ -73,6 +77,10 @@ namespace SVFHardwareSystem.Services
             if (model.SupplierID == 0)
             {
                 throw new InvalidFieldException("Supplier");
+            }
+            if (model.SIDR == "")
+            {
+                throw new InvalidFieldException("SIDR");
             }
             using (var db = new DataContext())
             {
@@ -227,8 +235,12 @@ namespace SVFHardwareSystem.Services
                 CheckDecimalIfLessThanOrEqual(model.Amount, 0, "Amount");
                 
                 var paymentMethod = db.PaymentMethods.FirstOrDefault(x => x.PaymentMethodID == model.PaymentMethodID);
-                CheckObjectIfExists(paymentMethod,"Payment Method");
 
+                CheckObjectIfExists(paymentMethod,"Payment Method");
+                if (model.PaymentMethodID == 2 && model.CheckNumber == 0)
+                {
+                    throw new InvalidFieldException("Check Number");
+                }
                 var total = GetPurchaseProducts(model.PurchaseID).Sum(r => r.Total);
                 var totalPayment = GetAllPurchasePayments(model.PurchaseID).Sum(r => r.Amount);
                 var balance = total - totalPayment - model.Amount;

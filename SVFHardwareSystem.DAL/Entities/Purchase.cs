@@ -13,6 +13,8 @@ namespace SVFHardwareSystem.DAL.Entities
         public DateTime CreateTimeStamp { get; set; } = DateTime.Now;
 
         public DateTime DatePurchase { get; set; }
+
+        public string SIDR { get; set; }
         public int SupplierID { get; set; }
         public virtual Supplier Supplier { get; set; }
 

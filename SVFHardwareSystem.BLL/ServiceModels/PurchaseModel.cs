@@ -14,6 +14,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
 
         public DateTime DatePurchase { get; set; }
         public int SupplierID { get; set; }
+        public string SIDR { get; set; }
         public string SupplierName { get; set; }
         public string Remarks { get; set; }
         public decimal Total { get; internal set; }

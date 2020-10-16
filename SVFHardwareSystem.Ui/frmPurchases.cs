@@ -99,6 +99,7 @@ namespace SVFHardwareSystem.Ui
                 purchaseModel.PurchaseID = _purchaseID;
                 purchaseModel.DatePurchase = dtDatePurchase.Value;
                 purchaseModel.Remarks = txtRemarks.Text;
+                purchaseModel.SIDR = txtSIDR.Text;
                 purchaseModel.SupplierID = _supplierID;
                 await _purchaseService.EditAsync(_purchaseID, purchaseModel);
                 MetroMessageBox.Show(this, "Changes has been saved.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -141,6 +142,7 @@ namespace SVFHardwareSystem.Ui
             try
             {
                 var purchase = await _purchaseService.GetAsync(_purchaseID);
+                txtSIDR.Text = purchase.SIDR;
                 txtRemarks.Text = purchase.Remarks;
                 dtDatePurchase.Value = purchase.DatePurchase;
             }

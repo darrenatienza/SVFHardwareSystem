@@ -17,6 +17,7 @@ namespace SVFHardwareSystem.DAL.Entities
         public DateTime PaymentDate { get; set; }
         public decimal Amount { get; set; }
         public int PaymentMethodID { get; set; }
+        public int CheckNumber { get; set; }
         public virtual PaymentMethod PaymentMethod { get; set; }
     }
 }

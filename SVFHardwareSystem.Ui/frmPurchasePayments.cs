@@ -56,6 +56,7 @@ namespace SVFHardwareSystem.Ui
                             count.ToString(),
                             item.PaymentDate,
                             item.PaymentMethodName,
+                            item.PaymentMethodName == "Check" ? item.CheckNumber.ToString() : "n/a",
                             item.Amount
                     });
                 }
@@ -123,7 +124,8 @@ namespace SVFHardwareSystem.Ui
             try
             {
                 var purchasePayment = new PurchasePaymentModel();
-                purchasePayment.Amount = txtAmout.Text.ToDecimal();
+                purchasePayment.CheckNumber = txtCheckNumber.Text.ToInt();
+                purchasePayment.Amount = txtAmount.Text.ToDecimal();
                 purchasePayment.PaymentDate = dtPaymentDate.Value;
                 purchasePayment.PurchaseID = _purchaseID;
                 purchasePayment.PaymentMethodID = _paymentMethodID;
@@ -147,7 +149,7 @@ namespace SVFHardwareSystem.Ui
 
         private void ResetInputs()
         {
-            txtAmout.Text = "";
+            txtCheckNumber.Text = "";
             cboPaymentMethod.SelectedIndex = 0;
         }
 

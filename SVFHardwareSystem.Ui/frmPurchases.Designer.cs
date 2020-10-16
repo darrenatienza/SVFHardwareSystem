@@ -65,6 +65,7 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.txtSIDR = new MetroFramework.Controls.MetroTextBox();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridPurchaseDate)).BeginInit();
             this.metroPanel2.SuspendLayout();
@@ -75,6 +76,7 @@
             // metroPanel1
             // 
             this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
+            this.metroPanel1.Controls.Add(this.txtSIDR);
             this.metroPanel1.Controls.Add(this.metroButton1);
             this.metroPanel1.Controls.Add(this.dtDatePurchase);
             this.metroPanel1.Controls.Add(this.btnPayments);
@@ -237,7 +239,7 @@
             this.gridPurchaseDate.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gridPurchaseDate.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridPurchaseDate.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridPurchaseDate.Size = new System.Drawing.Size(274, 209);
+            this.gridPurchaseDate.Size = new System.Drawing.Size(274, 162);
             this.gridPurchaseDate.TabIndex = 4;
             this.gridPurchaseDate.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPurchaseDate_CellClick);
             // 
@@ -536,6 +538,42 @@
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
+            // txtSIDR
+            // 
+            this.txtSIDR.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtSIDR.CustomButton.Image = global::SVFHardwareSystem.Ui.Properties.Resources.search;
+            this.txtSIDR.CustomButton.Location = new System.Drawing.Point(250, 1);
+            this.txtSIDR.CustomButton.Name = "";
+            this.txtSIDR.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.txtSIDR.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtSIDR.CustomButton.TabIndex = 1;
+            this.txtSIDR.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtSIDR.CustomButton.UseSelectable = true;
+            this.txtSIDR.CustomButton.UseVisualStyleBackColor = false;
+            this.txtSIDR.CustomButton.Visible = false;
+            this.txtSIDR.Lines = new string[0];
+            this.txtSIDR.Location = new System.Drawing.Point(14, 230);
+            this.txtSIDR.MaxLength = 32767;
+            this.txtSIDR.Name = "txtSIDR";
+            this.txtSIDR.PasswordChar = '\0';
+            this.txtSIDR.PromptText = "SI/DR #";
+            this.txtSIDR.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtSIDR.SelectedText = "";
+            this.txtSIDR.SelectionLength = 0;
+            this.txtSIDR.SelectionStart = 0;
+            this.txtSIDR.ShortcutsEnabled = true;
+            this.txtSIDR.ShowClearButton = true;
+            this.txtSIDR.Size = new System.Drawing.Size(274, 25);
+            this.txtSIDR.TabIndex = 14;
+            this.txtSIDR.UseCustomBackColor = true;
+            this.txtSIDR.UseSelectable = true;
+            this.txtSIDR.WaterMark = "SI/DR #";
+            this.txtSIDR.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtSIDR.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
             // frmPurchases
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -589,5 +627,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private MetroFramework.Controls.MetroButton metroButton1;
+        private MetroFramework.Controls.MetroTextBox txtSIDR;
     }
 }

@@ -190,6 +190,18 @@
     <Compile Include="Migrations\202010150348484_AddSalesTransactionDateToSales.designer.cs">
       <DependentUpon>202010150348484_AddSalesTransactionDateToSales.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010160825017_AddSIDROnPurchase.cs" />
+    <Compile Include="Migrations\202010160825017_AddSIDROnPurchase.designer.cs">
+      <DependentUpon>202010160825017_AddSIDROnPurchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010160836409_AddCheckNumberOnPurchasePayment.cs" />
+    <Compile Include="Migrations\202010160836409_AddCheckNumberOnPurchasePayment.designer.cs">
+      <DependentUpon>202010160836409_AddCheckNumberOnPurchasePayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010160840056_UpdateCheckNumberOnPurchasePayment.cs" />
+    <Compile Include="Migrations\202010160840056_UpdateCheckNumberOnPurchasePayment.designer.cs">
+      <DependentUpon>202010160840056_UpdateCheckNumberOnPurchasePayment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Misc\PaymentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -288,6 +300,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010150348484_AddSalesTransactionDateToSales.resx">
       <DependentUpon>202010150348484_AddSalesTransactionDateToSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010160825017_AddSIDROnPurchase.resx">
+      <DependentUpon>202010160825017_AddSIDROnPurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010160836409_AddCheckNumberOnPurchasePayment.resx">
+      <DependentUpon>202010160836409_AddCheckNumberOnPurchasePayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010160840056_UpdateCheckNumberOnPurchasePayment.resx">
+      <DependentUpon>202010160840056_UpdateCheckNumberOnPurchasePayment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
