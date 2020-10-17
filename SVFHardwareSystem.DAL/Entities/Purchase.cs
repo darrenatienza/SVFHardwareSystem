@@ -20,7 +20,9 @@ namespace SVFHardwareSystem.DAL.Entities
 
         public string Remarks { get; set; }
 
-        public ICollection<PurchaseProduct> PurchaseProducts { get; set; } = new HashSet<PurchaseProduct>();
+        public bool IsFullyPaid { get; set; }
 
+        public ICollection<PurchaseProduct> PurchaseProducts { get; set; } = new HashSet<PurchaseProduct>();
+        public ICollection<PurchasePayment> PurchasePayments { get; set; } = new HashSet<PurchasePayment>();
     }
 }

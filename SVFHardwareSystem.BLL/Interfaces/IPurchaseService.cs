@@ -11,7 +11,9 @@ namespace SVFHardwareSystem.Services.Interfaces
     {
 
         Task<IList<PurchaseModel>> GetAllAsync(int supplierID);
-        Task<IList<PurchaseProductModel>>  GetPurchaseProductsAsync(int purchaseID);
+        Task<IList<PurchaseModel>> GetAllPurchasePayablesAsync(bool isFullyPaid);
+        Task<IList<string>> GetAllPurchasePayableSuppliersAsync(bool isFullyPaid);
+        Task<IList<PurchaseProductModel>> GetPurchaseProductsAsync(int purchaseID);
         /// <summary>
         /// Edit the Purchase Product
         /// </summary>
@@ -20,7 +22,7 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// <exception cref="EditNotPermittedException">Thrown when purchase product upload quantity is true.</exception>
         /// <exception cref="InvalidFieldException">Thrown when product id and quantity is zero.</exception>
         Task EditPurchaseProduct(PurchaseProductModel purchaseProduct);
-        Task AddPurchaseProductAsync(int purchaseID,PurchaseProductModel purchaseProduct);
+        Task AddPurchaseProductAsync(int purchaseID, PurchaseProductModel purchaseProduct);
         Task<PurchaseProductModel> GetPurchaseProduct(int purchaseID, int productID);
         /// <summary>
         /// Removes the Purchase Product
@@ -36,6 +38,10 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// <param name="purchaseProductID">Id of the purchase product</param>
         /// <exception cref="CustomBaseException">Thrown when an invalid logic occurs</exception>
         void UploadPurchaseQuantity(int purchaseProductID);
+        /// <summary>
+        /// Add new Purchase payment on phone
+        /// </summary>
+        /// <param name="purchasePayment"></param>
         void AddPurchasePayment(PurchasePaymentModel purchasePayment);
     }
 }

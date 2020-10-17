@@ -157,3 +157,4 @@ C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVF
 C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmCustomerReceivable.resources
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\RdlCompile.cache
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\RdlCompile.compiled
+C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmPayables.resources

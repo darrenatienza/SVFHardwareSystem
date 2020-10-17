@@ -10,12 +10,12 @@ namespace SVFHardwareSystem.Services.ServiceModels
     {
         public int SupplierID { get; set; }
         public DateTime DatePurchase { get; set; }
+
+        public string SupplierName { get; set; }
         public string SIDR { get; set; }
         public decimal PurchaseAmount { get; set; }
-        public decimal Cash { get; set; }
-        public decimal Payable { get; set; }
-        public DateTime DateOfCheck { get; set; }
-        public int CheckNumber { get; set; }
-        public decimal CheckAmount { get; set; }
+        public decimal TotalCash { get; set; }
+        public decimal TotalPayable { get; set; }
+        
     }
 }

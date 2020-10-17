@@ -96,7 +96,7 @@ namespace SVFHardwareSystem.Ui
                 var purchase = _purchaseService.Get(_purchaseID);
                 if (purchase != null)
                 {
-                    txtTotalPurchase.Text = purchase.Total.ToString();
+                    txtTotalPurchase.Text = purchase.TotalPurchaseAmount.ToString();
                     txtTotalPayment.Text = purchase.TotalPayment.ToString();
                     txtBalance.Text = purchase.Balance.ToString();
                 }

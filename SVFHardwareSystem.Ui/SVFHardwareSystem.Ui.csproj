@@ -139,6 +139,12 @@
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPayables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPayables.Designer.cs">
+      <DependentUpon>frmPayables.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPointofSale.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,7 +241,7 @@
     <Compile Include="Reports\reports.cs">
       <DependentUpon>reports.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Reports\reports.Designer.cs">
+    <Compile Include="Reports\reports1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>reports.xsd</DependentUpon>
@@ -258,6 +264,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPayables.resx">
+      <DependentUpon>frmPayables.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPointofSale.resx">
       <DependentUpon>frmPointofSale.cs</DependentUpon>
@@ -316,6 +325,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\CustomerReceivable.rdlc" />
     <EmbeddedResource Include="Reports\PurchaseReport.rdlc" />
+    <EmbeddedResource Include="Reports\Purchases.rdlc" />
     <None Include=".editorconfig" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -338,7 +348,7 @@
     <None Include="Reports\reports.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>reports.Designer.cs</LastGenOutput>
+      <LastGenOutput>reports1.Designer.cs</LastGenOutput>
     </None>
     <None Include="Reports\reports.xss">
       <DependentUpon>reports.xsd</DependentUpon>

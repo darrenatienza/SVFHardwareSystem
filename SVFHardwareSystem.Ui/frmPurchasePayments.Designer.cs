@@ -32,6 +32,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.txtAmount = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.txtBalance = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.txtTotalPayment = new MetroFramework.Controls.MetroTextBox();
@@ -47,8 +49,6 @@
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.gridPurchasePayment = new MetroFramework.Controls.MetroGrid();
-            this.txtAmount = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,6 +88,45 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // txtAmount
+            // 
+            // 
+            // 
+            // 
+            this.txtAmount.CustomButton.Image = null;
+            this.txtAmount.CustomButton.Location = new System.Drawing.Point(82, 1);
+            this.txtAmount.CustomButton.Name = "";
+            this.txtAmount.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtAmount.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtAmount.CustomButton.TabIndex = 1;
+            this.txtAmount.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtAmount.CustomButton.UseSelectable = true;
+            this.txtAmount.CustomButton.Visible = false;
+            this.txtAmount.Lines = new string[0];
+            this.txtAmount.Location = new System.Drawing.Point(104, 326);
+            this.txtAmount.MaxLength = 32767;
+            this.txtAmount.Name = "txtAmount";
+            this.txtAmount.PasswordChar = '\0';
+            this.txtAmount.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtAmount.SelectedText = "";
+            this.txtAmount.SelectionLength = 0;
+            this.txtAmount.SelectionStart = 0;
+            this.txtAmount.ShortcutsEnabled = true;
+            this.txtAmount.Size = new System.Drawing.Size(104, 23);
+            this.txtAmount.TabIndex = 17;
+            this.txtAmount.UseSelectable = true;
+            this.txtAmount.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtAmount.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroLabel7
+            // 
+            this.metroLabel7.AutoSize = true;
+            this.metroLabel7.Location = new System.Drawing.Point(104, 304);
+            this.metroLabel7.Name = "metroLabel7";
+            this.metroLabel7.Size = new System.Drawing.Size(56, 19);
+            this.metroLabel7.TabIndex = 16;
+            this.metroLabel7.Text = "Amount";
             // 
             // txtBalance
             // 
@@ -190,7 +229,7 @@
             this.cboPaymentMethod.ItemHeight = 23;
             this.cboPaymentMethod.Location = new System.Drawing.Point(10, 272);
             this.cboPaymentMethod.Name = "cboPaymentMethod";
-            this.cboPaymentMethod.Size = new System.Drawing.Size(198, 29);
+            this.cboPaymentMethod.Size = new System.Drawing.Size(200, 29);
             this.cboPaymentMethod.TabIndex = 9;
             this.cboPaymentMethod.UseSelectable = true;
             this.cboPaymentMethod.SelectedIndexChanged += new System.EventHandler(this.cboPaymentMethod_SelectedIndexChanged);
@@ -360,45 +399,6 @@
             this.gridPurchasePayment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridPurchasePayment.Size = new System.Drawing.Size(564, 446);
             this.gridPurchasePayment.TabIndex = 2;
-            // 
-            // txtAmount
-            // 
-            // 
-            // 
-            // 
-            this.txtAmount.CustomButton.Image = null;
-            this.txtAmount.CustomButton.Location = new System.Drawing.Point(82, 1);
-            this.txtAmount.CustomButton.Name = "";
-            this.txtAmount.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtAmount.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtAmount.CustomButton.TabIndex = 1;
-            this.txtAmount.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtAmount.CustomButton.UseSelectable = true;
-            this.txtAmount.CustomButton.Visible = false;
-            this.txtAmount.Lines = new string[0];
-            this.txtAmount.Location = new System.Drawing.Point(104, 326);
-            this.txtAmount.MaxLength = 32767;
-            this.txtAmount.Name = "txtAmount";
-            this.txtAmount.PasswordChar = '\0';
-            this.txtAmount.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtAmount.SelectedText = "";
-            this.txtAmount.SelectionLength = 0;
-            this.txtAmount.SelectionStart = 0;
-            this.txtAmount.ShortcutsEnabled = true;
-            this.txtAmount.Size = new System.Drawing.Size(104, 23);
-            this.txtAmount.TabIndex = 17;
-            this.txtAmount.UseSelectable = true;
-            this.txtAmount.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtAmount.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // metroLabel7
-            // 
-            this.metroLabel7.AutoSize = true;
-            this.metroLabel7.Location = new System.Drawing.Point(104, 304);
-            this.metroLabel7.Name = "metroLabel7";
-            this.metroLabel7.Size = new System.Drawing.Size(56, 19);
-            this.metroLabel7.TabIndex = 16;
-            this.metroLabel7.Text = "Amount";
             // 
             // Column1
             // 

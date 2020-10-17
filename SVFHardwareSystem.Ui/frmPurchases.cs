@@ -61,6 +61,7 @@ namespace SVFHardwareSystem.Ui
                 if (d == DialogResult.Yes)
                 {
                     var purchaseModel = new PurchaseModel();
+                    purchaseModel.SIDR = txtSIDR.Text;
                     purchaseModel.DatePurchase = dtDatePurchase.Value;
                     purchaseModel.SupplierID = _supplierID;
                     await _purchaseService.AddAsync(purchaseModel);
@@ -69,11 +70,7 @@ namespace SVFHardwareSystem.Ui
                 }
 
             }
-            catch (RecordAlreadyExistsException ex)
-            {
-                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (InvalidFieldException ex)
+            catch (CustomBaseException ex)
             {
                 MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

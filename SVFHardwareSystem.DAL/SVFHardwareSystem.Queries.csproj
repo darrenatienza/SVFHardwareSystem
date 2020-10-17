@@ -202,6 +202,10 @@
     <Compile Include="Migrations\202010160840056_UpdateCheckNumberOnPurchasePayment.designer.cs">
       <DependentUpon>202010160840056_UpdateCheckNumberOnPurchasePayment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010170552383_AddIsFullyPaidOnPurchase.cs" />
+    <Compile Include="Migrations\202010170552383_AddIsFullyPaidOnPurchase.designer.cs">
+      <DependentUpon>202010170552383_AddIsFullyPaidOnPurchase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Misc\PaymentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -309,6 +313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010160840056_UpdateCheckNumberOnPurchasePayment.resx">
       <DependentUpon>202010160840056_UpdateCheckNumberOnPurchasePayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010170552383_AddIsFullyPaidOnPurchase.resx">
+      <DependentUpon>202010170552383_AddIsFullyPaidOnPurchase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

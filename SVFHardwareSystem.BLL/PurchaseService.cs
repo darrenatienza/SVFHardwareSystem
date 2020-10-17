@@ -24,10 +24,7 @@ namespace SVFHardwareSystem.Services
             {
                 throw new InvalidFieldException("Supplier");
             }
-            if (model.SIDR == "")
-            {
-                throw new InvalidFieldException("SIDR");
-            }
+            model.SIDR = model.SIDR == null || model.SIDR == "" ? throw new InvalidFieldException("SIDR") : model.SIDR;
             using (var db = new DataContext())
             {
                 var purchase = db.Purchases.FirstOrDefault(x => DbFunctions.TruncateTime(x.DatePurchase) == DbFunctions.TruncateTime(model.DatePurchase) && x.SupplierID == model.SupplierID);
@@ -40,7 +37,7 @@ namespace SVFHardwareSystem.Services
             await base.AddAsync(model);
         }
 
-        
+
 
         public async Task AddPurchaseProductAsync(int purchaseID, PurchaseProductModel model)
         {
@@ -101,7 +98,7 @@ namespace SVFHardwareSystem.Services
 
 
                 ValidatePurchaseProduct(model.ProductID, model.Quantity);
-                
+
                 var purchaseProduct = db.PurchaseProducts.Find(model.PurchaseProductID);
                 if (purchaseProduct.IsQuantityUploaded)
                 {
@@ -131,17 +128,9 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var objs = await db.Purchases.Where(x => x.Supplier.SupplierID == supplierID).ToListAsync();
+                var objs = await db.Purchases.Include(x => x.PurchaseProducts).Include(x => x.PurchasePayments).Where(x => x.Supplier.SupplierID == supplierID).ToListAsync();
                 var models = Mapping.Mapper.Map<List<PurchaseModel>>(objs);
-                var newModels = new List<PurchaseModel>();
-                foreach (var model in models)
-                {
-                    model.Total = GetPurchaseProducts(model.PurchaseID).Sum(r => r.Total);
-                    model.TotalPayment = GetAllPurchasePayments(model.PurchaseID).Sum(r => r.Amount);
-                    model.Balance = model.Total - model.TotalPayment;
-                    newModels.Add(model);
-                }
-                return newModels;
+                return models;
             }
         }
 
@@ -167,7 +156,7 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var obj =  await db.PurchaseProducts.FirstOrDefaultAsync(x => x.PurchaseID == purchaseID && x.ProductID == productID);
+                var obj = await db.PurchaseProducts.FirstOrDefaultAsync(x => x.PurchaseID == purchaseID && x.ProductID == productID);
                 var model = Mapping.Mapper.Map<PurchaseProductModel>(obj);
                 return model;
             }
@@ -209,7 +198,7 @@ namespace SVFHardwareSystem.Services
                 }
                 if (purchasePRoduct.IsQuantityUploaded)
                 {
-                    throw new PurchaseProductUploadAlreadyException(); 
+                    throw new PurchaseProductUploadAlreadyException();
                 }
                 product.Quantity += purchasePRoduct.Quantity;
                 purchasePRoduct.IsQuantityUploaded = true;
@@ -217,15 +206,18 @@ namespace SVFHardwareSystem.Services
                 db.Entry(purchasePRoduct).State = EntityState.Modified;
                 db.SaveChanges();
             }
-        
-    }
+
+        }
         public override PurchaseModel Get(int id)
         {
-            var model =  base.Get(id);
-            model.Total = GetPurchaseProducts(id).Sum(r => r.Total);
-            model.TotalPayment = GetAllPurchasePayments(id).Sum(r => r.Amount);
-            model.Balance = model.Total - model.TotalPayment;
-            return model;
+            using (var db = new DataContext())
+            {
+                var purchase = db.Purchases.Include(x => x.PurchasePayments).Include(x => x.PurchaseProducts).FirstOrDefault(x => x.PurchaseID == id);
+                var model = Mapping.Mapper.Map<PurchaseModel>(purchase);
+                return model;
+            }
+
+
         }
 
         public void AddPurchasePayment(PurchasePaymentModel model)
@@ -233,10 +225,11 @@ namespace SVFHardwareSystem.Services
             using (var db = new DataContext())
             {
                 CheckDecimalIfLessThanOrEqual(model.Amount, 0, "Amount");
-                
+
                 var paymentMethod = db.PaymentMethods.FirstOrDefault(x => x.PaymentMethodID == model.PaymentMethodID);
 
-                CheckObjectIfExists(paymentMethod,"Payment Method");
+                // check payment logic
+                CheckObjectIfExists(paymentMethod, "Payment Method");
                 if (model.PaymentMethodID == 2 && model.CheckNumber == 0)
                 {
                     throw new InvalidFieldException("Check Number");
@@ -248,12 +241,20 @@ namespace SVFHardwareSystem.Services
                 {
                     throw new OverPaymentException("Payment for Purchase Product Exceeded to total amount!");
                 }
+                // for fully paid set isfullypaid to true
+                if (balance == 0)
+                {
+                    var purchase = db.Purchases.Find(model.PurchaseID);
+
+                    purchase.IsFullyPaid = true;
+                    db.Entry(purchase).State = EntityState.Modified;
+                }
                 var purchasePayment = Mapping.Mapper.Map<PurchasePayment>(model);
                 db.PurchasePayments.Add(purchasePayment);
                 db.SaveChanges();
             }
         }
-        private void CheckDecimalIfLessThanOrEqual(decimal value, decimal lessThanOrEqualTo,string fieldName)
+        private void CheckDecimalIfLessThanOrEqual(decimal value, decimal lessThanOrEqualTo, string fieldName)
         {
             if (value <= lessThanOrEqualTo)
             {
@@ -292,6 +293,45 @@ namespace SVFHardwareSystem.Services
                 var purchasePayments = db.PurchasePayments.Where(x => x.PurchaseID == purchaseID).ToList();
                 var models = Mapping.Mapper.Map<IList<PurchasePaymentModel>>(purchasePayments);
                 return models;
+            }
+        }
+
+        public async Task<IList<PurchaseModel>> GetAllPurchasePayablesAsync(bool isFullyPaid)
+        {
+            using (var db = new DataContext())
+            {
+                //year = year == 0 ? throw new InvalidFieldException("Year") : year;
+
+                var purchases = await db.Purchases
+                    .Include(x => x.PurchasePayments)
+                    .Include(x => x.PurchaseProducts)
+                    .Where(x => x.IsFullyPaid == isFullyPaid).ToListAsync();
+
+                var purchaseModels = Mapping.Mapper.Map<List<PurchaseModel>>(purchases);
+
+                return purchaseModels;
+
+
+
+            }
+        }
+
+        public async Task<IList<string>> GetAllPurchasePayableSuppliersAsync(bool isFullyPaid)
+        {
+            using (var db = new DataContext())
+            {
+                //year = year == 0 ? throw new InvalidFieldException("Year") : year;
+
+                var purchases = await db.Purchases
+                    
+                    .Where(x => x.IsFullyPaid == isFullyPaid).ToListAsync();
+
+                var purchaseModels = Mapping.Mapper.Map<List<PurchaseModel>>(purchases);
+
+                return null;
+
+
+
             }
         }
     }
