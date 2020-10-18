@@ -58,8 +58,15 @@ namespace SVFHardwareSystem.Services
                     db.Entry(product).State = EntityState.Modified;
                 }
                 var purchaseProduct = Mapping.Mapper.Map<PurchaseProduct>(model);
+                
                 purchaseProduct.PurchaseID = purchaseID;
                 db.PurchaseProducts.Add(purchaseProduct);
+
+                // set is fully paid to false when adding new purchase product
+                var purchase = db.Purchases.Find(purchaseID);
+                purchase.IsFullyPaid = false;
+                db.Entry(purchase).State = EntityState.Modified;
+
                 await db.SaveChangesAsync();
 
             }
@@ -296,16 +303,16 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public async Task<IList<PurchaseModel>> GetAllPurchasePayablesAsync(bool isFullyPaid)
+        public async Task<IList<PurchaseModel>> GetAllPurchasePayablesAsync(int year, bool isFullyPaid)
         {
             using (var db = new DataContext())
             {
-                //year = year == 0 ? throw new InvalidFieldException("Year") : year;
+                year = year == 0 ? throw new InvalidFieldException("Year") : year;
 
                 var purchases = await db.Purchases
                     .Include(x => x.PurchasePayments)
                     .Include(x => x.PurchaseProducts)
-                    .Where(x => x.IsFullyPaid == isFullyPaid).ToListAsync();
+                    .Where(x => x.IsFullyPaid == isFullyPaid && x.DatePurchase.Year == year).ToListAsync();
 
                 var purchaseModels = Mapping.Mapper.Map<List<PurchaseModel>>(purchases);
 
@@ -316,22 +323,29 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public async Task<IList<string>> GetAllPurchasePayableSuppliersAsync(bool isFullyPaid)
+       
+
+        public async Task<PurchasesPerSupplierModel> GetPurchasesPerSupplier(int year, int supplierID, bool isFullyPaid)
         {
             using (var db = new DataContext())
             {
-                //year = year == 0 ? throw new InvalidFieldException("Year") : year;
+                 year = year == 0 ? throw new InvalidFieldException("Year") : year;
+                supplierID = supplierID == 0 ? throw new InvalidFieldException("Supplier") : supplierID;
 
-                var purchases = await db.Purchases
-                    
-                    .Where(x => x.IsFullyPaid == isFullyPaid).ToListAsync();
+                var supplier = await db.Suppliers
+                    .Include(x => x.Purchases.Select(y => y.PurchasePayments))
+                    .Include(x => x.Purchases.Select(y => y.PurchaseProducts))
+                    .FirstOrDefaultAsync(x => x.SupplierID == supplierID && x.Purchases.Where( y => y.DatePurchase.Year == year).Count() > 0);
+                    var model = Mapping.Mapper.Map<PurchasesPerSupplierModel>(supplier);
 
-                var purchaseModels = Mapping.Mapper.Map<List<PurchaseModel>>(purchases);
+                model.Purchases = model.Purchases.Where(x => x.IsFullyPaid == isFullyPaid).ToList();
 
-                return null;
+                return model;
+                  
 
 
 
+               
             }
         }
     }

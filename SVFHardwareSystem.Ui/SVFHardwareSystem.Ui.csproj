@@ -324,6 +324,7 @@
       <DependentUpon>frmSalesReceivablesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\CustomerReceivable.rdlc" />
+    <EmbeddedResource Include="Reports\PurchasePerSupplier.rdlc" />
     <EmbeddedResource Include="Reports\PurchaseReport.rdlc" />
     <EmbeddedResource Include="Reports\Purchases.rdlc" />
     <None Include=".editorconfig" />

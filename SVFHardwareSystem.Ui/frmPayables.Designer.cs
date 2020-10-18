@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.chkAll = new MetroFramework.Controls.MetroCheckBox();
+            this.cboYear = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.chkFullyPaid = new MetroFramework.Controls.MetroCheckBox();
             this.cboSuppliers = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
@@ -40,7 +42,9 @@
             // 
             // metroPanel1
             // 
-            this.metroPanel1.Controls.Add(this.chkAll);
+            this.metroPanel1.Controls.Add(this.cboYear);
+            this.metroPanel1.Controls.Add(this.metroLabel2);
+            this.metroPanel1.Controls.Add(this.chkFullyPaid);
             this.metroPanel1.Controls.Add(this.cboSuppliers);
             this.metroPanel1.Controls.Add(this.metroLabel1);
             this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -49,37 +53,63 @@
             this.metroPanel1.HorizontalScrollbarSize = 10;
             this.metroPanel1.Location = new System.Drawing.Point(20, 60);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(953, 41);
+            this.metroPanel1.Size = new System.Drawing.Size(953, 38);
             this.metroPanel1.TabIndex = 0;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
-            // chkAll
+            // cboYear
             // 
-            this.chkAll.AutoSize = true;
-            this.chkAll.Location = new System.Drawing.Point(286, 14);
-            this.chkAll.Name = "chkAll";
-            this.chkAll.Size = new System.Drawing.Size(37, 15);
-            this.chkAll.TabIndex = 12;
-            this.chkAll.Text = "All";
-            this.chkAll.UseSelectable = true;
-            this.chkAll.CheckedChanged += new System.EventHandler(this.chkAll_CheckedChanged);
+            this.cboYear.FormattingEnabled = true;
+            this.cboYear.ItemHeight = 23;
+            this.cboYear.Items.AddRange(new object[] {
+            "2020",
+            "2021",
+            "2022",
+            "2023"});
+            this.cboYear.Location = new System.Drawing.Point(53, 6);
+            this.cboYear.Name = "cboYear";
+            this.cboYear.Size = new System.Drawing.Size(120, 29);
+            this.cboYear.TabIndex = 14;
+            this.cboYear.UseSelectable = true;
+            this.cboYear.SelectedIndexChanged += new System.EventHandler(this.cboYear_SelectedIndexChanged);
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(13, 10);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(34, 19);
+            this.metroLabel2.TabIndex = 13;
+            this.metroLabel2.Text = "Year";
+            // 
+            // chkFullyPaid
+            // 
+            this.chkFullyPaid.AutoSize = true;
+            this.chkFullyPaid.Location = new System.Drawing.Point(446, 14);
+            this.chkFullyPaid.Name = "chkFullyPaid";
+            this.chkFullyPaid.Size = new System.Drawing.Size(106, 15);
+            this.chkFullyPaid.TabIndex = 12;
+            this.chkFullyPaid.Text = "Show Fully Paid";
+            this.chkFullyPaid.UseSelectable = true;
+            this.chkFullyPaid.CheckedChanged += new System.EventHandler(this.chkAll_CheckedChanged);
             // 
             // cboSuppliers
             // 
             this.cboSuppliers.FormattingEnabled = true;
             this.cboSuppliers.ItemHeight = 23;
-            this.cboSuppliers.Location = new System.Drawing.Point(82, 6);
+            this.cboSuppliers.Location = new System.Drawing.Point(242, 6);
             this.cboSuppliers.Name = "cboSuppliers";
             this.cboSuppliers.Size = new System.Drawing.Size(198, 29);
             this.cboSuppliers.TabIndex = 11;
             this.cboSuppliers.UseSelectable = true;
+            this.cboSuppliers.SelectedIndexChanged += new System.EventHandler(this.cboSuppliers_SelectedIndexChanged);
             // 
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(19, 10);
+            this.metroLabel1.Location = new System.Drawing.Point(179, 10);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(57, 19);
             this.metroLabel1.TabIndex = 10;
@@ -92,9 +122,9 @@
             this.metroPanel2.HorizontalScrollbarBarColor = true;
             this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel2.HorizontalScrollbarSize = 10;
-            this.metroPanel2.Location = new System.Drawing.Point(20, 101);
+            this.metroPanel2.Location = new System.Drawing.Point(20, 98);
             this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(953, 419);
+            this.metroPanel2.Size = new System.Drawing.Size(953, 422);
             this.metroPanel2.TabIndex = 1;
             this.metroPanel2.VerticalScrollbarBarColor = true;
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
@@ -107,7 +137,7 @@
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(953, 419);
+            this.reportViewer1.Size = new System.Drawing.Size(953, 422);
             this.reportViewer1.TabIndex = 2;
             // 
             // frmPayables
@@ -133,7 +163,9 @@
         private MetroFramework.Controls.MetroPanel metroPanel2;
         private MetroFramework.Controls.MetroComboBox cboSuppliers;
         private MetroFramework.Controls.MetroLabel metroLabel1;
-        private MetroFramework.Controls.MetroCheckBox chkAll;
+        private MetroFramework.Controls.MetroCheckBox chkFullyPaid;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private MetroFramework.Controls.MetroComboBox cboYear;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
     }
 }

@@ -1,7 +1,11 @@
-﻿using MetroFramework.Forms;
+﻿using MetroFramework;
+using MetroFramework.Forms;
 using Microsoft.Reporting.WinForms;
+using SVFHardwareSystem.Services.Exceptions;
+using SVFHardwareSystem.Services.Extensions;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
+using SVFHardwareSystem.Ui.Misc;
 using SVFHardwareSystem.Ui.Reports;
 using System;
 using System.Collections.Generic;
@@ -20,72 +24,178 @@ namespace SVFHardwareSystem.Ui
     {
         private IPurchaseService _purchaseService;
         private IList<PurchaseModel> _purchases;
+        private int _supplierID;
 
         public frmPayables(IPurchaseService purchaseService)
         {
             InitializeComponent();
             _purchaseService = purchaseService;
+            _purchases = new List<PurchaseModel>();
         }
 
        
 
-        private void LoadReport()
+        private async Task LoadReport()
         {
-            int count = 0;
-            var showAll = chkAll.Checked;
-            _purchases = Task.Run(() => _purchaseService.GetAllPurchasePayablesAsync(showAll)).Result;
-            var ds = new reports();
-            DataTable t = ds.Tables["Purchases"];
-            DataRow r;
-            foreach (var item in _purchases)
+
+            try
             {
-                count++;
+                int count = 0;
+                
+                var fullyPaid = chkFullyPaid.Checked;
+                var year = cboYear.Text.ToInt();
+                _purchases = await _purchaseService.GetAllPurchasePayablesAsync(year, fullyPaid);
+                var ds = new reports();
+                DataTable t = ds.Tables["Purchases"];
+                DataRow r;
+                foreach (var item in _purchases)
+                {
+                    count++;
+                    r = t.NewRow();
+                    r["Id"] = count.ToString();
+                    r["Date"] = item.DatePurchase.ToShortDateString();
+                    r["SupplierName"] = item.SupplierName;
+                    r["SIDR"] = item.SIDR;
+                    r["TotalPurchaseAmount"] = item.TotalPurchaseAmount;
+                    r["TotalCashAmount"] = item.TotalCashAmount;
+                    r["TotalPayableAmount"] = item.TotalPayableAmount;
+                    r["CheckDate"] = item.CheckDate;
+                    r["CheckNumber"] = item.CheckNumber;
+                    r["TotalCheckAmount"] = item.TotalCheckAmount;
+                    t.Rows.Add(r);
+                }
+                // for total of cash and purchases
                 r = t.NewRow();
-                r["Id"] = count.ToString();
-                r["Date"] = item.DatePurchase.ToShortDateString();
-                r["SupplierName"] = item.SupplierName;
-                r["SIDR"] = item.SIDR;
-                r["TotalPurchaseAmount"] = item.TotalPurchaseAmount;
-                r["TotalCashAmount"] = item.TotalCashAmount;
-                r["TotalPayableAmount"] = item.TotalPayableAmount;
-                r["CheckDate"] = item.CheckDate;
-                r["CheckNumber"] = item.CheckNumber;
-                r["TotalCheckAmount"] = item.TotalCheckAmount;
+                r["TotalPurchaseAmount"] = _purchases.Sum(x => x.TotalPurchaseAmount);
+                r["TotalCashAmount"] = _purchases.Sum(x => x.TotalCashAmount);
+               
                 t.Rows.Add(r);
+                reportViewer1.LocalReport.DataSources.Clear();
+                ReportDataSource rds = new ReportDataSource("Purchases", t);
+
+                reportViewer1.LocalReport.DataSources.Add(rds);
+                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer1.ZoomMode = ZoomMode.PageWidth;
+                this.reportViewer1.RefreshReport();
             }
-            reportViewer1.LocalReport.DataSources.Clear();
-            ReportDataSource rds = new ReportDataSource("Purchases", t);
+            catch (CustomBaseException ex)
+            {
 
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
 
-
-
-
-            reportViewer1.LocalReport.DataSources.Add(rds);
-            reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer1.ZoomMode = ZoomMode.PageWidth;
-            this.reportViewer1.RefreshReport();
+                MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
-        private void frmPayables_Load(object sender, EventArgs e)
+        private async Task LoadPurchasesPerSupplierReport()
         {
-            LoadReport();
+
+            try
+            {
+                int count = 0;
+
+                var fullyPaid = chkFullyPaid.Checked;
+                var year = cboYear.Text.ToInt();
+                var purchasesPerSupplier = await _purchaseService.GetPurchasesPerSupplier(year, _supplierID, fullyPaid);
+                var ds = new reports();
+                DataTable t = ds.Tables["Purchases"];
+                DataRow r;
+                foreach (var item in purchasesPerSupplier.Purchases)
+                {
+                    count++;
+                    r = t.NewRow();
+                    r["Id"] = count.ToString();
+                    r["Date"] = item.DatePurchase.ToShortDateString();
+                    r["SupplierName"] = item.SupplierName;
+                    r["SIDR"] = item.SIDR;
+                    r["TotalPurchaseAmount"] = item.TotalPurchaseAmount;
+                    r["TotalCashAmount"] = item.TotalCashAmount;
+                    r["TotalPayableAmount"] = item.TotalPayableAmount;
+                    r["CheckDate"] = item.CheckDate;
+                    r["CheckNumber"] = item.CheckNumber;
+                    r["TotalCheckAmount"] = item.TotalCheckAmount;
+                    t.Rows.Add(r);
+                }
+                // for total of cash and purchases
+                r = t.NewRow();
+                r["TotalPurchaseAmount"] = purchasesPerSupplier.TotalPurchaseAmount;
+                r["TotalCashAmount"] = purchasesPerSupplier.TotalCashPayment;
+
+                t.Rows.Add(r);
+
+                reportViewer1.LocalReport.ReportEmbeddedResource = "SVFHardwareSystem.Ui.Reports.PurchasePerSupplier.rdlc";
+                reportViewer1.LocalReport.DataSources.Clear();
+                ReportDataSource rds = new ReportDataSource("Purchases", t);
+
+                var __supplierName = new ReportParameter("SupplierName", purchasesPerSupplier.Name);
+                var __address = new ReportParameter("Address", purchasesPerSupplier.Address);
+                var __contactNumber = new ReportParameter("ContactNumber", purchasesPerSupplier.ContactNumber);
+                var __totalPurchase = new ReportParameter("TotalPurchaseAmount", purchasesPerSupplier.TotalPurchaseAmount.ToString());
+                var __totalCashPayment = new ReportParameter("TotalCashPayment", purchasesPerSupplier.TotalCashPayment.ToString());
+                var __totalPayablePayment = new ReportParameter("TotalPayablePayment", purchasesPerSupplier.TotalPayablePayment.ToString());
+
+                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { __supplierName, __address, __contactNumber, __totalPurchase,__totalCashPayment,__totalPayablePayment});
+
+                reportViewer1.LocalReport.DataSources.Add(rds);
+                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer1.ZoomMode = ZoomMode.PageWidth;
+                this.reportViewer1.RefreshReport();
+            }
+            catch (CustomBaseException ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        private async void frmPayables_Load(object sender, EventArgs e)
+        {
+            cboYear.SelectedIndex = 0;
+            await LoadReport();
             LoadSuppliers();
 
 
 
         }
 
-        private void chkAll_CheckedChanged(object sender, EventArgs e)
+        private async void chkAll_CheckedChanged(object sender, EventArgs e)
         {
-            LoadReport();
+            await LoadReport();
             LoadSuppliers();
         }
 
         private void LoadSuppliers()
         {
-            var _groupedSuppliers = _purchases.GroupBy(x => x.SupplierName).Select(x => new { Name = x.Key }).ToList();
             cboSuppliers.Items.Clear();
-            _groupedSuppliers.ForEach(x => cboSuppliers.Items.Add(x.Name));
+            if (_purchases.Count() > 0)
+            {
+                var _groupedSuppliers = _purchases.GroupBy(x => x.SupplierName).Select(x => new { Name = x.Key, ID = x.FirstOrDefault().SupplierID }).ToList();
+              
+                _groupedSuppliers.ForEach(x => cboSuppliers.Items.Add(new ItemX(x.Name,x.ID.ToString())));
+            }
+           
+        }
+
+        private async void cboYear_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            await LoadReport();
+            LoadSuppliers();
+        }
+
+        private async void cboSuppliers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _supplierID = ((ItemX)cboSuppliers.SelectedItem).Value.ToInt();
+            await LoadPurchasesPerSupplierReport();
+            
         }
     }
 }

@@ -11,8 +11,8 @@ namespace SVFHardwareSystem.Services.Interfaces
     {
 
         Task<IList<PurchaseModel>> GetAllAsync(int supplierID);
-        Task<IList<PurchaseModel>> GetAllPurchasePayablesAsync(bool isFullyPaid);
-        Task<IList<string>> GetAllPurchasePayableSuppliersAsync(bool isFullyPaid);
+        Task<IList<PurchaseModel>> GetAllPurchasePayablesAsync(int year, bool isFullyPaid);
+
         Task<IList<PurchaseProductModel>> GetPurchaseProductsAsync(int purchaseID);
         /// <summary>
         /// Edit the Purchase Product
@@ -43,5 +43,6 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// </summary>
         /// <param name="purchasePayment"></param>
         void AddPurchasePayment(PurchasePaymentModel purchasePayment);
+        Task<PurchasesPerSupplierModel> GetPurchasesPerSupplier(int year, int supplierID,bool fullyPaid);
     }
 }

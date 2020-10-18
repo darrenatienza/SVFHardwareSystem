@@ -37,10 +37,10 @@
             this.cboCategory = new MetroFramework.Controls.MetroComboBox();
             this.chkUploadQuantity = new MetroFramework.Controls.MetroCheckBox();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.txtUnit = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.txtPrice = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
-            this.txtUnit = new MetroFramework.Controls.MetroTextBox();
             this.SuspendLayout();
             // 
             // cboProduct
@@ -143,12 +143,45 @@
             this.metroToolTip1.SetToolTip(this.chkUploadQuantity, "Quantity will automatically reflect to the current inventory count of the product" +
         "");
             this.chkUploadQuantity.UseSelectable = true;
+            this.chkUploadQuantity.Visible = false;
             // 
             // metroToolTip1
             // 
             this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
+            // txtUnit
+            // 
+            // 
+            // 
+            // 
+            this.txtUnit.CustomButton.Image = null;
+            this.txtUnit.CustomButton.Location = new System.Drawing.Point(127, 1);
+            this.txtUnit.CustomButton.Name = "";
+            this.txtUnit.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtUnit.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtUnit.CustomButton.TabIndex = 1;
+            this.txtUnit.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtUnit.CustomButton.UseSelectable = true;
+            this.txtUnit.CustomButton.Visible = false;
+            this.txtUnit.Lines = new string[0];
+            this.txtUnit.Location = new System.Drawing.Point(25, 165);
+            this.txtUnit.MaxLength = 32767;
+            this.txtUnit.Name = "txtUnit";
+            this.txtUnit.PasswordChar = '\0';
+            this.txtUnit.ReadOnly = true;
+            this.txtUnit.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtUnit.SelectedText = "";
+            this.txtUnit.SelectionLength = 0;
+            this.txtUnit.SelectionStart = 0;
+            this.txtUnit.ShortcutsEnabled = true;
+            this.txtUnit.Size = new System.Drawing.Size(149, 23);
+            this.txtUnit.TabIndex = 11;
+            this.metroToolTip1.SetToolTip(this.txtUnit, "Unit base on product selling not on purchase.");
+            this.txtUnit.UseSelectable = true;
+            this.txtUnit.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtUnit.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // metroLabel4
             // 
@@ -197,38 +230,6 @@
             this.metroLabel5.Size = new System.Drawing.Size(32, 19);
             this.metroLabel5.TabIndex = 10;
             this.metroLabel5.Text = "Unit";
-            // 
-            // txtUnit
-            // 
-            // 
-            // 
-            // 
-            this.txtUnit.CustomButton.Image = null;
-            this.txtUnit.CustomButton.Location = new System.Drawing.Point(127, 1);
-            this.txtUnit.CustomButton.Name = "";
-            this.txtUnit.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtUnit.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtUnit.CustomButton.TabIndex = 1;
-            this.txtUnit.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtUnit.CustomButton.UseSelectable = true;
-            this.txtUnit.CustomButton.Visible = false;
-            this.txtUnit.Lines = new string[0];
-            this.txtUnit.Location = new System.Drawing.Point(25, 165);
-            this.txtUnit.MaxLength = 32767;
-            this.txtUnit.Name = "txtUnit";
-            this.txtUnit.PasswordChar = '\0';
-            this.txtUnit.ReadOnly = true;
-            this.txtUnit.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtUnit.SelectedText = "";
-            this.txtUnit.SelectionLength = 0;
-            this.txtUnit.SelectionStart = 0;
-            this.txtUnit.ShortcutsEnabled = true;
-            this.txtUnit.Size = new System.Drawing.Size(149, 23);
-            this.txtUnit.TabIndex = 11;
-            this.metroToolTip1.SetToolTip(this.txtUnit, "Unit base on product selling not on purchase.");
-            this.txtUnit.UseSelectable = true;
-            this.txtUnit.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtUnit.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // frmPurchaseProductForm
             // 

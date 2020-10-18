@@ -144,7 +144,7 @@ namespace SVFHardwareSystem.Ui
                 purchaseProduct.PurchaseProductID = _purchaseProductID;
                 purchaseProduct.ProductID = _productID;
                 purchaseProduct.Quantity = txtQuantity.Text.ToInt();
-                purchaseProduct.IsQuantityUploaded = chkUploadQuantity.Checked;
+                //purchaseProduct.IsQuantityUploaded = chkUploadQuantity.Checked;
                 purchaseProduct.Price = txtPrice.Text.ToDecimal();
                 if (_purchaseProductID > 0)
                 {
