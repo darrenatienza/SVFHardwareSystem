@@ -6,34 +6,34 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.83312cm</Width>
+              <Width>0.92779cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.39958cm</Width>
+              <Width>3.49425cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.51083cm</Width>
+              <Width>4.6055cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.05021cm</Width>
+              <Width>2.14488cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.21438cm</Width>
+              <Width>3.30905cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.10313cm</Width>
+              <Width>2.1978cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.20896cm</Width>
+              <Width>2.30363cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.22792cm</Width>
+              <Width>3.32259cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.98979cm</Width>
+              <Width>3.08446cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.54cm</Width>
+              <Width>2.63467cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -49,7 +49,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value xml:space="preserve"> </Value>
                               <Style>
                                 <FontFamily>calibri</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -776,9 +776,9 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>Purchases</DataSetName>
-        <Top>2.85433cm</Top>
+        <Top>0cm</Top>
         <Height>1.17354cm</Height>
-        <Width>27.07792cm</Width>
+        <Width>28.02467cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -786,11 +786,21 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>2in</Height>
+    <Height>0.46202in</Height>
     <Style />
   </Body>
-  <Width>10.6606in</Width>
+  <Width>11.03333in</Width>
   <Page>
+    <PageHeader>
+      <Height>1.54167in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
     <PageHeight>8.5in</PageHeight>
     <PageWidth>13in</PageWidth>
     <LeftMargin>0.7874in</LeftMargin>

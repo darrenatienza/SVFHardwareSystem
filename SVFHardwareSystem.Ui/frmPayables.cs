@@ -70,6 +70,8 @@ namespace SVFHardwareSystem.Ui
                 r["TotalCashAmount"] = _purchases.Sum(x => x.TotalCashAmount);
                
                 t.Rows.Add(r);
+
+                reportViewer1.LocalReport.ReportEmbeddedResource = "SVFHardwareSystem.Ui.Reports.Purchases.rdlc";
                 reportViewer1.LocalReport.DataSources.Clear();
                 ReportDataSource rds = new ReportDataSource("Purchases", t);
 
@@ -169,6 +171,7 @@ namespace SVFHardwareSystem.Ui
 
         private async void chkAll_CheckedChanged(object sender, EventArgs e)
         {
+            _supplierID = 0;
             await LoadReport();
             LoadSuppliers();
         }

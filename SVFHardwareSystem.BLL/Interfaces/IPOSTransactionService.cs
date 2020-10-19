@@ -37,7 +37,7 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// </summary>
         /// <param name="posTransactionID"></param>
         /// <param name="change"></param>
-        void Pay(int posTransactionID, decimal amountTendered, decimal total);
+        void Pay(int posTransactionID, decimal amountTendered, decimal total, DateTime paymentDate);
         
         void CheckAndUpdateIfPosTransactionIsFullyPaid(int posTransactionID);
     }

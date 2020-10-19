@@ -37,6 +37,7 @@
             this.btnPurchase = new MetroFramework.Controls.MetroTile();
             this.btnInventory = new MetroFramework.Controls.MetroTile();
             this.btnPayables = new MetroFramework.Controls.MetroTile();
+            this.btnSalesMontlyReport = new MetroFramework.Controls.MetroTile();
             this.SuspendLayout();
             // 
             // btnPointOfSale
@@ -138,11 +139,23 @@
             this.btnPayables.UseSelectable = true;
             this.btnPayables.Click += new System.EventHandler(this.btnPayables_Click);
             // 
+            // btnSalesMontlyReport
+            // 
+            this.btnSalesMontlyReport.ActiveControl = null;
+            this.btnSalesMontlyReport.Location = new System.Drawing.Point(268, 328);
+            this.btnSalesMontlyReport.Name = "btnSalesMontlyReport";
+            this.btnSalesMontlyReport.Size = new System.Drawing.Size(140, 95);
+            this.btnSalesMontlyReport.TabIndex = 9;
+            this.btnSalesMontlyReport.Text = "Sales Montly Report";
+            this.btnSalesMontlyReport.UseSelectable = true;
+            this.btnSalesMontlyReport.Click += new System.EventHandler(this.btnSalesMontlyReport_Click);
+            // 
             // frmDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnSalesMontlyReport);
             this.Controls.Add(this.btnPayables);
             this.Controls.Add(this.btnInventory);
             this.Controls.Add(this.btnPurchase);
@@ -169,5 +182,6 @@
         private MetroFramework.Controls.MetroTile btnPurchase;
         private MetroFramework.Controls.MetroTile btnInventory;
         private MetroFramework.Controls.MetroTile btnPayables;
+        private MetroFramework.Controls.MetroTile btnSalesMontlyReport;
     }
 }

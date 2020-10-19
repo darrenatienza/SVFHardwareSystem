@@ -101,6 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\FormatExtensions.cs" />
     <Compile Include="frmCustomerReceivable.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,6 +212,12 @@
     <Compile Include="frmSales.Designer.cs">
       <DependentUpon>frmSales.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSalesMonthlyReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSalesMonthlyReport.Designer.cs">
+      <DependentUpon>frmSalesMonthlyReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSalesReplaceCancel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -301,6 +308,9 @@
     <EmbeddedResource Include="frmSales.resx">
       <DependentUpon>frmSales.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSalesMonthlyReport.resx">
+      <DependentUpon>frmSalesMonthlyReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSalesReplaceCancel.resx">
       <DependentUpon>frmSalesReplaceCancel.cs</DependentUpon>
     </EmbeddedResource>
@@ -327,6 +337,7 @@
     <EmbeddedResource Include="Reports\PurchasePerSupplier.rdlc" />
     <EmbeddedResource Include="Reports\PurchaseReport.rdlc" />
     <EmbeddedResource Include="Reports\Purchases.rdlc" />
+    <EmbeddedResource Include="Reports\MonthlyTotalSales.rdlc" />
     <None Include=".editorconfig" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

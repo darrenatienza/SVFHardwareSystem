@@ -191,7 +191,7 @@ namespace SVFHardwareSystem.Services
             var cash = posPayments.Count() > 0 ? posPayments.Sum(y => y.Amount) : 0;
             return cash;
         }
-        public void Pay(int posTransactionID, decimal amountTendered, decimal total)
+        public void Pay(int posTransactionID, decimal amountTendered, decimal total,DateTime paymentDate)
         {
             using (var db = new DataContext())
             {
@@ -208,7 +208,7 @@ namespace SVFHardwareSystem.Services
                 // add new payment
                 var posPayment = new POSPayment();
                 posPayment.Amount = amountTendered;
-                posPayment.PaymentDate = DateTime.Now;
+                posPayment.PaymentDate = paymentDate;
                 posPayment.POSTransactionID = posTransactionID;
                 posPayment.IsReceivablePayment = receivable > 0 ? true : false;
                 db.POSPayments.Add(posPayment);

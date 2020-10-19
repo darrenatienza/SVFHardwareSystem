@@ -39,6 +39,8 @@
             this.lblReceivable = new MetroFramework.Controls.MetroLabel();
             this.txtReceivable = new MetroFramework.Controls.MetroTextBox();
             this.tmrControlState = new System.Windows.Forms.Timer(this.components);
+            this.dtPaymentDate = new MetroFramework.Controls.MetroDateTime();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.SuspendLayout();
             // 
             // txtTotal
@@ -57,7 +59,7 @@
             this.txtTotal.CustomButton.Visible = false;
             this.txtTotal.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtTotal.Lines = new string[0];
-            this.txtTotal.Location = new System.Drawing.Point(23, 106);
+            this.txtTotal.Location = new System.Drawing.Point(18, 145);
             this.txtTotal.MaxLength = 32767;
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.PasswordChar = '\0';
@@ -78,7 +80,7 @@
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(23, 84);
+            this.lblTotal.Location = new System.Drawing.Point(18, 123);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(36, 19);
             this.lblTotal.TabIndex = 1;
@@ -86,7 +88,7 @@
             // 
             // btnPay
             // 
-            this.btnPay.Location = new System.Drawing.Point(164, 235);
+            this.btnPay.Location = new System.Drawing.Point(159, 274);
             this.btnPay.Name = "btnPay";
             this.btnPay.Size = new System.Drawing.Size(93, 38);
             this.btnPay.TabIndex = 1;
@@ -97,7 +99,7 @@
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(23, 143);
+            this.metroLabel2.Location = new System.Drawing.Point(18, 182);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(114, 19);
             this.metroLabel2.TabIndex = 4;
@@ -119,7 +121,7 @@
             this.txtAmountTendered.CustomButton.Visible = false;
             this.txtAmountTendered.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtAmountTendered.Lines = new string[0];
-            this.txtAmountTendered.Location = new System.Drawing.Point(23, 165);
+            this.txtAmountTendered.Location = new System.Drawing.Point(18, 204);
             this.txtAmountTendered.MaxLength = 32767;
             this.txtAmountTendered.Name = "txtAmountTendered";
             this.txtAmountTendered.PasswordChar = '\0';
@@ -141,7 +143,7 @@
             // metroLabel3
             // 
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(19, 200);
+            this.metroLabel3.Location = new System.Drawing.Point(14, 239);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(54, 19);
             this.metroLabel3.TabIndex = 6;
@@ -163,7 +165,7 @@
             this.txtChange.CustomButton.Visible = false;
             this.txtChange.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtChange.Lines = new string[0];
-            this.txtChange.Location = new System.Drawing.Point(79, 200);
+            this.txtChange.Location = new System.Drawing.Point(74, 239);
             this.txtChange.MaxLength = 32767;
             this.txtChange.Name = "txtChange";
             this.txtChange.PasswordChar = '\0';
@@ -184,7 +186,7 @@
             // lblReceivable
             // 
             this.lblReceivable.AutoSize = true;
-            this.lblReceivable.Location = new System.Drawing.Point(143, 84);
+            this.lblReceivable.Location = new System.Drawing.Point(138, 123);
             this.lblReceivable.Name = "lblReceivable";
             this.lblReceivable.Size = new System.Drawing.Size(71, 19);
             this.lblReceivable.TabIndex = 7;
@@ -206,7 +208,7 @@
             this.txtReceivable.CustomButton.Visible = false;
             this.txtReceivable.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtReceivable.Lines = new string[0];
-            this.txtReceivable.Location = new System.Drawing.Point(143, 106);
+            this.txtReceivable.Location = new System.Drawing.Point(138, 145);
             this.txtReceivable.MaxLength = 32767;
             this.txtReceivable.Name = "txtReceivable";
             this.txtReceivable.PasswordChar = '\0';
@@ -229,11 +231,30 @@
             this.tmrControlState.Enabled = true;
             this.tmrControlState.Tick += new System.EventHandler(this.tmrControlState_Tick);
             // 
+            // dtPaymentDate
+            // 
+            this.dtPaymentDate.Location = new System.Drawing.Point(18, 91);
+            this.dtPaymentDate.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dtPaymentDate.Name = "dtPaymentDate";
+            this.dtPaymentDate.Size = new System.Drawing.Size(234, 29);
+            this.dtPaymentDate.TabIndex = 9;
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(18, 69);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(90, 19);
+            this.metroLabel1.TabIndex = 10;
+            this.metroLabel1.Text = "Payment Date";
+            // 
             // frmPointOfSalePayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(275, 295);
+            this.ClientSize = new System.Drawing.Size(275, 327);
+            this.Controls.Add(this.metroLabel1);
+            this.Controls.Add(this.dtPaymentDate);
             this.Controls.Add(this.lblReceivable);
             this.Controls.Add(this.txtReceivable);
             this.Controls.Add(this.metroLabel3);
@@ -264,5 +285,7 @@
         private MetroFramework.Controls.MetroLabel lblReceivable;
         private MetroFramework.Controls.MetroTextBox txtReceivable;
         private System.Windows.Forms.Timer tmrControlState;
+        private MetroFramework.Controls.MetroDateTime dtPaymentDate;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
     }
 }

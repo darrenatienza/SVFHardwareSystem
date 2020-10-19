@@ -171,5 +171,55 @@ namespace SVFHardwareSystem.Services
 
 
         }
+
+        public async Task<SalesMonthlyTotalModel> GetSalesMonthlyTotal(int month, int year)
+        {
+            using (var db = new DataContext())
+            {
+                var daysInMonth = DateTime.DaysInMonth(year, month);
+                var salesMonthlyTotalModel = new SalesMonthlyTotalModel();
+
+                
+                for (int day = 1; day <= daysInMonth; day++)
+                {
+                    var totalDailyCashPayment = await GetTotalCashOnlyPayment(month, year, day);
+                    var totalSalesAmount = await GetTotalSalesAmount(month, year, day);
+
+                    var salesDailyTotalModel = new SalesDailyTotalModel();
+                    salesDailyTotalModel.Date =  new DateTime(year, month, day);
+                    salesDailyTotalModel.TotalDailyCashPayment = totalDailyCashPayment;
+                    salesDailyTotalModel.TotalDailySalesAmount = totalSalesAmount;
+                    salesMonthlyTotalModel.SalesDailyTotals.Add(salesDailyTotalModel);
+                }
+                return salesMonthlyTotalModel;
+            }
+        }
+
+        public async Task<decimal> GetTotalCashOnlyPayment(int month, int year, int day)
+        {
+            using (var db = new DataContext())
+            {
+                var posPayments = await db.POSPayments.Where(x => x.PaymentDate.Month == month 
+                    && x.PaymentDate.Year == year && x.PaymentDate.Day == day 
+                    && x.IsReceivablePayment == false).ToListAsync();
+
+                return posPayments.Count() > 0 ? posPayments.Sum(y => y.Amount) : 0;
+            }
+
+
+        }
+
+        public async Task<decimal> GetTotalSalesAmount(int month, int year, int day)
+        {
+            using (var db = new DataContext())
+            {
+                var sales = await db.POSTransactions.Include(x => x.TransactionProducts).Where(x => x.SalesTransactionDate.Month == month
+                    && x.SalesTransactionDate.Year == year && x.SalesTransactionDate.Day == day ).ToListAsync();
+                
+                return sales.Count() > 0 ? sales.Sum(y => y.TransactionProducts.Sum(z => (z.Quantity - z.QuantityToCancel) * z.Price)) : 0;
+            }
+
+
+        }
     }
 }

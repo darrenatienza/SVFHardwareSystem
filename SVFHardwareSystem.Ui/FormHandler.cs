@@ -41,6 +41,9 @@ namespace SVFHardwareSystem.Ui
 
         public static frmPayables OpenPayablesForm() => UnityConfig
                      .Register().Resolve<frmPayables>();
+
+        public static frmSalesMonthlyReport OpenSaleMonthlyReportForm() => UnityConfig
+                   .Register().Resolve<frmSalesMonthlyReport>();
         public static frmSupplierForm OpenSupplierForm(int supplierID)
         {
             return UnityConfig

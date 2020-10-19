@@ -82,7 +82,8 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                _pOSTransactionService.Pay(_posTransactionID, _amount, _total);
+                var paymentDate = dtPaymentDate.Value;
+                _pOSTransactionService.Pay(_posTransactionID, _amount, _total,paymentDate);
                
                 this.Close();
             }

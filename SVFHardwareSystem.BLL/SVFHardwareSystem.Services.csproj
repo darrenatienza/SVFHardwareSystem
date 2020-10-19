@@ -105,7 +105,9 @@
     <Compile Include="ServiceModels\PurchasePaymentModel.cs" />
     <Compile Include="ServiceModels\PurchaseProductModel.cs" />
     <Compile Include="ServiceModels\PurchaseSaleInventoryProductModel.cs" />
+    <Compile Include="ServiceModels\SalesDailyTotalModel.cs" />
     <Compile Include="ServiceModels\SalesModel.cs" />
+    <Compile Include="ServiceModels\SalesMonthlyTotalModel.cs" />
     <Compile Include="ServiceModels\SalesProductModel.cs" />
     <Compile Include="ServiceModels\CustomerReceivableModel.cs" />
     <Compile Include="ServiceModels\CustomerSalesReceivableModel.cs" />
