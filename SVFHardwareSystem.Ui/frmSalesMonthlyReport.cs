@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,6 +62,11 @@ namespace SVFHardwareSystem.Ui
 
                 t.Rows.Add(r);
                 reportViewer1.LocalReport.DataSources.Clear();
+
+                var __totalPayablePayment = new ReportParameter("MonthYear", string.Format("{0} {1}",CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(salesMonthlyTotal.Month),salesMonthlyTotal.Year));
+
+                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { __totalPayablePayment});
+
                 ReportDataSource rds = new ReportDataSource("MonthlyTotalSales", t);
 
                 reportViewer1.LocalReport.DataSources.Add(rds);

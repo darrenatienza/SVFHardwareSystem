@@ -178,7 +178,8 @@ namespace SVFHardwareSystem.Services
             {
                 var daysInMonth = DateTime.DaysInMonth(year, month);
                 var salesMonthlyTotalModel = new SalesMonthlyTotalModel();
-
+                salesMonthlyTotalModel.Month = month;
+                salesMonthlyTotalModel.Year = year;
                 
                 for (int day = 1; day <= daysInMonth; day++)
                 {

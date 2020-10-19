@@ -163,6 +163,7 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
+                
                 var obj = await db.PurchaseProducts.FirstOrDefaultAsync(x => x.PurchaseID == purchaseID && x.ProductID == productID);
                 var model = Mapping.Mapper.Map<PurchaseProductModel>(obj);
                 return model;

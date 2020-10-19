@@ -8,9 +8,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
 {
     public class SalesMonthlyTotalModel
     {
-        public int Year { get; set; }
-        public int Month { get; set; }
-
+      
 
         public decimal TotalCashMonthlyPayment { get { return SalesDailyTotals.Sum(x => x.TotalDailyCashPayment); } }
 
@@ -18,7 +16,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
 
         public decimal TotalMonthlySalesAmount { get { return SalesDailyTotals.Sum(x => x.TotalDailySalesAmount); } }
         public IList<SalesDailyTotalModel> SalesDailyTotals { get; set; } = new List<SalesDailyTotalModel>();
-    
-        
+        public int Month { get; set; }
+        public int Year { get; set; }
     }
 }
