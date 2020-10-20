@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.cboYear = new MetroFramework.Controls.MetroComboBox();
+            this.dtDate = new MetroFramework.Controls.MetroDateTime();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.chkFullyPaid = new MetroFramework.Controls.MetroCheckBox();
             this.cboSuppliers = new MetroFramework.Controls.MetroComboBox();
@@ -42,7 +42,7 @@
             // 
             // metroPanel1
             // 
-            this.metroPanel1.Controls.Add(this.cboYear);
+            this.metroPanel1.Controls.Add(this.dtDate);
             this.metroPanel1.Controls.Add(this.metroLabel2);
             this.metroPanel1.Controls.Add(this.chkFullyPaid);
             this.metroPanel1.Controls.Add(this.cboSuppliers);
@@ -59,47 +59,45 @@
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
-            // cboYear
+            // dtDate
             // 
-            this.cboYear.FormattingEnabled = true;
-            this.cboYear.ItemHeight = 23;
-            this.cboYear.Items.AddRange(new object[] {
-            "2020",
-            "2021",
-            "2022",
-            "2023"});
-            this.cboYear.Location = new System.Drawing.Point(53, 6);
-            this.cboYear.Name = "cboYear";
-            this.cboYear.Size = new System.Drawing.Size(120, 29);
-            this.cboYear.TabIndex = 14;
-            this.cboYear.UseSelectable = true;
-            this.cboYear.SelectedIndexChanged += new System.EventHandler(this.cboYear_SelectedIndexChanged);
+            this.dtDate.CustomFormat = "MMMM, yyyy";
+            this.dtDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtDate.Location = new System.Drawing.Point(55, 6);
+            this.dtDate.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dtDate.Name = "dtDate";
+            this.dtDate.Size = new System.Drawing.Size(153, 29);
+            this.dtDate.TabIndex = 14;
+            this.dtDate.ValueChanged += new System.EventHandler(this.dtDate_ValueChanged);
             // 
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.Location = new System.Drawing.Point(13, 10);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(34, 19);
+            this.metroLabel2.Size = new System.Drawing.Size(36, 19);
             this.metroLabel2.TabIndex = 13;
-            this.metroLabel2.Text = "Year";
+            this.metroLabel2.Text = "Date";
             // 
             // chkFullyPaid
             // 
             this.chkFullyPaid.AutoSize = true;
-            this.chkFullyPaid.Location = new System.Drawing.Point(446, 14);
+            this.chkFullyPaid.Location = new System.Drawing.Point(844, 10);
             this.chkFullyPaid.Name = "chkFullyPaid";
             this.chkFullyPaid.Size = new System.Drawing.Size(106, 15);
             this.chkFullyPaid.TabIndex = 12;
             this.chkFullyPaid.Text = "Show Fully Paid";
             this.chkFullyPaid.UseSelectable = true;
+            this.chkFullyPaid.Visible = false;
             this.chkFullyPaid.CheckedChanged += new System.EventHandler(this.chkAll_CheckedChanged);
             // 
             // cboSuppliers
             // 
             this.cboSuppliers.FormattingEnabled = true;
             this.cboSuppliers.ItemHeight = 23;
-            this.cboSuppliers.Location = new System.Drawing.Point(242, 6);
+            this.cboSuppliers.Items.AddRange(new object[] {
+            "--Select Supplier--"});
+            this.cboSuppliers.Location = new System.Drawing.Point(281, 6);
             this.cboSuppliers.Name = "cboSuppliers";
             this.cboSuppliers.Size = new System.Drawing.Size(198, 29);
             this.cboSuppliers.TabIndex = 11;
@@ -109,7 +107,7 @@
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(179, 10);
+            this.metroLabel1.Location = new System.Drawing.Point(218, 10);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(57, 19);
             this.metroLabel1.TabIndex = 10;
@@ -133,7 +131,7 @@
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "SVFHardwareSystem.Ui.Reports.Purchases.rdlc";
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "SVFHardwareSystem.Ui.Reports.Payables.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
@@ -165,7 +163,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroCheckBox chkFullyPaid;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
-        private MetroFramework.Controls.MetroComboBox cboYear;
         private MetroFramework.Controls.MetroLabel metroLabel2;
+        private MetroFramework.Controls.MetroDateTime dtDate;
     }
 }

@@ -349,5 +349,26 @@ namespace SVFHardwareSystem.Services
                
             }
         }
+
+        public async Task<IList<PurchaseModel>> GetAllPurchasePayablesAsync(int year, int month,string supplierName)
+        {
+            using (var db = new DataContext())
+            {
+                year = year == 0 ? throw new InvalidFieldException("Year") : year;
+                month = month == 0 ? throw new InvalidFieldException("Month") : month;
+                supplierName = supplierName.Contains("Select") ? "" : supplierName;
+                var purchases = await db.Purchases
+                    .Include(x => x.PurchasePayments)
+                    .Include(x => x.PurchaseProducts)
+                    .Where(x => x.DatePurchase.Year == year && x.DatePurchase.Month == month && x.Supplier.Name.Contains(supplierName)).ToListAsync();
+
+                var purchaseModels = Mapping.Mapper.Map<List<PurchaseModel>>(purchases);
+
+                return purchaseModels;
+
+
+
+            }
+        }
     }
 }

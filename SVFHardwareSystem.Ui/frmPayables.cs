@@ -43,18 +43,20 @@ namespace SVFHardwareSystem.Ui
                 int count = 0;
                 
                 var fullyPaid = chkFullyPaid.Checked;
-                var year = cboYear.Text.ToInt();
-                _purchases = await _purchaseService.GetAllPurchasePayablesAsync(year, fullyPaid);
+                var year = dtDate.Value.Year;
+                var month = dtDate.Value.Month;
+                var supplierName = cboSuppliers.Text;
+                _purchases = await _purchaseService.GetAllPurchasePayablesAsync(year, month,supplierName);
 
 
                 var ds = new reports();
-                DataTable t = ds.Tables["Purchases"];
+                DataTable t = ds.Tables["Payables"];
                 DataRow r;
                 foreach (var item in _purchases)
                 {
                     count++;
                     r = t.NewRow();
-                    r["Id"] = count.ToString();
+                    //r["Id"] = count.ToString();
                     r["Date"] = item.DatePurchase.ToShortDateString();
                     r["SupplierName"] = item.SupplierName;
                     r["SIDR"] = item.SIDR;
@@ -68,14 +70,15 @@ namespace SVFHardwareSystem.Ui
                 }
                 // for total of cash and purchases
                 r = t.NewRow();
+                r["SupplierName"] = "Total";
                 r["TotalPurchaseAmount"] = _purchases.Sum(x => x.TotalPurchaseAmount);
                 r["TotalCashAmount"] = _purchases.Sum(x => x.TotalCashAmount);
-               
+                r["TotalPayableAmount"] = _purchases.Sum(x => x.TotalPayableAmount);
                 t.Rows.Add(r);
 
-                reportViewer1.LocalReport.ReportEmbeddedResource = "SVFHardwareSystem.Ui.Reports.Purchases.rdlc";
+               
                 reportViewer1.LocalReport.DataSources.Clear();
-                ReportDataSource rds = new ReportDataSource("Purchases", t);
+                ReportDataSource rds = new ReportDataSource("Payables", t);
 
                 reportViewer1.LocalReport.DataSources.Add(rds);
                 reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
@@ -95,7 +98,7 @@ namespace SVFHardwareSystem.Ui
             
         }
 
-        private async Task LoadPurchasesPerSupplierReport()
+        /**private async Task LoadPurchasesPerSupplierReport()
         {
 
             try
@@ -160,10 +163,10 @@ namespace SVFHardwareSystem.Ui
                 MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-        }
+        } */
         private async void frmPayables_Load(object sender, EventArgs e)
         {
-            cboYear.SelectedIndex = 0;
+            //cboYear.SelectedIndex = 0;
             await LoadReport();
             LoadSuppliers();
 
@@ -180,7 +183,9 @@ namespace SVFHardwareSystem.Ui
 
         private void LoadSuppliers()
         {
+           
             cboSuppliers.Items.Clear();
+            cboSuppliers.Items.Add("--Select Supplier--");
             if (_purchases.Count() > 0)
             {
                 var _groupedSuppliers = _purchases.GroupBy(x => x.SupplierName).Select(x => new { Name = x.Key, ID = x.FirstOrDefault().SupplierID }).ToList();
@@ -198,9 +203,14 @@ namespace SVFHardwareSystem.Ui
 
         private async void cboSuppliers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _supplierID = ((ItemX)cboSuppliers.SelectedItem).Value.ToInt();
-            await LoadPurchasesPerSupplierReport();
+            //_supplierID = ((ItemX)cboSuppliers.SelectedItem).Value.ToInt();
+            await LoadReport();
             
+        }
+
+        private async void dtDate_ValueChanged(object sender, EventArgs e)
+        {
+            await LoadReport();
         }
     }
 }
