@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Runtime.CompilerServices;
+using SVFHardwareSystem.Services.Exceptions;
 
 namespace SVFHardwareSystem.Services
 {
@@ -195,8 +196,13 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
+                var posTransaction = db.POSTransactions.Find(posTransactionID);
 
-               
+                if (posTransaction.SalesTransactionDate > paymentDate)
+                {
+                    throw new InvalidFieldException("Payment Date");
+                }
+
                 // used on first payment transaction
                 var totalPaymentsOnCash = GetTotalCashOnlyAmount(posTransactionID);
 
@@ -214,7 +220,7 @@ namespace SVFHardwareSystem.Services
                 db.POSPayments.Add(posPayment);
 
 
-                var posTransaction = db.POSTransactions.Find(posTransactionID);
+               
                 //total payment on cash with 0 value indicates first payment 
                 //for first payments, compute the receivable by subtracting the totalPurchase to amount tendered.
                 if (totalPaymentsOnCash == 0)

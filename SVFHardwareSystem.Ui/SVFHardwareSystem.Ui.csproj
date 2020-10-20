@@ -206,6 +206,12 @@
     <Compile Include="frmSaleForm.Designer.cs">
       <DependentUpon>frmSaleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSalesReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSalesReport.Designer.cs">
+      <DependentUpon>frmSalesReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSales.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -305,6 +311,9 @@
     <EmbeddedResource Include="frmSaleForm.resx">
       <DependentUpon>frmSaleForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSalesReport.resx">
+      <DependentUpon>frmSalesReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSales.resx">
       <DependentUpon>frmSales.cs</DependentUpon>
     </EmbeddedResource>
@@ -338,6 +347,7 @@
     <EmbeddedResource Include="Reports\PurchaseReport.rdlc" />
     <EmbeddedResource Include="Reports\Purchases.rdlc" />
     <EmbeddedResource Include="Reports\MonthlyTotalSales.rdlc" />
+    <EmbeddedResource Include="Reports\SalesReport.rdlc" />
     <None Include=".editorconfig" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

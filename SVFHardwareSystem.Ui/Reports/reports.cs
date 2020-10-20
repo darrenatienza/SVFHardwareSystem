@@ -4,6 +4,10 @@
 
     partial class reports
     {
+        partial class SalesReportDataTable
+        {
+        }
+
         partial class PurchasesDataTable
         {
 

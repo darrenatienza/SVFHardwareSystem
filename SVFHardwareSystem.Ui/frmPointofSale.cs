@@ -250,7 +250,7 @@ namespace SVFHardwareSystem.Ui
                             :  item.IsReplace ?  string.Format("{0} [{1} {2}]", item.ProductName ,item.QuantityToReplace.ToString(),"replaced")
                             //show product name only
                              : item.ProductName,
-                            item.ProductPrice.ToString(),
+                            item.Price.ToString(),
                     item.Quantity.ToString(),
                     item.Total.ToString()});
                     DataGridViewCheckBoxCell chk = gridList.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;

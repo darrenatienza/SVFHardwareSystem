@@ -20,7 +20,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         /// </summary>
         public DateTime UpdateTimeStamp { get; set; }
         public int POSTransactionID { get; set; }
-        public decimal Total { get { return Quantity * ProductPrice; } }
+        public decimal Total { get { return Quantity * Price; } }
 
         public decimal ProductPrice { get; set; }
         public int TransactionProductID { get; set; }

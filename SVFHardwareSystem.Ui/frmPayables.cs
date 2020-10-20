@@ -45,6 +45,8 @@ namespace SVFHardwareSystem.Ui
                 var fullyPaid = chkFullyPaid.Checked;
                 var year = cboYear.Text.ToInt();
                 _purchases = await _purchaseService.GetAllPurchasePayablesAsync(year, fullyPaid);
+
+
                 var ds = new reports();
                 DataTable t = ds.Tables["Purchases"];
                 DataRow r;
