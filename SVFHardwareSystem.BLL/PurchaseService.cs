@@ -370,5 +370,23 @@ namespace SVFHardwareSystem.Services
 
             }
         }
+
+        public Task<PurchaseMonthlyReportModel> GetPurchaseMonthlyReport(int year, int month)
+        {
+            using (var db = new DataContext())
+            {
+                year = year == 0 ? throw new InvalidFieldException("Year") : year;
+                month= month== 0 ? throw new InvalidFieldException("Month") : month;
+
+                var products = db.Products
+                    .Where(x => x.PurchaseProducts
+                    .Where(y => y.Purchase.DatePurchase.Year == year && y.Purchase.DatePurchase.Month == month).Count() > 0);
+                foreach (var item in products)
+                {
+                 
+                }
+
+            }
+        }
     }
 }

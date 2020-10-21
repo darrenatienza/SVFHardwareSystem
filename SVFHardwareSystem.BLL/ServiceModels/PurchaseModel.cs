@@ -8,6 +8,8 @@ namespace SVFHardwareSystem.Services.ServiceModels
 {
     public class PurchaseModel
     {
+        
+
         public PurchaseModel() { }
         public int PurchaseID { get; set; }
         public DateTime CreateTimeStamp { get; set; } = DateTime.Now;
@@ -59,43 +61,44 @@ namespace SVFHardwareSystem.Services.ServiceModels
         {
             get
             {
-                var dates = "";
+                var value = "";
                 var checks = PurchasePayments.Where(x => x.PaymentMethodName == "Check");
-                if (checks.Count() == 0)
-                {
-                    return "PD";
-                }
-                else
+                if (checks.Count() > 0)
                 {
                     foreach (var item in checks)
                     {
-                        dates += "[" + item.PaymentDate.ToShortDateString() + "]";
+                        value += "[" + item.PaymentDate.ToShortDateString() + "]";
                     }
-                    return dates;
+
                 }
-
-
-
+                if (TotalCashAmount == TotalPurchaseAmount)
+                {
+                    value=  "PD";
+                }
+                
+                return value;
             }
         }
         public string CheckNumber
         {
             get
             {
-                var checkNumber = "";
+                var value = "";
                 var checks = PurchasePayments.Where(x => x.PaymentMethodName == "Check");
-                if (checks.Count() == 0)
-                {
-                    return "no check";
-                }
-                else
+                if (checks.Count() > 0)
                 {
                     foreach (var item in checks)
                     {
-                        checkNumber += "[" + item.CheckNumber.ToString() + "]";
+                        value += "[" + item.CheckNumber + "]";
                     }
-                    return checkNumber;
+
                 }
+                if (TotalCashAmount == TotalPurchaseAmount)
+                {
+                    value = "no check";
+                }
+                
+                return value;
             }
         }
     }

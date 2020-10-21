@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.dtDate = new MetroFramework.Controls.MetroDateTime();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -51,15 +51,6 @@
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(14, 10);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(36, 19);
-            this.metroLabel1.TabIndex = 2;
-            this.metroLabel1.Text = "Date";
-            // 
             // dtDate
             // 
             this.dtDate.CustomFormat = "MMMM,yyyy";
@@ -69,6 +60,16 @@
             this.dtDate.Name = "dtDate";
             this.dtDate.Size = new System.Drawing.Size(160, 29);
             this.dtDate.TabIndex = 3;
+            this.dtDate.ValueChanged += new System.EventHandler(this.dtDate_ValueChanged);
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(14, 10);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(36, 19);
+            this.metroLabel1.TabIndex = 2;
+            this.metroLabel1.Text = "Date";
             // 
             // reportViewer1
             // 
@@ -89,6 +90,7 @@
             this.Controls.Add(this.metroPanel1);
             this.Name = "frmSalesMonthlyReport";
             this.Text = "Sales Monthly Report";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmSalesMonthlyReport_Load);
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();

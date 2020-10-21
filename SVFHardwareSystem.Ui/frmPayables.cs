@@ -5,6 +5,7 @@ using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.Extensions;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
+using SVFHardwareSystem.Ui.Extensions;
 using SVFHardwareSystem.Ui.Misc;
 using SVFHardwareSystem.Ui.Reports;
 using System;
@@ -54,29 +55,33 @@ namespace SVFHardwareSystem.Ui
                 DataRow r;
                 foreach (var item in _purchases)
                 {
+
+                    
                     count++;
                     r = t.NewRow();
                     //r["Id"] = count.ToString();
                     r["Date"] = item.DatePurchase.ToShortDateString();
                     r["SupplierName"] = item.SupplierName;
                     r["SIDR"] = item.SIDR;
-                    r["TotalPurchaseAmount"] = item.TotalPurchaseAmount;
-                    r["TotalCashAmount"] = item.TotalCashAmount;
-                    r["TotalPayableAmount"] = item.TotalPayableAmount;
-                    r["CheckDate"] = item.CheckDate;
+                    r["TotalPurchaseAmount"] = item.TotalPurchaseAmount.ToCurrencyFormat();
+                    r["TotalCashAmount"] = item.TotalCashAmount.ToCurrencyFormat();
+                    r["TotalPayableAmount"] = item.TotalPayableAmount.ToCurrencyFormat();
+                    r["CheckDate"] =  item.CheckDate;
                     r["CheckNumber"] = item.CheckNumber;
-                    r["TotalCheckAmount"] = item.TotalCheckAmount;
+                    r["TotalCheckAmount"] = item.TotalCheckAmount.ToCurrencyFormat();
                     t.Rows.Add(r);
                 }
                 // for total of cash and purchases
                 r = t.NewRow();
                 r["SupplierName"] = "Total";
-                r["TotalPurchaseAmount"] = _purchases.Sum(x => x.TotalPurchaseAmount);
-                r["TotalCashAmount"] = _purchases.Sum(x => x.TotalCashAmount);
-                r["TotalPayableAmount"] = _purchases.Sum(x => x.TotalPayableAmount);
+                r["TotalPurchaseAmount"] = _purchases.Sum(x => x.TotalPurchaseAmount).ToCurrencyFormat();
+                r["TotalCashAmount"] = _purchases.Sum(x => x.TotalCashAmount).ToCurrencyFormat();
+                r["TotalPayableAmount"] = _purchases.Sum(x => x.TotalPayableAmount).ToCurrencyFormat();
                 t.Rows.Add(r);
 
-               
+                var __dateRange = new ReportParameter("MonthYear", string.Format("{0}", dtDate.Value.ToString("MMMM yyyy")));
+
+                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { __dateRange });
                 reportViewer1.LocalReport.DataSources.Clear();
                 ReportDataSource rds = new ReportDataSource("Payables", t);
 

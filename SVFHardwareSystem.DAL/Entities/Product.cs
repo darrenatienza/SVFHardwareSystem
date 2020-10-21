@@ -22,5 +22,7 @@ namespace SVFHardwareSystem.DAL.Entities
         public virtual Category Category { get; set; }
         public decimal? DealersPrice { get; set; }
 
+        public ICollection<PurchaseProduct> PurchaseProducts { get; set; }
+
     }
 }

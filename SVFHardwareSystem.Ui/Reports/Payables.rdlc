@@ -487,7 +487,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Supplier Name</Value>
+                                  <Value>Description</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -524,7 +524,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>SIDR</Value>
+                                  <Value>SI/DR #</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -709,7 +709,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Check Number</Value>
+                                  <Value>Check No.</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -746,7 +746,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Total Check Amount</Value>
+                                  <Value>Amount</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>

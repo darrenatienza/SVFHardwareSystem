@@ -92,5 +92,10 @@ namespace SVFHardwareSystem.Ui
             
             await LoadSalesMonthlyReport();
         }
+
+        private async void dtDate_ValueChanged(object sender, EventArgs e)
+        {
+            await LoadSalesMonthlyReport();
+        }
     }
 }

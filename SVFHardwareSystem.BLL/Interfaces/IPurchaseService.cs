@@ -46,5 +46,9 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// <param name="purchasePayment"></param>
         void AddPurchasePayment(PurchasePaymentModel purchasePayment);
         Task<PurchasesPerSupplierModel> GetPurchasesPerSupplier(int year, int supplierID,bool fullyPaid);
+
+        Task<PurchaseMonthlyReportModel> GetPurchaseMonthlyReport(int year, int month);
+
+
     }
 }

@@ -94,6 +94,8 @@
     <Compile Include="PurchaseService.cs" />
     <Compile Include="SalesService.cs" />
     <Compile Include="Service.cs" />
+    <Compile Include="ServiceModels\PurchaseMonthlyReportModel.cs" />
+    <Compile Include="ServiceModels\PurchaseProductMonthlyReportModel.cs" />
     <Compile Include="ServiceModels\PurchasesPerSupplierModel.cs" />
     <Compile Include="ServiceModels\PaymentMethodModel.cs" />
     <Compile Include="ServiceModels\CategoryModel.cs" />
