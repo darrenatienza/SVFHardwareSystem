@@ -371,7 +371,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public Task<PurchaseMonthlyReportModel> GetPurchaseMonthlyReport(int year, int month)
+        public async Task<PurchaseMonthlyReportModel> GetPurchaseMonthlyReport(int year, int month)
         {
             using (var db = new DataContext())
             {
@@ -380,11 +380,15 @@ namespace SVFHardwareSystem.Services
 
                 var products = db.Products
                     .Where(x => x.PurchaseProducts
-                    .Where(y => y.Purchase.DatePurchase.Year == year && y.Purchase.DatePurchase.Month == month).Count() > 0);
-                foreach (var item in products)
+                    .Where(y => y.Purchase.DatePurchase.Year == year && y.Purchase.DatePurchase.Month == month).Count() > 0).ToListAsync();
+                var purchaseProductMonthlyReportModels = Mapping.Mapper.Map<List<PurchaseProductMonthlyReportModel>>(products);
+
+                foreach (var product in purchaseProductMonthlyReportModels)
                 {
-                 
+                    var purchaseProducts = db.PurchaseProducts.Where(x => x.Purchase.DatePurchase.Year == year && x.Purchase.DatePurchase.Month == month && x.ProductID == product.ProductID).ToListAsync();
+                    
                 }
+
 
             }
         }

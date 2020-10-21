@@ -11,6 +11,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
     /// </summary>
     public class PurchaseProductMonthlyReportModel
     {
+        public int ProductID { get; set; }
         public string CategoryName { get; set; }
         /// <summary>
         /// Description
