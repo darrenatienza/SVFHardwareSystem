@@ -47,7 +47,7 @@ namespace SVFHardwareSystem.Services.Interfaces
         void AddPurchasePayment(PurchasePaymentModel purchasePayment);
         Task<PurchasesPerSupplierModel> GetPurchasesPerSupplier(int year, int supplierID,bool fullyPaid);
 
-        Task<PurchaseMonthlyReportModel> GetPurchaseMonthlyReport(int year, int month);
+        Task<PurchaseInventoryModel> GetPurchaseMonthlyReport(int year, int month);
 
 
     }

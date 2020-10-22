@@ -38,6 +38,7 @@
             this.btnInventory = new MetroFramework.Controls.MetroTile();
             this.btnPayables = new MetroFramework.Controls.MetroTile();
             this.btnSalesMontlyReport = new MetroFramework.Controls.MetroTile();
+            this.btnPurchaseProductMonthlyReport = new MetroFramework.Controls.MetroTile();
             this.SuspendLayout();
             // 
             // btnPointOfSale
@@ -146,15 +147,27 @@
             this.btnSalesMontlyReport.Name = "btnSalesMontlyReport";
             this.btnSalesMontlyReport.Size = new System.Drawing.Size(140, 95);
             this.btnSalesMontlyReport.TabIndex = 9;
-            this.btnSalesMontlyReport.Text = "Sales Montly Report";
+            this.btnSalesMontlyReport.Text = "Sales Monthly Report";
             this.btnSalesMontlyReport.UseSelectable = true;
             this.btnSalesMontlyReport.Click += new System.EventHandler(this.btnSalesMontlyReport_Click);
+            // 
+            // btnPurchaseProductMonthlyReport
+            // 
+            this.btnPurchaseProductMonthlyReport.ActiveControl = null;
+            this.btnPurchaseProductMonthlyReport.Location = new System.Drawing.Point(414, 328);
+            this.btnPurchaseProductMonthlyReport.Name = "btnPurchaseProductMonthlyReport";
+            this.btnPurchaseProductMonthlyReport.Size = new System.Drawing.Size(286, 95);
+            this.btnPurchaseProductMonthlyReport.TabIndex = 10;
+            this.btnPurchaseProductMonthlyReport.Text = "Purchase Product Monthly Report";
+            this.btnPurchaseProductMonthlyReport.UseSelectable = true;
+            this.btnPurchaseProductMonthlyReport.Click += new System.EventHandler(this.btnPurchaseProductMonthlyReport_Click);
             // 
             // frmDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnPurchaseProductMonthlyReport);
             this.Controls.Add(this.btnSalesMontlyReport);
             this.Controls.Add(this.btnPayables);
             this.Controls.Add(this.btnInventory);
@@ -183,5 +196,6 @@
         private MetroFramework.Controls.MetroTile btnInventory;
         private MetroFramework.Controls.MetroTile btnPayables;
         private MetroFramework.Controls.MetroTile btnSalesMontlyReport;
+        private MetroFramework.Controls.MetroTile btnPurchaseProductMonthlyReport;
     }
 }

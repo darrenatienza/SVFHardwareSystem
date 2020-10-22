@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SVFHardwareSystem.Services.ServiceModels
 {
-    public class PurchaseMonthlyReportModel
+    public class PurchaseInventoryModel
     {
         public int Month { get; set; }
         public int Year { get; set; }
-        public IList<PurchaseProductMonthlyReportModel> PurchaseProductMonthlyReports { get; set; } = new List<PurchaseProductMonthlyReportModel>();
+        public IList<PurchaseProductInventoryModel> PurchaseProductMonthlyReports { get; set; } = new List<PurchaseProductInventoryModel>();
         public decimal TotalMonthlyAmount { get => PurchaseProductMonthlyReports.Sum(x => x.TotalAmount); }
     }
 }

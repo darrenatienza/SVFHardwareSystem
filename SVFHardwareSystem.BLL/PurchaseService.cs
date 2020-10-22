@@ -371,24 +371,47 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public async Task<PurchaseMonthlyReportModel> GetPurchaseMonthlyReport(int year, int month)
+        public async Task<PurchaseInventoryModel> GetPurchaseMonthlyReport(int year, int month)
         {
             using (var db = new DataContext())
             {
                 year = year == 0 ? throw new InvalidFieldException("Year") : year;
                 month= month== 0 ? throw new InvalidFieldException("Month") : month;
 
-                var products = db.Products
+                //query the product 
+                var products = await db.Products
                     .Where(x => x.PurchaseProducts
-                    .Where(y => y.Purchase.DatePurchase.Year == year && y.Purchase.DatePurchase.Month == month).Count() > 0).ToListAsync();
-                var purchaseProductMonthlyReportModels = Mapping.Mapper.Map<List<PurchaseProductMonthlyReportModel>>(products);
-
-                foreach (var product in purchaseProductMonthlyReportModels)
-                {
-                    var purchaseProducts = db.PurchaseProducts.Where(x => x.Purchase.DatePurchase.Year == year && x.Purchase.DatePurchase.Month == month && x.ProductID == product.ProductID).ToListAsync();
+                    .Where(y => y.Purchase.DatePurchase.Year == year && y.Purchase.DatePurchase.Month == month)
                     
-                }
+                    .Count() > 0).ToListAsync();
 
+                //create the purchase inventory
+                var model = new PurchaseInventoryModel();
+                model.Year = year;
+                model.Month = month;
+
+               
+                // set values to the purchase products
+                foreach (var product in products)
+                {
+                    // map equal properties
+                    var purchaseProductMonthlyReportModel = Mapping.Mapper.Map<PurchaseProductInventoryModel>(product);
+
+                    // query product purchase using year month and product id
+                    var purchaseProducts = await db.PurchaseProducts
+                        .Where(x => 
+                            x.Purchase.DatePurchase.Year == year 
+                            && x.Purchase.DatePurchase.Month == month 
+                            && x.ProductID == product.ProductID).ToListAsync();
+                    //set values
+                    purchaseProductMonthlyReportModel.Quantity = purchaseProducts.Sum(x => x.Quantity);
+                    purchaseProductMonthlyReportModel.TotalAmount = purchaseProducts.Sum(x => x.Quantity * x.Price);
+                    purchaseProducts.ForEach(x => purchaseProductMonthlyReportModel.SIDR = string.Format("[{0}]",x.Purchase.SIDR)) ;
+                    // add to model purchase products
+                    model.PurchaseProductMonthlyReports.Add(purchaseProductMonthlyReportModel);
+                }
+               
+                return model;
 
             }
         }
