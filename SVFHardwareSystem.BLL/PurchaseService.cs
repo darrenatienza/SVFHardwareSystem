@@ -406,7 +406,8 @@ namespace SVFHardwareSystem.Services
                     //set values
                     purchaseProductMonthlyReportModel.Quantity = purchaseProducts.Sum(x => x.Quantity);
                     purchaseProductMonthlyReportModel.TotalAmount = purchaseProducts.Sum(x => x.Quantity * x.Price);
-                    purchaseProducts.ForEach(x => purchaseProductMonthlyReportModel.SIDR = string.Format("[{0}]",x.Purchase.SIDR)) ;
+                    purchaseProducts.ForEach(x => purchaseProductMonthlyReportModel.SIDR += string.Format("[{0}]",x.Purchase.SIDR)) ;
+                    purchaseProducts.ForEach(x => purchaseProductMonthlyReportModel.Date += string.Format("[{0}]", x.Purchase.DatePurchase.ToShortDateString()));
                     // add to model purchase products
                     model.PurchaseProductMonthlyReports.Add(purchaseProductMonthlyReportModel);
                 }

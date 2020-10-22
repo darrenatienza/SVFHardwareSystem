@@ -16,7 +16,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         /// <summary>
         /// Description
         /// </summary>
-        public string  ProductName { get; internal set; }
+        public string  Name { get; internal set; }
         public string Unit { get; internal set; }
         /// <summary>
         /// Ref
@@ -35,5 +35,6 @@ namespace SVFHardwareSystem.Services.ServiceModels
         /// Amount
         /// </summary>
         public decimal TotalAmount { get; internal set; }
+        public string Date { get; internal set; }
     }
 }

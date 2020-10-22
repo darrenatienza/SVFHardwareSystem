@@ -243,11 +243,11 @@
       <DependentUpon>frmSuppliers.cs</DependentUpon>
     </Compile>
     <Compile Include="Misc\ItemX.cs" />
-    <Compile Include="frmProductMonthlyReport.cs">
+    <Compile Include="frmPurchaseProductInventoryReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmProductMonthlyReport.Designer.cs">
-      <DependentUpon>frmProductMonthlyReport.cs</DependentUpon>
+    <Compile Include="frmPurchaseProductInventoryReport.Designer.cs">
+      <DependentUpon>frmPurchaseProductInventoryReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -335,8 +335,8 @@
     <EmbeddedResource Include="frmSuppliers.resx">
       <DependentUpon>frmSuppliers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmProductMonthlyReport.resx">
-      <DependentUpon>frmProductMonthlyReport.cs</DependentUpon>
+    <EmbeddedResource Include="frmPurchaseProductInventoryReport.resx">
+      <DependentUpon>frmPurchaseProductInventoryReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
