@@ -15,7 +15,7 @@ namespace SVFHardwareSystem.DAL.Entities
         public int SaleProductID { get; set; }
         public int ProductID { get; set; }
         public virtual Product Product { get; set; }
-        public int POSTransactionID { get; set; }
+        public int SaleID { get; set; }
         public virtual Sale Sale { get; set; }
         public int Quantity { get; set; }
         /// <summary>

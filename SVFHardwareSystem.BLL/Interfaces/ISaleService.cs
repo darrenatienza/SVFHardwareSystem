@@ -12,7 +12,7 @@ namespace SVFHardwareSystem.Services.Interfaces
     {
         Task<SaleModel> Get(string code);
         SaleModel GetUnFinishedTransaction();
-        void EditCustomerIDOnCurrentPOSTransaction(int posTransactionID, int customerID);
+        void EditCustomerIDOnCurrentSale(int posTransactionID, int customerID);
         /// <summary>
         /// Get total amount of current POS Transaction where IsToPay = true and IsPaid = false.
         /// </summary>
@@ -39,6 +39,6 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// <param name="change"></param>
         void Pay(int posTransactionID, decimal amountTendered, decimal total, DateTime paymentDate);
         
-        void CheckAndUpdateIfPosTransactionIsFullyPaid(int posTransactionID);
+        void CheckAndUpdateIfSaleIsFullyPaid(int posTransactionID);
     }
 }

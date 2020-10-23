@@ -18,11 +18,11 @@ namespace SVFHardwareSystem.Services
     {
         public SaleService() { }
 
-        public void EditCustomerIDOnCurrentPOSTransaction(int posTransactionID, int customerID)
+        public void EditCustomerIDOnCurrentSale(int posTransactionID, int customerID)
         {
             using (var db = new DataContext())
             {
-                var entity = db.POSTransactions.Find(posTransactionID);
+                var entity = db.Sales.Find(posTransactionID);
                 entity.CustomerID = customerID;
                 db.Entry(entity).State = EntityState.Modified;
                 db.SaveChanges();
@@ -37,7 +37,7 @@ namespace SVFHardwareSystem.Services
                 //decimal cash = 0;
                 //decimal receivable = 0;
                 //decimal cancel = 0;
-                var entity = await db.POSTransactions.FirstOrDefaultAsync(x => x.SIDR == code);
+                var entity = await db.Sales.FirstOrDefaultAsync(x => x.SIDR == code);
                 var model = entity != null ? Mapping.Mapper.Map<SaleModel>(entity) : throw new KeyNotFoundException();
                 ////get total and receivables list
                 //var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == entity.POSTransactionID);
@@ -69,7 +69,7 @@ namespace SVFHardwareSystem.Services
         {
             decimal cancel = 0;
 
-            var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == pOSTransactionID);
+            var transactionProducts = db.SaleProducts.Where(x => x.SaleID == pOSTransactionID);
             // cancel items are computed where is cancel is true and is paid is true
             var cancelItems = transactionProducts.Where(a => a.IsCancel == true && a.IsPaid == true);
             cancel = cancelItems.Count() > 0 ? cancelItems.Sum(z => z.QuantityToCancel * z.Price) : 0;
@@ -82,7 +82,7 @@ namespace SVFHardwareSystem.Services
             decimal recievable = 0;
             using (var db = new DataContext())
             {
-                var isFinished = db.POSTransactions.Find(posTransactionID).IsFinished;
+                var isFinished = db.Sales.Find(posTransactionID).IsFinished;
                 if (isFinished)
                 {
                     var total = this.GetTotalAmount(db, posTransactionID);
@@ -109,7 +109,7 @@ namespace SVFHardwareSystem.Services
         {
             decimal total = 0;
 
-            var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == posTransactionID);
+            var transactionProducts = db.SaleProducts.Where(x => x.SaleID == posTransactionID);
             if (transactionProducts.Count() > 0)
             {
                 //subtract the quantity cancelled to purchase quantity then multiply the result on product price to get
@@ -129,7 +129,7 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == posTransactionID).ToList();
+                var transactionProducts = db.SaleProducts.Where(x => x.SaleID == posTransactionID).ToList();
                 // here quantity to cancel must subtract to actual quantity purchase because they are quantities that the
                 // customers was not pay.
                 return transactionProducts.Sum(y => (y.Quantity - y.QuantityToCancel) * y.Price);
@@ -141,9 +141,9 @@ namespace SVFHardwareSystem.Services
             {
                 decimal total = 0;
                 decimal cash = 0;
-                var entity = db.POSTransactions.FirstOrDefault(x => x.IsFinished == false);
+                var entity = db.Sales.FirstOrDefault(x => x.IsFinished == false);
                 var model = entity != null ? Mapping.Mapper.Map<SaleModel>(entity) : throw new KeyNotFoundException();
-                var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == entity.SaleID);
+                var transactionProducts = db.SaleProducts.Where(x => x.SaleID == entity.SaleID);
                 var posPayments = db.POSPayments.Where(x => x.SaleID == entity.SaleID);
 
                 if (transactionProducts.Count() > 0)
@@ -196,7 +196,7 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var posTransaction = db.POSTransactions.Find(posTransactionID);
+                var posTransaction = db.Sales.Find(posTransactionID);
 
                 if (posTransaction.SalesTransactionDate > paymentDate)
                 {
@@ -241,7 +241,7 @@ namespace SVFHardwareSystem.Services
                 db.Entry(posTransaction).State = EntityState.Modified;
 
                 // update isPaid of products on transaction products
-                var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == posTransactionID && x.IsToPay == true && x.IsPaid == false);
+                var transactionProducts = db.SaleProducts.Where(x => x.SaleID == posTransactionID && x.IsToPay == true && x.IsPaid == false);
                 foreach (var item in transactionProducts)
                 {
                     item.IsPaid = true;
@@ -264,12 +264,12 @@ namespace SVFHardwareSystem.Services
 
         }
         
-        public void CheckAndUpdateIfPosTransactionIsFullyPaid(int posTransactionID)
+        public void CheckAndUpdateIfSaleIsFullyPaid(int posTransactionID)
         {
             using (var db = new DataContext())
             {
                 var receivable = GetReceivableAmount(posTransactionID);
-                var posTransaction = db.POSTransactions.Find(posTransactionID);
+                var posTransaction = db.Sales.Find(posTransactionID);
 
                 posTransaction.IsFullyPaid = receivable == 0 ? true : false;
                 db.Entry(posTransaction).State = EntityState.Modified;

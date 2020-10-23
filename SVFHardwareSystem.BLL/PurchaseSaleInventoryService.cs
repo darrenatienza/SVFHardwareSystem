@@ -56,7 +56,7 @@ namespace SVFHardwareSystem.Services
                         purchaseSaleInventory.PurchaseUnitCost = Math.Round(totalAmountPurchase / totalQuantityPurchase, 2);
                     }
 
-                    var sales = await db.TransactionProducts.Where(x => x.CreateTimeStamp.Year == year && x.ProductID == purchaseSaleInventory.ProductID).ToListAsync();
+                    var sales = await db.SaleProducts.Where(x => x.CreateTimeStamp.Year == year && x.ProductID == purchaseSaleInventory.ProductID).ToListAsync();
                     //get total sale quantity according to the year
                     var totalSalesQuantity = sales.Count() > 0 ? sales.Sum(x => x.Quantity) - sales.Sum(x => x.QuantityToCancel) : 0;
 

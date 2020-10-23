@@ -20,9 +20,12 @@ namespace SVFHardwareSystem.DAL.Entities
         public string Cost { get; set; }
         public string SIDR { get; set; }
         public bool IsFinished { get; set; }
-        public ICollection<SalePayment> POSPayments { get; set; } = new HashSet<SalePayment>();
+        public ICollection<SalePayment> SalePayments { get; set; } = new HashSet<SalePayment>();
         public ICollection<SaleProduct> TransactionProducts { get; set; } = new HashSet<SaleProduct>();
-        public DateTime? DateFinished { get; set; }
+        /// <summary>
+        /// Date when the sale finished
+        /// </summary>
+        public DateTime DateFinished { get; set; }
         public bool IsFullyPaid { get; set; }
         /// <summary>
         /// Date when the transaction happens

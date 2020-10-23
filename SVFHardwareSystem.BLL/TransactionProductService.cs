@@ -37,7 +37,7 @@ namespace SVFHardwareSystem.Services
                     product.Quantity = remainingQuantity;
                     db.Entry(product).State = EntityState.Modified;
                     transactionProduct.Price = product.Price;
-                    db.TransactionProducts.Add(transactionProduct);
+                    db.SaleProducts.Add(transactionProduct);
 
                     await db.SaveChangesAsync();
                 }
@@ -53,7 +53,7 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var transactionProduct = db.TransactionProducts.Find(transactionProductID);
+                var transactionProduct = db.SaleProducts.Find(transactionProductID);
                 var product = db.Products.Find(transactionProduct.ProductID);
                 // product where isCancel is true must not update the status because it was returned
                 if (transactionProduct.IsCancel)
@@ -99,7 +99,7 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var productOnTransaction = db.TransactionProducts.Find(id);
+                var productOnTransaction = db.SaleProducts.Find(id);
                 productOnTransaction.IsToPay = isToPay;
                 db.Entry(productOnTransaction).State = EntityState.Modified;
                 db.SaveChanges();
@@ -110,7 +110,7 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var productsOnTransactions = await db.TransactionProducts.Where(x => x.POSTransactionID == id).OrderByDescending(x => x.SaleProductID).ToListAsync();
+                var productsOnTransactions = await db.SaleProducts.Where(x => x.SaleID == id).OrderByDescending(x => x.SaleProductID).ToListAsync();
                 var models = Mapping.Mapper.Map<List<SaleProductModel>>(productsOnTransactions);
                 return models;
             }
@@ -120,13 +120,13 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var transactionProduct = db.TransactionProducts.Find(transactionProductID);
+                var transactionProduct = db.SaleProducts.Find(transactionProductID);
                 var product = db.Products.Find(transactionProduct.ProductID);
 
                 var addedQuantity = product.Quantity + transactionProduct.Quantity;
                 product.Quantity = addedQuantity;
                 db.Entry(product).State = EntityState.Modified;
-                db.TransactionProducts.Remove(transactionProduct);
+                db.SaleProducts.Remove(transactionProduct);
                 await db.SaveChangesAsync();
             }
         }
@@ -138,7 +138,7 @@ namespace SVFHardwareSystem.Services
 
 
 
-                var transactionProduct = db.TransactionProducts.Find(transactionProductID);
+                var transactionProduct = db.SaleProducts.Find(transactionProductID);
                 var product = db.Products.Find(transactionProduct.ProductID);
                 // if isReplace or iscancel is true, record must not update the status because it was replace
                 if (transactionProduct.IsReplace || transactionProduct.IsCancel)
@@ -189,7 +189,7 @@ namespace SVFHardwareSystem.Services
             supplierProductToReturn.ProductID = productID;
             supplierProductToReturn.Quantity = quantityToCancelReplace;
             supplierProductToReturn.Reason = reason;
-            db.SupplierProductsToReturn.Add(supplierProductToReturn);
+            db.WarrantyProducts.Add(supplierProductToReturn);
         }
     }
 }

@@ -576,7 +576,7 @@
             this.btnUpdatePOSTransactionDetails.UseCustomBackColor = true;
             this.btnUpdatePOSTransactionDetails.UseSelectable = true;
             this.btnUpdatePOSTransactionDetails.UseStyleColors = true;
-            this.btnUpdatePOSTransactionDetails.Click += new System.EventHandler(this.btnUpdatePOSTransactionDetails_Click);
+            this.btnUpdatePOSTransactionDetails.Click += new System.EventHandler(this.btnUpdateSaleDetails_Click);
             // 
             // txtCustomerName
             // 

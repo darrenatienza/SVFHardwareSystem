@@ -31,13 +31,13 @@ namespace SVFHardwareSystem.Services
                 db.POSPayments.Add(posPayment);
 
                 // update isFinish of Pos Transaction
-                var posTransaction = db.POSTransactions.Find(posTransactionID);
+                var posTransaction = db.Sales.Find(posTransactionID);
                 posTransaction.IsFinished = true;
                 posTransaction.DateFinished = DateTime.Now;
                 db.Entry(posTransaction).State = EntityState.Modified;
 
                 // update isPaid of products on transaction products
-                var transactionProducts = db.TransactionProducts.Where(x => x.POSTransactionID == posTransactionID && x.IsToPay == true && x.IsPaid == false);
+                var transactionProducts = db.SaleProducts.Where(x => x.SaleID == posTransactionID && x.IsToPay == true && x.IsPaid == false);
                 foreach (var item in transactionProducts)
                 {
                     item.IsPaid = true;

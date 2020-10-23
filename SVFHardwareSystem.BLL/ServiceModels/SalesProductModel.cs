@@ -10,8 +10,8 @@ namespace SVFHardwareSystem.Services.ServiceModels
     {
         public DateTime CreateTimeStamp { get; set; }
         public string ProductName { get; set; }
-        public string POSTransactionCost { get; set; }
-        public string POSTransactionSIDR { get; set; }
+        public string SaleCost { get; set; }
+        public string SaleSIDR { get; set; }
         public int Quantity { get; set; }
         public decimal ProductPrice { get; set; }
         public string ProductUnit { get; set; }
@@ -40,7 +40,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public int QuantityToCancel { get; set; }
         public bool IsCancel { get; internal set; }
         public bool IsPaid { get; internal set; }
-        public int POSTransactionID { get; internal set; }
+        public int SaleID { get; internal set; }
         public bool IsReplace { get; set; }
         /// <summary>
         /// Amount of Product after being purchase

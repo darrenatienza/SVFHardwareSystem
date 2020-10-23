@@ -18,10 +18,10 @@ namespace SVFHardwareSystem.Queries
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<SalePayment> POSPayments { get; set; }
-        public virtual DbSet<Sale> POSTransactions { get; set; }
-        public virtual DbSet<SaleProduct> TransactionProducts { get; set; }
+        public virtual DbSet<Sale> Sales { get; set; }
+        public virtual DbSet<SaleProduct> SaleProducts { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<WarrantyProduct> SupplierProductsToReturn { get; set; }
+        public virtual DbSet<WarrantyProduct> WarrantyProducts { get; set; }
 
         public virtual DbSet<Purchase> Purchases { get; set; }
         public virtual DbSet<PurchaseProduct> PurchaseProducts { get; set; }

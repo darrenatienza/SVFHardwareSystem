@@ -72,5 +72,10 @@ namespace SVFHardwareSystem.Ui
         {
             FormHandler.OpenProductMonthlyReport().Show();
         }
+
+        private void btnProductSale_Click(object sender, EventArgs e)
+        {
+            FormHandler.OpenProductSaleForm().Show();
+        }
     }
 }

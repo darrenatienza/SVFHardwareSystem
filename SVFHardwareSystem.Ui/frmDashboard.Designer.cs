@@ -39,6 +39,7 @@
             this.btnPayables = new MetroFramework.Controls.MetroTile();
             this.btnSalesMontlyReport = new MetroFramework.Controls.MetroTile();
             this.btnPurchaseProductMonthlyReport = new MetroFramework.Controls.MetroTile();
+            this.btnProductSale = new MetroFramework.Controls.MetroTile();
             this.SuspendLayout();
             // 
             // btnPointOfSale
@@ -162,11 +163,23 @@
             this.btnPurchaseProductMonthlyReport.UseSelectable = true;
             this.btnPurchaseProductMonthlyReport.Click += new System.EventHandler(this.btnPurchaseProductMonthlyReport_Click);
             // 
+            // btnProductSale
+            // 
+            this.btnProductSale.ActiveControl = null;
+            this.btnProductSale.Location = new System.Drawing.Point(125, 429);
+            this.btnProductSale.Name = "btnProductSale";
+            this.btnProductSale.Size = new System.Drawing.Size(286, 95);
+            this.btnProductSale.TabIndex = 11;
+            this.btnProductSale.Text = "Sale Product Monthly Report";
+            this.btnProductSale.UseSelectable = true;
+            this.btnProductSale.Click += new System.EventHandler(this.btnProductSale_Click);
+            // 
             // frmDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 578);
+            this.Controls.Add(this.btnProductSale);
             this.Controls.Add(this.btnPurchaseProductMonthlyReport);
             this.Controls.Add(this.btnSalesMontlyReport);
             this.Controls.Add(this.btnPayables);
@@ -197,5 +210,6 @@
         private MetroFramework.Controls.MetroTile btnPayables;
         private MetroFramework.Controls.MetroTile btnSalesMontlyReport;
         private MetroFramework.Controls.MetroTile btnPurchaseProductMonthlyReport;
+        private MetroFramework.Controls.MetroTile btnProductSale;
     }
 }

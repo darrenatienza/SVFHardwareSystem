@@ -19,25 +19,25 @@ namespace SVFHardwareSystem.Ui
 {
     public partial class frmPointofSale : MetroForm
     {
-        private int _posTransactionID;
-        private ISaleService _posTransactionService;
+        private int _saleID;
+        private ISaleService _saleService;
         private IProductService _productService;
         private ISaleProductService _transactionProductService;
         private ICustomerService _customerService;
         private int _transactionProductID;
         private int customerID;
-        private bool _isFinishedPosTransaction;
+        private bool _isFinishedSale;
         private bool _isFullyPaid;
 
-        public frmPointofSale(ISaleService posTransactionService,
-            IProductService productService, ISaleProductService transactionProductService,
+        public frmPointofSale(ISaleService saleService,
+            IProductService productService, ISaleProductService saleProductService,
             ICustomerService customerService)
         {
 
             InitializeComponent();
-            _posTransactionService = posTransactionService;
+            _saleService = saleService;
             _productService = productService;
-            _transactionProductService = transactionProductService;
+            _transactionProductService = saleProductService;
             _customerService = customerService;
             gridList.CellValueChanged += GridList_CellValueChanged;
         }
@@ -48,7 +48,7 @@ namespace SVFHardwareSystem.Ui
 
             LoadAutoCompleteCustomersData();
             loadAutoCompleteData();
-            await GenerateNewOrLoadUnFinishedPOSTransaction();
+            await GenerateNewOrLoadUnFinishedSale();
 
 
 
@@ -57,18 +57,18 @@ namespace SVFHardwareSystem.Ui
 
         }
 
-        private async Task GenerateNewOrLoadUnFinishedPOSTransaction()
+        private async Task GenerateNewOrLoadUnFinishedSale()
         {
             try
             {
-                var previousPOSTransaction = _posTransactionService.GetUnFinishedTransaction();
+                var previousPOSTransaction = _saleService.GetUnFinishedTransaction();
                 txtCost.Text = previousPOSTransaction.Cost;
                 txtCustomerName.Text = previousPOSTransaction.CustomerFullName;
                 customerID = previousPOSTransaction.CustomerID;
                 txtSIDR.Text = previousPOSTransaction.SIDR;
-                _posTransactionID = previousPOSTransaction.SaleID;
+                _saleID = previousPOSTransaction.SaleID;
                 txtReceivable.Text = "0.00"; // all unfinished transactions have 0.00 value
-                _isFinishedPosTransaction = previousPOSTransaction.IsFinished;
+                _isFinishedSale = previousPOSTransaction.IsFinished;
                 _isFullyPaid = previousPOSTransaction.IsFullyPaid;
                 txtTotal.Text = previousPOSTransaction.TotalAmount.ToString();
                 await LoadProductsOnTransaction();
@@ -80,8 +80,8 @@ namespace SVFHardwareSystem.Ui
                 txtCustomerName.Text = "";
                 customerID = 0;
                 txtSIDR.Text = "";
-                _posTransactionID = 0;
-                _isFinishedPosTransaction = false;
+                _saleID = 0;
+                _isFinishedSale = false;
                 txtTotal.Text = "0.00";
                 txtReceivable.Text = "0.00";
 
@@ -103,20 +103,20 @@ namespace SVFHardwareSystem.Ui
             try
             {
                 var posTransaction = new SaleModel();
-                _posTransactionID = 2;
+                _saleID = 2;
                 posTransaction.CustomerID = 2;
                 posTransaction.Cost = txtCost.Text;
                 posTransaction.CreateTimeStamp = DateTime.Now;
                 posTransaction.SIDR = txtSIDR.Text;
                 //edit
-                if (_posTransactionID > 0)
+                if (_saleID > 0)
                 {
-                    await _posTransactionService.EditAsync(_posTransactionID, posTransaction);
+                    await _saleService.EditAsync(_saleID, posTransaction);
                 }
                 else
                 {
                     //add
-                    await _posTransactionService.AddAsync(posTransaction);
+                    await _saleService.AddAsync(posTransaction);
                 }
 
                 // await LoadCategories();
@@ -183,7 +183,7 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                if (_posTransactionID > 0)
+                if (_saleID > 0)
                 {
                     //get the product id according to its name
                     var productID = _productService.GetProductID(txtProductName.Text);
@@ -191,7 +191,7 @@ namespace SVFHardwareSystem.Ui
                     transactionProductModel.ProductID = productID;
                     transactionProductModel.IsPaid = false;
                     transactionProductModel.IsToPay = true;
-                    transactionProductModel.SaleID = _posTransactionID;
+                    transactionProductModel.SaleID = _saleID;
                     transactionProductModel.Quantity = 1;
                     transactionProductModel.UpdateTimeStamp = DateTime.Now;
                     await _transactionProductService.AddNewTransactionProductAsync(transactionProductModel);
@@ -230,7 +230,7 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                var productsOnTransaction = await _transactionProductService.GetProductsBySaleID(_posTransactionID);
+                var productsOnTransaction = await _transactionProductService.GetProductsBySaleID(_saleID);
 
                 int rowIndex = 0; // index of rows
                 int checkboxColumnIndex = 1;
@@ -286,7 +286,7 @@ namespace SVFHardwareSystem.Ui
             {
                 if (_transactionProductID > 0)
                 {
-                    if (!_isFinishedPosTransaction)
+                    if (!_isFinishedSale)
                     {
 
 
@@ -353,7 +353,7 @@ namespace SVFHardwareSystem.Ui
 
                 }
             }
-            txtTotal.Text = _posTransactionService.GetTotalAmount(_posTransactionID).ToString();
+            txtTotal.Text = _saleService.GetTotalAmount(_saleID).ToString();
             gridList.CellValueChanged += GridList_CellValueChanged; // subscribe for future manual action
             gridList.CellMouseUp += gridList_CellMouseUp;
         }
@@ -440,7 +440,7 @@ namespace SVFHardwareSystem.Ui
                         var rows = gridList.SelectedRows[0];
                         var chkValue = bool.Parse(rows.Cells[checkboxColumnIndex].Value.ToString());
                         _transactionProductService.EditIsToPay(_transactionProductID, chkValue);
-                        txtTotal.Text = _posTransactionService.GetTotalAmount(_posTransactionID).ToString("N");
+                        txtTotal.Text = _saleService.GetTotalAmount(_saleID).ToString("N");
                     }
 
                 }
@@ -463,13 +463,13 @@ namespace SVFHardwareSystem.Ui
                 {
 
                     var code = txtSIDR.Text;
-                    var posTransaction = await _posTransactionService.Get(code);
-                    _posTransactionID = posTransaction.SaleID;
+                    var posTransaction = await _saleService.Get(code);
+                    _saleID = posTransaction.SaleID;
                     txtCost.Text = posTransaction.Cost;
                     txtCustomerName.Text = posTransaction.CustomerFullName;
                     customerID = posTransaction.CustomerID;
                     txtReceivable.Text = posTransaction.Receivable.ToString();
-                    _isFinishedPosTransaction = posTransaction.IsFinished;
+                    _isFinishedSale = posTransaction.IsFinished;
                     _isFullyPaid = posTransaction.IsFullyPaid;
                     txtTotal.Text = posTransaction.TotalAmount.ToString("N"); // currency format no symbol
                     txtPayment.Text = posTransaction.TotalPayment.ToString();
@@ -490,9 +490,9 @@ namespace SVFHardwareSystem.Ui
                 txtCost.Text = "";
                 txtCustomerName.Text = "";
                 txtTotal.Text = "0.00";
-                _isFinishedPosTransaction = false;
+                _isFinishedSale = false;
                 _isFullyPaid = false;
-                _posTransactionID = 0;
+                _saleID = 0;
 
             }
             catch (Exception ex)
@@ -511,25 +511,25 @@ namespace SVFHardwareSystem.Ui
 
         private async void txtProductName_ButtonClick(object sender, EventArgs e)
         {
-            FormHandler.OpenPointOfSaleQuantityEditForm(_posTransactionID).ShowDialog();
+            FormHandler.OpenPointOfSaleQuantityEditForm(_saleID).ShowDialog();
             await LoadProductsOnTransaction();
             await SetTransactionData();
         }
 
         private async void btnNewTransaction_Click(object sender, EventArgs e)
         {
-            await AddNewPOSTransaction();
+            await AddNewSale();
         }
 
-        private async Task AddNewPOSTransaction()
+        private async Task AddNewSale()
         {
             try
             {
-                if (_posTransactionID == 0)
+                if (_saleID == 0)
                 {
 
 
-                    if (ValidatePOSTransactionFields())
+                    if (ValidateSailields())
                     {
                         var newPOSTransaction = new SaleModel();
                         newPOSTransaction.SalesTransactionDate = dtSalesTransactionDate.Value;
@@ -537,8 +537,8 @@ namespace SVFHardwareSystem.Ui
                         newPOSTransaction.CreateTimeStamp = DateTime.Now;
                         newPOSTransaction.CustomerID = customerID;
                         newPOSTransaction.SIDR = txtSIDR.Text;
-                        newPOSTransaction = await _posTransactionService.AddNewAsync(newPOSTransaction);
-                        _posTransactionID = newPOSTransaction.SaleID;
+                        newPOSTransaction = await _saleService.AddNewAsync(newPOSTransaction);
+                        _saleID = newPOSTransaction.SaleID;
                         MetroMessageBox.Show(this, "New Point of Sale Transaction has been generated!", "New Point of Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
@@ -548,7 +548,7 @@ namespace SVFHardwareSystem.Ui
                     DialogResult d = MetroMessageBox.Show(this, "A Transaction is currently loaded. Do you want to reload unfinished Point of Sale Transaction?", "New Point of Sale Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (d == DialogResult.Yes)
                     {
-                        await GenerateNewOrLoadUnFinishedPOSTransaction();
+                        await GenerateNewOrLoadUnFinishedSale();
                     }
                 }
 
@@ -561,7 +561,7 @@ namespace SVFHardwareSystem.Ui
             }
         }
 
-        private bool ValidatePOSTransactionFields()
+        private bool ValidateSailields()
         {
 
             //form validation
@@ -629,23 +629,23 @@ namespace SVFHardwareSystem.Ui
             LoadAutoCompleteCustomersData();
         }
 
-        private async void btnUpdatePOSTransactionDetails_Click(object sender, EventArgs e)
+        private async void btnUpdateSaleDetails_Click(object sender, EventArgs e)
         {
             try
             {
-                if (_posTransactionID > 0)
+                if (_saleID > 0)
                 {
-                    if (!_isFinishedPosTransaction)
+                    if (!_isFinishedSale)
                     {
 
 
-                        if (ValidatePOSTransactionFields())
+                        if (ValidateSailields())
                         {
-                            var posTransaction = await _posTransactionService.GetAsync(_posTransactionID);
+                            var posTransaction = await _saleService.GetAsync(_saleID);
                             posTransaction.Cost = txtCost.Text;
                             posTransaction.CustomerID = customerID;
                             posTransaction.SIDR = txtSIDR.Text;
-                            await _posTransactionService.EditAsync(_posTransactionID, posTransaction);
+                            await _saleService.EditAsync(_saleID, posTransaction);
                             MetroMessageBox.Show(this, "Point of Sale Details has been updated", "Update Point of Sale Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
@@ -672,13 +672,13 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                if (_posTransactionID > 0)
+                if (_saleID > 0)
                 {
-                    var total = _posTransactionService.GetTotalAmount(_posTransactionID);
-                    var receivableAmout = _posTransactionService.GetReceivableAmount(_posTransactionID);
+                    var total = _saleService.GetTotalAmount(_saleID);
+                    var receivableAmout = _saleService.GetReceivableAmount(_saleID);
                     if (total > 0 || receivableAmout > 0)
                     {
-                        FormHandler.OpenPointOfSalePaymentForm(_posTransactionID).ShowDialog();
+                        FormHandler.OpenPointOfSalePaymentForm(_saleID).ShowDialog();
 
                         // this means that a pos transaction is loaded and if payment commited, it will reload the computation
                         // and update the interface
@@ -686,7 +686,7 @@ namespace SVFHardwareSystem.Ui
 
                         if (_isFullyPaid)
                         {
-                            await GenerateNewOrLoadUnFinishedPOSTransaction();
+                            await GenerateNewOrLoadUnFinishedSale();
                         }
 
 
@@ -720,7 +720,7 @@ namespace SVFHardwareSystem.Ui
         private void ManageControlState()
         {
 
-            if (_posTransactionID == 0 || _isFinishedPosTransaction)
+            if (_saleID == 0 || _isFinishedSale)
             {
                 btnRemove.Enabled = false;
                 btnUpdatePOSTransactionDetails.Enabled = false;
@@ -736,7 +736,7 @@ namespace SVFHardwareSystem.Ui
 
             }
             // when transaction is finish
-            if (!_isFinishedPosTransaction)
+            if (!_isFinishedSale)
             {
                 pnlSummary.Visible = false;
                 btnCancelReplace.Enabled = false;
@@ -761,7 +761,7 @@ namespace SVFHardwareSystem.Ui
 
         private async void btnCancelReplace_Click(object sender, EventArgs e)
         {
-            if (_isFinishedPosTransaction)
+            if (_isFinishedSale)
             {
                 FormHandler.OpenSalesReplaceCancelForm(_transactionProductID).ShowDialog();
                 await SetTransactionData();
