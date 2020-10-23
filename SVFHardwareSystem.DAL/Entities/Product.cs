@@ -24,5 +24,7 @@ namespace SVFHardwareSystem.DAL.Entities
 
         public ICollection<PurchaseProduct> PurchaseProducts { get; set; }
 
+        public ICollection<SaleProduct> SaleProducts { get; set; }
+
     }
 }

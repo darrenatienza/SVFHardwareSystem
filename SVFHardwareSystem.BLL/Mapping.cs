@@ -42,14 +42,14 @@ namespace AutoMap
             CreateMap<CustomerModel, Customer>().ForMember(dest => dest.CustomerID, act => act.Ignore()); ;
             CreateMap<Customer, CustomerModel>();
             //
-            CreateMap<POSTransaction, POSTransactionModel>();
-            CreateMap<POSTransactionModel, POSTransaction>();
+            CreateMap<Sale, SaleModel>();
+            CreateMap<SaleModel, Sale>();
 
             //
-            CreateMap<TransactionProduct, TransactionProductModel>();
-            CreateMap<TransactionProductModel, TransactionProduct>();
-            CreateMap<TransactionProduct, SalesProductModel>();
-            CreateMap<POSTransaction, SalesModel>();
+            CreateMap<SaleProduct, SaleProductModel>();
+            CreateMap<SaleProductModel, SaleProduct>();
+            CreateMap<SaleProduct, SalesProductModel>();
+            CreateMap<Sale, SalesModel>();
             CreateMap<Supplier, SupplierModel>();
             // ignoring category id for updating entity
             CreateMap<SupplierModel, Supplier>();
@@ -69,7 +69,7 @@ namespace AutoMap
             CreateMap<PurchaseSaleInventoryProductModel, PurchaseSaleInventoryProduct>();
             CreateMap<PurchaseSaleInventoryProduct, PurchaseSaleInventoryProductModel>();
 
-            CreateMap<POSTransaction, CustomerReceivableModel>();
+            CreateMap<Sale, CustomerReceivableModel>();
             CreateMap<Customer, CustomerReceivableModel>();
             CreateMap<Supplier, PurchasesPerSupplierModel>();
 

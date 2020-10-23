@@ -17,10 +17,10 @@ namespace SVFHardwareSystem.Ui
 {
     public partial class frmSalesReplaceCancel : MetroForm
     {
-        private ITransactionProductService _transactionProductService;
+        private ISaleProductService _transactionProductService;
         private int _transactionProductID;
 
-        public frmSalesReplaceCancel(ITransactionProductService transactionProductService, int transactionProductID)
+        public frmSalesReplaceCancel(ISaleProductService transactionProductService, int transactionProductID)
         {
             InitializeComponent();
             _transactionProductService = transactionProductService;

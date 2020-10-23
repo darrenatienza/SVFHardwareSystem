@@ -16,15 +16,15 @@ namespace SVFHardwareSystem.Ui
 {
     public partial class frmPointOfSalePayment : MetroForm
     {
-        private IPOSPaymentService _posPaymentService;
-        private IPOSTransactionService _pOSTransactionService;
+        private ISalePaymentService _posPaymentService;
+        private ISaleService _pOSTransactionService;
         private int _posTransactionID;
         private decimal _total;
         private decimal _receivable;
         private decimal _change;
         private decimal _amount;
 
-        public frmPointOfSalePayment(IPOSPaymentService posPaymentService, IPOSTransactionService pOSTransactionService, int transactionID)
+        public frmPointOfSalePayment(ISalePaymentService posPaymentService, ISaleService pOSTransactionService, int transactionID)
         {
             InitializeComponent();
             _posPaymentService = posPaymentService;

@@ -15,5 +15,7 @@ namespace SVFHardwareSystem.Services.Interfaces
         CustomerReceivableModel GetCustomerWithReceivables(int customerID);
 
         Task<SalesMonthlyTotalModel> GetSalesMonthlyTotal(int month, int year);
+
+        Task<ProductInventoryModel> GetSalesProductMonthlyInventories(int month, int year);
     }
 }

@@ -415,6 +415,60 @@ namespace SVFHardwareSystem.Services
                 return model;
 
             }
+
+
         }
+
+        public async Task<List<PurchaseProductInventoryModel>> GetPurchaseProductYearlyInventories(int year)
+        {
+            using (var db = new DataContext())
+            {
+                year = year == 0 ? throw new InvalidFieldException("Year") : year;
+                //query the product 
+                var products = await db.Products
+                    .Where(x => x.PurchaseProducts
+                    .Where(y => y.Purchase.DatePurchase.Year == year)
+
+                    .Count() > 0).ToListAsync();
+
+
+                var models = new List<PurchaseProductInventoryModel>();
+                // set values to the purchase products
+                foreach (var product in products)
+                {
+
+                    // map equal properties
+                    var purchaseProductMonthlyReportModel = Mapping.Mapper.Map<PurchaseProductInventoryModel>(product);
+                    // query product purchase using year month and product id
+                    var purchaseProducts = await db.PurchaseProducts
+                        .Where(x =>
+                            x.Purchase.DatePurchase.Year == year
+                            && x.ProductID == product.ProductID).ToListAsync();
+                    //set values
+                    purchaseProductMonthlyReportModel.Quantity = purchaseProducts.Sum(x => x.Quantity);
+                    purchaseProductMonthlyReportModel.TotalAmount = purchaseProducts.Sum(x => x.Quantity * x.Price);
+                    purchaseProducts.ForEach(x => purchaseProductMonthlyReportModel.SIDR += string.Format("[{0}]", x.Purchase.SIDR));
+                    purchaseProducts.ForEach(x => purchaseProductMonthlyReportModel.Date += string.Format("[{0}]", x.Purchase.DatePurchase.ToShortDateString()));
+                    // add to model purchase products
+                    models.Add(purchaseProductMonthlyReportModel);
+                }
+
+                return models;
+            }
+        }
+        public async Task<decimal> GetPurchaseProductYearlyFinalTotalAmount(int year)
+        {
+            using (var db = new DataContext())
+            {
+                year = year == 0 ? throw new InvalidFieldException("Year") : year;
+                // query product purchase using year
+                var purchaseProducts = await db.PurchaseProducts
+                    .Where(x =>
+                        x.Purchase.DatePurchase.Year == year
+                      ).Select(x => new { x.Quantity, x.Price }).ToListAsync();
+                return purchaseProducts.Sum(x => x.Quantity * x.Price);
+            }
+        }
+
     }
 }

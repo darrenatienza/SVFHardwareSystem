@@ -20,11 +20,11 @@ namespace SVFHardwareSystem.Ui
     {
         private IProductService _productService;
         private int _posTransactionID;
-        private ITransactionProductService _transactionProductService;
+        private ISaleProductService _transactionProductService;
         private int productID;
         private int availableQuantity;
 
-        public frmPointofSaleQuantityEdit(IProductService productService,ITransactionProductService transactionProductService, int posTransactionID)
+        public frmPointofSaleQuantityEdit(IProductService productService,ISaleProductService transactionProductService, int posTransactionID)
         {
             InitializeComponent();
             _productService = productService;
@@ -99,10 +99,10 @@ namespace SVFHardwareSystem.Ui
                     txtQuantity.WithError = true;
                     return;
                 }
-                var transactionProduct = new TransactionProductModel();
+                var transactionProduct = new SaleProductModel();
                 transactionProduct.IsPaid = false;
                 transactionProduct.IsToPay = true;
-                transactionProduct.POSTransactionID = _posTransactionID;
+                transactionProduct.SaleID = _posTransactionID;
                 transactionProduct.ProductID = productID;
                 transactionProduct.Quantity = int.Parse(txtQuantity.Text);
                 transactionProduct.UpdateTimeStamp = DateTime.Now;

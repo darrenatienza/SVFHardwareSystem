@@ -1,5 +1,6 @@
 ﻿using AutoMap;
 using SVFHardwareSystem.Queries;
+using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
 using System;
@@ -16,9 +17,9 @@ namespace SVFHardwareSystem.Services
 {
     public class SalesService : ISalesService
     {
-        private IPOSTransactionService _posTransaction;
+        private ISaleService _posTransaction;
 
-        public SalesService(IPOSTransactionService posTransaction)
+        public SalesService(ISaleService posTransaction)
         {
             _posTransaction = posTransaction;
         }
@@ -43,13 +44,13 @@ namespace SVFHardwareSystem.Services
 
 
                     // this is the total amout of payment and being subtracted for every product on this transaction
-                    var amountPaidOnCash = _posTransaction.GetTotalCashOnlyAmount(item.POSTransactionID);
+                    var amountPaidOnCash = _posTransaction.GetTotalCashOnlyAmount(item.SaleID);
 
                     // this is the total amout of payment and being subtracted for every product on this transaction
-                    var amountCashOnly = _posTransaction.GetTotalCashOnlyAmount(item.POSTransactionID);
+                    var amountCashOnly = _posTransaction.GetTotalCashOnlyAmount(item.SaleID);
 
 
-                    var receivablePayment = _posTransaction.GetTotalReceivablePayment(item.POSTransactionID);
+                    var receivablePayment = _posTransaction.GetTotalReceivablePayment(item.SaleID);
 
                     var _salesProducts = Mapping.Mapper.Map<List<SalesProductModel>>(item.TransactionProducts);
                     // cash debit and receivable debit computation
@@ -136,7 +137,7 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var posPayments = db.POSPayments.Where(x => x.POSTransactionID == posTransactionID); ;
+                var posPayments = db.POSPayments.Where(x => x.SaleID == posTransactionID); ;
                 //compute for  total amount of cash payments
                 var cash = posPayments.Count() > 0 ? posPayments.Sum(y => y.Amount) : 0;
                 return cash;
@@ -154,8 +155,8 @@ namespace SVFHardwareSystem.Services
 
                 foreach (var item in salesTransctions)
                 {
-                    var totalPurchaseAmount = GetTotalPurchaseAmount(item.POSTransactionID);
-                    var totalPaymentAmount = GetTotalPaymentAmount(item.POSTransactionID);
+                    var totalPurchaseAmount = GetTotalPurchaseAmount(item.SaleID);
+                    var totalPaymentAmount = GetTotalPaymentAmount(item.SaleID);
 
                     var model = new CustomerSalesReceivableModel();
                     model.Credit = totalPurchaseAmount;
@@ -210,7 +211,7 @@ namespace SVFHardwareSystem.Services
 
         }
 
-        public async Task<decimal> GetTotalSalesAmount(int month, int year, int day)
+        private async Task<decimal> GetTotalSalesAmount(int month, int year, int day)
         {
             using (var db = new DataContext())
             {
@@ -222,5 +223,42 @@ namespace SVFHardwareSystem.Services
 
 
         }
-    }
+
+        public async Task<ProductInventoryModel> GetSalesProductMonthlyInventories(int month, int year)
+        {
+            using (var db = new DataContext())
+            {
+                year = year == 0 ? throw new InvalidFieldException("Year") : year;
+                month = month == 0 ? throw new InvalidFieldException("Month") : month;
+                //query the product 
+                var products = await db.Products
+                    .Where(x => x.SaleProducts
+                    .Where(y => y.Sale.CreateTimeStamp.Year == year)
+                    .Count() > 0).ToListAsync();
+
+
+                var models = new List<PurchaseProductInventoryModel>();
+                // set values to the purchase products
+                foreach (var product in products)
+                {
+
+                    // map equal properties
+                    var purchaseProductMonthlyReportModel = Mapping.Mapper.Map<PurchaseProductInventoryModel>(product);
+                    // query product purchase using year month and product id
+                    var purchaseProducts = await db.PurchaseProducts
+                        .Where(x =>
+                            x.Purchase.DatePurchase.Year == year
+                            && x.ProductID == product.ProductID).ToListAsync();
+                    //set values
+                    purchaseProductMonthlyReportModel.Quantity = purchaseProducts.Sum(x => x.Quantity);
+                    purchaseProductMonthlyReportModel.TotalAmount = purchaseProducts.Sum(x => x.Quantity * x.Price);
+                    purchaseProducts.ForEach(x => purchaseProductMonthlyReportModel.SIDR += string.Format("[{0}]", x.Purchase.SIDR));
+                    purchaseProducts.ForEach(x => purchaseProductMonthlyReportModel.Date += string.Format("[{0}]", x.Purchase.DatePurchase.ToShortDateString()));
+                    // add to model purchase products
+                    models.Add(purchaseProductMonthlyReportModel);
+                }
+
+                return models;
+            }
+        }
 }

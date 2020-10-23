@@ -13,17 +13,17 @@ using System.Threading.Tasks;
 
 namespace SVFHardwareSystem.Services
 {
-    public class TransactionProductService : Service<TransactionProductModel, TransactionProduct>, ITransactionProductService
+    public class TransactionProductService : Service<SaleProductModel, SaleProduct>, ISaleProductService
     {
         public TransactionProductService() { }
 
-        public async Task AddNewTransactionProductAsync(TransactionProductModel model)
+        public async Task AddNewTransactionProductAsync(SaleProductModel model)
         {
 
             using (var db = new DataContext())
             {
 
-                var transactionProduct = Mapping.Mapper.Map<TransactionProduct>(model);
+                var transactionProduct = Mapping.Mapper.Map<SaleProduct>(model);
 
                 var product = db.Products.Find(model.ProductID);
                 if (product != null)
@@ -106,12 +106,12 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public async Task<IList<TransactionProductModel>> GetProductsByTransactionID(int id)
+        public async Task<IList<SaleProductModel>> GetProductsBySaleID(int id)
         {
             using (var db = new DataContext())
             {
-                var productsOnTransactions = await db.TransactionProducts.Where(x => x.POSTransactionID == id).OrderByDescending(x => x.TransactionProductID).ToListAsync();
-                var models = Mapping.Mapper.Map<List<TransactionProductModel>>(productsOnTransactions);
+                var productsOnTransactions = await db.TransactionProducts.Where(x => x.POSTransactionID == id).OrderByDescending(x => x.SaleProductID).ToListAsync();
+                var models = Mapping.Mapper.Map<List<SaleProductModel>>(productsOnTransactions);
                 return models;
             }
         }
@@ -183,7 +183,7 @@ namespace SVFHardwareSystem.Services
 
         private void AddSupplierProductToReturnOnReplaceCancel(DataContext db, int productID, int quantityToCancelReplace, string reason)
         {
-            var supplierProductToReturn = new SupplierProductToReturn();
+            var supplierProductToReturn = new WarrantyProduct();
             supplierProductToReturn.Code = ""; // temporary put empty string
             supplierProductToReturn.IsProductFromCancelReplace = true;
             supplierProductToReturn.ProductID = productID;

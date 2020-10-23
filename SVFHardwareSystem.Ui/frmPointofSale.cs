@@ -20,17 +20,17 @@ namespace SVFHardwareSystem.Ui
     public partial class frmPointofSale : MetroForm
     {
         private int _posTransactionID;
-        private IPOSTransactionService _posTransactionService;
+        private ISaleService _posTransactionService;
         private IProductService _productService;
-        private ITransactionProductService _transactionProductService;
+        private ISaleProductService _transactionProductService;
         private ICustomerService _customerService;
         private int _transactionProductID;
         private int customerID;
         private bool _isFinishedPosTransaction;
         private bool _isFullyPaid;
 
-        public frmPointofSale(IPOSTransactionService posTransactionService,
-            IProductService productService, ITransactionProductService transactionProductService,
+        public frmPointofSale(ISaleService posTransactionService,
+            IProductService productService, ISaleProductService transactionProductService,
             ICustomerService customerService)
         {
 
@@ -66,7 +66,7 @@ namespace SVFHardwareSystem.Ui
                 txtCustomerName.Text = previousPOSTransaction.CustomerFullName;
                 customerID = previousPOSTransaction.CustomerID;
                 txtSIDR.Text = previousPOSTransaction.SIDR;
-                _posTransactionID = previousPOSTransaction.POSTransactionID;
+                _posTransactionID = previousPOSTransaction.SaleID;
                 txtReceivable.Text = "0.00"; // all unfinished transactions have 0.00 value
                 _isFinishedPosTransaction = previousPOSTransaction.IsFinished;
                 _isFullyPaid = previousPOSTransaction.IsFullyPaid;
@@ -102,7 +102,7 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                var posTransaction = new POSTransactionModel();
+                var posTransaction = new SaleModel();
                 _posTransactionID = 2;
                 posTransaction.CustomerID = 2;
                 posTransaction.Cost = txtCost.Text;
@@ -187,11 +187,11 @@ namespace SVFHardwareSystem.Ui
                 {
                     //get the product id according to its name
                     var productID = _productService.GetProductID(txtProductName.Text);
-                    var transactionProductModel = new TransactionProductModel();
+                    var transactionProductModel = new SaleProductModel();
                     transactionProductModel.ProductID = productID;
                     transactionProductModel.IsPaid = false;
                     transactionProductModel.IsToPay = true;
-                    transactionProductModel.POSTransactionID = _posTransactionID;
+                    transactionProductModel.SaleID = _posTransactionID;
                     transactionProductModel.Quantity = 1;
                     transactionProductModel.UpdateTimeStamp = DateTime.Now;
                     await _transactionProductService.AddNewTransactionProductAsync(transactionProductModel);
@@ -230,7 +230,7 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                var productsOnTransaction = await _transactionProductService.GetProductsByTransactionID(_posTransactionID);
+                var productsOnTransaction = await _transactionProductService.GetProductsBySaleID(_posTransactionID);
 
                 int rowIndex = 0; // index of rows
                 int checkboxColumnIndex = 1;
@@ -240,7 +240,7 @@ namespace SVFHardwareSystem.Ui
                 foreach (var item in productsOnTransaction)
                 {
                     count++;
-                    gridList.Rows.Add(new object[] {item.TransactionProductID.ToString(),item.IsToPay,
+                    gridList.Rows.Add(new object[] {item.SaleProductID.ToString(),item.IsToPay,
                           count.ToString(),
                           //IsReplace and IsCancel = true then show productName [replace] [cancelled]
                             item.IsReplace && item.IsCancel ? string.Format("{0} [{1} {2}, {3} {4}]", item.ProductName ,item.QuantityToReplace.ToString(),"replaced", item.QuantityToCancel.ToString(),"cancelled")
@@ -464,7 +464,7 @@ namespace SVFHardwareSystem.Ui
 
                     var code = txtSIDR.Text;
                     var posTransaction = await _posTransactionService.Get(code);
-                    _posTransactionID = posTransaction.POSTransactionID;
+                    _posTransactionID = posTransaction.SaleID;
                     txtCost.Text = posTransaction.Cost;
                     txtCustomerName.Text = posTransaction.CustomerFullName;
                     customerID = posTransaction.CustomerID;
@@ -531,14 +531,14 @@ namespace SVFHardwareSystem.Ui
 
                     if (ValidatePOSTransactionFields())
                     {
-                        var newPOSTransaction = new POSTransactionModel();
+                        var newPOSTransaction = new SaleModel();
                         newPOSTransaction.SalesTransactionDate = dtSalesTransactionDate.Value;
                         newPOSTransaction.Cost = txtCost.Text;
                         newPOSTransaction.CreateTimeStamp = DateTime.Now;
                         newPOSTransaction.CustomerID = customerID;
                         newPOSTransaction.SIDR = txtSIDR.Text;
                         newPOSTransaction = await _posTransactionService.AddNewAsync(newPOSTransaction);
-                        _posTransactionID = newPOSTransaction.POSTransactionID;
+                        _posTransactionID = newPOSTransaction.SaleID;
                         MetroMessageBox.Show(this, "New Point of Sale Transaction has been generated!", "New Point of Sale Transaction", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 

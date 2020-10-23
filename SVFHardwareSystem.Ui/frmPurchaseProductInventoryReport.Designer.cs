@@ -32,11 +32,13 @@
             this.dtDate = new MetroFramework.Controls.MetroDateTime();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.chkTotal = new MetroFramework.Controls.MetroCheckBox();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroPanel1
             // 
+            this.metroPanel1.Controls.Add(this.chkTotal);
             this.metroPanel1.Controls.Add(this.dtDate);
             this.metroPanel1.Controls.Add(this.metroLabel1);
             this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -81,6 +83,17 @@
             this.reportViewer1.Size = new System.Drawing.Size(760, 360);
             this.reportViewer1.TabIndex = 4;
             // 
+            // chkTotal
+            // 
+            this.chkTotal.AutoSize = true;
+            this.chkTotal.Location = new System.Drawing.Point(223, 10);
+            this.chkTotal.Name = "chkTotal";
+            this.chkTotal.Size = new System.Drawing.Size(123, 15);
+            this.chkTotal.TabIndex = 4;
+            this.chkTotal.Text = "Show Total for Year";
+            this.chkTotal.UseSelectable = true;
+            this.chkTotal.CheckedChanged += new System.EventHandler(this.chkTotal_CheckedChanged);
+            // 
             // frmProductInventoryReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -102,5 +115,6 @@
         private MetroFramework.Controls.MetroDateTime dtDate;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private MetroFramework.Controls.MetroCheckBox chkTotal;
     }
 }

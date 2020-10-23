@@ -49,6 +49,8 @@ namespace SVFHardwareSystem.Services.Interfaces
 
         Task<PurchaseInventoryModel> GetPurchaseMonthlyReport(int year, int month);
 
+        Task<List<PurchaseProductInventoryModel>> GetPurchaseProductYearlyInventories(int year);
+        Task<decimal> GetPurchaseProductYearlyFinalTotalAmount(int year);
 
     }
 }

@@ -101,7 +101,7 @@ namespace SVFHardwareSystem.Ui
         {
             return UnityConfig
                 .Register()
-                .RegisterType<frmPointOfSalePayment>(new InjectionConstructor(new object[] { new POSPaymentService(), new POSTransactionService(), posTransactionID }))
+                .RegisterType<frmPointOfSalePayment>(new InjectionConstructor(new object[] { new SalePaymentService(), new SaleService(), posTransactionID }))
                 .Resolve<frmPointOfSalePayment>();
 
         }
