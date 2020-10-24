@@ -30,7 +30,7 @@ namespace SVFHardwareSystem.Services
             {
 
 
-                var postransactions = db.Sales.Include(x => x.TransactionProducts).Where(x => DbFunctions.TruncateTime(x.DateFinished) >= DbFunctions.TruncateTime(from)
+                var postransactions = db.Sales.Include(x => x.SaleProducts).Where(x => DbFunctions.TruncateTime(x.DateFinished) >= DbFunctions.TruncateTime(from)
                 && DbFunctions.TruncateTime(x.DateFinished) <= DbFunctions.TruncateTime(to)
                 && (x.Cost.Contains(criteria) || x.SIDR.Contains(criteria))
                 && (x.IsFinished)).ToList();
@@ -52,7 +52,7 @@ namespace SVFHardwareSystem.Services
 
                     var receivablePayment = _saleService.GetTotalReceivablePayment(item.SaleID);
 
-                    var _salesProducts = Mapping.Mapper.Map<List<SalesProductModel>>(item.TransactionProducts);
+                    var _salesProducts = Mapping.Mapper.Map<List<SalesProductModel>>(item.SaleProducts);
                     // cash debit and receivable debit computation
                     foreach (var salesProduct in _salesProducts)
                     {
@@ -160,7 +160,7 @@ namespace SVFHardwareSystem.Services
 
                     var model = new CustomerSalesReceivableModel();
                     model.Credit = totalPurchaseAmount;
-                    model.SalesTransactionDate = item.SalesTransactionDate;
+                    model.SalesTransactionDate = item.SaleDate;
                     model.Debit = totalPaymentAmount;
                     model.SI = item.SIDR;
                     customerReceivableModel.SalesReceivables.Add(model);
@@ -215,10 +215,10 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var sales = await db.Sales.Include(x => x.TransactionProducts).Where(x => x.SalesTransactionDate.Month == month
-                    && x.SalesTransactionDate.Year == year && x.SalesTransactionDate.Day == day).ToListAsync();
+                var sales = await db.Sales.Include(x => x.SaleProducts).Where(x => x.SaleDate.Month == month
+                    && x.SaleDate.Year == year && x.SaleDate.Day == day).ToListAsync();
 
-                return sales.Count() > 0 ? sales.Sum(y => y.TransactionProducts.Sum(z => (z.Quantity - z.QuantityToCancel) * z.Price)) : 0;
+                return sales.Count() > 0 ? sales.Sum(y => y.SaleProducts.Sum(z => (z.Quantity - z.QuantityToCancel) * z.Price)) : 0;
             }
 
 

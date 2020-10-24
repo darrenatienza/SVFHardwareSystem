@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 
 namespace SVFHardwareSystem.Services
 {
-    public class TransactionProductService : Service<SaleProductModel, SaleProduct>, ISaleProductService
+    public class SaleProductService : Service<SaleProductModel, SaleProduct>, ISaleProductService
     {
-        public TransactionProductService() { }
+        public SaleProductService() { }
 
         public async Task AddNewTransactionProductAsync(SaleProductModel model)
         {

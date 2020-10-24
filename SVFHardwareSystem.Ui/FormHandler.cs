@@ -41,8 +41,8 @@ namespace SVFHardwareSystem.Ui
 
         public static frmPayables OpenPayablesForm() => UnityConfig
                      .Register().Resolve<frmPayables>();
-        public static frmProductSaleInventory OpenProductSaleForm() => UnityConfig
-                  .Register().Resolve<frmProductSaleInventory>();
+        public static frmSaleProductMonthlyInventory OpenProductSaleMonthlyInventoryForm() => UnityConfig
+                  .Register().Resolve<frmSaleProductMonthlyInventory>();
         public static frmSalesMonthlyReport OpenSaleMonthlyReportForm() => UnityConfig
                    .Register().Resolve<frmSalesMonthlyReport>();
 
@@ -93,7 +93,7 @@ namespace SVFHardwareSystem.Ui
         {
             return UnityConfig
                 .Register()
-                .RegisterType<frmPointofSaleQuantityEdit>(new InjectionConstructor(new object[] { new ProductService(), new TransactionProductService(), posTransactionID }))
+                .RegisterType<frmPointofSaleQuantityEdit>(new InjectionConstructor(new object[] { new ProductService(), new SaleProductService(), posTransactionID }))
                 .Resolve<frmPointofSaleQuantityEdit>();
 
         }
@@ -110,7 +110,7 @@ namespace SVFHardwareSystem.Ui
         {
             return UnityConfig
                 .Register()
-                .RegisterType<frmSalesReplaceCancel>(new InjectionConstructor(new object[] { new TransactionProductService(), posTransactionID }))
+                .RegisterType<frmSalesReplaceCancel>(new InjectionConstructor(new object[] { new SaleProductService(), posTransactionID }))
                 .Resolve<frmSalesReplaceCancel>();
 
         }

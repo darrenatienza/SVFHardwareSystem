@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SVFHardwareSystem.DAL.Entities
 {
+
     public class PurchaseSaleInventoryProduct
     {
         public int PurchaseSaleInventoryProductID { get; set; }

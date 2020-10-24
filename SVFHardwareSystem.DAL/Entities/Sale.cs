@@ -14,6 +14,9 @@ namespace SVFHardwareSystem.DAL.Entities
         public Sale() { }
 
         public int SaleID { get; set; }
+        /// <summary>
+        /// Date when the record created
+        /// </summary>
         public DateTime CreateTimeStamp { get; set; }
         public int CustomerID { get; set; }
         public virtual Customer Customer { get; set; }
@@ -21,7 +24,7 @@ namespace SVFHardwareSystem.DAL.Entities
         public string SIDR { get; set; }
         public bool IsFinished { get; set; }
         public ICollection<SalePayment> SalePayments { get; set; } = new HashSet<SalePayment>();
-        public ICollection<SaleProduct> TransactionProducts { get; set; } = new HashSet<SaleProduct>();
+        public ICollection<SaleProduct> SaleProducts { get; set; } = new HashSet<SaleProduct>();
         /// <summary>
         /// Date when the sale finished
         /// </summary>
@@ -30,6 +33,6 @@ namespace SVFHardwareSystem.DAL.Entities
         /// <summary>
         /// Date when the transaction happens
         /// </summary>
-        public DateTime SalesTransactionDate { get; set; }
+        public DateTime SaleDate { get; set; }
     }
 }

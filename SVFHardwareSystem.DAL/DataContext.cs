@@ -1,4 +1,5 @@
-﻿using SVFHardwareSystem.DAL.Entities;
+﻿using SVFHardwareSystem.DAL;
+using SVFHardwareSystem.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SVFHardwareSystem.Queries
 {
-    public class DataContext : DbContext
+    public class DataContext :DbContext ,IDataContext
     {
         public DataContext() : base("name=DataContext")
         {
@@ -31,6 +32,8 @@ namespace SVFHardwareSystem.Queries
 
         public virtual DbSet<PurchaseSaleInventoryProduct> PurchaseSaleInventoryProducts { get; set; }
         public virtual DbSet<PurchaseSaleInventory> PurchaseSaleInventories { get; set; }
+
+        public virtual DbSet<ProductInventory> ProductInventories { get; set; }
 
     }
 }

@@ -39,7 +39,7 @@
                         IsFinished = c.Boolean(nullable: false),
                         DateFinished = c.DateTime(nullable: false),
                         IsFullyPaid = c.Boolean(nullable: false),
-                        SalesTransactionDate = c.DateTime(nullable: false),
+                        SaleDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.SaleID)
                 .ForeignKey("dbo.Customers", t => t.CustomerID, cascadeDelete: true)
@@ -180,35 +180,50 @@
                 .PrimaryKey(t => t.SupplierID);
             
             CreateTable(
-                "dbo.PurchaseSaleInventories",
+                "dbo.ProductInventories",
                 c => new
                     {
-                        PurchaseSaleInventoryID = c.Int(nullable: false, identity: true),
-                        Year = c.Int(nullable: false),
+                        ProductInventoryID = c.Int(nullable: false, identity: true),
                         CreateTimeStamp = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.PurchaseSaleInventoryID);
-            
-            CreateTable(
-                "dbo.PurchaseSaleInventoryProducts",
-                c => new
-                    {
-                        PurchaseSaleInventoryProductID = c.Int(nullable: false, identity: true),
-                        PurchaseSaleInventoryID = c.Int(nullable: false),
                         ProductID = c.Int(nullable: false),
                         Year = c.Int(nullable: false),
-                        BeginningQuantity = c.Int(nullable: false),
-                        BeginningUnitCost = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        PurchaseQuantity = c.Int(nullable: false),
-                        PurchaseUnitCost = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        SalesQuantity = c.Int(nullable: false),
-                        SalesUnitCost = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Quantity = c.Int(nullable: false),
+                        TotalAmount = c.Decimal(nullable: false, precision: 18, scale: 2),
                     })
-                .PrimaryKey(t => t.PurchaseSaleInventoryProductID)
+                .PrimaryKey(t => t.ProductInventoryID)
                 .ForeignKey("dbo.Products", t => t.ProductID, cascadeDelete: true)
-                .ForeignKey("dbo.PurchaseSaleInventories", t => t.PurchaseSaleInventoryID, cascadeDelete: true)
-                .Index(t => t.PurchaseSaleInventoryID)
                 .Index(t => t.ProductID);
+            
+            //CreateTable(
+            //    "dbo.PurchaseSaleInventories",
+            //    c => new
+            //        {
+            //            PurchaseSaleInventoryID = c.Int(nullable: false, identity: true),
+            //            Year = c.Int(nullable: false),
+            //            CreateTimeStamp = c.DateTime(nullable: false),
+            //        })
+            //    .PrimaryKey(t => t.PurchaseSaleInventoryID);
+            
+            //CreateTable(
+            //    "dbo.PurchaseSaleInventoryProducts",
+            //    c => new
+            //        {
+            //            PurchaseSaleInventoryProductID = c.Int(nullable: false, identity: true),
+            //            PurchaseSaleInventoryID = c.Int(nullable: false),
+            //            ProductID = c.Int(nullable: false),
+            //            Year = c.Int(nullable: false),
+            //            BeginningQuantity = c.Int(nullable: false),
+            //            BeginningUnitCost = c.Decimal(nullable: false, precision: 18, scale: 2),
+            //            PurchaseQuantity = c.Int(nullable: false),
+            //            PurchaseUnitCost = c.Decimal(nullable: false, precision: 18, scale: 2),
+            //            SalesQuantity = c.Int(nullable: false),
+            //            SalesUnitCost = c.Decimal(nullable: false, precision: 18, scale: 2),
+            //        })
+            //    .PrimaryKey(t => t.PurchaseSaleInventoryProductID)
+            //    .ForeignKey("dbo.Products", t => t.ProductID, cascadeDelete: true)
+            //    .ForeignKey("dbo.PurchaseSaleInventories", t => t.PurchaseSaleInventoryID, cascadeDelete: true)
+            //    .Index(t => t.PurchaseSaleInventoryID)
+            //    .Index(t => t.ProductID);
             
             CreateTable(
                 "dbo.WarrantyProducts",
@@ -231,8 +246,9 @@
         public override void Down()
         {
             DropForeignKey("dbo.WarrantyProducts", "ProductID", "dbo.Products");
-            DropForeignKey("dbo.PurchaseSaleInventoryProducts", "PurchaseSaleInventoryID", "dbo.PurchaseSaleInventories");
-            DropForeignKey("dbo.PurchaseSaleInventoryProducts", "ProductID", "dbo.Products");
+            //DropForeignKey("dbo.PurchaseSaleInventoryProducts", "PurchaseSaleInventoryID", "dbo.PurchaseSaleInventories");
+            //DropForeignKey("dbo.PurchaseSaleInventoryProducts", "ProductID", "dbo.Products");
+            DropForeignKey("dbo.ProductInventories", "ProductID", "dbo.Products");
             DropForeignKey("dbo.SaleProducts", "SaleID", "dbo.Sales");
             DropForeignKey("dbo.SaleProducts", "ProductID", "dbo.Products");
             DropForeignKey("dbo.Purchases", "SupplierID", "dbo.Suppliers");
@@ -244,8 +260,9 @@
             DropForeignKey("dbo.SalePayments", "SaleID", "dbo.Sales");
             DropForeignKey("dbo.Sales", "CustomerID", "dbo.Customers");
             DropIndex("dbo.WarrantyProducts", new[] { "ProductID" });
-            DropIndex("dbo.PurchaseSaleInventoryProducts", new[] { "ProductID" });
-            DropIndex("dbo.PurchaseSaleInventoryProducts", new[] { "PurchaseSaleInventoryID" });
+            //DropIndex("dbo.PurchaseSaleInventoryProducts", new[] { "ProductID" });
+            //DropIndex("dbo.PurchaseSaleInventoryProducts", new[] { "PurchaseSaleInventoryID" });
+            DropIndex("dbo.ProductInventories", new[] { "ProductID" });
             DropIndex("dbo.PurchasePayments", new[] { "PaymentMethodID" });
             DropIndex("dbo.PurchasePayments", new[] { "PurchaseID" });
             DropIndex("dbo.Purchases", new[] { "SupplierID" });
@@ -257,8 +274,9 @@
             DropIndex("dbo.SalePayments", new[] { "SaleID" });
             DropIndex("dbo.Sales", new[] { "CustomerID" });
             DropTable("dbo.WarrantyProducts");
-            DropTable("dbo.PurchaseSaleInventoryProducts");
-            DropTable("dbo.PurchaseSaleInventories");
+            //DropTable("dbo.PurchaseSaleInventoryProducts");
+            //DropTable("dbo.PurchaseSaleInventories");
+            DropTable("dbo.ProductInventories");
             DropTable("dbo.Suppliers");
             DropTable("dbo.PaymentMethods");
             DropTable("dbo.PurchasePayments");

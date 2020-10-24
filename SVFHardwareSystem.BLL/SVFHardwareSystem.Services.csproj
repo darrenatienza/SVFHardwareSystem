@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\OverPaymentException.cs" />
+    <Compile Include="Interfaces\IProductInventoryService.cs" />
     <Compile Include="Interfaces\IPurchaseSaleInventoryService.cs" />
     <Compile Include="PaymentMethodService.cs" />
     <Compile Include="CustomerService.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Interfaces\ISaleProductService.cs" />
     <Compile Include="Mapping.cs" />
     <Compile Include="CategoryService.cs" />
+    <Compile Include="ProductInventoryService.cs" />
     <Compile Include="SalePaymentService.cs" />
     <Compile Include="SaleService.cs" />
     <Compile Include="ProductService.cs" />
@@ -117,7 +119,7 @@
     <Compile Include="ServiceModels\SupplierModel.cs" />
     <Compile Include="ServiceModels\SaleProductModel.cs" />
     <Compile Include="SupplierService.cs" />
-    <Compile Include="TransactionProductService.cs" />
+    <Compile Include="SaleProductService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SVFHardwareSystem.DAL\SVFHardwareSystem.Queries.csproj">

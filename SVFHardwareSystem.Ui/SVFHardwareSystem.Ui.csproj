@@ -176,11 +176,11 @@
     <Compile Include="frmProducts.Designer.cs">
       <DependentUpon>frmProducts.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmProductSaleInventory.cs">
+    <Compile Include="frmSaleProductMonthlyInventory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmProductSaleInventory.Designer.cs">
-      <DependentUpon>frmProductSaleInventory.cs</DependentUpon>
+    <Compile Include="frmSaleProductMonthlyInventory.Designer.cs">
+      <DependentUpon>frmSaleProductMonthlyInventory.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPurchasePayments.cs">
       <SubType>Form</SubType>
@@ -308,9 +308,6 @@
     <EmbeddedResource Include="frmProducts.resx">
       <DependentUpon>frmProducts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmProductSaleInventory.resx">
-      <DependentUpon>frmProductSaleInventory.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmPurchasePayments.resx">
       <DependentUpon>frmPurchasePayments.cs</DependentUpon>
     </EmbeddedResource>
@@ -325,6 +322,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSaleForm.resx">
       <DependentUpon>frmSaleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSaleProductMonthlyInventory.resx">
+      <DependentUpon>frmSaleProductMonthlyInventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSalesReport.resx">
       <DependentUpon>frmSalesReport.cs</DependentUpon>
@@ -363,6 +363,7 @@
     <EmbeddedResource Include="Reports\CustomerReceivable.rdlc" />
     <EmbeddedResource Include="Reports\Payables.rdlc" />
     <EmbeddedResource Include="Reports\PurchasePerSupplier.rdlc" />
+    <EmbeddedResource Include="Reports\SaleProductInventory.rdlc" />
     <EmbeddedResource Include="Reports\PurchaseProductInventoryYearlyReport.rdlc" />
     <EmbeddedResource Include="Reports\PurchaseReport.rdlc" />
     <EmbeddedResource Include="Reports\MonthlyTotalSales.rdlc" />

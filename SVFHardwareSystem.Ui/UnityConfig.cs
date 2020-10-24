@@ -18,12 +18,12 @@ namespace SVFHardwareSystem.Ui
             container.RegisterType<ICategoryService, CategoryService>();
             container.RegisterType<ICustomerService, CustomerService>();
             container.RegisterType<ISaleService, SaleService>();
-            container.RegisterType<ISaleProductService, TransactionProductService>();
+            container.RegisterType<ISaleProductService, SaleProductService>();
             container.RegisterType<ISalesService, SalesService>();
             container.RegisterType<ISupplierService, SupplierService>();
             container.RegisterType<IPurchaseService, PurchaseService>();
             container.RegisterType<IPurchaseSaleInventoryService, PurchaseSaleInventoryService>();
-        
+            container.RegisterType<IProductInventoryService, ProductInventoryService>();
             return container;
         }
     }
