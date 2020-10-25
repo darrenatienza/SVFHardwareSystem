@@ -58,7 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\OverPaymentException.cs" />
-    <Compile Include="Interfaces\IProductInventoryService.cs" />
+    <Compile Include="Interfaces\IPurchaseProductInventoryService.cs" />
+    <Compile Include="Interfaces\ISaleProductInventoryService.cs" />
     <Compile Include="Interfaces\IPurchaseSaleInventoryService.cs" />
     <Compile Include="PaymentMethodService.cs" />
     <Compile Include="CustomerService.cs" />
@@ -85,7 +86,8 @@
     <Compile Include="Interfaces\ISaleProductService.cs" />
     <Compile Include="Mapping.cs" />
     <Compile Include="CategoryService.cs" />
-    <Compile Include="ProductInventoryService.cs" />
+    <Compile Include="PurchaseProductInventoryService.cs" />
+    <Compile Include="SaleProductInventoryService.cs" />
     <Compile Include="SalePaymentService.cs" />
     <Compile Include="SaleService.cs" />
     <Compile Include="ProductService.cs" />
@@ -96,7 +98,7 @@
     <Compile Include="PurchaseService.cs" />
     <Compile Include="SalesService.cs" />
     <Compile Include="Service.cs" />
-    <Compile Include="ServiceModels\ProductInventoryModel.cs" />
+    <Compile Include="ServiceModels\SaleProductInventoryModel.cs" />
     <Compile Include="ServiceModels\PurchaseInventoryModel.cs" />
     <Compile Include="ServiceModels\PurchaseProductInventoryModel.cs" />
     <Compile Include="ServiceModels\PurchasesPerSupplierModel.cs" />

@@ -23,7 +23,8 @@ namespace SVFHardwareSystem.Ui
             container.RegisterType<ISupplierService, SupplierService>();
             container.RegisterType<IPurchaseService, PurchaseService>();
             container.RegisterType<IPurchaseSaleInventoryService, PurchaseSaleInventoryService>();
-            container.RegisterType<IProductInventoryService, ProductInventoryService>();
+            container.RegisterType<ISaleProductInventoryService, SaleProductInventoryService>();
+            container.RegisterType<IPurchaseProductInventoryService, PurchaseProductInventoryService>();
             return container;
         }
     }

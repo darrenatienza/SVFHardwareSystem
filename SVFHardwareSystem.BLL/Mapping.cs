@@ -74,7 +74,7 @@ namespace AutoMap
             CreateMap<Supplier, PurchasesPerSupplierModel>();
 
             CreateMap<Product, PurchaseProductInventoryModel>();
-            CreateMap<Product, ProductInventoryModel>();
+            CreateMap<Product, SaleProductInventoryModel>();
             // Additional mappings here...
         }
     }

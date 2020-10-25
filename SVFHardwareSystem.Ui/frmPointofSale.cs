@@ -62,6 +62,7 @@ namespace SVFHardwareSystem.Ui
             try
             {
                 var previousPOSTransaction = _saleService.GetUnFinishedTransaction();
+                dtSalesTransactionDate.Value = previousPOSTransaction.SaleDate;
                 txtCost.Text = previousPOSTransaction.Cost;
                 txtCustomerName.Text = previousPOSTransaction.CustomerFullName;
                 customerID = previousPOSTransaction.CustomerID;
@@ -98,35 +99,7 @@ namespace SVFHardwareSystem.Ui
             }
         }
 
-        private async void btnSaveTransaction_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var posTransaction = new SaleModel();
-                _saleID = 2;
-                posTransaction.CustomerID = 2;
-                posTransaction.Cost = txtCost.Text;
-                posTransaction.CreateTimeStamp = DateTime.Now;
-                posTransaction.SIDR = txtSIDR.Text;
-                //edit
-                if (_saleID > 0)
-                {
-                    await _saleService.EditAsync(_saleID, posTransaction);
-                }
-                else
-                {
-                    //add
-                    await _saleService.AddAsync(posTransaction);
-                }
-
-                // await LoadCategories();
-            }
-            catch (Exception ex)
-            {
-
-                MetroMessageBox.Show(this, ex.ToString());
-            }
-        }
+        
 
 
         //AutoCompleteData Method
@@ -532,7 +505,7 @@ namespace SVFHardwareSystem.Ui
                     if (ValidateSailields())
                     {
                         var newPOSTransaction = new SaleModel();
-                        newPOSTransaction.SalesTransactionDate = dtSalesTransactionDate.Value;
+                        newPOSTransaction.SaleDate = dtSalesTransactionDate.Value;
                         newPOSTransaction.Cost = txtCost.Text;
                         newPOSTransaction.CreateTimeStamp = DateTime.Now;
                         newPOSTransaction.CustomerID = customerID;
@@ -645,6 +618,7 @@ namespace SVFHardwareSystem.Ui
                             posTransaction.Cost = txtCost.Text;
                             posTransaction.CustomerID = customerID;
                             posTransaction.SIDR = txtSIDR.Text;
+                            posTransaction.SaleDate = dtSalesTransactionDate.Value;
                             await _saleService.EditAsync(_saleID, posTransaction);
                             MetroMessageBox.Show(this, "Point of Sale Details has been updated", "Update Point of Sale Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }

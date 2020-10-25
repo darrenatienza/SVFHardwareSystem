@@ -224,7 +224,7 @@ namespace SVFHardwareSystem.Services
 
         }
 
-        public async Task<List<ProductInventoryModel>> GetAllProductSaleInventoryByMonthYear(int month, int year)
+        public async Task<List<SaleProductInventoryModel>> GetAllProductSaleInventoryByMonthYear(int month, int year)
         {
             using (var db = new DataContext())
             {
@@ -237,13 +237,13 @@ namespace SVFHardwareSystem.Services
                     .Count() > 0).ToListAsync();
 
 
-                var models = new List<ProductInventoryModel>();
+                var models = new List<SaleProductInventoryModel>();
                 // set values to the purchase products
                 foreach (var product in products)
                 {
 
                     // map equal properties
-                    var model = Mapping.Mapper.Map<ProductInventoryModel>(product);
+                    var model = Mapping.Mapper.Map<SaleProductInventoryModel>(product);
                     // query product purchase using year month and product id
                     var saleProduct = await db.SaleProducts
                         .Where(x =>

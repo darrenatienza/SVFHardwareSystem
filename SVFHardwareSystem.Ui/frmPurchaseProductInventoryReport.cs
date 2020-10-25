@@ -3,6 +3,7 @@ using MetroFramework.Forms;
 using Microsoft.Reporting.WinForms;
 using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.Interfaces;
+using SVFHardwareSystem.Services.ServiceModels;
 using SVFHardwareSystem.Ui.Extensions;
 using SVFHardwareSystem.Ui.Reports;
 using System;
@@ -20,119 +21,34 @@ namespace SVFHardwareSystem.Ui
 {
     public partial class frmProductInventoryReport : MetroForm
     {
-        private IPurchaseService _purchaseService;
-        private int _year;
-        private int _month;
+        private IPurchaseProductInventoryService _purchaseProductInventoryService;
 
-        public frmProductInventoryReport(IPurchaseService purchaseService)
+
+        public frmProductInventoryReport(IPurchaseProductInventoryService purchaseProductInventoryService)
         {
             InitializeComponent();
-            _purchaseService = purchaseService;
+            _purchaseProductInventoryService = purchaseProductInventoryService;
         }
 
         private async void frmProductMonthlyReport_Load(object sender, EventArgs e)
         {
-            _year = dtDate.Value.Year;
-            _month = dtDate.Value.Month;
-            chkTotal.Text = string.Format("Show Total for Year {0}", _year);
-            await LoadProductMonthlyReport();
+
+            var month = dtDate.Value.Month;
+            var year = dtDate.Value.Year;
+            await LoadPurchaseProductInventories(year,month);
 
         }
 
-        private async Task LoadProductMonthlyReport()
-        {
-            try
+       
+
+        private void LoadReport(string duration, decimal finalAmount, IList<PurchaseProductInventoryModel> purchaseProducts, string reportType)
             {
-                
-                var monthlyProducts = await _purchaseService.GetPurchaseMonthlyReport(_year, _month);
-
-                int count = 0;
-                var ds = new reports();
-                DataTable t = ds.Tables["Purchases"];
-                DataRow r;
-                foreach (var item in monthlyProducts.PurchaseProductMonthlyReports)
-                {
-                    count++;
-                    r = t.NewRow();
-                    //r["Id"] = count.ToString();
-                    r["Category"] = item.CategoryName;
-                    r["Description"] = item.Name;
-                    r["Unit"] = item.Unit;
-                    r["Date"] = item.Date;
-                    r["Ref"] = item.SIDR;
-                    r["Qty"] = item.Quantity;
-                    r["UCost"] = item.Price.ToCurrencyFormat();
-                    r["Amount"] = item.TotalAmount.ToCurrencyFormat();
-
-                    t.Rows.Add(r);
-                }
-                // for total of cash and purchases
-                r = t.NewRow();
-                r["Description"] = "Total";
-                r["Amount"] = monthlyProducts.TotalMonthlyAmount.ToCurrencyFormat();
-               
-
-                t.Rows.Add(r);
-                reportViewer1.LocalReport.DataSources.Clear();
-                reportViewer1.LocalReport.ReportEmbeddedResource = "SVFHardwareSystem.Ui.Reports.PurchaseReport.rdlc";
-                var __totalPayablePayment = new ReportParameter("MonthYear", string.Format("{0} {1}", CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(monthlyProducts.Month), monthlyProducts.Year));
-                var __isYearlyTotalAmount = new ReportParameter("IsYearlyTotalAmount", "false");
-                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { __totalPayablePayment,__isYearlyTotalAmount });
-
-                ReportDataSource rds = new ReportDataSource("Purchases", t);
-
-                reportViewer1.LocalReport.DataSources.Add(rds);
-                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer1.ZoomMode = ZoomMode.PageWidth;
-                this.reportViewer1.RefreshReport();
-
-            }
-            catch (CustomBaseException ex)
-            {
-
-                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-
-                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private async void dtDate_ValueChanged(object sender, EventArgs e)
-        {
-            _year = dtDate.Value.Year;
-            _month = dtDate.Value.Month;
-            chkTotal.Text = string.Format("Show Total for Year {0}", _year);
-            await LoadProductMonthlyReport();
-        }
-
-        private async void chkTotal_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkTotal.Checked == true)
-            {
-                dtDate.Enabled = false;
-                await LoadPurchaseProductYearlyInventories();
-            }
-            else
-            {
-                dtDate.Enabled = true;
-                await LoadProductMonthlyReport();
-            }
-        }
-
-        private async Task LoadPurchaseProductYearlyInventories()
-        {
-            try
-            {
-
-                var productInventories = await _purchaseService.GetPurchaseProductYearlyInventories(_year);
-
+                try { 
                 int count = 0;
                 var ds = new reports();
                 DataTable t = ds.Tables["ProductInventory"];
                 DataRow r;
-                foreach (var item in productInventories)
+                foreach (var item in purchaseProducts)
                 {
                     count++;
                     r = t.NewRow();
@@ -148,21 +64,17 @@ namespace SVFHardwareSystem.Ui
 
                     t.Rows.Add(r);
                 }
-               
-                var finalAmount = await _purchaseService.GetPurchaseProductYearlyFinalTotalAmount(_year);
                 // for total of cash and purchases
                 r = t.NewRow();
                 r["Description"] = "Total";
-                r["Amount"] = finalAmount.ToCurrencyFormat();
+                r["Amount"] =finalAmount.ToCurrencyFormat();
 
 
                 t.Rows.Add(r);
                 reportViewer1.LocalReport.DataSources.Clear();
+                reportViewer1.LocalReport.ReportEmbeddedResource = reportType;
+                var __totalPayablePayment = new ReportParameter("Duration", duration);
 
-                var __totalPayablePayment = new ReportParameter("Year", string.Format("{0}",  _year));
-                
-
-                reportViewer1.LocalReport.ReportEmbeddedResource = "SVFHardwareSystem.Ui.Reports.PurchaseProductInventoryYearlyReport.rdlc";
                 reportViewer1.LocalReport.SetParameters(new ReportParameter[] { __totalPayablePayment });
 
                 ReportDataSource rds = new ReportDataSource("ProductInventory", t);
@@ -173,6 +85,40 @@ namespace SVFHardwareSystem.Ui
                 this.reportViewer1.RefreshReport();
 
             }
+           
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void dtDate_ValueChanged(object sender, EventArgs e)
+        {
+            var year = dtDate.Value.Year;
+            var month = dtDate.Value.Month;
+
+            if (radioMonth.Checked)
+            {
+                await LoadPurchaseProductInventories(year,month);
+            }
+            if (radioYear.Checked)
+            {
+                await LoadPurchaseProductInventories(year);
+            }
+            
+        }
+        private async Task LoadPurchaseProductInventories(int year, int month)
+        {
+            try
+            {
+
+                var monthlyProducts = await _purchaseProductInventoryService.GetPurchaseProductInventories(year, month);
+                var reportType = "SVFHardwareSystem.Ui.Reports.PurchaseProductInverntoryMonth.rdlc";
+                var duration = string.Format("{0} {1}", CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month), year);
+                var finalAmount = await _purchaseProductInventoryService.GetPurchaseProductTotal(year, month);
+                LoadReport(duration, finalAmount, monthlyProducts, reportType);
+            }
             catch (CustomBaseException ex)
             {
 
@@ -184,6 +130,54 @@ namespace SVFHardwareSystem.Ui
                 MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-    
+        private async Task LoadPurchaseProductInventories(int year)
+        {
+            try
+            {
+                var productInventories = await _purchaseProductInventoryService.GetPurchaseProductInventories(year);
+                var reportType = "SVFHardwareSystem.Ui.Reports.PurchaseProductInventoryYear.rdlc";
+                var duration =  year.ToString();
+                var finalAmount = await _purchaseProductInventoryService.GetPurchaseProductTotal(year);
+                LoadReport(duration, finalAmount, productInventories, reportType);
+            }
+            catch (CustomBaseException ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void radioMonth_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioMonth.Checked)
+            {
+                dtDate.Format = DateTimePickerFormat.Custom;
+                dtDate.CustomFormat = "MMMM yyyy";
+
+                var month = dtDate.Value.Month;
+                var year = dtDate.Value.Year;
+
+                await LoadPurchaseProductInventories(year,month);
+            }
+        }
+
+        private async void radioYear_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioYear.Checked)
+            {
+                dtDate.Format = DateTimePickerFormat.Custom;
+                dtDate.CustomFormat = "yyyy";
+
+                var month = dtDate.Value.Month;
+                var year = dtDate.Value.Year;
+
+                await LoadPurchaseProductInventories(year);
+            }
+        }
     }
 }

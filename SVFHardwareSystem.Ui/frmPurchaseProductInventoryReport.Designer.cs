@@ -32,13 +32,15 @@
             this.dtDate = new MetroFramework.Controls.MetroDateTime();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.chkTotal = new MetroFramework.Controls.MetroCheckBox();
+            this.radioMonth = new MetroFramework.Controls.MetroRadioButton();
+            this.radioYear = new MetroFramework.Controls.MetroRadioButton();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroPanel1
             // 
-            this.metroPanel1.Controls.Add(this.chkTotal);
+            this.metroPanel1.Controls.Add(this.radioYear);
+            this.metroPanel1.Controls.Add(this.radioMonth);
             this.metroPanel1.Controls.Add(this.dtDate);
             this.metroPanel1.Controls.Add(this.metroLabel1);
             this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -83,16 +85,29 @@
             this.reportViewer1.Size = new System.Drawing.Size(760, 360);
             this.reportViewer1.TabIndex = 4;
             // 
-            // chkTotal
+            // radioMonth
             // 
-            this.chkTotal.AutoSize = true;
-            this.chkTotal.Location = new System.Drawing.Point(223, 10);
-            this.chkTotal.Name = "chkTotal";
-            this.chkTotal.Size = new System.Drawing.Size(123, 15);
-            this.chkTotal.TabIndex = 4;
-            this.chkTotal.Text = "Show Total for Year";
-            this.chkTotal.UseSelectable = true;
-            this.chkTotal.CheckedChanged += new System.EventHandler(this.chkTotal_CheckedChanged);
+            this.radioMonth.AutoSize = true;
+            this.radioMonth.Checked = true;
+            this.radioMonth.Location = new System.Drawing.Point(223, 13);
+            this.radioMonth.Name = "radioMonth";
+            this.radioMonth.Size = new System.Drawing.Size(75, 15);
+            this.radioMonth.TabIndex = 4;
+            this.radioMonth.TabStop = true;
+            this.radioMonth.Text = "By Month";
+            this.radioMonth.UseSelectable = true;
+            this.radioMonth.CheckedChanged += new System.EventHandler(this.radioMonth_CheckedChanged);
+            // 
+            // radioYear
+            // 
+            this.radioYear.AutoSize = true;
+            this.radioYear.Location = new System.Drawing.Point(304, 13);
+            this.radioYear.Name = "radioYear";
+            this.radioYear.Size = new System.Drawing.Size(61, 15);
+            this.radioYear.TabIndex = 5;
+            this.radioYear.Text = "By Year";
+            this.radioYear.UseSelectable = true;
+            this.radioYear.CheckedChanged += new System.EventHandler(this.radioYear_CheckedChanged);
             // 
             // frmProductInventoryReport
             // 
@@ -115,6 +130,7 @@
         private MetroFramework.Controls.MetroDateTime dtDate;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
-        private MetroFramework.Controls.MetroCheckBox chkTotal;
+        private MetroFramework.Controls.MetroRadioButton radioYear;
+        private MetroFramework.Controls.MetroRadioButton radioMonth;
     }
 }

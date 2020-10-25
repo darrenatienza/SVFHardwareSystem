@@ -176,11 +176,11 @@
     <Compile Include="frmProducts.Designer.cs">
       <DependentUpon>frmProducts.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSaleProductMonthlyInventory.cs">
+    <Compile Include="frmSaleProductInventory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSaleProductMonthlyInventory.Designer.cs">
-      <DependentUpon>frmSaleProductMonthlyInventory.cs</DependentUpon>
+    <Compile Include="frmSaleProductInventory.Designer.cs">
+      <DependentUpon>frmSaleProductInventory.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPurchasePayments.cs">
       <SubType>Form</SubType>
@@ -323,8 +323,8 @@
     <EmbeddedResource Include="frmSaleForm.resx">
       <DependentUpon>frmSaleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSaleProductMonthlyInventory.resx">
-      <DependentUpon>frmSaleProductMonthlyInventory.cs</DependentUpon>
+    <EmbeddedResource Include="frmSaleProductInventory.resx">
+      <DependentUpon>frmSaleProductInventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSalesReport.resx">
       <DependentUpon>frmSalesReport.cs</DependentUpon>
@@ -364,8 +364,8 @@
     <EmbeddedResource Include="Reports\Payables.rdlc" />
     <EmbeddedResource Include="Reports\PurchasePerSupplier.rdlc" />
     <EmbeddedResource Include="Reports\SaleProductInventory.rdlc" />
-    <EmbeddedResource Include="Reports\PurchaseProductInventoryYearlyReport.rdlc" />
-    <EmbeddedResource Include="Reports\PurchaseReport.rdlc" />
+    <EmbeddedResource Include="Reports\PurchaseProductInventoryYear.rdlc" />
+    <EmbeddedResource Include="Reports\PurchaseProductInverntoryMonth.rdlc" />
     <EmbeddedResource Include="Reports\MonthlyTotalSales.rdlc" />
     <EmbeddedResource Include="Reports\SalesReport.rdlc" />
     <None Include=".editorconfig" />

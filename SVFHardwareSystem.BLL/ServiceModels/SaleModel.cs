@@ -8,7 +8,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
 {
     public class SaleModel
     {
-        public DateTime CreateTimeStamp { get; set; }
+        public DateTime CreateTimeStamp { get; set; } = DateTime.Now;
         public string CustomerFullName { get; set; }
         public string Cost { get; set; }
         public string SIDR { get; set; }
@@ -24,7 +24,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public decimal TotalPayment { get; set; }
         public decimal CancelAmount { get; internal set; }
         public decimal Price { get; set; }
-        public DateTime SalesTransactionDate { get; set; }
+        public DateTime SaleDate { get; set; } = DateTime.Now;
         public DateTime DateFinished { get; set; } = DateTime.Now;
     }
 }

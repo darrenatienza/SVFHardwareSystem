@@ -47,10 +47,7 @@ namespace SVFHardwareSystem.Services.Interfaces
         void AddPurchasePayment(PurchasePaymentModel purchasePayment);
         Task<PurchasesPerSupplierModel> GetPurchasesPerSupplier(int year, int supplierID,bool fullyPaid);
 
-        Task<PurchaseInventoryModel> GetPurchaseMonthlyReport(int year, int month);
-
-        Task<List<PurchaseProductInventoryModel>> GetPurchaseProductYearlyInventories(int year);
-        Task<decimal> GetPurchaseProductYearlyFinalTotalAmount(int year);
+        
 
     }
 }
