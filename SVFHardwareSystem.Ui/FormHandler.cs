@@ -48,7 +48,8 @@ namespace SVFHardwareSystem.Ui
 
         public static frmSalesReport OpenSalesReport() => UnityConfig
                    .Register().Resolve<frmSalesReport>();
-
+        public static frmProductInventory OpenProductInventory() => UnityConfig
+                   .Register().Resolve<frmProductInventory>();
         internal static frmProductInventoryReport OpenProductMonthlyReport() => UnityConfig
                    .Register().Resolve<frmProductInventoryReport>();
 

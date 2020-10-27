@@ -13,5 +13,6 @@ namespace SVFHardwareSystem.DAL
         DbSet<Product> Products { get; set; }
         DbSet<SaleProduct> SaleProducts { get; set; }
         DbSet<PurchaseProduct> PurchaseProducts { get; set; }
+        DbSet<ProductInventory> ProductInventories { get; set; }
     }
 }

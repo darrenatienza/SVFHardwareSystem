@@ -2,6 +2,7 @@
 using AutoMapper.Collection;
 using AutoMapper.EquivalencyExpression;
 using SVFHardwareSystem.DAL.Entities;
+using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
 using System;
 using System.Collections.Generic;
@@ -75,6 +76,7 @@ namespace AutoMap
 
             CreateMap<Product, PurchaseProductInventoryModel>();
             CreateMap<Product, SaleProductInventoryModel>();
+            CreateMap<Product, ProductInventoryModel>();
             // Additional mappings here...
         }
     }

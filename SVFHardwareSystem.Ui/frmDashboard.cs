@@ -55,7 +55,7 @@ namespace SVFHardwareSystem.Ui
 
         private void btnInventory_Click(object sender, EventArgs e)
         {
-            FormHandler.OpenPurchaseSaleInventoriesForm().ShowDialog();
+            FormHandler.OpenProductInventory().Show();
         }
 
         private void btnPayables_Click(object sender, EventArgs e)

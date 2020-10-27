@@ -35,6 +35,9 @@ namespace SVFHardwareSystem.Services.ServiceModels
         /// Amount
         /// </summary>
         public decimal TotalAmount { get; internal set; }
+        /// <summary>
+        /// Purchase Dates
+        /// </summary>
         public string Date { get; internal set; }
     }
 }

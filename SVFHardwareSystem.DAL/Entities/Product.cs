@@ -22,9 +22,10 @@ namespace SVFHardwareSystem.DAL.Entities
         public virtual Category Category { get; set; }
         public decimal? DealersPrice { get; set; }
 
-        public ICollection<PurchaseProduct> PurchaseProducts { get; set; }
+        public ICollection<PurchaseProduct> PurchaseProducts { get; set; } = new HashSet<PurchaseProduct>();
 
-        public ICollection<SaleProduct> SaleProducts { get; set; }
+        public ICollection<SaleProduct> SaleProducts { get; set; } = new HashSet<SaleProduct>();
 
+        public ICollection<ProductInventory> ProductInventories { get; set; } = new HashSet<ProductInventory>();
     }
 }
