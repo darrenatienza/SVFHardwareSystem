@@ -37,11 +37,13 @@
             this.dtDate = new MetroFramework.Controls.MetroDateTime();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.spinnerLoading = new MetroFramework.Controls.MetroProgressSpinner();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroPanel1
             // 
+            this.metroPanel1.Controls.Add(this.spinnerLoading);
             this.metroPanel1.Controls.Add(this.btnSave);
             this.metroPanel1.Controls.Add(this.radioPurchase);
             this.metroPanel1.Controls.Add(this.radioBeginning);
@@ -143,6 +145,18 @@
             this.reportViewer1.Size = new System.Drawing.Size(760, 329);
             this.reportViewer1.TabIndex = 5;
             // 
+            // spinnerLoading
+            // 
+            this.spinnerLoading.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.spinnerLoading.Location = new System.Drawing.Point(732, 12);
+            this.spinnerLoading.Maximum = 100;
+            this.spinnerLoading.Name = "spinnerLoading";
+            this.spinnerLoading.Size = new System.Drawing.Size(16, 16);
+            this.spinnerLoading.TabIndex = 8;
+            this.spinnerLoading.UseSelectable = true;
+            this.spinnerLoading.Value = 65;
+            this.spinnerLoading.Visible = false;
+            // 
             // frmProductInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -171,5 +185,6 @@
         private MetroFramework.Controls.MetroRadioButton radioBeginning;
         private MetroFramework.Controls.MetroRadioButton radioEnding;
         private MetroFramework.Controls.MetroButton btnSave;
+        private MetroFramework.Controls.MetroProgressSpinner spinnerLoading;
     }
 }

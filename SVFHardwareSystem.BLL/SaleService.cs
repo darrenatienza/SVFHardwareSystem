@@ -144,7 +144,7 @@ namespace SVFHardwareSystem.Services
                 var entity = db.Sales.FirstOrDefault(x => x.IsFinished == false);
                 var model = entity != null ? Mapping.Mapper.Map<SaleModel>(entity) : throw new KeyNotFoundException();
                 var transactionProducts = db.SaleProducts.Where(x => x.SaleID == entity.SaleID);
-                var posPayments = db.POSPayments.Where(x => x.SaleID == entity.SaleID);
+                var posPayments = db.SalePayments.Where(x => x.SaleID == entity.SaleID);
 
                 if (transactionProducts.Count() > 0)
                 {
@@ -168,14 +168,14 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var posPayments = db.POSPayments.Where(x => x.SaleID == posTransactionID && x.IsReceivablePayment == true).ToList();
+                var posPayments = db.SalePayments.Where(x => x.SaleID == posTransactionID && x.IsReceivablePayment == true).ToList();
                 return ComputeTotalPaymentAmount(posPayments);
             }
         }
 
         private decimal GetCashAmount(DataContext db, int postransactionID)
         {
-            var posPayments = db.POSPayments.Where(x => x.SaleID == postransactionID); ;
+            var posPayments = db.SalePayments.Where(x => x.SaleID == postransactionID); ;
             //compute for  total amount of cash payments
             var cash = posPayments.Count() > 0 ? posPayments.Sum(y => y.Amount) : 0;
             return cash;
@@ -198,7 +198,7 @@ namespace SVFHardwareSystem.Services
             {
                 var posTransaction = db.Sales.Find(posTransactionID);
 
-                if (posTransaction.SaleDate > paymentDate)
+                if ( paymentDate < posTransaction.SaleDate)
                 {
                     throw new InvalidFieldException("Payment Date");
                 }
@@ -217,7 +217,7 @@ namespace SVFHardwareSystem.Services
                 posPayment.PaymentDate = paymentDate;
                 posPayment.SaleID = posTransactionID;
                 posPayment.IsReceivablePayment = receivable > 0 ? true : false;
-                db.POSPayments.Add(posPayment);
+                db.SalePayments.Add(posPayment);
 
 
                
@@ -225,13 +225,15 @@ namespace SVFHardwareSystem.Services
                 //for first payments, compute the receivable by subtracting the totalPurchase to amount tendered.
                 if (totalPaymentsOnCash == 0)
                 {
+                   
                     var initialReceivables = totalPurchase - amountTendered;
-
+                    var isFullyPaid = initialReceivables > 0 ? false : true;
                     // update isFinish of Pos Transaction for first payment
-                  
+
                     posTransaction.IsFinished = true;
-                    posTransaction.DateFinished = DateTime.Now;
-                    posTransaction.IsFullyPaid = initialReceivables > 0 ? false : true;
+                    //posTransaction.DateFinished = DateTime.Now;
+                    posTransaction.IsFullyPaid = isFullyPaid;
+                    posTransaction.HasReceivablePayment = isFullyPaid ? false :true ;
                 }
                 else
                 {
@@ -257,7 +259,7 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var posPayments = db.POSPayments.Where(x => x.SaleID == postransactionID && x.IsReceivablePayment == false).ToList();
+                var posPayments = db.SalePayments.Where(x => x.SaleID == postransactionID && x.IsReceivablePayment == false).ToList();
                 return ComputeTotalPaymentAmount(posPayments);
             }
 

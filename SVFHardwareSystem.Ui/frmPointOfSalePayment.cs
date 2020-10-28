@@ -19,17 +19,19 @@ namespace SVFHardwareSystem.Ui
         private ISalePaymentService _posPaymentService;
         private ISaleService _pOSTransactionService;
         private int _posTransactionID;
+        private DateTime _saleDate;
         private decimal _total;
         private decimal _receivable;
         private decimal _change;
         private decimal _amount;
 
-        public frmPointOfSalePayment(ISalePaymentService posPaymentService, ISaleService pOSTransactionService, int transactionID)
+        public frmPointOfSalePayment(ISalePaymentService posPaymentService, ISaleService pOSTransactionService, int transactionID, DateTime saleDate)
         {
             InitializeComponent();
             _posPaymentService = posPaymentService;
             _pOSTransactionService = pOSTransactionService;
             _posTransactionID = transactionID;
+            _saleDate = saleDate;
         }
 
         private void frmPointOfSalePayment_Load(object sender, EventArgs e)
@@ -39,7 +41,7 @@ namespace SVFHardwareSystem.Ui
 
             _receivable = _pOSTransactionService.GetReceivableAmount(_posTransactionID);
             txtReceivable.Text = _receivable.ToString();
-
+            dtPaymentDate.Value = _saleDate;
 
 
 

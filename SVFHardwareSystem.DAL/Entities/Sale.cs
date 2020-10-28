@@ -25,14 +25,21 @@ namespace SVFHardwareSystem.DAL.Entities
         public bool IsFinished { get; set; }
         public ICollection<SalePayment> SalePayments { get; set; } = new HashSet<SalePayment>();
         public ICollection<SaleProduct> SaleProducts { get; set; } = new HashSet<SaleProduct>();
+        [Obsolete("Not applicable on current point of sale setup")]
         /// <summary>
         /// Date when the sale finished
         /// </summary>
-        public DateTime DateFinished { get; set; }
+        public DateTime DateFinished { get; set; } = DateTime.Now;
         public bool IsFullyPaid { get; set; }
         /// <summary>
         /// Date when the transaction happens
         /// </summary>
         public DateTime SaleDate { get; set; }
+        /// <summary>
+        /// Indicates if the Sale is cancelled
+        /// This means that all products are cancelled to
+        /// </summary>
+        public bool IsSaleCancel { get; set; }
+        public bool HasReceivablePayment { get; set; }
     }
 }

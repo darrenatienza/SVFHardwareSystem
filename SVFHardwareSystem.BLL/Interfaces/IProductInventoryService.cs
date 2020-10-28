@@ -13,5 +13,9 @@ namespace SVFHardwareSystem.Services.Interfaces
 
         Task<IList<ProductInventoryModel>> GetSaleInventories(int year);
         Task<IList<ProductInventoryModel>> GetEndingInventories(int year);
+        Task<decimal> GetBeginningInventoryAmount(int year);
+        Task<decimal> GetSaleInventoryAmount(int year);
+        Task<decimal> GetPurchaseInventoryAmount(int year);
+        Task<decimal> GetEndingInventoryAmount(int year);
     }
 }

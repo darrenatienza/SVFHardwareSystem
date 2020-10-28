@@ -21,6 +21,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public decimal TotalReceivableCredit { get { return SalesProducts.Sum(x => x.ReceivablesCredit); } }
 
         public IList<SalesProductModel> SalesProducts { get; set; } = new List<SalesProductModel>();
-        public object CustomerFullName { get; set; }
+        public string CustomerFullName { get; set; }
+        public DateTime SaleDate { get; set; }
     }
 }

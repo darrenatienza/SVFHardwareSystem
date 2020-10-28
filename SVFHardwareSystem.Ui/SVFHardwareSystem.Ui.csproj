@@ -371,6 +371,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\CustomerReceivable.rdlc" />
     <EmbeddedResource Include="Reports\Payables.rdlc" />
+    <EmbeddedResource Include="Reports\ProductInventory.rdlc" />
     <EmbeddedResource Include="Reports\PurchasePerSupplier.rdlc" />
     <EmbeddedResource Include="Reports\SaleProductInventory.rdlc" />
     <EmbeddedResource Include="Reports\PurchaseProductInventoryYear.rdlc" />

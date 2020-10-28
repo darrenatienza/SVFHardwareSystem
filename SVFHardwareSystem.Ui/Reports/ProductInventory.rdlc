@@ -559,7 +559,7 @@
       <Width>7.5in</Width>
       <Page>
         <PageHeader>
-          <Height>1.13541in</Height>
+          <Height>1.13542in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -586,23 +586,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Purchases</Value>
-                      <Style>
-                        <FontFamily>CAlibri</FontFamily>
-                        <FontSize>14pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                        <Color>Brown</Color>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=Parameters!Duration.Value</Value>
+                      <Value>=Parameters!ReportTitle.Value</Value>
                       <Style>
                         <FontFamily>CAlibri</FontFamily>
                         <FontSize>16pt</FontSize>
@@ -618,7 +602,23 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Parameters!Type.Value</Value>
+                      <Value>=Parameters!Year.Value</Value>
+                      <Style>
+                        <FontFamily>CAlibri</FontFamily>
+                        <FontSize>14pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                        <Color>Brown</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value />
                       <Style>
                         <FontFamily>CAlibri</FontFamily>
                         <FontSize>12pt</FontSize>
@@ -653,8 +653,8 @@
             </Border>
           </Style>
         </PageHeader>
-        <LeftMargin>1in</LeftMargin>
-        <RightMargin>1in</RightMargin>
+        <LeftMargin>0.5in</LeftMargin>
+        <RightMargin>0.5in</RightMargin>
         <TopMargin>1in</TopMargin>
         <BottomMargin>1in</BottomMargin>
         <Style />
@@ -662,13 +662,13 @@
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="Duration">
+    <ReportParameter Name="Year">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="Type">
+    <ReportParameter Name="ReportTitle">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -683,12 +683,12 @@
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>Duration</ParameterName>
+          <ParameterName>Year</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>Type</ParameterName>
+          <ParameterName>ReportTitle</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

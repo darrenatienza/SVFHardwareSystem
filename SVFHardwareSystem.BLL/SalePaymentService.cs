@@ -28,12 +28,12 @@ namespace SVFHardwareSystem.Services
                 posPayment.Amount = amountTendered;
                 posPayment.PaymentDate = DateTime.Now;
                 posPayment.SaleID = posTransactionID;
-                db.POSPayments.Add(posPayment);
+                db.SalePayments.Add(posPayment);
 
                 // update isFinish of Pos Transaction
                 var posTransaction = db.Sales.Find(posTransactionID);
                 posTransaction.IsFinished = true;
-                posTransaction.DateFinished = DateTime.Now;
+                //posTransaction.DateFinished = DateTime.Now;
                 db.Entry(posTransaction).State = EntityState.Modified;
 
                 // update isPaid of products on transaction products

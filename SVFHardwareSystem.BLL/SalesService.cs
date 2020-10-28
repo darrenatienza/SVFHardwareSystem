@@ -30,8 +30,8 @@ namespace SVFHardwareSystem.Services
             {
 
 
-                var postransactions = db.Sales.Include(x => x.SaleProducts).Where(x => DbFunctions.TruncateTime(x.DateFinished) >= DbFunctions.TruncateTime(from)
-                && DbFunctions.TruncateTime(x.DateFinished) <= DbFunctions.TruncateTime(to)
+                var postransactions = db.Sales.Include(x => x.SaleProducts).Where(x => DbFunctions.TruncateTime(x.SaleDate) >= DbFunctions.TruncateTime(from)
+                && DbFunctions.TruncateTime(x.SaleDate) <= DbFunctions.TruncateTime(to)
                 && (x.Cost.Contains(criteria) || x.SIDR.Contains(criteria))
                 && (x.IsFinished)).ToList();
 
@@ -137,7 +137,7 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var posPayments = db.POSPayments.Where(x => x.SaleID == posTransactionID); ;
+                var posPayments = db.SalePayments.Where(x => x.SaleID == posTransactionID); ;
                 //compute for  total amount of cash payments
                 var cash = posPayments.Count() > 0 ? posPayments.Sum(y => y.Amount) : 0;
                 return cash;
@@ -201,9 +201,9 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var posPayments = await db.POSPayments.Where(x => x.PaymentDate.Month == month
-                    && x.PaymentDate.Year == year && x.PaymentDate.Day == day
-                    && x.IsReceivablePayment == false).ToListAsync();
+                var posPayments = await db.SalePayments.Where(x => x.Sale.SaleDate.Month == month
+                    && x.Sale.SaleDate.Year == year && x.Sale.SaleDate.Day == day
+                    && x.IsReceivablePayment == false && x.Sale.IsSaleCancel == false && x.Sale.HasReceivablePayment == true).ToListAsync();
 
                 return posPayments.Count() > 0 ? posPayments.Sum(y => y.Amount) : 0;
             }
@@ -216,7 +216,7 @@ namespace SVFHardwareSystem.Services
             using (var db = new DataContext())
             {
                 var sales = await db.Sales.Include(x => x.SaleProducts).Where(x => x.SaleDate.Month == month
-                    && x.SaleDate.Year == year && x.SaleDate.Day == day).ToListAsync();
+                    && x.SaleDate.Year == year && x.SaleDate.Day == day && x.HasReceivablePayment == true).ToListAsync();
 
                 return sales.Count() > 0 ? sales.Sum(y => y.SaleProducts.Sum(z => (z.Quantity - z.QuantityToCancel) * z.Price)) : 0;
             }
@@ -247,7 +247,7 @@ namespace SVFHardwareSystem.Services
                     // query product purchase using year month and product id
                     var saleProduct = await db.SaleProducts
                         .Where(x =>
-                            x.Sale.DateFinished.Year == year
+                            x.Sale.SaleDate.Year == year
                             && x.ProductID == product.ProductID).ToListAsync();
                     //set values
                     model.Quantity = saleProduct.Sum(x => x.Quantity);

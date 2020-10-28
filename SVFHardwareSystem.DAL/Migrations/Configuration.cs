@@ -84,9 +84,9 @@
             var products = new Dictionary<string, Product>
             {
                 //Users Lookup
-                {"1", new Product {ProductID = 1, Name = "Product 1", CategoryID = 1, Code="1", Limit = 1, Price = 20, Quantity= 1000, Unit= "pc"}},
-                {"2", new Product {ProductID = 2, Name = "Product 2", CategoryID = 1, Code="2", Limit = 1, Price = 5, Quantity= 1000, Unit= "pc"}},
-                {"3", new Product {ProductID = 3, Name = "Product 3", CategoryID = 1, Code="3", Limit = 1, Price = 14, Quantity= 1000, Unit= "pc"}},
+                {"1", new Product {ProductID = 1, Name = "Product 1", CategoryID = 1, Code="1", Limit = 1, Price = 20, Quantity= 0, Unit= "pc"}},
+                {"2", new Product {ProductID = 2, Name = "Product 2", CategoryID = 1, Code="2", Limit = 1, Price = 5, Quantity= 0, Unit= "pc"}},
+                {"3", new Product {ProductID = 3, Name = "Product 3", CategoryID = 1, Code="3", Limit = 1, Price = 14, Quantity= 0, Unit= "pc"}},
 
             };
             foreach (var product in products.Values)

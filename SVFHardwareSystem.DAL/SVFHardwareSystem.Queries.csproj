@@ -75,6 +75,14 @@
     <Compile Include="Migrations\202010241953394_initial.designer.cs">
       <DependentUpon>202010241953394_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010280551266_AddIsSaleCancelOnSale.cs" />
+    <Compile Include="Migrations\202010280551266_AddIsSaleCancelOnSale.designer.cs">
+      <DependentUpon>202010280551266_AddIsSaleCancelOnSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010280820189_AddHasReceivablePaymentOnSale.cs" />
+    <Compile Include="Migrations\202010280820189_AddHasReceivablePaymentOnSale.designer.cs">
+      <DependentUpon>202010280820189_AddHasReceivablePaymentOnSale.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Misc\PaymentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +94,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202010241953394_initial.resx">
       <DependentUpon>202010241953394_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010280551266_AddIsSaleCancelOnSale.resx">
+      <DependentUpon>202010280551266_AddIsSaleCancelOnSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010280820189_AddHasReceivablePaymentOnSale.resx">
+      <DependentUpon>202010280820189_AddHasReceivablePaymentOnSale.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

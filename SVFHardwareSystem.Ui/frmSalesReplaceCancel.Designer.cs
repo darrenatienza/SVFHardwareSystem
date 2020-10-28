@@ -238,10 +238,12 @@
             // chkAddQuantity
             // 
             this.chkAddQuantity.AutoSize = true;
+            this.chkAddQuantity.Checked = true;
             this.chkAddQuantity.Location = new System.Drawing.Point(272, 33);
             this.chkAddQuantity.Name = "chkAddQuantity";
             this.chkAddQuantity.Size = new System.Drawing.Size(206, 15);
             this.chkAddQuantity.TabIndex = 14;
+            this.chkAddQuantity.TabStop = true;
             this.chkAddQuantity.Text = "Add Quantity to Product Inventory";
             this.metroToolTip1.SetToolTip(this.chkAddQuantity, "If check, the quantity of the product that cancel will add\r\nto the product invent" +
         "ory.");

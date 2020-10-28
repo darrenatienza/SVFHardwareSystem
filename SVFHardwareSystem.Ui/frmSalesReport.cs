@@ -52,7 +52,7 @@ namespace SVFHardwareSystem.Ui
                 {
                     count++;
                     r = t.NewRow();
-                    r["Date"] =             sale.CreateTimeStamp.ToShortDateString();
+                    r["Date"] =             sale.SaleDate.ToShortDateString();
                     r["Cost"] =             sale.Cost;
                     r["SIDR"] =             sale.SIDR;
                     r["Quantity"] =         "";

@@ -1,4 +1,5 @@
 ﻿using AutoMap;
+using SVFHardwareSystem.DAL;
 using SVFHardwareSystem.DAL.Entities;
 using SVFHardwareSystem.Queries;
 using SVFHardwareSystem.Services.Exceptions;
@@ -54,12 +55,21 @@ namespace SVFHardwareSystem.Services
             using (var db = new DataContext())
             {
                 var transactionProduct = db.SaleProducts.Find(transactionProductID);
+                // use sale id to retrive the  sale record of product
+                var saleID = transactionProduct.SaleID;
+                var sale = db.Sales.Find(saleID);
+                //total of sale quantity
+                var totalSaleProductQuantity = db.SaleProducts.Where(x => x.SaleID == saleID).Sum(x => x.Quantity);
+                //total of cancel quantity
+                var totalSaleProductQuantityToCancel = db.SaleProducts.Where(x => x.SaleID == saleID).Sum(x => x.QuantityToCancel);
+
                 var product = db.Products.Find(transactionProduct.ProductID);
-                // product where isCancel is true must not update the status because it was returned
+                // product where isCancel is true must not update the status because it was already cancelled
                 if (transactionProduct.IsCancel)
                 {
                     throw new ReturnedProductMustNotUpdateStatusException();
                 }
+                // quantity of product to cancel must not exceed to the product on sale or not less than 0
                 if (quantityToCancel <= 0 || quantityToCancel > transactionProduct.Quantity)
                 {
                     throw new LimitMustNotExceedOrLessException(transactionProduct.Quantity, 1);
@@ -80,8 +90,14 @@ namespace SVFHardwareSystem.Services
                     AddSupplierProductToReturnOnReplaceCancel(db, product.ProductID, quantityToCancel, reason);
                 }
 
-                //Notes: No need to subtract quantity on product inventory after adding it to the supplier product to return because the
-                // product is purchased.
+                totalSaleProductQuantityToCancel += quantityToCancel;
+                
+                // cancel the sale if the total quantity of cancel per product is equal to total quantity  purchase
+                sale.IsSaleCancel = totalSaleProductQuantity == totalSaleProductQuantityToCancel ? true : false;
+
+                db.Entry(sale).State = EntityState.Modified;
+                
+
                 db.Entry(product).State = EntityState.Modified;
 
                 transactionProduct.IsForReturnToSupplierAfterCancel = isForReturnToSupplier;
@@ -181,7 +197,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        private void AddSupplierProductToReturnOnReplaceCancel(DataContext db, int productID, int quantityToCancelReplace, string reason)
+        private void AddSupplierProductToReturnOnReplaceCancel(IDataContext db, int productID, int quantityToCancelReplace, string reason)
         {
             var supplierProductToReturn = new WarrantyProduct();
             supplierProductToReturn.Code = ""; // temporary put empty string

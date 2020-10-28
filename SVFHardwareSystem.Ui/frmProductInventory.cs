@@ -2,6 +2,7 @@
 using MetroFramework.Controls;
 using MetroFramework.Forms;
 using Microsoft.Reporting.WinForms;
+using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Ui.Extensions;
 using SVFHardwareSystem.Ui.Reports;
@@ -26,23 +27,50 @@ namespace SVFHardwareSystem.Ui
             InitializeComponent();
             _productInventoryService = productInventoryService;
             radioBeginning.CheckedChanged += RadioBeginning_CheckedChanged;
+            radioSale.CheckedChanged += RadioBeginning_CheckedChanged;
+            radioPurchase.CheckedChanged += RadioBeginning_CheckedChanged;
+            radioEnding.CheckedChanged += RadioBeginning_CheckedChanged;
         }
 
-        private void RadioBeginning_CheckedChanged(object sender, EventArgs e)
+        private async void RadioBeginning_CheckedChanged(object sender, EventArgs e)
         {
             var radio = (MetroRadioButton)sender;
-            int year = dtDate.Value.Year;
-            if (radio.Name == radioEnding.Name)
-            {
-                btnSave.Visible = radioEnding.Checked ? true : false;
-            }
             
+            spinnerLoading.Visible = true;
+            btnSave.Visible = false;
+            if (radio.Checked)
+            {
+                int year = dtDate.Value.Year;
+                await Task.Delay(500);
+                if (radio.Name == radioBeginning.Name)
+                {
+                    await LoadBeginningInventories(year);
+                }
+                if (radio.Name == radioSale.Name)
+                {
+                    await LoadSaleInventories(year);
+                }
+                if (radio.Name == radioPurchase.Name)
+                {
+                    await LoadPurchaseInventoriesAsync(year);
+                }
+                if (radio.Name == radioEnding.Name)
+                {
+                    btnSave.Visible = radioEnding.Checked ? true : false;
+                    await LoadEndingInventories(year);
+                }
+            }
+
+            spinnerLoading.Visible = false;
         }
 
-        private void frmProductInventory_Load(object sender, EventArgs e)
+        private async void frmProductInventory_Load(object sender, EventArgs e)
         {
-
-          
+            var year = dtDate.Value.Year;
+            spinnerLoading.Visible = true;
+            await Task.Delay(100);
+            await LoadBeginningInventories(year);
+            spinnerLoading.Visible = false;
         }
 
         private void radioEnding_CheckedChanged(object sender, EventArgs e)
@@ -60,10 +88,69 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                var productInventories = await _productInventoryService.GetBeginningInventories((int)year);
-                var reportTitle = "Beginning";
-                
-                var finalAmount = await _productInventoryService.GetBeginningInventories((int)year);
+                var productInventories = await _productInventoryService.GetBeginningInventories(year);
+                var reportTitle = "Beginning Inventory";
+                var finalAmount = await _productInventoryService.GetBeginningInventoryAmount(year);
+                LoadReport(year, finalAmount, productInventories, reportTitle);
+            }
+            catch (CustomBaseException ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private async Task LoadSaleInventories(int year)
+        {
+            try
+            {
+                var productInventories = await _productInventoryService.GetSaleInventories(year);
+                var reportTitle = "Sale Inventory";
+                var finalAmount = await _productInventoryService.GetSaleInventoryAmount(year);
+                LoadReport(year, finalAmount, productInventories, reportTitle);
+            }
+            catch (CustomBaseException ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private async Task LoadEndingInventories(int year)
+        {
+            try
+            {
+                var productInventories = await _productInventoryService.GetEndingInventories(year);
+                var reportTitle = "Ending Inventory";
+                var finalAmount = await _productInventoryService.GetEndingInventoryAmount(year);
+                LoadReport(year, finalAmount, productInventories, reportTitle);
+            }
+            catch (CustomBaseException ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private async Task LoadPurchaseInventoriesAsync(int year)
+        {
+            try
+            {
+                var productInventories = await _productInventoryService.GetPurchaseInventories(year);
+                var reportTitle = "Purchase Inventory";
+                var finalAmount = await _productInventoryService.GetPurchaseInventoryAmount(year);
                 LoadReport(year, finalAmount, productInventories, reportTitle);
             }
             catch (CustomBaseException ex)
@@ -78,7 +165,7 @@ namespace SVFHardwareSystem.Ui
             }
         }
 
-        private void LoadReport(string duration, decimal finalAmount, IList<ProductInventoryModel> productInventories, string reportTitle)
+        private void LoadReport(int year, decimal finalAmount, IList<ProductInventoryModel> productInventories, string reportTitle)
         {
             try
             {
@@ -91,8 +178,8 @@ namespace SVFHardwareSystem.Ui
                     count++;
                     r = t.NewRow();
                     //r["Id"] = count.ToString();
-                    r["Category"] = item.ProductCategoryName;
-                    r["Description"] = item.ProductName;
+                    r["Category"] = item.CategoryName;
+                    r["Description"] = item.Name;
                     r["Unit"] = item.Unit;
                     r["Qty"] = item.Quantity;
                     r["UCost"] = item.UnitPrice.ToCurrencyFormat();
@@ -100,7 +187,7 @@ namespace SVFHardwareSystem.Ui
 
                     t.Rows.Add(r);
                 }
-                // for total of cash and purchases
+                // for total 
                 r = t.NewRow();
                 r["Description"] = "Total";
                 r["Amount"] = finalAmount.ToCurrencyFormat();
@@ -108,7 +195,7 @@ namespace SVFHardwareSystem.Ui
 
                 t.Rows.Add(r);
                 reportViewer1.LocalReport.DataSources.Clear();
-                var __year = new ReportParameter("Duration", duration);
+                var __year = new ReportParameter("Year", year.ToString());
                 var __reportTitle = new ReportParameter("ReportTitle", reportTitle);
                 reportViewer1.LocalReport.SetParameters(new ReportParameter[] { __year, __reportTitle });
 

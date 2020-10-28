@@ -18,17 +18,7 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var products = await GetProductsExistsOnProductInventoryPurchasesAndSales(db, year);
-                var models = new List<ProductInventoryModel>();
-                foreach (var product in products)
-                {
-                    // get last product as beginning
-                    var productOnInventory = db.ProductInventories.LastOrDefault(x => x.ProductID == product.ProductID);
-                    // map similar properties
-                    var model = Mapping.Mapper.Map<ProductInventoryModel>(productOnInventory);
-                    models.Add(model);
-                }
-                return models;
+               return await GetBeginningInventories(db, year);
             }
         }
 
@@ -44,19 +34,28 @@ namespace SVFHardwareSystem.Services
                     var model = Mapping.Mapper.Map<ProductInventoryModel>(product);
 
                     // get last product as beginning
-                    var productOnInventory = db.ProductInventories.LastOrDefault(x => x.ProductID == product.ProductID);
-
+                    var productOnInventory = (await GetBeginningInventories(db,year)).FirstOrDefault(x => x.ProductID == product.ProductID);
+                   
                     // get purchase product for the year
                     var productOnPurchase = (await GetPurchaseInventories(db, year)).FirstOrDefault(x => x.ProductID == product.ProductID);
 
                     // get sale product for the year
                     var productOnSale = (await GetSaleInventories(db, year)).FirstOrDefault(x => x.ProductID == product.ProductID);
-                    
+
+                    // check for nulls
+                    var productOnInventoryQuantity = productOnInventory == null ? 0 : productOnInventory.Quantity;
+                    var productOnPurchaseQuantity = productOnPurchase == null ? 0 : productOnPurchase.Quantity;
+                    var productOnSaleQuantity = productOnSale == null ? 0 : productOnSale.Quantity;
+
+                    var productOnInventoryTotalAmount = productOnInventory == null ? 0 : productOnInventory.TotalAmount;
+                    var productOnPurchaseTotalAmount = productOnPurchase == null ? 0 : productOnPurchase.TotalAmount;
+                    var productOnSaleTotalAmount = productOnSale == null ? 0 : productOnSale.TotalAmount;
+
                     //compute total quantity (ending quantity)
-                    model.Quantity = (productOnInventory.Quantity + productOnPurchase.Quantity) - productOnSale.Quantity;
+                    model.Quantity = (productOnInventoryQuantity + productOnPurchaseQuantity) - productOnSaleQuantity;
                     
                     //compute total amount (ending amount)
-                    model.TotalAmount = (productOnInventory.TotalAmount + productOnPurchase.TotalAmount) - productOnSale.TotalAmount;
+                    model.TotalAmount = (productOnInventoryTotalAmount + productOnPurchaseTotalAmount) - productOnSaleTotalAmount;
                     
                     models.Add(model);
                 }
@@ -92,7 +91,7 @@ namespace SVFHardwareSystem.Services
                     .Where(x => x.PurchaseProducts.Where(y => y.Purchase.DatePurchase.Year == year).Count() > 0 
                     || x.SaleProducts.Where( y => y.Sale.SaleDate.Year == year).Count() > 0
                     || x.ProductInventories.Where(z => z.ProductID == x.ProductID).Count() > 0)
-                    .Select(z => new Product { Name = z.Name, Unit = z.Unit, ProductID = z.ProductID }).ToListAsync();
+                    .ToListAsync();
         }
         public async Task<IList<ProductInventoryModel>> GetBeginningInventories(IDataContext db, int year)
         {
@@ -101,10 +100,22 @@ namespace SVFHardwareSystem.Services
             var models = new List<ProductInventoryModel>();
             foreach (var product in products)
             {
+                var model = new ProductInventoryModel();
+                model.Name = product.Name;
+                model.CategoryName = product.Category.Name;
+                model.Unit = product.Unit;
+
                 // get last product as beginning
-                var productOnInventory = db.ProductInventories.LastOrDefault(x => x.ProductID == product.ProductID);
-                // map similar properties
-                var model = Mapping.Mapper.Map<ProductInventoryModel>(productOnInventory);
+                var productOnInventory = db.ProductInventories.OrderByDescending(x => x.ProductInventoryID).FirstOrDefault(x => x.ProductID == product.ProductID);
+                if (productOnInventory != null)
+                {
+                    model.CreateTimeStamp = productOnInventory.CreateTimeStamp;
+                    model.ProductInventoryID = productOnInventory.ProductInventoryID;
+                    model.Quantity = productOnInventory.Quantity;
+                    model.TotalAmount = productOnInventory.TotalAmount;
+                    model.Year = productOnInventory.Year;
+                }
+
                 models.Add(model);
             }
             return models;
@@ -142,7 +153,7 @@ namespace SVFHardwareSystem.Services
                 // get last product as beginning
                 var productOnSales = await db.SaleProducts.Where(x => x.ProductID == product.ProductID).ToListAsync();
                 // set computed properties
-                model.Quantity = productOnSales.Sum(x => x.Quantity);
+                model.Quantity = productOnSales.Sum(x => x.Quantity - x.QuantityToCancel);
                 model.TotalAmount = productOnSales.Sum(x => x.Price * (x.Quantity - x.QuantityToCancel));
                 model.Year = year;
                 models.Add(model);
@@ -151,5 +162,40 @@ namespace SVFHardwareSystem.Services
 
         }
 
+        public async Task<decimal> GetBeginningInventoryAmount(int year)
+        {
+            using (var db = new DataContext())
+            {
+                var beginningInventories = await GetBeginningInventories(db, year);
+                return beginningInventories.Sum(x => x.TotalAmount);
+            }
+        }
+
+        public async Task<decimal> GetSaleInventoryAmount(int year)
+        {
+            using (var db = new DataContext())
+            {
+                var inventories = await GetSaleInventories(db, year);
+                return inventories.Sum(x => x.TotalAmount);
+            }
+        }
+
+        public async Task<decimal> GetPurchaseInventoryAmount(int year)
+        {
+            using (var db = new DataContext())
+            {
+                var inventories = await GetPurchaseInventories(db, year);
+                return inventories.Sum(x => x.TotalAmount);
+            }
+        }
+
+        public async Task<decimal> GetEndingInventoryAmount(int year)
+        {
+            using (var db = new DataContext())
+            {
+                var inventories = await GetEndingInventories(year);
+                return inventories.Sum(x => x.TotalAmount);
+            }
+        }
     }
 }

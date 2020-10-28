@@ -650,9 +650,10 @@ namespace SVFHardwareSystem.Ui
                 {
                     var total = _saleService.GetTotalAmount(_saleID);
                     var receivableAmout = _saleService.GetReceivableAmount(_saleID);
+                    var saleDate = dtSalesTransactionDate.Value;
                     if (total > 0 || receivableAmout > 0)
                     {
-                        FormHandler.OpenPointOfSalePaymentForm(_saleID).ShowDialog();
+                        FormHandler.OpenPointOfSalePaymentForm(_saleID,saleDate).ShowDialog();
 
                         // this means that a pos transaction is loaded and if payment commited, it will reload the computation
                         // and update the interface
