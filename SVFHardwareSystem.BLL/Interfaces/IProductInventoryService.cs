@@ -17,5 +17,6 @@ namespace SVFHardwareSystem.Services.Interfaces
         Task<decimal> GetSaleInventoryAmount(int year);
         Task<decimal> GetPurchaseInventoryAmount(int year);
         Task<decimal> GetEndingInventoryAmount(int year);
+        Task SaveEndingInventoryAsync(int year);
     }
 }

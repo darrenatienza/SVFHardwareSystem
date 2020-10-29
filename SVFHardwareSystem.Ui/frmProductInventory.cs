@@ -80,9 +80,24 @@ namespace SVFHardwareSystem.Ui
             
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private async void btnSave_Click(object sender, EventArgs e)
         {
+            try
+            {
+                var year = dtDate.Value.Year;
+                await _productInventoryService.SaveEndingInventoryAsync(year);
+                MetroMessageBox.Show(this, "New Purchase and Sales of Products have been saved!", "Purchase and Sales Products", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (CustomBaseException ex)
+            {
 
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private async Task LoadBeginningInventories(int year)
         {
