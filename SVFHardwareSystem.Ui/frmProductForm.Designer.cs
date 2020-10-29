@@ -81,6 +81,7 @@
             this.txtCode.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtCode.CustomButton.UseSelectable = true;
             this.txtCode.CustomButton.Visible = false;
+            this.txtCode.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtCode.Lines = new string[0];
             this.txtCode.Location = new System.Drawing.Point(23, 103);
             this.txtCode.MaxLength = 32767;
@@ -103,14 +104,15 @@
             // 
             // 
             this.txtName.CustomButton.Image = null;
-            this.txtName.CustomButton.Location = new System.Drawing.Point(290, 1);
+            this.txtName.CustomButton.Location = new System.Drawing.Point(290, 2);
             this.txtName.CustomButton.Name = "";
-            this.txtName.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtName.CustomButton.Size = new System.Drawing.Size(19, 19);
             this.txtName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtName.CustomButton.TabIndex = 1;
             this.txtName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtName.CustomButton.UseSelectable = true;
             this.txtName.CustomButton.Visible = false;
+            this.txtName.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtName.Lines = new string[0];
             this.txtName.Location = new System.Drawing.Point(159, 103);
             this.txtName.MaxLength = 32767;
@@ -169,6 +171,7 @@
             this.txtLimit.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtLimit.CustomButton.UseSelectable = true;
             this.txtLimit.CustomButton.Visible = false;
+            this.txtLimit.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtLimit.Lines = new string[0];
             this.txtLimit.Location = new System.Drawing.Point(370, 255);
             this.txtLimit.MaxLength = 32767;
@@ -247,6 +250,7 @@
             this.txtPrice.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtPrice.CustomButton.UseSelectable = true;
             this.txtPrice.CustomButton.Visible = false;
+            this.txtPrice.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtPrice.Lines = new string[0];
             this.txtPrice.Location = new System.Drawing.Point(248, 255);
             this.txtPrice.MaxLength = 32767;
@@ -277,6 +281,7 @@
             this.txtUnit.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtUnit.CustomButton.UseSelectable = true;
             this.txtUnit.CustomButton.Visible = false;
+            this.txtUnit.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtUnit.Lines = new string[0];
             this.txtUnit.Location = new System.Drawing.Point(23, 255);
             this.txtUnit.MaxLength = 32767;
@@ -346,6 +351,7 @@
             this.txtQuantity.CustomButton.TabIndex = 1;
             this.txtQuantity.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtQuantity.CustomButton.UseSelectable = true;
+            this.txtQuantity.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtQuantity.Lines = new string[0];
             this.txtQuantity.Location = new System.Drawing.Point(23, 151);
             this.txtQuantity.MaxLength = 32767;

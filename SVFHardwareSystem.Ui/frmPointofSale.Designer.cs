@@ -58,6 +58,8 @@
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.metroPanel6 = new MetroFramework.Controls.MetroPanel();
+            this.dtSalesTransactionDate = new MetroFramework.Controls.MetroDateTime();
+            this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
             this.pnlSummary = new MetroFramework.Controls.MetroPanel();
             this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
             this.txtCancelAmount = new System.Windows.Forms.TextBox();
@@ -78,8 +80,6 @@
             this.btnPayment = new MetroFramework.Controls.MetroTile();
             this.tooltip = new MetroFramework.Components.MetroToolTip();
             this.trmControlState = new System.Windows.Forms.Timer(this.components);
-            this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
-            this.dtSalesTransactionDate = new MetroFramework.Controls.MetroDateTime();
             this.metroPanel1.SuspendLayout();
             this.metroPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridList)).BeginInit();
@@ -450,6 +450,28 @@
             this.metroPanel6.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel6.VerticalScrollbarSize = 10;
             // 
+            // dtSalesTransactionDate
+            // 
+            this.dtSalesTransactionDate.Location = new System.Drawing.Point(15, 30);
+            this.dtSalesTransactionDate.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dtSalesTransactionDate.Name = "dtSalesTransactionDate";
+            this.dtSalesTransactionDate.Size = new System.Drawing.Size(277, 29);
+            this.dtSalesTransactionDate.TabIndex = 19;
+            // 
+            // metroLabel9
+            // 
+            this.metroLabel9.AutoSize = true;
+            this.metroLabel9.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel9.ForeColor = System.Drawing.Color.Black;
+            this.metroLabel9.Location = new System.Drawing.Point(15, 6);
+            this.metroLabel9.Name = "metroLabel9";
+            this.metroLabel9.Size = new System.Drawing.Size(40, 19);
+            this.metroLabel9.Style = MetroFramework.MetroColorStyle.White;
+            this.metroLabel9.TabIndex = 18;
+            this.metroLabel9.Text = "Date";
+            this.metroLabel9.UseCustomBackColor = true;
+            this.metroLabel9.UseCustomForeColor = true;
+            // 
             // pnlSummary
             // 
             this.pnlSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
@@ -591,7 +613,8 @@
             this.txtCustomerName.CustomButton.TabIndex = 1;
             this.txtCustomerName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtCustomerName.CustomButton.UseSelectable = true;
-            this.txtCustomerName.Lines = new string[0];
+            this.txtCustomerName.Lines = new string[] {
+        " "};
             this.txtCustomerName.Location = new System.Drawing.Point(16, 143);
             this.txtCustomerName.MaxLength = 32767;
             this.txtCustomerName.Name = "txtCustomerName";
@@ -604,6 +627,7 @@
             this.txtCustomerName.ShowButton = true;
             this.txtCustomerName.Size = new System.Drawing.Size(276, 23);
             this.txtCustomerName.TabIndex = 3;
+            this.txtCustomerName.Text = " ";
             this.tooltip.SetToolTip(this.txtCustomerName, "Press Enter to update the Customer.");
             this.txtCustomerName.UseSelectable = true;
             this.txtCustomerName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -783,28 +807,6 @@
             this.trmControlState.Enabled = true;
             this.trmControlState.Tick += new System.EventHandler(this.tmrControlState);
             // 
-            // metroLabel9
-            // 
-            this.metroLabel9.AutoSize = true;
-            this.metroLabel9.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.metroLabel9.ForeColor = System.Drawing.Color.Black;
-            this.metroLabel9.Location = new System.Drawing.Point(15, 6);
-            this.metroLabel9.Name = "metroLabel9";
-            this.metroLabel9.Size = new System.Drawing.Size(40, 19);
-            this.metroLabel9.Style = MetroFramework.MetroColorStyle.White;
-            this.metroLabel9.TabIndex = 18;
-            this.metroLabel9.Text = "Date";
-            this.metroLabel9.UseCustomBackColor = true;
-            this.metroLabel9.UseCustomForeColor = true;
-            // 
-            // dtSalesTransactionDate
-            // 
-            this.dtSalesTransactionDate.Location = new System.Drawing.Point(15, 30);
-            this.dtSalesTransactionDate.MinimumSize = new System.Drawing.Size(0, 29);
-            this.dtSalesTransactionDate.Name = "dtSalesTransactionDate";
-            this.dtSalesTransactionDate.Size = new System.Drawing.Size(277, 29);
-            this.dtSalesTransactionDate.TabIndex = 19;
-            // 
             // frmPointofSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -813,7 +815,7 @@
             this.Controls.Add(this.metroPanel1);
             this.Name = "frmPointofSale";
             this.Padding = new System.Windows.Forms.Padding(10, 60, 10, 10);
-            this.Style = MetroFramework.MetroColorStyle.Red;
+            this.Style = MetroFramework.MetroColorStyle.Default;
             this.Text = "Point of Sale";
             this.Load += new System.EventHandler(this.frmPointofSale_Load);
             this.Shown += new System.EventHandler(this.frmPointofSale_Shown);

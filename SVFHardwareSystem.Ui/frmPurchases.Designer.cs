@@ -35,7 +35,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.txtSIDR = new MetroFramework.Controls.MetroTextBox();
             this.dtDatePurchase = new MetroFramework.Controls.MetroDateTime();
             this.btnPayments = new MetroFramework.Controls.MetroButton();
             this.btnSave = new MetroFramework.Controls.MetroButton();
@@ -43,9 +43,6 @@
             this.txtRemarks = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.gridPurchaseDate = new MetroFramework.Controls.MetroGrid();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.cboSupplier = new MetroFramework.Controls.MetroComboBox();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
@@ -65,7 +62,11 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            this.txtSIDR = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridPurchaseDate)).BeginInit();
             this.metroPanel2.SuspendLayout();
@@ -76,8 +77,9 @@
             // metroPanel1
             // 
             this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
+            this.metroPanel1.Controls.Add(this.metroLabel4);
+            this.metroPanel1.Controls.Add(this.metroLabel3);
             this.metroPanel1.Controls.Add(this.txtSIDR);
-            this.metroPanel1.Controls.Add(this.metroButton1);
             this.metroPanel1.Controls.Add(this.dtDatePurchase);
             this.metroPanel1.Controls.Add(this.btnPayments);
             this.metroPanel1.Controls.Add(this.btnSave);
@@ -93,25 +95,52 @@
             this.metroPanel1.HorizontalScrollbarSize = 10;
             this.metroPanel1.Location = new System.Drawing.Point(20, 60);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(299, 483);
+            this.metroPanel1.Size = new System.Drawing.Size(299, 529);
             this.metroPanel1.TabIndex = 0;
             this.metroPanel1.UseCustomBackColor = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
-            // metroButton1
+            // txtSIDR
             // 
-            this.metroButton1.Location = new System.Drawing.Point(160, 437);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(128, 32);
-            this.metroButton1.TabIndex = 13;
-            this.metroButton1.Text = "Print";
-            this.metroButton1.UseSelectable = true;
+            this.txtSIDR.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtSIDR.CustomButton.Image = global::SVFHardwareSystem.Ui.Properties.Resources.search;
+            this.txtSIDR.CustomButton.Location = new System.Drawing.Point(250, 1);
+            this.txtSIDR.CustomButton.Name = "";
+            this.txtSIDR.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.txtSIDR.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtSIDR.CustomButton.TabIndex = 1;
+            this.txtSIDR.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtSIDR.CustomButton.UseSelectable = true;
+            this.txtSIDR.CustomButton.UseVisualStyleBackColor = false;
+            this.txtSIDR.CustomButton.Visible = false;
+            this.txtSIDR.Lines = new string[0];
+            this.txtSIDR.Location = new System.Drawing.Point(14, 244);
+            this.txtSIDR.MaxLength = 32767;
+            this.txtSIDR.Name = "txtSIDR";
+            this.txtSIDR.PasswordChar = '\0';
+            this.txtSIDR.PromptText = "00000";
+            this.txtSIDR.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtSIDR.SelectedText = "";
+            this.txtSIDR.SelectionLength = 0;
+            this.txtSIDR.SelectionStart = 0;
+            this.txtSIDR.ShortcutsEnabled = true;
+            this.txtSIDR.ShowClearButton = true;
+            this.txtSIDR.Size = new System.Drawing.Size(274, 25);
+            this.txtSIDR.TabIndex = 14;
+            this.txtSIDR.UseCustomBackColor = true;
+            this.txtSIDR.UseSelectable = true;
+            this.txtSIDR.WaterMark = "00000";
+            this.txtSIDR.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtSIDR.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // dtDatePurchase
             // 
-            this.dtDatePurchase.Location = new System.Drawing.Point(14, 261);
+            this.dtDatePurchase.Location = new System.Drawing.Point(14, 295);
             this.dtDatePurchase.MinimumSize = new System.Drawing.Size(0, 29);
             this.dtDatePurchase.Name = "dtDatePurchase";
             this.dtDatePurchase.Size = new System.Drawing.Size(274, 29);
@@ -120,9 +149,9 @@
             // 
             // btnPayments
             // 
-            this.btnPayments.Location = new System.Drawing.Point(14, 437);
+            this.btnPayments.Location = new System.Drawing.Point(14, 485);
             this.btnPayments.Name = "btnPayments";
-            this.btnPayments.Size = new System.Drawing.Size(140, 32);
+            this.btnPayments.Size = new System.Drawing.Size(274, 32);
             this.btnPayments.TabIndex = 11;
             this.btnPayments.Text = "View Payments";
             this.btnPayments.UseSelectable = true;
@@ -130,7 +159,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(160, 399);
+            this.btnSave.Location = new System.Drawing.Point(160, 447);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(128, 32);
             this.btnSave.TabIndex = 10;
@@ -141,7 +170,7 @@
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(14, 399);
+            this.btnGenerate.Location = new System.Drawing.Point(14, 447);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(140, 32);
             this.btnGenerate.TabIndex = 9;
@@ -155,16 +184,16 @@
             // 
             // 
             this.txtRemarks.CustomButton.Image = null;
-            this.txtRemarks.CustomButton.Location = new System.Drawing.Point(192, 1);
+            this.txtRemarks.CustomButton.Location = new System.Drawing.Point(184, 2);
             this.txtRemarks.CustomButton.Name = "";
-            this.txtRemarks.CustomButton.Size = new System.Drawing.Size(81, 81);
+            this.txtRemarks.CustomButton.Size = new System.Drawing.Size(87, 87);
             this.txtRemarks.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtRemarks.CustomButton.TabIndex = 1;
             this.txtRemarks.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtRemarks.CustomButton.UseSelectable = true;
             this.txtRemarks.CustomButton.Visible = false;
             this.txtRemarks.Lines = new string[0];
-            this.txtRemarks.Location = new System.Drawing.Point(14, 310);
+            this.txtRemarks.Location = new System.Drawing.Point(14, 349);
             this.txtRemarks.MaxLength = 32767;
             this.txtRemarks.Multiline = true;
             this.txtRemarks.Name = "txtRemarks";
@@ -175,7 +204,7 @@
             this.txtRemarks.SelectionLength = 0;
             this.txtRemarks.SelectionStart = 0;
             this.txtRemarks.ShortcutsEnabled = true;
-            this.txtRemarks.Size = new System.Drawing.Size(274, 83);
+            this.txtRemarks.Size = new System.Drawing.Size(274, 92);
             this.txtRemarks.TabIndex = 7;
             this.txtRemarks.UseSelectable = true;
             this.txtRemarks.WaterMark = "Insert Remarks here..";
@@ -185,7 +214,7 @@
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(14, 290);
+            this.metroLabel2.Location = new System.Drawing.Point(14, 327);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(59, 19);
             this.metroLabel2.TabIndex = 5;
@@ -239,30 +268,9 @@
             this.gridPurchaseDate.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gridPurchaseDate.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridPurchaseDate.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridPurchaseDate.Size = new System.Drawing.Size(274, 162);
+            this.gridPurchaseDate.Size = new System.Drawing.Size(274, 173);
             this.gridPurchaseDate.TabIndex = 4;
             this.gridPurchaseDate.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPurchaseDate_CellClick);
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "ID";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Visible = false;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "#";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 50;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Purchase Date";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 150;
             // 
             // metroLabel1
             // 
@@ -295,7 +303,7 @@
             this.metroPanel2.HorizontalScrollbarSize = 10;
             this.metroPanel2.Location = new System.Drawing.Point(319, 60);
             this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(593, 483);
+            this.metroPanel2.Size = new System.Drawing.Size(593, 529);
             this.metroPanel2.TabIndex = 1;
             this.metroPanel2.VerticalScrollbarBarColor = true;
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
@@ -354,7 +362,7 @@
             this.gridPurchaseProduct.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.gridPurchaseProduct.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridPurchaseProduct.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridPurchaseProduct.Size = new System.Drawing.Size(593, 452);
+            this.gridPurchaseProduct.Size = new System.Drawing.Size(593, 498);
             this.gridPurchaseProduct.TabIndex = 5;
             this.gridPurchaseProduct.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPurchaseProduct_CellClick);
             // 
@@ -538,47 +546,52 @@
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
-            // txtSIDR
+            // metroLabel3
             // 
-            this.txtSIDR.BackColor = System.Drawing.Color.White;
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.Location = new System.Drawing.Point(14, 222);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(61, 19);
+            this.metroLabel3.TabIndex = 15;
+            this.metroLabel3.Text = "SI / DR #";
+            this.metroLabel3.UseCustomBackColor = true;
             // 
+            // metroLabel4
             // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.Location = new System.Drawing.Point(12, 273);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(36, 19);
+            this.metroLabel4.TabIndex = 16;
+            this.metroLabel4.Text = "Date";
+            this.metroLabel4.UseCustomBackColor = true;
             // 
-            this.txtSIDR.CustomButton.Image = global::SVFHardwareSystem.Ui.Properties.Resources.search;
-            this.txtSIDR.CustomButton.Location = new System.Drawing.Point(250, 1);
-            this.txtSIDR.CustomButton.Name = "";
-            this.txtSIDR.CustomButton.Size = new System.Drawing.Size(23, 23);
-            this.txtSIDR.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtSIDR.CustomButton.TabIndex = 1;
-            this.txtSIDR.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtSIDR.CustomButton.UseSelectable = true;
-            this.txtSIDR.CustomButton.UseVisualStyleBackColor = false;
-            this.txtSIDR.CustomButton.Visible = false;
-            this.txtSIDR.Lines = new string[0];
-            this.txtSIDR.Location = new System.Drawing.Point(14, 230);
-            this.txtSIDR.MaxLength = 32767;
-            this.txtSIDR.Name = "txtSIDR";
-            this.txtSIDR.PasswordChar = '\0';
-            this.txtSIDR.PromptText = "SI/DR #";
-            this.txtSIDR.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtSIDR.SelectedText = "";
-            this.txtSIDR.SelectionLength = 0;
-            this.txtSIDR.SelectionStart = 0;
-            this.txtSIDR.ShortcutsEnabled = true;
-            this.txtSIDR.ShowClearButton = true;
-            this.txtSIDR.Size = new System.Drawing.Size(274, 25);
-            this.txtSIDR.TabIndex = 14;
-            this.txtSIDR.UseCustomBackColor = true;
-            this.txtSIDR.UseSelectable = true;
-            this.txtSIDR.WaterMark = "SI/DR #";
-            this.txtSIDR.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtSIDR.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // Column1
+            // 
+            this.Column1.HeaderText = "ID";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Visible = false;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "#";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 50;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Purchase Date";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 175;
             // 
             // frmPurchases
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(932, 563);
+            this.ClientSize = new System.Drawing.Size(932, 609);
             this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.metroPanel1);
             this.Name = "frmPurchases";
@@ -600,9 +613,6 @@
         private MetroFramework.Controls.MetroComboBox cboSupplier;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroGrid gridPurchaseDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroTextBox txtRemarks;
         private MetroFramework.Controls.MetroButton btnGenerate;
@@ -626,7 +636,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private MetroFramework.Controls.MetroButton metroButton1;
         private MetroFramework.Controls.MetroTextBox txtSIDR;
+        private MetroFramework.Controls.MetroLabel metroLabel4;
+        private MetroFramework.Controls.MetroLabel metroLabel3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
     }
 }

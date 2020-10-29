@@ -33,9 +33,7 @@
             this.txtQuantity = new MetroFramework.Controls.MetroTextBox();
             this.txtProductName = new MetroFramework.Controls.MetroTextBox();
             this.lblavailable = new MetroFramework.Controls.MetroLabel();
-            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.btnApply = new MetroFramework.Controls.MetroButton();
-            this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -50,7 +48,7 @@
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(35, 151);
+            this.metroLabel2.Location = new System.Drawing.Point(16, 145);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(88, 19);
             this.metroLabel2.TabIndex = 1;
@@ -71,22 +69,22 @@
             this.txtQuantity.CustomButton.UseSelectable = true;
             this.txtQuantity.CustomButton.Visible = false;
             this.txtQuantity.FontWeight = MetroFramework.MetroTextBoxWeight.Bold;
-            this.txtQuantity.Lines = new string[] {
-        "0"};
-            this.txtQuantity.Location = new System.Drawing.Point(129, 151);
+            this.txtQuantity.Lines = new string[0];
+            this.txtQuantity.Location = new System.Drawing.Point(16, 167);
             this.txtQuantity.MaxLength = 32767;
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.PasswordChar = '\0';
+            this.txtQuantity.PromptText = "0";
             this.txtQuantity.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtQuantity.SelectedText = "";
             this.txtQuantity.SelectionLength = 0;
             this.txtQuantity.SelectionStart = 0;
             this.txtQuantity.ShortcutsEnabled = true;
-            this.txtQuantity.Size = new System.Drawing.Size(108, 23);
+            this.txtQuantity.Size = new System.Drawing.Size(221, 23);
             this.txtQuantity.TabIndex = 2;
-            this.txtQuantity.Text = "0";
             this.txtQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtQuantity.UseSelectable = true;
+            this.txtQuantity.WaterMark = "0";
             this.txtQuantity.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtQuantity.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
@@ -124,61 +122,40 @@
             // lblavailable
             // 
             this.lblavailable.AutoSize = true;
-            this.lblavailable.Location = new System.Drawing.Point(148, 120);
+            this.lblavailable.Location = new System.Drawing.Point(16, 120);
             this.lblavailable.Name = "lblavailable";
             this.lblavailable.Size = new System.Drawing.Size(76, 19);
             this.lblavailable.TabIndex = 4;
             this.lblavailable.Text = "Available: 0";
             this.lblavailable.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // metroPanel1
-            // 
-            this.metroPanel1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.metroPanel1.Controls.Add(this.btnApply);
-            this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.metroPanel1.HorizontalScrollbarBarColor = true;
-            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(1, 200);
-            this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(252, 35);
-            this.metroPanel1.TabIndex = 5;
-            this.metroPanel1.UseCustomBackColor = true;
-            this.metroPanel1.VerticalScrollbarBarColor = true;
-            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 10;
-            // 
             // btnApply
             // 
             this.btnApply.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnApply.Location = new System.Drawing.Point(190, 3);
+            this.btnApply.Location = new System.Drawing.Point(16, 196);
             this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(59, 29);
-            this.btnApply.Style = MetroFramework.MetroColorStyle.White;
+            this.btnApply.Size = new System.Drawing.Size(221, 29);
             this.btnApply.TabIndex = 13;
             this.btnApply.Text = "Apply";
-            this.btnApply.UseCustomBackColor = true;
             this.btnApply.UseSelectable = true;
-            this.btnApply.UseStyleColors = true;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
             // frmPointofSaleQuantityEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(254, 236);
-            this.Controls.Add(this.metroPanel1);
+            this.ClientSize = new System.Drawing.Size(254, 245);
             this.Controls.Add(this.lblavailable);
+            this.Controls.Add(this.btnApply);
             this.Controls.Add(this.txtProductName);
             this.Controls.Add(this.txtQuantity);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.metroLabel1);
             this.Name = "frmPointofSaleQuantityEdit";
             this.Padding = new System.Windows.Forms.Padding(1, 60, 1, 1);
-            this.Style = MetroFramework.MetroColorStyle.Red;
+            this.Style = MetroFramework.MetroColorStyle.Default;
             this.Text = "Edit Quantity";
             this.Load += new System.EventHandler(this.frmPointofSaleQuantityEdit_Load);
-            this.metroPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,7 +168,6 @@
         private MetroFramework.Controls.MetroTextBox txtQuantity;
         private MetroFramework.Controls.MetroTextBox txtProductName;
         private MetroFramework.Controls.MetroLabel lblavailable;
-        private MetroFramework.Controls.MetroPanel metroPanel1;
         private MetroFramework.Controls.MetroButton btnApply;
     }
 }

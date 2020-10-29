@@ -67,8 +67,8 @@
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(10, 141);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 1;
-            this.metroTabControl1.Size = new System.Drawing.Size(491, 236);
+            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.Size = new System.Drawing.Size(491, 253);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
             // 
@@ -84,7 +84,7 @@
             this.metroTabPage1.HorizontalScrollbarSize = 10;
             this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(483, 194);
+            this.metroTabPage1.Size = new System.Drawing.Size(483, 211);
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "Replace";
             this.metroTabPage1.VerticalScrollbarBarColor = true;
@@ -146,7 +146,7 @@
             this.lblOfQuantityOnReplace.Location = new System.Drawing.Point(103, 44);
             this.lblOfQuantityOnReplace.Name = "lblOfQuantityOnReplace";
             this.lblOfQuantityOnReplace.Size = new System.Drawing.Size(36, 19);
-            this.lblOfQuantityOnReplace.Style = MetroFramework.MetroColorStyle.Red;
+            this.lblOfQuantityOnReplace.Style = MetroFramework.MetroColorStyle.Black;
             this.lblOfQuantityOnReplace.TabIndex = 15;
             this.lblOfQuantityOnReplace.Text = " of 0";
             this.lblOfQuantityOnReplace.UseCustomBackColor = true;
@@ -159,7 +159,7 @@
             this.metroLabel5.Location = new System.Drawing.Point(11, 22);
             this.metroLabel5.Name = "metroLabel5";
             this.metroLabel5.Size = new System.Drawing.Size(110, 15);
-            this.metroLabel5.Style = MetroFramework.MetroColorStyle.Red;
+            this.metroLabel5.Style = MetroFramework.MetroColorStyle.Black;
             this.metroLabel5.TabIndex = 14;
             this.metroLabel5.Text = "*Quantity to Replace";
             this.metroLabel5.UseCustomBackColor = true;
@@ -185,9 +185,9 @@
             // 
             // btnApplyReplace
             // 
-            this.btnApplyReplace.Location = new System.Drawing.Point(392, 168);
+            this.btnApplyReplace.Location = new System.Drawing.Point(319, 168);
             this.btnApplyReplace.Name = "btnApplyReplace";
-            this.btnApplyReplace.Size = new System.Drawing.Size(88, 23);
+            this.btnApplyReplace.Size = new System.Drawing.Size(161, 40);
             this.btnApplyReplace.TabIndex = 4;
             this.btnApplyReplace.Text = "Apply";
             this.btnApplyReplace.UseSelectable = true;
@@ -199,7 +199,7 @@
             this.metroLabel1.Location = new System.Drawing.Point(3, 9);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(124, 19);
-            this.metroLabel1.Style = MetroFramework.MetroColorStyle.Red;
+            this.metroLabel1.Style = MetroFramework.MetroColorStyle.Black;
             this.metroLabel1.TabIndex = 3;
             this.metroLabel1.Text = "*Reason To Replace";
             this.metroLabel1.UseStyleColors = true;
@@ -304,7 +304,7 @@
             this.lblOfQuantityOnCancel.Location = new System.Drawing.Point(102, 36);
             this.lblOfQuantityOnCancel.Name = "lblOfQuantityOnCancel";
             this.lblOfQuantityOnCancel.Size = new System.Drawing.Size(36, 19);
-            this.lblOfQuantityOnCancel.Style = MetroFramework.MetroColorStyle.Red;
+            this.lblOfQuantityOnCancel.Style = MetroFramework.MetroColorStyle.Black;
             this.lblOfQuantityOnCancel.TabIndex = 15;
             this.lblOfQuantityOnCancel.Text = " of 0";
             this.lblOfQuantityOnCancel.UseCustomBackColor = true;
@@ -317,7 +317,7 @@
             this.metroLabel3.Location = new System.Drawing.Point(10, 14);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(103, 15);
-            this.metroLabel3.Style = MetroFramework.MetroColorStyle.Red;
+            this.metroLabel3.Style = MetroFramework.MetroColorStyle.Black;
             this.metroLabel3.TabIndex = 14;
             this.metroLabel3.Text = "*Quantity to Cancel";
             this.metroLabel3.UseCustomBackColor = true;
@@ -346,7 +346,7 @@
             this.metroLabel2.Location = new System.Drawing.Point(3, 11);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(117, 19);
-            this.metroLabel2.Style = MetroFramework.MetroColorStyle.Red;
+            this.metroLabel2.Style = MetroFramework.MetroColorStyle.Black;
             this.metroLabel2.TabIndex = 5;
             this.metroLabel2.Text = "*Reason To Cancel";
             this.metroLabel2.UseStyleColors = true;
@@ -375,7 +375,7 @@
             this.lblQuantity.Location = new System.Drawing.Point(44, 45);
             this.lblQuantity.Name = "lblQuantity";
             this.lblQuantity.Size = new System.Drawing.Size(61, 19);
-            this.lblQuantity.Style = MetroFramework.MetroColorStyle.Red;
+            this.lblQuantity.Style = MetroFramework.MetroColorStyle.Black;
             this.lblQuantity.TabIndex = 7;
             this.lblQuantity.Text = "Quantity:";
             this.lblQuantity.UseCustomBackColor = true;
@@ -387,7 +387,7 @@
             this.lblProductName.Location = new System.Drawing.Point(7, 17);
             this.lblProductName.Name = "lblProductName";
             this.lblProductName.Size = new System.Drawing.Size(98, 19);
-            this.lblProductName.Style = MetroFramework.MetroColorStyle.Red;
+            this.lblProductName.Style = MetroFramework.MetroColorStyle.Black;
             this.lblProductName.TabIndex = 6;
             this.lblProductName.Text = "Product Name:";
             this.lblProductName.UseCustomBackColor = true;
@@ -403,7 +403,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 387);
+            this.ClientSize = new System.Drawing.Size(511, 404);
             this.Controls.Add(this.metroTabControl1);
             this.Controls.Add(this.metroPanel1);
             this.Name = "frmSalesReplaceCancel";

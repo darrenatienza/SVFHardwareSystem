@@ -88,9 +88,9 @@
             // 
             // btnPay
             // 
-            this.btnPay.Location = new System.Drawing.Point(159, 274);
+            this.btnPay.Location = new System.Drawing.Point(18, 274);
             this.btnPay.Name = "btnPay";
-            this.btnPay.Size = new System.Drawing.Size(93, 38);
+            this.btnPay.Size = new System.Drawing.Size(234, 38);
             this.btnPay.TabIndex = 1;
             this.btnPay.Text = "Pay";
             this.btnPay.UseSelectable = true;
@@ -252,7 +252,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(275, 327);
+            this.ClientSize = new System.Drawing.Size(271, 327);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.dtPaymentDate);
             this.Controls.Add(this.lblReceivable);
@@ -265,7 +265,7 @@
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.txtTotal);
             this.Name = "frmPointOfSalePayment";
-            this.Style = MetroFramework.MetroColorStyle.Red;
+            this.Style = MetroFramework.MetroColorStyle.Default;
             this.Text = "Payment";
             this.Load += new System.EventHandler(this.frmPointOfSalePayment_Load);
             this.ResumeLayout(false);
