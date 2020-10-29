@@ -144,34 +144,7 @@ namespace SVFHardwareSystem.Services
             }
 
         }
-        public CustomerReceivableModel GetCustomerWithReceivables(int customerID)
-        {
-            using (var db = new DataContext())
-            {
-                var customer = db.Customers.Find(customerID);
-                var customerReceivableModel = Mapping.Mapper.Map<CustomerReceivableModel>(customer);
-
-                var salesTransctions = db.Sales.Where(x => x.CustomerID == customerID && x.IsFullyPaid == false).ToList();
-
-                foreach (var item in salesTransctions)
-                {
-                    var totalPurchaseAmount = GetTotalPurchaseAmount(item.SaleID);
-                    var totalPaymentAmount = GetTotalPaymentAmount(item.SaleID);
-
-                    var model = new CustomerSalesReceivableModel();
-                    model.Credit = totalPurchaseAmount;
-                    model.SalesTransactionDate = item.SaleDate;
-                    model.Debit = totalPaymentAmount;
-                    model.SI = item.SIDR;
-                    customerReceivableModel.SalesReceivables.Add(model);
-                }
-                return customerReceivableModel;
-
-            }
-
-
-
-        }
+        
 
         public async Task<SalesMonthlyTotalModel> GetSalesMonthlyTotal(int month, int year)
         {

@@ -78,6 +78,7 @@ namespace AutoMap
             CreateMap<Product, SaleProductInventoryModel>();
             CreateMap<Product, ProductInventoryModel>();
             CreateMap<ProductInventory, ProductInventoryModel>();
+            CreateMap<ProductInventoryModel, ProductInventory>();
             // Additional mappings here...
         }
     }

@@ -45,6 +45,7 @@
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
+            this.metroTile1 = new MetroFramework.Controls.MetroTile();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -183,7 +184,7 @@
             this.btnSalesMontlyReport.ActiveControl = null;
             this.btnSalesMontlyReport.Location = new System.Drawing.Point(370, 29);
             this.btnSalesMontlyReport.Name = "btnSalesMontlyReport";
-            this.btnSalesMontlyReport.Size = new System.Drawing.Size(301, 254);
+            this.btnSalesMontlyReport.Size = new System.Drawing.Size(301, 95);
             this.btnSalesMontlyReport.Style = MetroFramework.MetroColorStyle.Brown;
             this.btnSalesMontlyReport.TabIndex = 9;
             this.btnSalesMontlyReport.Text = "SALE MONTHLY REPORT";
@@ -236,6 +237,7 @@
             // 
             // metroTabPage1
             // 
+            this.metroTabPage1.Controls.Add(this.metroTile1);
             this.metroTabPage1.Controls.Add(this.btnSalesMontlyReport);
             this.metroTabPage1.Controls.Add(this.btnProductSale);
             this.metroTabPage1.Controls.Add(this.btnPointOfSale);
@@ -302,6 +304,19 @@
             this.metroTabPage4.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage4.VerticalScrollbarSize = 10;
             // 
+            // metroTile1
+            // 
+            this.metroTile1.ActiveControl = null;
+            this.metroTile1.Location = new System.Drawing.Point(370, 130);
+            this.metroTile1.Name = "metroTile1";
+            this.metroTile1.Size = new System.Drawing.Size(301, 149);
+            this.metroTile1.Style = MetroFramework.MetroColorStyle.Teal;
+            this.metroTile1.TabIndex = 12;
+            this.metroTile1.Text = "CUSTOMERS WITH RECEIVABLES";
+            this.metroTile1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.metroTile1.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.metroTile1.UseSelectable = true;
+            // 
             // frmDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -338,5 +353,6 @@
         private MetroFramework.Controls.MetroTabPage metroTabPage2;
         private MetroFramework.Controls.MetroTabPage metroTabPage3;
         private MetroFramework.Controls.MetroTabPage metroTabPage4;
+        private MetroFramework.Controls.MetroTile metroTile1;
     }
 }

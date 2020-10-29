@@ -18,10 +18,10 @@ namespace SVFHardwareSystem.Services.Interfaces
         public string  Name { get; set; }
         public string Unit { get; set; }
         public int Year { get; set; }
-        public int Quantity { get; set; }
+        public int Qty { get; set; }
         public decimal UnitPrice
         {
-            get => TotalAmount > 0 && Quantity > 0 ? TotalAmount / Quantity : 0;
+            get => TotalAmount > 0 && Qty > 0 ? TotalAmount / Qty : 0;
         }
         /// <summary>
         /// Total

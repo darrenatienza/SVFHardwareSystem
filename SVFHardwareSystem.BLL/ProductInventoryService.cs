@@ -26,40 +26,7 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var products = await GetProductsExistsOnProductInventoryPurchasesAndSales(db, year);
-                var models = new List<ProductInventoryModel>();
-                foreach (var product in products)
-                {
-                    // map similar properties
-                    var model = Mapping.Mapper.Map<ProductInventoryModel>(product);
-
-                    // get last product as beginning
-                    var productOnInventory = (await GetBeginningInventories(db,year)).FirstOrDefault(x => x.ProductID == product.ProductID);
-                   
-                    // get purchase product for the year
-                    var productOnPurchase = (await GetPurchaseInventories(db, year)).FirstOrDefault(x => x.ProductID == product.ProductID);
-
-                    // get sale product for the year
-                    var productOnSale = (await GetSaleInventories(db, year)).FirstOrDefault(x => x.ProductID == product.ProductID);
-
-                    // check for nulls
-                    var productOnInventoryQuantity = productOnInventory == null ? 0 : productOnInventory.Quantity;
-                    var productOnPurchaseQuantity = productOnPurchase == null ? 0 : productOnPurchase.Quantity;
-                    var productOnSaleQuantity = productOnSale == null ? 0 : productOnSale.Quantity;
-
-                    var productOnInventoryTotalAmount = productOnInventory == null ? 0 : productOnInventory.TotalAmount;
-                    var productOnPurchaseTotalAmount = productOnPurchase == null ? 0 : productOnPurchase.TotalAmount;
-                    var productOnSaleTotalAmount = productOnSale == null ? 0 : productOnSale.TotalAmount;
-
-                    //compute total quantity (ending quantity)
-                    model.Quantity = (productOnInventoryQuantity + productOnPurchaseQuantity) - productOnSaleQuantity;
-                    
-                    //compute total amount (ending amount)
-                    model.TotalAmount = (productOnInventoryTotalAmount + productOnPurchaseTotalAmount) - productOnSaleTotalAmount;
-                    
-                    models.Add(model);
-                }
-                return models;
+                return await GetEndingInventories(db, year);
             }
         }
         public async Task<IList<ProductInventoryModel>> GetEndingInventories(IDataContext db, int year)
@@ -82,16 +49,17 @@ namespace SVFHardwareSystem.Services
                     var productOnSale = (await GetSaleInventories(db, year)).FirstOrDefault(x => x.ProductID == product.ProductID);
 
                     // check for nulls
-                    var productOnInventoryQuantity = productOnInventory == null ? 0 : productOnInventory.Quantity;
-                    var productOnPurchaseQuantity = productOnPurchase == null ? 0 : productOnPurchase.Quantity;
-                    var productOnSaleQuantity = productOnSale == null ? 0 : productOnSale.Quantity;
+                    var productOnInventoryQuantity = productOnInventory == null ? 0 : productOnInventory.Qty;
+                    var productOnPurchaseQuantity = productOnPurchase == null ? 0 : productOnPurchase.Qty;
+                    var productOnSaleQuantity = productOnSale == null ? 0 : productOnSale.Qty;
 
                     var productOnInventoryTotalAmount = productOnInventory == null ? 0 : productOnInventory.TotalAmount;
                     var productOnPurchaseTotalAmount = productOnPurchase == null ? 0 : productOnPurchase.TotalAmount;
                     var productOnSaleTotalAmount = productOnSale == null ? 0 : productOnSale.TotalAmount;
-
+                model.CreateTimeStamp = DateTime.Now;
+                model.Year = year;
                     //compute total quantity (ending quantity)
-                    model.Quantity = (productOnInventoryQuantity + productOnPurchaseQuantity) - productOnSaleQuantity;
+                    model.Qty = (productOnInventoryQuantity + productOnPurchaseQuantity) - productOnSaleQuantity;
 
                     //compute total amount (ending amount)
                     model.TotalAmount = (productOnInventoryTotalAmount + productOnPurchaseTotalAmount) - productOnSaleTotalAmount;
@@ -135,21 +103,19 @@ namespace SVFHardwareSystem.Services
         {
 
             var products = await GetProductsExistsOnProductInventoryPurchasesAndSales(db, year);
+            var previousYear = year - 1;
             var models = new List<ProductInventoryModel>();
             foreach (var product in products)
             {
-                var model = new ProductInventoryModel();
-                model.Name = product.Name;
-                model.CategoryName = product.Category.Name;
-                model.Unit = product.Unit;
+                var model = Mapping.Mapper.Map<ProductInventoryModel>(product);
 
                 // get last product as beginning
-                var productOnInventory = db.ProductInventories.OrderByDescending(x => x.ProductInventoryID).FirstOrDefault(x => x.ProductID == product.ProductID);
+                var productOnInventory = db.ProductInventories.FirstOrDefault(x => x.ProductID == product.ProductID && x.Year == previousYear);
                 if (productOnInventory != null)
                 {
                     model.CreateTimeStamp = productOnInventory.CreateTimeStamp;
                     model.ProductInventoryID = productOnInventory.ProductInventoryID;
-                    model.Quantity = productOnInventory.Quantity;
+                    model.Qty = productOnInventory.Quantity;
                     model.TotalAmount = productOnInventory.TotalAmount;
                     model.Year = productOnInventory.Year;
                 }
@@ -169,9 +135,9 @@ namespace SVFHardwareSystem.Services
                 // map similar properties
                 var model = Mapping.Mapper.Map<ProductInventoryModel>(product);
                 // get last product as beginning
-                var productOnPurchases = await db.PurchaseProducts.Where(x => x.ProductID == product.ProductID).ToListAsync();
+                var productOnPurchases = await db.PurchaseProducts.Where(x => x.ProductID == product.ProductID && x.Purchase.DatePurchase.Year == year).ToListAsync();
                 // set computed properties
-                model.Quantity = productOnPurchases.Sum(x => x.Quantity);
+                model.Qty = productOnPurchases.Sum(x => x.Quantity);
                 model.TotalAmount = productOnPurchases.Sum(x => x.Price * x.Quantity);
                 model.Year = year;
                 models.Add(model);
@@ -189,9 +155,9 @@ namespace SVFHardwareSystem.Services
                 // map similar properties
                 var model = Mapping.Mapper.Map<ProductInventoryModel>(product);
                 // get last product as beginning
-                var productOnSales = await db.SaleProducts.Where(x => x.ProductID == product.ProductID).ToListAsync();
+                var productOnSales = await db.SaleProducts.Where(x => x.ProductID == product.ProductID && x.Sale.SaleDate.Year == year).ToListAsync();
                 // set computed properties
-                model.Quantity = productOnSales.Sum(x => x.Quantity - x.QuantityToCancel);
+                model.Qty = productOnSales.Sum(x => x.Quantity - x.QuantityToCancel);
                 model.TotalAmount = productOnSales.Sum(x => x.Price * (x.Quantity - x.QuantityToCancel));
                 model.Year = year;
                 models.Add(model);

@@ -198,7 +198,7 @@ namespace SVFHardwareSystem.Services
             {
                 var posTransaction = db.Sales.Find(posTransactionID);
 
-                if ( paymentDate < posTransaction.SaleDate)
+                if ( paymentDate.Date < posTransaction.SaleDate.Date)
                 {
                     throw new InvalidFieldException("Payment Date");
                 }

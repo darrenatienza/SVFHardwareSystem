@@ -196,7 +196,7 @@ namespace SVFHardwareSystem.Ui
                     r["Category"] = item.CategoryName;
                     r["Description"] = item.Name;
                     r["Unit"] = item.Unit;
-                    r["Qty"] = item.Quantity;
+                    r["Qty"] = item.Qty;
                     r["UCost"] = item.UnitPrice.ToCurrencyFormat();
                     r["Amount"] = item.TotalAmount.ToCurrencyFormat();
 
