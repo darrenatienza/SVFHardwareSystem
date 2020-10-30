@@ -141,5 +141,19 @@ namespace SVFHardwareSystem.Services
                 return models;
             }
         }
+
+        public async Task<Dictionary<int,string>> GetProductNamesAsync(string criteria)
+        {
+            using (var db = new DataContext())
+            {
+                var names = await db.Products.Where(x => x.Name.Contains(criteria)).Select(x => new { x.ProductID, x.Name }).ToListAsync();
+                var dictionaries = new Dictionary<int, string>();
+                foreach (var item in names)
+                {
+                    dictionaries.Add(item.ProductID, item.Name);
+                }
+                return dictionaries;
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace SVFHardwareSystem.Ui
 {
-    partial class frmSalesReplaceCancel
+    partial class frmPointOfSalesReplaceCancel
     {
         /// <summary>
         /// Required designer variable.
@@ -67,9 +67,9 @@
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(10, 141);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.SelectedIndex = 1;
             this.metroTabControl1.Size = new System.Drawing.Size(491, 253);
-            this.metroTabControl1.TabIndex = 0;
+            this.metroTabControl1.TabIndex = 1;
             this.metroTabControl1.UseSelectable = true;
             // 
             // metroTabPage1
@@ -117,7 +117,7 @@
             this.txtReplaceReason.SelectionStart = 0;
             this.txtReplaceReason.ShortcutsEnabled = true;
             this.txtReplaceReason.Size = new System.Drawing.Size(259, 131);
-            this.txtReplaceReason.TabIndex = 2;
+            this.txtReplaceReason.TabIndex = 0;
             this.txtReplaceReason.UseSelectable = true;
             this.txtReplaceReason.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtReplaceReason.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -170,7 +170,7 @@
             this.txtQuantityToReplace.Location = new System.Drawing.Point(19, 44);
             this.txtQuantityToReplace.Name = "txtQuantityToReplace";
             this.txtQuantityToReplace.Size = new System.Drawing.Size(78, 20);
-            this.txtQuantityToReplace.TabIndex = 13;
+            this.txtQuantityToReplace.TabIndex = 1;
             // 
             // chkReturnToSupplierAfterReplace
             // 
@@ -182,13 +182,14 @@
             this.chkReturnToSupplierAfterReplace.Text = "For return to supplier";
             this.metroToolTip1.SetToolTip(this.chkReturnToSupplierAfterReplace, "If check, the product will be tag as return to supplier");
             this.chkReturnToSupplierAfterReplace.UseSelectable = true;
+            this.chkReturnToSupplierAfterReplace.Visible = false;
             // 
             // btnApplyReplace
             // 
             this.btnApplyReplace.Location = new System.Drawing.Point(319, 168);
             this.btnApplyReplace.Name = "btnApplyReplace";
             this.btnApplyReplace.Size = new System.Drawing.Size(161, 40);
-            this.btnApplyReplace.TabIndex = 4;
+            this.btnApplyReplace.TabIndex = 2;
             this.btnApplyReplace.Text = "Apply";
             this.btnApplyReplace.UseSelectable = true;
             this.btnApplyReplace.Click += new System.EventHandler(this.btnApplyReplace_Click);
@@ -217,7 +218,7 @@
             this.metroTabPage2.HorizontalScrollbarSize = 10;
             this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(483, 194);
+            this.metroTabPage2.Size = new System.Drawing.Size(483, 211);
             this.metroTabPage2.TabIndex = 1;
             this.metroTabPage2.Text = "Cancel";
             this.metroTabPage2.VerticalScrollbarBarColor = true;
@@ -234,6 +235,7 @@
             this.chkIsReturnToSupplierAfterCancel.Text = "For return to supplier";
             this.metroToolTip1.SetToolTip(this.chkIsReturnToSupplierAfterCancel, "If check, the product will be tag as return to supplier");
             this.chkIsReturnToSupplierAfterCancel.UseSelectable = true;
+            this.chkIsReturnToSupplierAfterCancel.Visible = false;
             // 
             // chkAddQuantity
             // 
@@ -275,7 +277,7 @@
             this.txtCancelReason.SelectionStart = 0;
             this.txtCancelReason.ShortcutsEnabled = true;
             this.txtCancelReason.Size = new System.Drawing.Size(257, 129);
-            this.txtCancelReason.TabIndex = 4;
+            this.txtCancelReason.TabIndex = 3;
             this.txtCancelReason.UseSelectable = true;
             this.txtCancelReason.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtCancelReason.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -328,14 +330,14 @@
             this.txtQuantityToCancel.Location = new System.Drawing.Point(18, 36);
             this.txtQuantityToCancel.Name = "txtQuantityToCancel";
             this.txtQuantityToCancel.Size = new System.Drawing.Size(78, 20);
-            this.txtQuantityToCancel.TabIndex = 13;
+            this.txtQuantityToCancel.TabIndex = 4;
             // 
             // btnApplyCancel
             // 
-            this.btnApplyCancel.Location = new System.Drawing.Point(395, 168);
+            this.btnApplyCancel.Location = new System.Drawing.Point(319, 168);
             this.btnApplyCancel.Name = "btnApplyCancel";
-            this.btnApplyCancel.Size = new System.Drawing.Size(88, 23);
-            this.btnApplyCancel.TabIndex = 6;
+            this.btnApplyCancel.Size = new System.Drawing.Size(161, 40);
+            this.btnApplyCancel.TabIndex = 5;
             this.btnApplyCancel.Text = "Apply";
             this.btnApplyCancel.UseSelectable = true;
             this.btnApplyCancel.Click += new System.EventHandler(this.btnApplyCancel_Click);
@@ -399,14 +401,14 @@
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
-            // frmSalesReplaceCancel
+            // frmPointOfSalesReplaceCancel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(511, 404);
             this.Controls.Add(this.metroTabControl1);
             this.Controls.Add(this.metroPanel1);
-            this.Name = "frmSalesReplaceCancel";
+            this.Name = "frmPointOfSalesReplaceCancel";
             this.Padding = new System.Windows.Forms.Padding(10, 60, 10, 10);
             this.Text = "Sales Replace / Cancel";
             this.Load += new System.EventHandler(this.frmSalesReturned_Load);

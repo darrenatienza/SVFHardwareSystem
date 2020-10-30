@@ -29,16 +29,21 @@
         private void InitializeComponent()
         {
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.cboYear = new MetroFramework.Controls.MetroComboBox();
+            this.cboCustomers = new MetroFramework.Controls.MetroComboBox();
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.dtDate = new MetroFramework.Controls.MetroDateTime();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.pnlDate = new MetroFramework.Controls.MetroPanel();
             this.metroPanel1.SuspendLayout();
+            this.pnlDate.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroPanel1
             // 
+            this.metroPanel1.Controls.Add(this.pnlDate);
             this.metroPanel1.Controls.Add(this.metroLabel1);
-            this.metroPanel1.Controls.Add(this.cboYear);
+            this.metroPanel1.Controls.Add(this.cboCustomers);
             this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
@@ -51,16 +56,6 @@
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
-            // reportViewer1
-            // 
-            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "SVFHardwareSystem.Ui.Reports.CustomerReceivable.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(20, 109);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(893, 442);
-            this.reportViewer1.TabIndex = 2;
-            // 
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
@@ -71,22 +66,69 @@
             this.metroLabel1.TabIndex = 9;
             this.metroLabel1.Text = "Customer Name";
             // 
-            // cboYear
+            // cboCustomers
             // 
-            this.cboYear.FormattingEnabled = true;
-            this.cboYear.ItemHeight = 23;
-            this.cboYear.Items.AddRange(new object[] {
+            this.cboCustomers.FormattingEnabled = true;
+            this.cboCustomers.ItemHeight = 23;
+            this.cboCustomers.Items.AddRange(new object[] {
             "2020",
             "2021",
             "2022",
             "2023",
             "2024",
             "2025"});
-            this.cboYear.Location = new System.Drawing.Point(129, 9);
-            this.cboYear.Name = "cboYear";
-            this.cboYear.Size = new System.Drawing.Size(240, 29);
-            this.cboYear.TabIndex = 8;
-            this.cboYear.UseSelectable = true;
+            this.cboCustomers.Location = new System.Drawing.Point(129, 9);
+            this.cboCustomers.Name = "cboCustomers";
+            this.cboCustomers.Size = new System.Drawing.Size(183, 29);
+            this.cboCustomers.TabIndex = 8;
+            this.cboCustomers.UseSelectable = true;
+            this.cboCustomers.SelectedIndexChanged += new System.EventHandler(this.cboCustomers_SelectedIndexChanged);
+            // 
+            // reportViewer1
+            // 
+            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "SVFHardwareSystem.Ui.Reports.CustomerReceivable.rdlc";
+            this.reportViewer1.Location = new System.Drawing.Point(20, 109);
+            this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.ServerReport.BearerToken = null;
+            this.reportViewer1.Size = new System.Drawing.Size(893, 442);
+            this.reportViewer1.TabIndex = 2;
+            // 
+            // dtDate
+            // 
+            this.dtDate.CustomFormat = "MMMM,yyyy";
+            this.dtDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtDate.Location = new System.Drawing.Point(45, 9);
+            this.dtDate.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dtDate.Name = "dtDate";
+            this.dtDate.Size = new System.Drawing.Size(160, 29);
+            this.dtDate.TabIndex = 11;
+            this.dtDate.ValueChanged += new System.EventHandler(this.dtDate_ValueChanged);
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(3, 14);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(36, 19);
+            this.metroLabel2.TabIndex = 10;
+            this.metroLabel2.Text = "Date";
+            // 
+            // pnlDate
+            // 
+            this.pnlDate.Controls.Add(this.dtDate);
+            this.pnlDate.Controls.Add(this.metroLabel2);
+            this.pnlDate.HorizontalScrollbarBarColor = true;
+            this.pnlDate.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlDate.HorizontalScrollbarSize = 10;
+            this.pnlDate.Location = new System.Drawing.Point(318, 0);
+            this.pnlDate.Name = "pnlDate";
+            this.pnlDate.Size = new System.Drawing.Size(219, 49);
+            this.pnlDate.TabIndex = 12;
+            this.pnlDate.VerticalScrollbarBarColor = true;
+            this.pnlDate.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlDate.VerticalScrollbarSize = 10;
+            this.pnlDate.Visible = false;
             // 
             // frmCustomerReceivable
             // 
@@ -100,6 +142,8 @@
             this.Load += new System.EventHandler(this.CustomerReceivable_Load);
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
+            this.pnlDate.ResumeLayout(false);
+            this.pnlDate.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -109,6 +153,9 @@
         private MetroFramework.Controls.MetroPanel metroPanel1;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private MetroFramework.Controls.MetroLabel metroLabel1;
-        private MetroFramework.Controls.MetroComboBox cboYear;
+        private MetroFramework.Controls.MetroComboBox cboCustomers;
+        private MetroFramework.Controls.MetroDateTime dtDate;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private MetroFramework.Controls.MetroPanel pnlDate;
     }
 }

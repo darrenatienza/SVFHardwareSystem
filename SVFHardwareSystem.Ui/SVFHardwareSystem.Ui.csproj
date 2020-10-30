@@ -236,11 +236,11 @@
     <Compile Include="frmSalesMonthlyReport.Designer.cs">
       <DependentUpon>frmSalesMonthlyReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSalesReplaceCancel.cs">
+    <Compile Include="frmPointOfSalesReplaceCancel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSalesReplaceCancel.Designer.cs">
-      <DependentUpon>frmSalesReplaceCancel.cs</DependentUpon>
+    <Compile Include="frmPointOfSalesReplaceCancel.Designer.cs">
+      <DependentUpon>frmPointOfSalesReplaceCancel.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSupplierForm.cs">
       <SubType>Form</SubType>
@@ -345,8 +345,8 @@
     <EmbeddedResource Include="frmSalesMonthlyReport.resx">
       <DependentUpon>frmSalesMonthlyReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSalesReplaceCancel.resx">
-      <DependentUpon>frmSalesReplaceCancel.cs</DependentUpon>
+    <EmbeddedResource Include="frmPointOfSalesReplaceCancel.resx">
+      <DependentUpon>frmPointOfSalesReplaceCancel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSupplierForm.resx">
       <DependentUpon>frmSupplierForm.cs</DependentUpon>

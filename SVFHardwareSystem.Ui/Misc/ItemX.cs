@@ -8,16 +8,16 @@ namespace SVFHardwareSystem.Ui.Misc
 {
     public class ItemX
     {
-        public string Name;
         public string Value;
-        public ItemX(string name, string value)
+        public string Key;
+        public ItemX(string value, string key)
         {
-            Name = name; Value = value;
+            Value = value; Key = key;
         }
         public override string ToString()
         {
             // Generates the text shown in the combo box
-            return Name;
+            return Value;
         }
     }
 }

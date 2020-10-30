@@ -16,5 +16,6 @@ namespace SVFHardwareSystem.Services.Interfaces
         void DeductQuantityOnProduct(int productID, int quantityToBuy);
         IList<ProductModel> GetAll(string category, string criteria);
         Task<IList<ProductModel>> GetAllByCategoryID(int categoryID);
+        Task<Dictionary<int,string>> GetProductNamesAsync(string criteria);
     }
 }

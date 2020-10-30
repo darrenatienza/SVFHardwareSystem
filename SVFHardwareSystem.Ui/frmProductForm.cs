@@ -160,12 +160,12 @@ namespace SVFHardwareSystem.Ui
 
         private void cboSupplier_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _supplierID = ((ItemX)cboSupplier.SelectedItem).Value.ToInt();
+            _supplierID = ((ItemX)cboSupplier.SelectedItem).Key.ToInt();
         }
 
         private void cboCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _categoryID = ((ItemX)cboCategory.SelectedItem).Value.ToInt();
+            _categoryID = ((ItemX)cboCategory.SelectedItem).Key.ToInt();
         }
 
         private void txtQuantity_ButtonClick(object sender, EventArgs e)

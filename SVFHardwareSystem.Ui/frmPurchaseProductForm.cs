@@ -181,7 +181,7 @@ namespace SVFHardwareSystem.Ui
 
         private void SetCategoryID()
         {
-            _categoryID = ((ItemX)cboCategory.SelectedItem).Value.ToInt();
+            _categoryID = ((ItemX)cboCategory.SelectedItem).Key.ToInt();
         }
 
         private void cboProduct_SelectedIndexChanged(object sender, EventArgs e)
@@ -211,7 +211,7 @@ namespace SVFHardwareSystem.Ui
 
         private void SetProductID()
         {
-            _productID = ((ItemX)cboProduct.SelectedItem).Value.ToInt();
+            _productID = ((ItemX)cboProduct.SelectedItem).Key.ToInt();
         }
     }
 }

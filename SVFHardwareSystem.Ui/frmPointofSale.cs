@@ -46,8 +46,7 @@ namespace SVFHardwareSystem.Ui
 
         {
 
-            LoadAutoCompleteCustomersData();
-            loadAutoCompleteData();
+
             await GenerateNewOrLoadUnFinishedSale();
 
 
@@ -102,47 +101,8 @@ namespace SVFHardwareSystem.Ui
         
 
 
-        //AutoCompleteData Method
-        private async void loadAutoCompleteData()
-        {
-
-            //Set AutoCompleteSource property of txt_StateName as CustomSource
-            txtProductName.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
-            txtProductName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            var productNames = await _productService.GetAllAsync();
-            foreach (var item in productNames)
-            {
-                txtProductName.AutoCompleteCustomSource.Add(item.Name);
-            }
-            //Set AutoCompleteSource property of txt_StateName as CustomSource
-            txtCustomerName.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
-            txtCustomerName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            var customerNames = await _customerService.GetAllAsync();
-            foreach (var item in customerNames)
-            {
-                txtCustomerName.AutoCompleteCustomSource.Add(item.FullName.ToString());
-
-            }
-
-        }
-        //AutoCompleteData Method
-        private async void LoadAutoCompleteCustomersData()
-        {
-
-            //Set AutoCompleteSource property of txt_StateName as CustomSource
-            txtCustomerName.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
-            txtCustomerName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            var customerNames = await _customerService.GetAllAsync();
-            foreach (var item in customerNames)
-            {
-                txtCustomerName.AutoCompleteCustomSource.Add(item.FullName.ToString());
-
-            }
-
-        }
+        
+       
 
         private void txtProductName_KeyDown(object sender, KeyEventArgs e)
         {
@@ -599,7 +559,7 @@ namespace SVFHardwareSystem.Ui
         private void txtCustomerName_ButtonClick(object sender, EventArgs e)
         {
             FormHandler.OpenCustomersForm().ShowDialog();
-            LoadAutoCompleteCustomersData();
+
         }
 
         private async void btnUpdateSaleDetails_Click(object sender, EventArgs e)
@@ -742,6 +702,50 @@ namespace SVFHardwareSystem.Ui
                 await SetTransactionData();
             }
 
+        }
+
+        private async void txtProductName_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var criteria = txtProductName.Text;
+                await LoadProductSearchList(criteria);
+            }
+            catch (CustomBaseException ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async Task LoadProductSearchList(string criteria)
+        {
+            var productNames = await _productService.GetProductNamesAsync(criteria);
+            UpdateProductSearchList(productNames);
+        }
+
+        private void UpdateProductSearchList(Dictionary<int,string> productNames)
+        {
+            lbProducts.Items.Clear();
+            foreach (var item in productNames)
+            {
+                lbProducts.Items.Add(item.Value);
+            }
+        }
+
+        private void txtProductName_MouseLeave(object sender, EventArgs e)
+        {
+            lbProducts.Visible = false;
+        }
+
+        private void txtProductName_MouseClick(object sender, MouseEventArgs e)
+        {
+            lbProducts.Visible = true;
         }
     }
 }

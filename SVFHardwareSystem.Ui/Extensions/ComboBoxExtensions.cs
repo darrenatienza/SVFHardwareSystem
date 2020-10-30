@@ -20,7 +20,7 @@ namespace SVFHardwareSystem.Ui.Extensions
         public static ItemX SelectItemByID(this ObjectCollection collection, int id)
         {
 
-            return collection.OfType<ItemX>().FirstOrDefault(r => r.Value == id.ToString());
+            return collection.OfType<ItemX>().FirstOrDefault(r => r.Key == id.ToString());
         }
     }
 }

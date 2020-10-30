@@ -52,7 +52,7 @@ namespace SVFHardwareSystem.Ui
                    .Register().Resolve<frmProductInventory>();
         internal static frmProductInventoryReport OpenProductMonthlyReport() => UnityConfig
                    .Register().Resolve<frmProductInventoryReport>();
-
+   
         public static frmSupplierForm OpenSupplierForm(int supplierID)
         {
             return UnityConfig
@@ -107,12 +107,12 @@ namespace SVFHardwareSystem.Ui
                 .Resolve<frmPointOfSalePayment>();
 
         }
-        public static frmSalesReplaceCancel OpenSalesReplaceCancelForm(int posTransactionID)
+        public static frmPointOfSalesReplaceCancel OpenSalesReplaceCancelForm(int posTransactionID)
         {
             return UnityConfig
                 .Register()
-                .RegisterType<frmSalesReplaceCancel>(new InjectionConstructor(new object[] { new SaleProductService(), posTransactionID }))
-                .Resolve<frmSalesReplaceCancel>();
+                .RegisterType<frmPointOfSalesReplaceCancel>(new InjectionConstructor(new object[] { new SaleProductService(), posTransactionID }))
+                .Resolve<frmPointOfSalesReplaceCancel>();
 
         }
 

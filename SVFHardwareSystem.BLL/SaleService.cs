@@ -192,7 +192,7 @@ namespace SVFHardwareSystem.Services
             var cash = posPayments.Count() > 0 ? posPayments.Sum(y => y.Amount) : 0;
             return cash;
         }
-        public void Pay(int posTransactionID, decimal amountTendered, decimal total,DateTime paymentDate)
+        public void Pay(int posTransactionID, decimal amountTendered,DateTime paymentDate)
         {
             using (var db = new DataContext())
             {

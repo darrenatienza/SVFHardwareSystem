@@ -11,6 +11,7 @@ namespace SVFHardwareSystem.Services.Interfaces
     {
         Task<IList<CustomerReceivableModel>> GetCustomerReceivables(int customerID);
 
-        Task<Dictionary<int, string>> GetCustomerNameWithReceivables();
+        Task<Dictionary<int, string>> GetCustomerNamesWithReceivables();
+        Task<IList<CustomerReceivableModel>> GetAllCustomersReceivables(int month, int year);
     }
 }

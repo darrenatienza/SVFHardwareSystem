@@ -77,5 +77,10 @@ namespace SVFHardwareSystem.Ui
         {
             FormHandler.OpenProductSaleMonthlyInventoryForm().Show();
         }
+
+        private void btnCustomerReceivables_Click(object sender, EventArgs e)
+        {
+            FormHandler.OpenCustomerReceivableForm().ShowDialog();
+        }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using AutoMap;
+using SVFHardwareSystem.DAL.Entities;
 using SVFHardwareSystem.Queries;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,18 +14,70 @@ namespace SVFHardwareSystem.Services
 {
     public class CustomerReceivableService : ICustomerReceivableService
     {
-        public async Task<Dictionary<int, string>> GetCustomerNameWithReceivables()
+      
+
+        public CustomerReceivableService()
+        {
+           
+        }
+
+       
+        public async Task<IList<CustomerReceivableModel>> GetAllCustomersReceivables(int month, int year)
         {
             using (var db = new DataContext())
             {
-                var customers = db.Customers.Where(x => x.)
+                var customerSaleWithReceivables = await db.Sales
+                       .Where(x => x.IsFullyPaid == false && x.SaleDate.Year == year && x.SaleDate.Month == month)
+                       .Select(x =>
+                        new CustomerReceivableModel
+                        {
+                            Date = x.SaleDate,
+                            CustomerID = x.CustomerID,
+                            Debit = x.SalePayments.Sum(sp => sp.Amount),
+                            Credit = x.SaleProducts.Sum(spr => spr.Price * (spr.Quantity - spr.QuantityToCancel)),
+                            SI = x.SIDR,
+                            FullName = x.Customer.FullName
+                        })
+                        .ToListAsync();
+
+                return customerSaleWithReceivables;
             }
         }
 
-        public Task<IList<CustomerReceivableModel>> GetCustomerReceivables(int customerID)
+        public async Task<Dictionary<int, string>> GetCustomerNamesWithReceivables()
         {
-            throw new NotImplementedException();
+            using (var db = new DataContext())
+            {
+                var customers = await db.Customers.Where(x => x.Sales.Where(y => y.IsFullyPaid == false).Count() > 0).ToListAsync();
+                var custormersDictionaries = new Dictionary<int, string>();
+                foreach (var item in customers)
+                {
+                    custormersDictionaries.Add(item.CustomerID, item.FullName);
+                }
+                return custormersDictionaries;
+            }
         }
+
+        public async Task<IList<CustomerReceivableModel>> GetCustomerReceivables(int customerID)
+        {
+            using (var db = new DataContext())
+            {
+                var customerSaleWithReceivables = await db.Sales
+                       .Where(x => x.CustomerID == customerID && x.IsFullyPaid == false)
+                       .Select(x =>
+                        new CustomerReceivableModel { 
+                            Date = x.SaleDate,
+                            CustomerID = x.CustomerID, 
+                            Debit = x.SalePayments.Sum(sp => sp.Amount), 
+                            Credit = x.SaleProducts.Sum(spr => spr.Price * (spr.Quantity - spr.QuantityToCancel)), 
+                            SI = x.SIDR, FullName = x.Customer.FullName })
+                        .ToListAsync();
+
+                return customerSaleWithReceivables;
+            }
+        }
+
+      
 
         //public CustomerReceivableModel GetCustomerWithReceivables(int customerID)
         //{

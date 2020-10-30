@@ -155,7 +155,7 @@ namespace SVFHardwareSystem.Ui
 
         private void cboPaymentMethod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _paymentMethodID = cboPaymentMethod.SelectedIndex == 0 ? cboPaymentMethod.SelectedIndex = 0: ((ItemX)cboPaymentMethod.SelectedItem).Value.ToInt();
+            _paymentMethodID = cboPaymentMethod.SelectedIndex == 0 ? cboPaymentMethod.SelectedIndex = 0: ((ItemX)cboPaymentMethod.SelectedItem).Key.ToInt();
         }
     }
 }

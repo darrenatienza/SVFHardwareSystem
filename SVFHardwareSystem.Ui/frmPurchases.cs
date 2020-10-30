@@ -129,7 +129,7 @@ namespace SVFHardwareSystem.Ui
 
         private void cboSupplier_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _supplierID = ((ItemX)cboSupplier.SelectedItem).Value.ToInt();
+            _supplierID = ((ItemX)cboSupplier.SelectedItem).Key.ToInt();
             LoadPurchaseDates();
 
         }

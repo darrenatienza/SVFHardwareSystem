@@ -42,10 +42,10 @@
             this.btnProductSale = new MetroFramework.Controls.MetroTile();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.btnCustomerReceivables = new MetroFramework.Controls.MetroTile();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
-            this.metroTile1 = new MetroFramework.Controls.MetroTile();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -237,7 +237,7 @@
             // 
             // metroTabPage1
             // 
-            this.metroTabPage1.Controls.Add(this.metroTile1);
+            this.metroTabPage1.Controls.Add(this.btnCustomerReceivables);
             this.metroTabPage1.Controls.Add(this.btnSalesMontlyReport);
             this.metroTabPage1.Controls.Add(this.btnProductSale);
             this.metroTabPage1.Controls.Add(this.btnPointOfSale);
@@ -253,6 +253,20 @@
             this.metroTabPage1.VerticalScrollbarBarColor = true;
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
+            // 
+            // btnCustomerReceivables
+            // 
+            this.btnCustomerReceivables.ActiveControl = null;
+            this.btnCustomerReceivables.Location = new System.Drawing.Point(370, 130);
+            this.btnCustomerReceivables.Name = "btnCustomerReceivables";
+            this.btnCustomerReceivables.Size = new System.Drawing.Size(301, 149);
+            this.btnCustomerReceivables.Style = MetroFramework.MetroColorStyle.Teal;
+            this.btnCustomerReceivables.TabIndex = 12;
+            this.btnCustomerReceivables.Text = "CUSTOMERS WITH RECEIVABLES";
+            this.btnCustomerReceivables.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnCustomerReceivables.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.btnCustomerReceivables.UseSelectable = true;
+            this.btnCustomerReceivables.Click += new System.EventHandler(this.btnCustomerReceivables_Click);
             // 
             // metroTabPage2
             // 
@@ -304,19 +318,6 @@
             this.metroTabPage4.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage4.VerticalScrollbarSize = 10;
             // 
-            // metroTile1
-            // 
-            this.metroTile1.ActiveControl = null;
-            this.metroTile1.Location = new System.Drawing.Point(370, 130);
-            this.metroTile1.Name = "metroTile1";
-            this.metroTile1.Size = new System.Drawing.Size(301, 149);
-            this.metroTile1.Style = MetroFramework.MetroColorStyle.Teal;
-            this.metroTile1.TabIndex = 12;
-            this.metroTile1.Text = "CUSTOMERS WITH RECEIVABLES";
-            this.metroTile1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.metroTile1.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
-            this.metroTile1.UseSelectable = true;
-            // 
             // frmDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -353,6 +354,6 @@
         private MetroFramework.Controls.MetroTabPage metroTabPage2;
         private MetroFramework.Controls.MetroTabPage metroTabPage3;
         private MetroFramework.Controls.MetroTabPage metroTabPage4;
-        private MetroFramework.Controls.MetroTile metroTile1;
+        private MetroFramework.Controls.MetroTile btnCustomerReceivables;
     }
 }

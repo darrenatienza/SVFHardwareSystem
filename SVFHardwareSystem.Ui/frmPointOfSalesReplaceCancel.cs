@@ -15,12 +15,12 @@ using System.Windows.Forms;
 
 namespace SVFHardwareSystem.Ui
 {
-    public partial class frmSalesReplaceCancel : MetroForm
+    public partial class frmPointOfSalesReplaceCancel : MetroForm
     {
         private ISaleProductService _transactionProductService;
         private int _transactionProductID;
 
-        public frmSalesReplaceCancel(ISaleProductService transactionProductService, int transactionProductID)
+        public frmPointOfSalesReplaceCancel(ISaleProductService transactionProductService, int transactionProductID)
         {
             InitializeComponent();
             _transactionProductService = transactionProductService;

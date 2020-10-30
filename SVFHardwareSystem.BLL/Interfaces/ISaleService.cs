@@ -1,4 +1,5 @@
 ﻿
+using SVFHardwareSystem.Queries;
 using SVFHardwareSystem.Services.ServiceModels;
 using System;
 using System.Collections.Generic;
@@ -30,14 +31,12 @@ namespace SVFHardwareSystem.Services.Interfaces
         decimal GetTotalReceivablePayment(int posTransactionID);
 
         /// <summary>
-        /// Adds new record of payment for current pos transaction.
-        /// Set isPaid = true of  transactions products where isToPay = true.
-        /// Set isFinish = true of current pos transaction.
-        /// Set isFullyPaid = true of sales if the receivable = 0
+        /// Adds new payment for sale
         /// </summary>
-        /// <param name="posTransactionID"></param>
-        /// <param name="change"></param>
-        void Pay(int posTransactionID, decimal amountTendered, decimal total, DateTime paymentDate);
+        /// <param name="saleID">ID of the sale</param>
+        /// <param name="amountTendered">Amount paid by customer</param>
+        /// <param name="paymentDate">Date when Payment is done</param>
+        void Pay(int saleID, decimal amountTendered, DateTime paymentDate);
         
         void CheckAndUpdateIfSaleIsFullyPaid(int posTransactionID);
     }
