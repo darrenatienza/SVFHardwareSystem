@@ -27,60 +27,32 @@ namespace SVFHardwareSystem.Ui
         public frmPointofSaleQuantityEdit(IProductService productService,ISaleProductService transactionProductService, int posTransactionID)
         {
             InitializeComponent();
+
+            //setup product names listbox search
+            var x = txtProductName.Location.X;
+            var y = txtProductName.Location.Y + txtProductName.Size.Height; ;
+            lbProducts.Location = new Point(x, y);
+            lbProducts.Width = txtProductName.Width;
+            lbProducts.Visible = false;
+            lbProducts.KeyDown += lbProducts_KeyDown;
+
+
+
+
             _productService = productService;
             _posTransactionID = posTransactionID;
             _transactionProductService = transactionProductService;
         }
 
+       
         private void frmPointofSaleQuantityEdit_Load(object sender, EventArgs e)
         {
-            loadProductAutoCompleteData();
-        }
-        private async void loadProductAutoCompleteData()
-        {
 
-            //Set AutoCompleteSource property of txt_StateName as CustomSource
-            txtProductName.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            //Set AutoCompleteMode property of txt_StateName as SuggestAppend. SuggestAppend Applies both Suggest and Append
-            txtProductName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            var productNames = await _productService.GetAllAsync();
-            foreach (var item in productNames)
-            {
-                txtProductName.AutoCompleteCustomSource.Add(item.Name);
-            }
-
-        }
-
-        private void txtProductName_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    //get product by productname and set values to productid and lblavailable;
-                    var productName = txtProductName.Text;
-                    var product = _productService.GetByProductName(productName);
-                    
-                        productID = product.ProductID;
-                    availableQuantity = product.Quantity;
-                        lblavailable.Text = string.Format("Available: {0}", product.Quantity.ToString());
-
-                }
-            }
-            catch (RecordNotFoundException)
-            {
-                // no record found on selected product name
-                productID = 0;
-                lblavailable.Text = string.Format("Available: {0}", 0);
-                txtProductName.WithError = true;
-            }
-            catch (Exception ex)
-            {
-
-                MetroMessageBox.Show(this, ex.ToString());
-            }
             
         }
+       
+
+       
 
         private async void btnApply_Click(object sender, EventArgs e)
         {
@@ -119,5 +91,125 @@ namespace SVFHardwareSystem.Ui
                 MetroMessageBox.Show(this, ex.ToString());
             }
         }
+
+        #region Product Name List Box Implementations
+
+        /// <summary>
+        /// Occurs when a keyboard key is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private  void txtProductName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                try
+                {
+                    //get product by productname and set values to productid and lblavailable;
+                    var productName = txtProductName.Text;
+                var product = _productService.GetByProductName(productName);
+
+                productID = product.ProductID;
+                availableQuantity = product.Quantity;
+                lblavailable.Text = string.Format("Available: {0}", product.Quantity.ToString());
+                lbProducts.Visible = false;
+                }
+            catch (RecordNotFoundException)
+                {
+                    // no record found on selected product name
+                    productID = 0;
+                    lblavailable.Text = string.Format("Available: {0}", 0);
+                    txtProductName.WithError = true;
+                }
+                catch (Exception ex)
+                {
+
+                    MetroMessageBox.Show(this, ex.ToString());
+                }
+            }
+            if (e.KeyCode == Keys.Down)
+            {
+                lbProducts.Focus();
+            }
+
+        }
+
+        /// <summary>
+        /// Occurs when a keyboard key is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void lbProducts_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up)
+            {
+                if (lbProducts.SelectedIndex == 0)
+                {
+                    txtProductName.Focus();
+                }
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (lbProducts.SelectedIndex >= 0)
+                {
+                    txtProductName.Text = lbProducts.Text;
+                    txtProductName_TextChanged(sender, e);
+                    txtProductName.Focus();
+                    lbProducts.Visible = false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Occurs when a text changed happen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void txtProductName_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var criteria = txtProductName.Text;
+                await LoadProductSearchList(criteria);
+            }
+            catch (CustomBaseException ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async Task LoadProductSearchList(string criteria)
+        {
+            Dictionary<int, string> productNames = new Dictionary<int, string>();
+            if (criteria != "")
+            {
+                productNames = await _productService.GetProductNamesAsync(criteria);
+            }
+            UpdateProductSearchList(productNames);
+        }
+
+        private void UpdateProductSearchList(Dictionary<int, string> productNames)
+        {
+            lbProducts.Visible = false;
+            if (productNames.Count > 0)
+            {
+                lbProducts.Visible = true;
+                lbProducts.Items.Clear();
+                foreach (var item in productNames)
+                {
+                    lbProducts.Items.Add(item.Value);
+                }
+            }
+
+
+        }
+
+        #endregion
     }
 }

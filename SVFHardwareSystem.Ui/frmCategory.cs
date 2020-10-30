@@ -1,5 +1,6 @@
 ﻿using MetroFramework;
 using MetroFramework.Forms;
+using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
 using System;
@@ -34,16 +35,17 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                var categories = await _categoryService.GetAllAsync();
+                var categories = await _categoryService.GetAllAsync(txtSearch.Text);
                 int count = 0;
-                lvCategories.Items.Clear();
+                gridCategories.Rows.Clear();
                 foreach (var item in categories)
                 {
                     count++;
-                    var lvi = new ListViewItem(count.ToString());
-                    lvi.SubItems.Add(item.Name);
-                    lvi.Tag = item.CategoryID;
-                    lvCategories.Items.Add(lvi);
+                    gridCategories.Rows.Add(new string[] {
+                            item.CategoryID.ToString(),
+                            count.ToString(),
+                            item.Name
+                            });
                 }
             }
             catch (Exception ex)
@@ -61,6 +63,12 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
+                if (txtName.Text == "")
+                {
+                    MetroMessageBox.Show(this, "Name is Required", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtName.WithError = true;
+                    return;
+                }
                 var category = new CategoryModel();
                 category.Name = txtName.Text;
                 //edit
@@ -76,32 +84,17 @@ namespace SVFHardwareSystem.Ui
                 
                 await LoadCategories();
             }
+            catch (CustomBaseException ex)
+            {
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
 
-                MetroMessageBox.Show(this, ex.ToString());
+                MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
 
-        }
-
-        private async void lvCategories_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                id = lvCategories.SelectedItems.Count > 0 ? int.Parse(lvCategories.SelectedItems[0].Tag.ToString()) : 0;
-                if(id > 0)
-                {
-                    var category = await _categoryService.GetAsync(id);
-                    txtName.Text = category.Name;
-                }
-                
-            }
-            catch (Exception ex)
-            {
-
-                MetroMessageBox.Show(this, ex.ToString());
-            }
         }
 
         private async void btnDelete_Click(object sender, EventArgs e)
@@ -145,23 +138,27 @@ namespace SVFHardwareSystem.Ui
 
         private async void btnSearch_Click(object sender, EventArgs e)
         {
+            await LoadCategories();
+        }
+
+        private async void gridCategories_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
             try
             {
-                var categories = await _categoryService.GetAll(txtSearch.Text);
-                int count = 0;
-                lvCategories.Items.Clear();
-                foreach (var item in categories)
+                var grid = gridCategories;
+
+                if (grid.SelectedRows.Count > 0)
                 {
-                    count++;
-                    var lvi = new ListViewItem(count.ToString());
-                    lvi.SubItems.Add(item.Name);
-                    lvi.Tag = item.CategoryID;
-                    lvCategories.Items.Add(lvi);
+                    id = int.Parse(grid.SelectedRows[0].Cells[0].Value.ToString());
+                    if (id > 0)
+                    {
+                        var category = await _categoryService.GetAsync(id);
+                        txtName.Text = category.Name;
+                    }
                 }
             }
             catch (Exception ex)
             {
-
                 MetroMessageBox.Show(this, ex.ToString());
             }
         }

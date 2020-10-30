@@ -1,5 +1,6 @@
 ﻿using MetroFramework;
 using MetroFramework.Forms;
+using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
 using System;
@@ -64,6 +65,7 @@ namespace SVFHardwareSystem.Ui
 
             try
             {
+                ValidateFields();
                 var customer = new CustomerModel();
                 customer.FullName = txtFullName.Text;
                 customer.Address = txtAddress.Text;
@@ -80,6 +82,10 @@ namespace SVFHardwareSystem.Ui
                 }
                 this.Close();
             }
+            catch (CustomBaseException ex)
+            {
+                MetroMessageBox.Show(this, ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
 
@@ -87,6 +93,25 @@ namespace SVFHardwareSystem.Ui
             }
            
            
+        }
+
+        private void ValidateFields()
+        {
+            if (txtFullName.Text == "")
+            {
+                txtFullName.WithError = true;
+                throw new InvalidFieldException("FullName");
+            }
+            if (txtAddress.Text == "")
+            {
+                txtAddress.WithError = true;
+                throw new InvalidFieldException("Address");
+            }
+            if (txtContactNum.Text == "")
+            {
+                txtContactNum.WithError = true;
+                throw new InvalidFieldException("Contact Number");
+            }
         }
     }
 }

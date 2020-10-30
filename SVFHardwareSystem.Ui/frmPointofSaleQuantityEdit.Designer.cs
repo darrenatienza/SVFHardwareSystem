@@ -34,6 +34,7 @@
             this.txtProductName = new MetroFramework.Controls.MetroTextBox();
             this.lblavailable = new MetroFramework.Controls.MetroLabel();
             this.btnApply = new MetroFramework.Controls.MetroButton();
+            this.lbProducts = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -60,7 +61,7 @@
             // 
             // 
             this.txtQuantity.CustomButton.Image = null;
-            this.txtQuantity.CustomButton.Location = new System.Drawing.Point(86, 1);
+            this.txtQuantity.CustomButton.Location = new System.Drawing.Point(199, 1);
             this.txtQuantity.CustomButton.Name = "";
             this.txtQuantity.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtQuantity.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -117,6 +118,7 @@
             this.txtProductName.UseSelectable = true;
             this.txtProductName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtProductName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtProductName.TextChanged += new System.EventHandler(this.txtProductName_TextChanged);
             this.txtProductName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtProductName_KeyDown);
             // 
             // lblavailable
@@ -140,11 +142,20 @@
             this.btnApply.UseSelectable = true;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
+            // lbProducts
+            // 
+            this.lbProducts.FormattingEnabled = true;
+            this.lbProducts.Location = new System.Drawing.Point(269, 95);
+            this.lbProducts.Name = "lbProducts";
+            this.lbProducts.Size = new System.Drawing.Size(178, 95);
+            this.lbProducts.TabIndex = 14;
+            // 
             // frmPointofSaleQuantityEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(254, 245);
+            this.ClientSize = new System.Drawing.Size(255, 245);
+            this.Controls.Add(this.lbProducts);
             this.Controls.Add(this.lblavailable);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.txtProductName);
@@ -169,5 +180,6 @@
         private MetroFramework.Controls.MetroTextBox txtProductName;
         private MetroFramework.Controls.MetroLabel lblavailable;
         private MetroFramework.Controls.MetroButton btnApply;
+        private System.Windows.Forms.ListBox lbProducts;
     }
 }

@@ -191,6 +191,7 @@
             this.txtSearch.WaterMark = "Search";
             this.txtSearch.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtSearch.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtSearch.ButtonClick += new MetroFramework.Controls.MetroTextBox.ButClick(this.btnSearch_Click);
             // 
             // btnDelete
             // 
@@ -203,6 +204,7 @@
             this.btnDelete.Size = new System.Drawing.Size(35, 24);
             this.btnDelete.TabIndex = 4;
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -215,6 +217,7 @@
             this.btnEdit.Size = new System.Drawing.Size(35, 24);
             this.btnEdit.TabIndex = 3;
             this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
@@ -227,6 +230,7 @@
             this.btnAdd.Size = new System.Drawing.Size(35, 24);
             this.btnAdd.TabIndex = 2;
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // frmCustomers
             // 

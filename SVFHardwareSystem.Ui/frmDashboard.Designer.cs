@@ -187,7 +187,7 @@
             this.btnSalesMontlyReport.Size = new System.Drawing.Size(301, 95);
             this.btnSalesMontlyReport.Style = MetroFramework.MetroColorStyle.Brown;
             this.btnSalesMontlyReport.TabIndex = 9;
-            this.btnSalesMontlyReport.Text = "SALE MONTHLY REPORT";
+            this.btnSalesMontlyReport.Text = "MONTHLY RECEIVABLES";
             this.btnSalesMontlyReport.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnSalesMontlyReport.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
             this.btnSalesMontlyReport.UseSelectable = true;
@@ -215,7 +215,7 @@
             this.btnProductSale.Size = new System.Drawing.Size(360, 149);
             this.btnProductSale.Style = MetroFramework.MetroColorStyle.Magenta;
             this.btnProductSale.TabIndex = 11;
-            this.btnProductSale.Text = "SALE PRODUCT REPORT";
+            this.btnProductSale.Text = "PRODUCT SALES";
             this.btnProductSale.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnProductSale.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
             this.btnProductSale.UseSelectable = true;

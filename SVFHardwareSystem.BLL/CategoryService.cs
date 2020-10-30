@@ -20,7 +20,7 @@ namespace SVFHardwareSystem.Services
         {
            
         }
-        public async Task<IList<CategoryModel>> GetAll(string criteria)
+        public async Task<IList<CategoryModel>> GetAllAsync(string criteria)
         {
             using (var db = new DataContext())
             {

@@ -1,6 +1,6 @@
 ﻿namespace SVFHardwareSystem.Ui
 {
-    partial class frmSalesReport
+    partial class frmDailySales
     {
         /// <summary>
         /// Required designer variable.

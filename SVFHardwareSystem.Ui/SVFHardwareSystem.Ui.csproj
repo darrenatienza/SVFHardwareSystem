@@ -218,11 +218,11 @@
     <Compile Include="frmSaleForm.Designer.cs">
       <DependentUpon>frmSaleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSalesReport.cs">
+    <Compile Include="frmDailySales.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSalesReport.Designer.cs">
-      <DependentUpon>frmSalesReport.cs</DependentUpon>
+    <Compile Include="frmDailySales.Designer.cs">
+      <DependentUpon>frmDailySales.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSales.cs">
       <SubType>Form</SubType>
@@ -336,8 +336,8 @@
     <EmbeddedResource Include="frmSaleProductInventory.resx">
       <DependentUpon>frmSaleProductInventory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSalesReport.resx">
-      <DependentUpon>frmSalesReport.cs</DependentUpon>
+    <EmbeddedResource Include="frmDailySales.resx">
+      <DependentUpon>frmDailySales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSales.resx">
       <DependentUpon>frmSales.cs</DependentUpon>

@@ -35,5 +35,19 @@ namespace SVFHardwareSystem.Services
                 return customer == null ? throw new RecordNotFoundException() : customer.CustomerID;
             }
         }
+
+        public async Task<Dictionary<int, string>> GetCustomerNamesAsync(string criteria)
+        {
+            using (var db = new DataContext())
+            {
+                var names = await db.Customers.Where(x => x.FullName.Contains(criteria)).Select(x => new { x.CustomerID, x.FullName }).ToListAsync();
+                var dictionaries = new Dictionary<int, string>();
+                foreach (var item in names)
+                {
+                    dictionaries.Add(item.CustomerID, item.FullName);
+                }
+                return dictionaries;
+            }
+        }
     }
 }

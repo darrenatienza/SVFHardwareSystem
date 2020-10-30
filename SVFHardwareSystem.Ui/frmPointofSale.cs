@@ -3,6 +3,7 @@ using MetroFramework.Forms;
 using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
+using SVFHardwareSystem.Ui.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -100,19 +101,9 @@ namespace SVFHardwareSystem.Ui
 
         
 
-
         
-       
 
-        private void txtProductName_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                AddProductOnTransaction();
-            }
-        }
-
-        private async void AddProductOnTransaction()
+        private async Task AddProductOnTransaction()
         {
             try
             {
@@ -404,9 +395,9 @@ namespace SVFHardwareSystem.Ui
                     txtReceivable.Text = posTransaction.Receivable.ToString();
                     _isFinishedSale = posTransaction.IsFinished;
                     _isFullyPaid = posTransaction.IsFullyPaid;
-                    txtTotal.Text = posTransaction.TotalAmount.ToString("N"); // currency format no symbol
-                    txtPayment.Text = posTransaction.TotalPayment.ToString();
-                    txtCancelAmount.Text = posTransaction.CancelAmount.ToString();
+                    txtTotal.Text = posTransaction.TotalAmount.ToCurrencyFormat();
+                    txtPayment.Text = posTransaction.TotalPayment.ToCurrencyFormat();
+                    txtCancelAmount.Text = posTransaction.CancelAmount.ToCurrencyFormat();  
                     await LoadProductsOnTransaction();
                 }
                 else
@@ -452,6 +443,7 @@ namespace SVFHardwareSystem.Ui
         private async void btnNewTransaction_Click(object sender, EventArgs e)
         {
             await AddNewSale();
+            this.Focus();
         }
 
         private async Task AddNewSale()
@@ -462,7 +454,7 @@ namespace SVFHardwareSystem.Ui
                 {
 
 
-                    if (ValidateSailields())
+                    if (VAlidateFields())
                     {
                         var newPOSTransaction = new SaleModel();
                         newPOSTransaction.SaleDate = dtSalesTransactionDate.Value;
@@ -484,6 +476,7 @@ namespace SVFHardwareSystem.Ui
                         await GenerateNewOrLoadUnFinishedSale();
                     }
                 }
+                
 
 
             }
@@ -494,7 +487,7 @@ namespace SVFHardwareSystem.Ui
             }
         }
 
-        private bool ValidateSailields()
+        private bool VAlidateFields()
         {
 
             //form validation
@@ -520,13 +513,7 @@ namespace SVFHardwareSystem.Ui
             return true;
         }
 
-        private void txtCustomerName_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                SetCustomerIDField();
-            }
-        }
+        
 
         private void SetCustomerIDField()
         {
@@ -572,7 +559,7 @@ namespace SVFHardwareSystem.Ui
                     {
 
 
-                        if (ValidateSailields())
+                        if (VAlidateFields())
                         {
                             var posTransaction = await _saleService.GetAsync(_saleID);
                             posTransaction.Cost = txtCost.Text;
@@ -704,6 +691,157 @@ namespace SVFHardwareSystem.Ui
 
         }
 
+      
+       
+        protected override  bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            
+            if (keyData == (Keys.Control | Keys.P))
+            {
+                txtProductName.Focus();
+                return true;
+            }
+            if (keyData == (Keys.Control | Keys.N))
+            {
+                btnNewTransaction_Click(this, EventArgs.Empty);
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+
+
+        #region Customer Name List Box Implementations
+        private void txtCustomerName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SetCustomerIDField();
+                lbCustomer.Visible = false;
+            }
+            if (e.KeyCode == Keys.Down)
+            {
+                lbCustomer.Focus();
+            }
+           
+        }
+        private void lbCustomer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (lbCustomer.SelectedIndex == 0)
+            {
+                if (e.KeyCode == Keys.Up)
+                {
+                    txtCustomerName.Focus();
+                }
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                
+                txtCustomerName.Text = lbCustomer.Text;
+                SetCustomerIDField();
+                txtCustomerName.Focus();
+                lbCustomer.Visible = false;
+
+
+            }
+        }
+        private async void txtCustomerName_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var criteria = txtCustomerName.Text;
+                await LoadCustomerSearchList(criteria);
+            }
+            catch (CustomBaseException ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private async Task LoadCustomerSearchList(string criteria)
+        {
+            Dictionary<int, string> productNames = new Dictionary<int, string>();
+            if (criteria != "")
+            {
+                productNames = await _customerService.GetCustomerNamesAsync(criteria);
+            }
+            UpdateCustomerSearchList(productNames);
+        }
+
+        private void UpdateCustomerSearchList(Dictionary<int, string> customerNames)
+        {
+            lbCustomer.Visible = false;
+            if (customerNames.Count > 0)
+            {
+                lbCustomer.Visible = true;
+                lbCustomer.Items.Clear();
+                foreach (var item in customerNames)
+                {
+                    lbCustomer.Items.Add(item.Value);
+                }
+            }
+
+
+        }
+        #endregion
+
+        #region Product Name List Box Implementations
+
+        /// <summary>
+        /// Occurs when a keyboard key is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void txtProductName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                await AddProductOnTransaction();
+                lbProducts.Visible = false;
+            }
+            if (e.KeyCode == Keys.Down)
+            {
+                lbProducts.Focus();
+            }
+
+        }
+
+        /// <summary>
+        /// Occurs when a keyboard key is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void lbProducts_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up)
+            {
+                if (lbProducts.SelectedIndex == 0)
+                {
+                    txtProductName.Focus();
+                }
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (lbProducts.SelectedIndex >= 0)
+                {
+                    txtProductName.Text = lbProducts.Text;
+                    await AddProductOnTransaction();
+                    txtProductName.Focus();
+                    lbProducts.Visible = false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Occurs when a text changed happen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void txtProductName_TextChanged(object sender, EventArgs e)
         {
             try
@@ -725,27 +863,30 @@ namespace SVFHardwareSystem.Ui
 
         private async Task LoadProductSearchList(string criteria)
         {
-            var productNames = await _productService.GetProductNamesAsync(criteria);
+            Dictionary<int, string> productNames = new Dictionary<int, string>();
+            if (criteria != "")
+            {
+                productNames = await _productService.GetProductNamesAsync(criteria);
+            }
             UpdateProductSearchList(productNames);
         }
 
-        private void UpdateProductSearchList(Dictionary<int,string> productNames)
-        {
-            lbProducts.Items.Clear();
-            foreach (var item in productNames)
-            {
-                lbProducts.Items.Add(item.Value);
-            }
-        }
-
-        private void txtProductName_MouseLeave(object sender, EventArgs e)
+        private void UpdateProductSearchList(Dictionary<int, string> productNames)
         {
             lbProducts.Visible = false;
+            if (productNames.Count > 0)
+            {
+                lbProducts.Visible = true;
+                lbProducts.Items.Clear();
+                foreach (var item in productNames)
+                {
+                    lbProducts.Items.Add(item.Value);
+                }
+            }
+
+
         }
 
-        private void txtProductName_MouseClick(object sender, MouseEventArgs e)
-        {
-            lbProducts.Visible = true;
-        }
+        #endregion
     }
 }

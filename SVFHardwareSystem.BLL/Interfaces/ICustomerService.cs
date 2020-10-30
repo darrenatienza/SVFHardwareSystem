@@ -11,5 +11,6 @@ namespace SVFHardwareSystem.Services.Interfaces
     {
         Task<IList<CustomerModel>> GetAll(string criteria);
         int GetCustomerID(string customerName);
+        Task<Dictionary<int, string>> GetCustomerNamesAsync(string criteria);
     }
 }

@@ -33,8 +33,8 @@ namespace SVFHardwareSystem.Services
                         {
                             Date = x.SaleDate,
                             CustomerID = x.CustomerID,
-                            Debit = x.SalePayments.Sum(sp => sp.Amount),
-                            Credit = x.SaleProducts.Sum(spr => spr.Price * (spr.Quantity - spr.QuantityToCancel)),
+                            Debit = x.SalePayments.Count() > 0 ?x.SalePayments.Sum(sp => sp.Amount) : 0,
+                            Credit = x.SaleProducts.Count() > 0? x.SaleProducts.Sum(spr => spr.Price * (spr.Quantity - spr.QuantityToCancel)) : 0,
                             SI = x.SIDR,
                             FullName = x.Customer.FullName
                         })
@@ -68,8 +68,8 @@ namespace SVFHardwareSystem.Services
                         new CustomerReceivableModel { 
                             Date = x.SaleDate,
                             CustomerID = x.CustomerID, 
-                            Debit = x.SalePayments.Sum(sp => sp.Amount), 
-                            Credit = x.SaleProducts.Sum(spr => spr.Price * (spr.Quantity - spr.QuantityToCancel)), 
+                            Debit = x.SalePayments.Count() > 0 ? x.SalePayments.Sum(sp => sp.Amount) : 0, 
+                            Credit = x.SaleProducts.Count() > 0 ?x.SaleProducts.Sum(spr => spr.Price * (spr.Quantity - spr.QuantityToCancel)) : 0, 
                             SI = x.SIDR, FullName = x.Customer.FullName })
                         .ToListAsync();
 

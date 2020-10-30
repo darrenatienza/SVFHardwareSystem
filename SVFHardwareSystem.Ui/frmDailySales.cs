@@ -16,11 +16,11 @@ using System.Windows.Forms;
 
 namespace SVFHardwareSystem.Ui
 {
-    public partial class frmSalesReport : MetroForm
+    public partial class frmDailySales : MetroForm
     {
         private ISalesService _salesService;
 
-        public frmSalesReport(ISalesService salesService)
+        public frmDailySales(ISalesService salesService)
         {
             InitializeComponent();
             this.MinimizeBox = false;
