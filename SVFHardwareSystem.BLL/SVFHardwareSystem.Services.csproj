@@ -58,12 +58,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerReceivableService.cs" />
+    <Compile Include="Exceptions\InvalidFieldException2.cs" />
     <Compile Include="Exceptions\OverPaymentException.cs" />
     <Compile Include="Interfaces\ICustomerReceivableService.cs" />
     <Compile Include="Interfaces\IProductInventoryService.cs" />
     <Compile Include="Interfaces\IPurchaseProductInventoryService.cs" />
     <Compile Include="Interfaces\ISaleProductInventoryService.cs" />
     <Compile Include="Interfaces\IPurchaseSaleInventoryService.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Interfaces\ProductInventoryModel.cs" />
     <Compile Include="PaymentMethodService.cs" />
     <Compile Include="CustomerService.cs" />
@@ -125,8 +127,10 @@
     <Compile Include="ServiceModels\CustomerSalesReceivableModel.cs" />
     <Compile Include="ServiceModels\SupplierModel.cs" />
     <Compile Include="ServiceModels\SaleProductModel.cs" />
+    <Compile Include="ServiceModels\UserModel.cs" />
     <Compile Include="SupplierService.cs" />
     <Compile Include="SaleProductService.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SVFHardwareSystem.DAL\SVFHardwareSystem.Queries.csproj">

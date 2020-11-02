@@ -138,12 +138,17 @@ namespace SVFHardwareSystem.Ui
 
         private void gridCustomers_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            
+        }
+
+        private void gridCustomers_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
             var grid = gridCustomers;
 
             if (grid.SelectedRows.Count > 0)
             {
                 id = int.Parse(grid.SelectedRows[0].Cells[0].Value.ToString());
-                
+
 
 
             }

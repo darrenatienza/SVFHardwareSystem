@@ -23,14 +23,16 @@ namespace SVFHardwareSystem.Ui
         private IPurchaseService _purchaseService;
         private int _purchaseID;
         private IPaymentMethodService _paymentMethodService;
+        private DateTime _purchaseDate;
         private int _paymentMethodID;
 
-        public frmPurchasePayments(IPurchaseService purchaseService,IPaymentMethodService paymentMethodService, int purchaseID)
+        public frmPurchasePayments(IPurchaseService purchaseService,IPaymentMethodService paymentMethodService, int purchaseID, DateTime purchaseDate)
         {
             InitializeComponent();
             _purchaseService = purchaseService;
             _purchaseID = purchaseID;
             _paymentMethodService = paymentMethodService;
+            _purchaseDate = purchaseDate;
         }
 
         private void frmPurchasePayments_Load(object sender, EventArgs e)
@@ -99,6 +101,7 @@ namespace SVFHardwareSystem.Ui
                     txtTotalPurchase.Text = purchase.TotalPurchaseAmount.ToString();
                     txtTotalPayment.Text = purchase.TotalPayment.ToString();
                     txtBalance.Text = purchase.Balance.ToString();
+                    dtPaymentDate.Value = _purchaseDate;
                 }
 
             }
@@ -156,6 +159,17 @@ namespace SVFHardwareSystem.Ui
         private void cboPaymentMethod_SelectedIndexChanged(object sender, EventArgs e)
         {
             _paymentMethodID = cboPaymentMethod.SelectedIndex == 0 ? cboPaymentMethod.SelectedIndex = 0: ((ItemX)cboPaymentMethod.SelectedItem).Key.ToInt();
+            var paymentText = cboPaymentMethod.Text;
+            switch (paymentText)
+            {
+                case "Check":
+                    txtCheckNumber.Enabled = true;
+                    break;
+                default:
+                    txtCheckNumber.Enabled = false;
+                    break;
+            }
+            
         }
     }
 }

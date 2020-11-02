@@ -114,7 +114,7 @@ namespace SVFHardwareSystem.Ui
 
         private void gridProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            SetProductID();
+           
         }
 
         private void SetProductID()
@@ -161,6 +161,11 @@ namespace SVFHardwareSystem.Ui
 
                 MetroMessageBox.Show(this, ex.ToString());
             }
+        }
+
+        private void gridProducts_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SetProductID();
         }
     }
 }

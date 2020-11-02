@@ -194,6 +194,7 @@
             this.gridSupplier.Size = new System.Drawing.Size(760, 339);
             this.gridSupplier.TabIndex = 9;
             this.gridSupplier.UseStyleColors = true;
+            this.gridSupplier.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridSupplier_CellClick);
             this.gridSupplier.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridCustomers_CellContentClick);
             // 
             // Column1

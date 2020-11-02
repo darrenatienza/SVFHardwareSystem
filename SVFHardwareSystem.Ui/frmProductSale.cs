@@ -20,13 +20,13 @@ using System.Windows.Forms;
 
 namespace SVFHardwareSystem.Ui
 {
-    public partial class frmSaleProductInventory : MetroForm
+    public partial class frmProductSale : MetroForm
     {
   
         private ISaleProductInventoryService _productInventoryService;
        
 
-        public frmSaleProductInventory(ISaleProductInventoryService productInventoryService)
+        public frmProductSale(ISaleProductInventoryService productInventoryService)
         {
             InitializeComponent();
             _productInventoryService = productInventoryService;

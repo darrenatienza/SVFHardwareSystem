@@ -139,6 +139,7 @@
             this.Controls.Add(this.metroPanel1);
             this.Name = "frmCustomerReceivable";
             this.Text = "CustomerReceivable";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.CustomerReceivable_Load);
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();

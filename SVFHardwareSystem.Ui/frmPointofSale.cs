@@ -41,7 +41,12 @@ namespace SVFHardwareSystem.Ui
             _transactionProductService = saleProductService;
             _customerService = customerService;
             gridList.CellValueChanged += GridList_CellValueChanged;
+            txtCustomerName.GotFocus += TxtCustomerName_GotFocus;
         }
+
+        
+
+     
 
         private async void frmPointofSale_Load(object sender, EventArgs e)
 
@@ -388,16 +393,7 @@ namespace SVFHardwareSystem.Ui
 
                     var code = txtSIDR.Text;
                     var posTransaction = await _saleService.Get(code);
-                    _saleID = posTransaction.SaleID;
-                    txtCost.Text = posTransaction.Cost;
-                    txtCustomerName.Text = posTransaction.CustomerFullName;
-                    customerID = posTransaction.CustomerID;
-                    txtReceivable.Text = posTransaction.Receivable.ToString();
-                    _isFinishedSale = posTransaction.IsFinished;
-                    _isFullyPaid = posTransaction.IsFullyPaid;
-                    txtTotal.Text = posTransaction.TotalAmount.ToCurrencyFormat();
-                    txtPayment.Text = posTransaction.TotalPayment.ToCurrencyFormat();
-                    txtCancelAmount.Text = posTransaction.CancelAmount.ToCurrencyFormat();  
+                    SetSaleData(posTransaction);
                     await LoadProductsOnTransaction();
                 }
                 else
@@ -425,14 +421,23 @@ namespace SVFHardwareSystem.Ui
                 MetroMessageBox.Show(this, ex.ToString());
             }
         }
-
-        private async void txtSIDR_ButtonClick(object sender, EventArgs e)
+        public void SetSaleData(SaleModel model)
         {
-            await SetTransactionData();
-
-
+            _saleID = model.SaleID;
+            txtCost.Text = model.Cost;
+            txtCustomerName.Text = model.CustomerFullName;
+            customerID = model.CustomerID;
+            txtReceivable.Text = model.Receivable.ToString();
+            _isFinishedSale = model.IsFinished;
+            _isFullyPaid = model.IsFullyPaid;
+            txtTotal.Text = model.TotalAmount.ToCurrencyFormat();
+            txtPayment.Text = model.TotalPayment.ToCurrencyFormat();
+            txtCancelAmount.Text = model.CancelAmount.ToCurrencyFormat();
+            dtSalesTransactionDate.Value = model.SaleDate;
+            //close customer search list
+            lbCustomer.Visible = false;
         }
-
+        
         private async void txtProductName_ButtonClick(object sender, EventArgs e)
         {
             FormHandler.OpenPointOfSaleQuantityEditForm(_saleID).ShowDialog();
@@ -480,10 +485,15 @@ namespace SVFHardwareSystem.Ui
 
 
             }
+            catch (CustomBaseException ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
 
-                MetroMessageBox.Show(this, ex.ToString());
+                MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -887,6 +897,21 @@ namespace SVFHardwareSystem.Ui
 
         }
 
+        private void TxtCustomerName_GotFocus(object sender, EventArgs e)
+        {
+            txtCustomerName.TextChanged += txtCustomerName_TextChanged;
+        }
+        private async void txtSIDR_ButtonClick(object sender, EventArgs e)
+        {
+            txtCustomerName.TextChanged -= txtCustomerName_TextChanged;
+            await SetTransactionData();
+        }
+
         #endregion
+
+        private void txtCustomerName_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

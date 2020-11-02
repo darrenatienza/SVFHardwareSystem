@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SVFHardwareSystem.Services.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
 {
     public class PurchaseModel
     {
-        
+        private string _sidr;
 
         public PurchaseModel() { }
         public int PurchaseID { get; set; }
@@ -16,7 +17,17 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public bool IsFullyPaid { get; set; }
         public DateTime DatePurchase { get; set; }
         public int SupplierID { get; set; }
-        public string SIDR { get; set; }
+        public string SIDR
+        {
+            get { return _sidr; }
+            set
+            {
+                if (value == "" || value == null)
+                {
+                    throw new InvalidFieldException("SIDR");
+                }
+                _sidr = value;
+            } }
         public string SupplierName { get; set; }
         public string Remarks { get; set; }
         public decimal TotalPurchaseAmount { get { return PurchaseProducts.Sum(x => x.Total); } }

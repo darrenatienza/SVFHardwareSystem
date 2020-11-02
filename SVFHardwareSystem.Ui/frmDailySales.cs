@@ -24,9 +24,7 @@ namespace SVFHardwareSystem.Ui
         public frmDailySales(ISalesService salesService,ISalePaymentService salePaymentService)
         {
             InitializeComponent();
-            this.MinimizeBox = false;
-            this.MaximizeBox = false;
-            this.Resizable = false;
+            
             _salesService = salesService;
             _salePaymentService = salePaymentService;
         }

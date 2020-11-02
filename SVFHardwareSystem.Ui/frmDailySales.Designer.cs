@@ -32,23 +32,21 @@
             this.txtCriteria = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.dtDate = new MetroFramework.Controls.MetroDateTime();
-            this.dtTo = new MetroFramework.Controls.MetroDateTime();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.label1 = new System.Windows.Forms.Label();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroPanel1
             // 
             this.metroPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
+            this.metroPanel1.Controls.Add(this.label1);
             this.metroPanel1.Controls.Add(this.txtCriteria);
             this.metroPanel1.Controls.Add(this.metroLabel4);
             this.metroPanel1.Controls.Add(this.metroLabel2);
-            this.metroPanel1.Controls.Add(this.metroLabel3);
             this.metroPanel1.Controls.Add(this.dtDate);
-            this.metroPanel1.Controls.Add(this.dtTo);
             this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
@@ -77,7 +75,7 @@
             this.txtCriteria.CustomButton.UseSelectable = true;
             this.txtCriteria.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.txtCriteria.Lines = new string[0];
-            this.txtCriteria.Location = new System.Drawing.Point(397, 6);
+            this.txtCriteria.Location = new System.Drawing.Point(238, 6);
             this.txtCriteria.MaxLength = 32767;
             this.txtCriteria.Name = "txtCriteria";
             this.txtCriteria.PasswordChar = '\0';
@@ -99,7 +97,7 @@
             // metroLabel4
             // 
             this.metroLabel4.AutoSize = true;
-            this.metroLabel4.Location = new System.Drawing.Point(339, 10);
+            this.metroLabel4.Location = new System.Drawing.Point(180, 10);
             this.metroLabel4.Name = "metroLabel4";
             this.metroLabel4.Size = new System.Drawing.Size(52, 19);
             this.metroLabel4.TabIndex = 11;
@@ -111,20 +109,10 @@
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.Location = new System.Drawing.Point(9, 10);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(41, 19);
+            this.metroLabel2.Size = new System.Drawing.Size(36, 19);
             this.metroLabel2.TabIndex = 8;
-            this.metroLabel2.Text = "From";
+            this.metroLabel2.Text = "Date";
             this.metroLabel2.UseCustomBackColor = true;
-            // 
-            // metroLabel3
-            // 
-            this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(174, 10);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(22, 19);
-            this.metroLabel3.TabIndex = 9;
-            this.metroLabel3.Text = "To";
-            this.metroLabel3.UseCustomBackColor = true;
             // 
             // dtDate
             // 
@@ -135,16 +123,6 @@
             this.dtDate.Size = new System.Drawing.Size(112, 29);
             this.dtDate.TabIndex = 2;
             this.metroToolTip1.SetToolTip(this.dtDate, "Date From");
-            // 
-            // dtTo
-            // 
-            this.dtTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtTo.Location = new System.Drawing.Point(202, 6);
-            this.dtTo.MinimumSize = new System.Drawing.Size(0, 29);
-            this.dtTo.Name = "dtTo";
-            this.dtTo.Size = new System.Drawing.Size(131, 29);
-            this.dtTo.TabIndex = 3;
-            this.metroToolTip1.SetToolTip(this.dtTo, "Date To");
             // 
             // metroToolTip1
             // 
@@ -161,6 +139,17 @@
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.Size = new System.Drawing.Size(927, 469);
             this.reportViewer1.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Maroon;
+            this.label1.Location = new System.Drawing.Point(717, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(207, 26);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Note: Receivable payments are payments \r\nfrom previous receivable sales.";
             // 
             // frmDailySales
             // 
@@ -185,9 +174,8 @@
         private MetroFramework.Controls.MetroTextBox txtCriteria;
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroLabel metroLabel2;
-        private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroDateTime dtDate;
-        private MetroFramework.Controls.MetroDateTime dtTo;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private System.Windows.Forms.Label label1;
     }
 }

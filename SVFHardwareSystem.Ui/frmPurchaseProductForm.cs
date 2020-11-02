@@ -158,14 +158,11 @@ namespace SVFHardwareSystem.Ui
                 }
                 this.Close();
             }
-            catch (InvalidFieldException ex)
+            catch (CustomBaseException ex)
             {
                 MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (RecordAlreadyExistsException ex)
-            {
-                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+           
             catch (Exception ex)
             {
 

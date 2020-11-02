@@ -19,7 +19,7 @@ namespace SVFHardwareSystem.Services.Exceptions
         /// Initializer
         /// </summary>
         /// <param name="recordIdentifier">Record Already exists for {recordIdentifier}</param>
-        public RecordAlreadyExistsException(string recordIdentifier) : base(String.Format("Record Already exists for {0}", recordIdentifier))
+        public RecordAlreadyExistsException(string field) : base(String.Format("Record Already exists for {0}", field))
         {
         }
     }

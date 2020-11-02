@@ -154,8 +154,6 @@ C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVF
 C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmPurchases.resources
 C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmPurchaseSaleInventories.resources
 C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmSaleForm.resources
-C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmSaleProductInventory.resources
-C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmSalesReport.resources
 C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmSales.resources
 C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmSalesMonthlyReport.resources
 C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmSupplierForm.resources
@@ -234,3 +232,5 @@ C:\Users\User\Desktop\projects\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\
 C:\Users\User\Desktop\projects\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\ru\Microsoft.ReportViewer.WinForms.resources.dll
 C:\Users\User\Desktop\projects\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
 C:\Users\User\Desktop\projects\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmDailySales.resources
+C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmProductSale.resources

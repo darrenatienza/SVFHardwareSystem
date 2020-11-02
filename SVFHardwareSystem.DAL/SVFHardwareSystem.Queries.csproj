@@ -65,6 +65,7 @@
     <Compile Include="Entities\PurchaseSaleInventory.cs" />
     <Compile Include="Entities\PurchaseSaleInventoryProduct.cs" />
     <Compile Include="Entities\Supplier.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\WarrantyProduct.cs" />
     <Compile Include="Entities\SaleProduct.cs" />
     <Compile Include="Entities\Product.cs" />
@@ -83,6 +84,10 @@
     <Compile Include="Migrations\202010280820189_AddHasReceivablePaymentOnSale.designer.cs">
       <DependentUpon>202010280820189_AddHasReceivablePaymentOnSale.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011021431559_AddUser.cs" />
+    <Compile Include="Migrations\202011021431559_AddUser.designer.cs">
+      <DependentUpon>202011021431559_AddUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Misc\PaymentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010280820189_AddHasReceivablePaymentOnSale.resx">
       <DependentUpon>202010280820189_AddHasReceivablePaymentOnSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011021431559_AddUser.resx">
+      <DependentUpon>202011021431559_AddUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

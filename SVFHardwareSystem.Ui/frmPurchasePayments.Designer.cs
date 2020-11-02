@@ -288,6 +288,7 @@
             this.txtCheckNumber.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtCheckNumber.CustomButton.UseSelectable = true;
             this.txtCheckNumber.CustomButton.Visible = false;
+            this.txtCheckNumber.Enabled = false;
             this.txtCheckNumber.Lines = new string[0];
             this.txtCheckNumber.Location = new System.Drawing.Point(10, 326);
             this.txtCheckNumber.MaxLength = 32767;

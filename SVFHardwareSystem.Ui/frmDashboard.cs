@@ -82,5 +82,15 @@ namespace SVFHardwareSystem.Ui
         {
             FormHandler.OpenCustomerReceivableForm().ShowDialog();
         }
+
+        private void frmDashboard_Load(object sender, EventArgs e)
+        {
+            var login = FormHandler.OpenLogin();
+          login.ShowDialog();
+            if (!login.IsLoginSuccess)
+            {
+                Application.Exit();
+            }
+        }
     }
 }

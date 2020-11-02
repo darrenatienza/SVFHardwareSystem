@@ -18,6 +18,19 @@ namespace SVFHardwareSystem.Services
     {
         public SaleService() { }
 
+        public override async Task<SaleModel> AddNewAsync(SaleModel model)
+        {
+            using (var db = new DataContext())
+            {
+                var sidr = db.Sales.Select(x => new { x.SIDR, x.Cost }).FirstOrDefault(x => x.SIDR == model.SIDR && x.Cost == model.Cost);
+                if (sidr != null )
+                {
+                    throw new InvalidFieldException2("SIDR already exists!");
+                }
+            }
+            return await base.AddNewAsync(model);
+        }
+
         public void EditCustomerIDOnCurrentSale(int posTransactionID, int customerID)
         {
             using (var db = new DataContext())

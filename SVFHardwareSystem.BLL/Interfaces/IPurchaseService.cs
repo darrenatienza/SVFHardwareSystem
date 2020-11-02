@@ -40,6 +40,8 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// <param name="purchaseProductID">Id of the purchase product</param>
         /// <exception cref="CustomBaseException">Thrown when an invalid logic occurs</exception>
         void UploadPurchaseQuantity(int purchaseProductID);
+        Task<int> GeneratedNewPurchaseID(int supplierID);
+
         /// <summary>
         /// Add new Purchase payment on phone
         /// </summary>

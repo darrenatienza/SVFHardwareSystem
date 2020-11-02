@@ -41,8 +41,11 @@ namespace SVFHardwareSystem.Ui
 
         public static frmPayables OpenPayablesForm() => UnityConfig
                      .Register().Resolve<frmPayables>();
-        public static frmSaleProductInventory OpenProductSaleMonthlyInventoryForm() => UnityConfig
-                  .Register().Resolve<frmSaleProductInventory>();
+
+        public static frmLogin OpenLogin() => UnityConfig
+                     .Register().Resolve<frmLogin>();
+        public static frmProductSale OpenProductSaleMonthlyInventoryForm() => UnityConfig
+                  .Register().Resolve<frmProductSale>();
         public static frmSalesMonthlyReport OpenSaleMonthlyReportForm() => UnityConfig
                    .Register().Resolve<frmSalesMonthlyReport>();
 
@@ -77,11 +80,11 @@ namespace SVFHardwareSystem.Ui
                 .Resolve<frmPurchaseProductForm>();
 
         }
-        public static frmPurchasePayments OpenPurchasePayments(int purchaseID)
+        public static frmPurchasePayments OpenPurchasePayments(int purchaseID, DateTime purchaseDate)
         {
             return UnityConfig
                 .Register()
-                .RegisterType<frmPurchasePayments>(new InjectionConstructor(new object[] { new PurchaseService(), new PaymentMethodService(), purchaseID }))
+                .RegisterType<frmPurchasePayments>(new InjectionConstructor(new object[] { new PurchaseService(), new PaymentMethodService(), purchaseID,purchaseDate }))
                 .Resolve<frmPurchasePayments>();
 
         }

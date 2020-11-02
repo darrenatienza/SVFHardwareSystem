@@ -19,14 +19,17 @@ namespace SVFHardwareSystem.Services
     {
         public override async Task AddAsync(PurchaseModel model)
         {
-
-            if (model.SupplierID == 0)
+            using (var db = new DataContext())
+            {
+                if (model.SupplierID == 0)
             {
                 throw new InvalidFieldException("Supplier");
             }
-            model.SIDR = model.SIDR == null || model.SIDR == "" ? throw new InvalidFieldException("SIDR") : model.SIDR;
-            using (var db = new DataContext())
-            {
+            
+                var existingPurchase = db.Purchases.FirstOrDefaultAsync(x => x.SupplierID == model.SupplierID && x.SIDR == model.SIDR);
+
+                model.SIDR = existingPurchase != null ? throw new RecordAlreadyExistsException("SIDR") : model.SIDR;
+
                 var purchase = db.Purchases.FirstOrDefault(x => DbFunctions.TruncateTime(x.DatePurchase) == DbFunctions.TruncateTime(model.DatePurchase) && x.SupplierID == model.SupplierID);
                 if (purchase != null)
                 {
@@ -50,12 +53,18 @@ namespace SVFHardwareSystem.Services
                     //no duplicate products for every purchases
                     throw new RecordAlreadyExistsException(string.Format("Product {0}", existProductOnPurchase.Product.Name));
                 }
+                var product = db.Products.Find(model.ProductID);
                 if (model.IsQuantityUploaded)
                 {
                     // add the quantity to current product quantity if isquantityuploaded is true
-                    var product = db.Products.Find(model.ProductID);
+                    
                     product.Quantity += model.Quantity;
                     db.Entry(product).State = EntityState.Modified;
+                }
+                
+                if (model.Price >= product.Price)
+                {
+                    throw new InvalidFieldException2("Purchase Unit Price must be less than product price"); 
                 }
                 var purchaseProduct = Mapping.Mapper.Map<PurchaseProduct>(model);
                 
@@ -232,7 +241,14 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
+                var purchase = db.Purchases.Find(model.PurchaseID);
+
                 CheckDecimalIfLessThanOrEqual(model.Amount, 0, "Amount");
+                //payment date must be greater than purchase date.
+                if (model.PaymentDate.Date < purchase.DatePurchase.Date)
+                {
+                    throw new InvalidFieldException2("Payment Date must be greater than Purchase Date");
+                }
 
                 var paymentMethod = db.PaymentMethods.FirstOrDefault(x => x.PaymentMethodID == model.PaymentMethodID);
 
@@ -242,6 +258,7 @@ namespace SVFHardwareSystem.Services
                 {
                     throw new InvalidFieldException("Check Number");
                 }
+
                 var total = GetPurchaseProducts(model.PurchaseID).Sum(r => r.Total);
                 var totalPayment = GetAllPurchasePayments(model.PurchaseID).Sum(r => r.Amount);
                 var balance = total - totalPayment - model.Amount;
@@ -252,7 +269,7 @@ namespace SVFHardwareSystem.Services
                 // for fully paid set isfullypaid to true
                 if (balance == 0)
                 {
-                    var purchase = db.Purchases.Find(model.PurchaseID);
+                    
 
                     purchase.IsFullyPaid = true;
                     db.Entry(purchase).State = EntityState.Modified;
@@ -371,7 +388,21 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        
-
+        public async Task<int> GeneratedNewPurchaseID(int supplierID)
+        {
+            using (var db = new DataContext())
+            {
+                var purchase = new Purchase();
+                purchase.CreateTimeStamp = DateTime.Now;
+                purchase.DatePurchase = DateTime.Now;
+                purchase.IsFullyPaid = false;
+                purchase.Remarks = "";
+                purchase.SIDR = "";
+                purchase.SupplierID = supplierID;
+                db.Purchases.Add(purchase);
+                await db.SaveChangesAsync();
+                return purchase.PurchaseID;
+            }
+        }
     }
 }

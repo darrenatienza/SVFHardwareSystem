@@ -34,6 +34,7 @@ namespace SVFHardwareSystem.Queries
         public virtual DbSet<PurchaseSaleInventory> PurchaseSaleInventories { get; set; }
 
         public virtual DbSet<ProductInventory> ProductInventories { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
     }
 }

@@ -118,6 +118,7 @@
             this.Controls.Add(this.metroPanel1);
             this.Name = "frmProductInventoryReport";
             this.Text = "Purchase Product Inventory Report";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmProductMonthlyReport_Load);
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();

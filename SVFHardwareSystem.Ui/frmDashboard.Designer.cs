@@ -230,7 +230,7 @@
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.SelectedIndex = 2;
             this.metroTabControl1.Size = new System.Drawing.Size(1021, 498);
             this.metroTabControl1.TabIndex = 12;
             this.metroTabControl1.UseSelectable = true;
@@ -326,6 +326,7 @@
             this.Controls.Add(this.metroTabControl1);
             this.Name = "frmDashboard";
             this.Text = "Dashboard";
+            this.Load += new System.EventHandler(this.frmDashboard_Load);
             this.metroTabControl1.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
             this.metroTabPage2.ResumeLayout(false);

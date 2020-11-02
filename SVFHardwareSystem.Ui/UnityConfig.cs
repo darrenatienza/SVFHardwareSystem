@@ -1,5 +1,6 @@
 ﻿using SVFHardwareSystem.Services;
 using SVFHardwareSystem.Services.Interfaces;
+using SVFHardwareSystem.Ui.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,8 @@ namespace SVFHardwareSystem.Ui
             container.RegisterType<IProductInventoryService, ProductInventoryService>();
             container.RegisterType<ICustomerReceivableService, CustomerReceivableService>();
             container.RegisterType<ISalePaymentService, SalePaymentService>();
+            container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IAuthenticationService, AuthenticationService>();
             return container;
         }
     }

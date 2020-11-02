@@ -78,7 +78,7 @@
 
 
 
-           
+            
 
             #region Add Products
             var products = new Dictionary<string, Product>
@@ -91,6 +91,18 @@
             };
             foreach (var product in products.Values)
                 context.Products.AddOrUpdate(t => t.ProductID, product);
+            #endregion
+
+            #region Add Users
+            var users = new Dictionary<string, User>
+            {
+                //Users Lookup
+                {"1", new User {UserID = 1, UserName = "Admin", Password = "YWRtaW4="}},
+                {"2", new User {UserID = 2, UserName = "User", Password = "dXNlcg=="}},
+
+            };
+            foreach (var user in users.Values)
+                context.Users.AddOrUpdate(t => t.UserID, user);
             #endregion
         }
     }

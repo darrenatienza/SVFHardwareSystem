@@ -147,6 +147,7 @@
             this.Controls.Add(this.metroPanel1);
             this.Name = "frmPayables";
             this.Text = "Payables";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmPayables_Load);
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();

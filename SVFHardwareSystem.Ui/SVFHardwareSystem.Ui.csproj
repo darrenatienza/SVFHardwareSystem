@@ -182,11 +182,11 @@
     <Compile Include="frmProducts.Designer.cs">
       <DependentUpon>frmProducts.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSaleProductInventory.cs">
+    <Compile Include="frmProductSale.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSaleProductInventory.Designer.cs">
-      <DependentUpon>frmSaleProductInventory.cs</DependentUpon>
+    <Compile Include="frmProductSale.Designer.cs">
+      <DependentUpon>frmProductSale.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPurchasePayments.cs">
       <SubType>Form</SubType>
@@ -254,6 +254,8 @@
     <Compile Include="frmSuppliers.Designer.cs">
       <DependentUpon>frmSuppliers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\AuthenticationService.cs" />
+    <Compile Include="Interfaces\IAuthenticationService.cs" />
     <Compile Include="Misc\ItemX.cs" />
     <Compile Include="frmPurchaseProductInventoryReport.cs">
       <SubType>Form</SubType>
@@ -333,8 +335,8 @@
     <EmbeddedResource Include="frmSaleForm.resx">
       <DependentUpon>frmSaleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSaleProductInventory.resx">
-      <DependentUpon>frmSaleProductInventory.cs</DependentUpon>
+    <EmbeddedResource Include="frmProductSale.resx">
+      <DependentUpon>frmProductSale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDailySales.resx">
       <DependentUpon>frmDailySales.cs</DependentUpon>

@@ -4,6 +4,7 @@ using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.Extensions;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
+using SVFHardwareSystem.Ui.Extensions;
 using SVFHardwareSystem.Ui.Misc;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ namespace SVFHardwareSystem.Ui
             InitializeComponent();
             _supplierService = supplierService;
             _purchaseService = purchaseService;
+           
         }
 
         private void frmPurchases_Load(object sender, EventArgs e)
@@ -50,7 +52,21 @@ namespace SVFHardwareSystem.Ui
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            GenerateNewPurchase();
+            _purchaseID = 0;
+            _purchaseProductID = 0;
+            txtSIDR.Text = "";
+            dtDatePurchase.Value = DateTime.Now;
+            txtRemarks.Text = "";
+        }
+
+        private async Task GenerateNewPurchaseID()
+        {
+            _purchaseID = await _purchaseService.GeneratedNewPurchaseID(_supplierID);
+        }
+
+        private async Task DeletePurchaseIDGeneration()
+        {
+            await _purchaseService.RemoveAsync(_purchaseID);
         }
 
         private async void GenerateNewPurchase()
@@ -98,8 +114,19 @@ namespace SVFHardwareSystem.Ui
                 purchaseModel.Remarks = txtRemarks.Text;
                 purchaseModel.SIDR = txtSIDR.Text;
                 purchaseModel.SupplierID = _supplierID;
-                await _purchaseService.EditAsync(_purchaseID, purchaseModel);
+                if (_purchaseID == 0)
+                {
+                    await _purchaseService.AddAsync(purchaseModel);
+                }
+                else
+                {
+                    await _purchaseService.EditAsync(_purchaseID, purchaseModel);
+                }
+                
                 MetroMessageBox.Show(this, "Changes has been saved.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                await LoadPurchaseDates();
+                await LoadPurchaseProducts();
+
             }
             catch (CustomBaseException ex)
             {
@@ -119,7 +146,8 @@ namespace SVFHardwareSystem.Ui
 
         private void ViewPayments()
         {
-            FormHandler.OpenPurchasePayments(_purchaseID).ShowDialog();
+            var purchaseDate = dtDatePurchase.Value;
+            FormHandler.OpenPurchasePayments(_purchaseID,purchaseDate).ShowDialog();
         }
 
         private void dtDatePurchase_ValueChanged(object sender, EventArgs e)
@@ -127,10 +155,11 @@ namespace SVFHardwareSystem.Ui
 
         }
 
-        private void cboSupplier_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cboSupplier_SelectedIndexChanged(object sender, EventArgs e)
         {
             _supplierID = ((ItemX)cboSupplier.SelectedItem).Key.ToInt();
-            LoadPurchaseDates();
+           await LoadPurchaseDates();
+            gridPurchaseProduct.Rows.Clear();
 
         }
 
@@ -152,10 +181,14 @@ namespace SVFHardwareSystem.Ui
 
         private void gridPurchaseDate_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            
         }
+        protected override async void OnFormClosed(FormClosedEventArgs e)
+        {
 
-        private async void LoadPurchaseProducts()
+            base.OnFormClosed(e);
+        }
+        private async Task LoadPurchaseProducts()
         {
             try
             {
@@ -183,6 +216,7 @@ namespace SVFHardwareSystem.Ui
 
                     DataGridViewCheckBoxCell chk = grid.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
                     chk.ReadOnly = true;
+                    
                     if (item.IsQuantityUploaded)
                     {
 
@@ -195,6 +229,7 @@ namespace SVFHardwareSystem.Ui
                     rowIndex++; // increment for proceeding to new row;
                 }
 
+                lblTotal.Text = purchases.Sum(x => x.Total).ToCurrencyFormat();
 
             }
             catch (Exception ex)
@@ -216,7 +251,7 @@ namespace SVFHardwareSystem.Ui
 
             }
         }
-        private async void LoadPurchaseDates()
+        private async Task LoadPurchaseDates()
         {
             try
             {
@@ -347,6 +382,11 @@ namespace SVFHardwareSystem.Ui
                 // other exceptions
                 MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

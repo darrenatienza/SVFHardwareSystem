@@ -1,6 +1,6 @@
 ﻿namespace SVFHardwareSystem.Ui
 {
-    partial class frmSaleProductInventory
+    partial class frmProductSale
     {
         /// <summary>
         /// Required designer variable.
@@ -122,15 +122,16 @@
             this.metroLabel1.TabIndex = 2;
             this.metroLabel1.Text = "Date";
             // 
-            // frmSaleProductMonthlyInventory
+            // frmProductSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.reportViewer1);
             this.Controls.Add(this.metroPanel1);
-            this.Name = "frmSaleProductMonthlyInventory";
-            this.Text = "Sales Product Inventory";
+            this.Name = "frmProductSale";
+            this.Text = "Product Sales";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmSaleProductMonthlyInventory_Load);
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();

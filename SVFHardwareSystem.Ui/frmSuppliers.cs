@@ -136,6 +136,11 @@ namespace SVFHardwareSystem.Ui
 
         private void gridCustomers_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+           
+        }
+
+        private void gridSupplier_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
             var grid = gridSupplier;
 
             if (grid.SelectedRows.Count > 0)
