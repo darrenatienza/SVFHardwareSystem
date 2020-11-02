@@ -233,5 +233,83 @@ namespace SVFHardwareSystem.Services
                 return models;
             }
         }
+
+        public async Task<IList<SalesModel>> GetSales(DateTime date, string criteria)
+        {
+            using (var db = new DataContext())
+            {
+
+
+                var postransactions = await db.Sales.Include(x => x.SaleProducts).Where(x => DbFunctions.TruncateTime(x.SaleDate) == DbFunctions.TruncateTime(date)
+              
+                && (x.Cost.Contains(criteria) || x.SIDR.Contains(criteria))
+                && (x.IsFinished)).ToListAsync();
+
+                var sales = new List<SalesModel>();
+                foreach (var item in postransactions)
+                {
+                    var sale = Mapping.Mapper.Map<SalesModel>(item);
+                    // this is the total amout of payment and being subtracted for every product on this transaction
+                    var amountPaidOnCash = _saleService.GetTotalCashOnlyAmount(item.SaleID);
+
+                    // this is the total amout of payment and being subtracted for every product on this transaction
+                    var amountCashOnly = _saleService.GetTotalCashOnlyAmount(item.SaleID);
+
+
+                    var receivablePayment = _saleService.GetTotalReceivablePayment(item.SaleID);
+
+                    var _salesProducts = Mapping.Mapper.Map<List<SalesProductModel>>(item.SaleProducts);
+                    // cash debit and receivable debit computation
+                    foreach (var salesProduct in _salesProducts)
+                    {
+                        //sales debit and cash credit computation
+
+                        // compute the remaining quantity by subtracting total quantity purchase and quantity cancel
+                        // get the remaining quantity amount by subtracting the product price and the remaining quantity
+                        // get the cancel amount by subtracting product price to quantity cancel
+                        // the cancel amount will be the SALE Debit And CASH Debit because these are the amount that will be
+                        // given back to the customer
+                        var remainingQuantity = salesProduct.Quantity - salesProduct.QuantityToCancel;
+                        decimal remainingQuantityAmount = salesProduct.Price * remainingQuantity;
+                        decimal cancelAmount = salesProduct.Price * salesProduct.QuantityToCancel;
+                        salesProduct.SaleDebit = cancelAmount;
+                        salesProduct.CashCredit = cancelAmount;
+                        //subtract first the amount paid on cash (first payment)
+                        amountPaidOnCash -= remainingQuantityAmount;
+                        if (amountPaidOnCash >= 0)
+                        {
+                            salesProduct.CashDebit = remainingQuantityAmount;
+                        }
+
+                        else
+                        {
+                            //then subtract the amount paid on receivables
+                            receivablePayment -= Math.Abs(amountPaidOnCash);
+                            if (receivablePayment >= 0)
+                            {
+                                salesProduct.ReceivablesCredit = Math.Abs(amountPaidOnCash);
+                                salesProduct.CashDebit = remainingQuantityAmount - salesProduct.ReceivablesCredit;
+                            }
+                            else
+                            {
+                                //if negative credit, convert the negative to positive, put this as receivable credit
+                                salesProduct.ReceivableDebit = Math.Abs(receivablePayment);
+                                //get portion of cash debit paid
+                                salesProduct.CashDebit = remainingQuantityAmount - salesProduct.ReceivableDebit;
+                            }
+
+                            amountPaidOnCash = 0; // set to zero to avoid wrong computation for later amount
+
+
+
+                        }
+                        sale.SalesProducts.Add(salesProduct);
+                    }
+                    sales.Add(sale);
+                }
+                // order sales according on update time
+                return sales;
+            }
+        }
     }
 }

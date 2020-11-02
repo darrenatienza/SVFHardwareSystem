@@ -18,5 +18,6 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// <param name="change"></param>
         [Obsolete("This method has been move to PaymentService")]
         void Pay(int posTransactionID, decimal amountTendered, decimal total);
+        Task<decimal> GetReceivablePaymentAmount(DateTime date);
     }
 }

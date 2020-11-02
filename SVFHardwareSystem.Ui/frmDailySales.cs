@@ -19,31 +19,36 @@ namespace SVFHardwareSystem.Ui
     public partial class frmDailySales : MetroForm
     {
         private ISalesService _salesService;
+        private ISalePaymentService _salePaymentService;
 
-        public frmDailySales(ISalesService salesService)
+        public frmDailySales(ISalesService salesService,ISalePaymentService salePaymentService)
         {
             InitializeComponent();
             this.MinimizeBox = false;
             this.MaximizeBox = false;
             this.Resizable = false;
             _salesService = salesService;
+            _salePaymentService = salePaymentService;
         }
 
-        private void frmSales_Load(object sender, EventArgs e)
+        private async void frmSales_Load(object sender, EventArgs e)
         {
-            LoadSales();
+            await LoadSales();
         }
 
-        private void LoadSales()
+        private async Task LoadSales()
         {
             try
             {
-                var from = dtFrom.Value;
-                var to = dtTo.Value;
+                // delay to load the ui
+                await Task.Delay(100);
+
+                var date = dtDate.Value;
+               
                 var criteria = txtCriteria.Text;
-                var sales = _salesService.GetSales(from, to, criteria);
+                var sales = await _salesService.GetSales(date,criteria);
 
-
+                var recievablePaymentAmount = await _salePaymentService.GetReceivablePaymentAmount(date.Date);
                 var ds = new reports();
                 DataTable t = ds.Tables["SalesReport"];
                 DataRow r;
@@ -113,10 +118,32 @@ namespace SVFHardwareSystem.Ui
                     t.Rows.Add(r);
                 }
 
-
-                var __dateRange = new ReportParameter("DateRange", string.Format("{0} to {1}", from.ToString("MMMM dd,yyyy"),to.ToString("MMMM dd,yyyy")));
-
-                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { __dateRange });
+                var cashAmount = sales.Sum(x => x.TotalCashDebit);
+                var saleAmount = sales.Sum(x => x.TotalSaleCredit);
+                var recievableSale = sales.Sum(x => x.TotalReceivableDebit);
+                var totalCash = (recievablePaymentAmount + cashAmount);
+                var totalSale = totalCash + recievableSale;
+                var __dateRange = new ReportParameter("DateRange", string.Format("Date: {0}", date.ToString("MMMM dd,yyyy")));
+                // total purchase by customer per day
+                var __totalPurchaseSale = new ReportParameter("TotalPurchaseSale", saleAmount.ToCurrencyFormat());
+                // total cash payment paid bay customer per day
+                var __cash = new ReportParameter("CashPayment", cashAmount.ToString() );
+                // total receivable payment by customer by that day
+                var __receivablePayment = new ReportParameter("ReceivablePayment",recievablePaymentAmount.ToCurrencyFormat());
+                // cash + receivablePayment
+                var __totalCash = new ReportParameter("TotalCash", totalCash.ToCurrencyFormat());
+                // unpaid by customer
+                var __receivable = new ReportParameter("ReceivableSale", recievableSale.ToCurrencyFormat());
+                // totalcash + receivable sale
+                var __totalSale = new ReportParameter("TotalSale", totalSale.ToCurrencyFormat() );
+                
+                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { __dateRange,
+                    __totalPurchaseSale,
+                    __cash,
+                    __receivablePayment,
+                    
+                    __receivable,
+                    __totalSale});
                 reportViewer1.LocalReport.DataSources.Clear();
                     ReportDataSource rds = new ReportDataSource("SalesReport", t);
 

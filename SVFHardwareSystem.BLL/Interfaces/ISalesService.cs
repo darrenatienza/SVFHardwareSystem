@@ -17,5 +17,6 @@ namespace SVFHardwareSystem.Services.Interfaces
         Task<SalesMonthlyTotalModel> GetSalesMonthlyTotal(int month, int year);
 
         Task<List<SaleProductInventoryModel>> GetAllProductSaleInventoryByMonthYear(int month, int year);
+        Task<IList<SalesModel>> GetSales(DateTime date, string criteria);
     }
 }

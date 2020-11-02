@@ -16,6 +16,15 @@ namespace SVFHardwareSystem.Services
     {
         public SalePaymentService() { }
 
+        public async Task<decimal> GetReceivablePaymentAmount(DateTime date)
+        {
+            using (var db = new DataContext())
+            {
+                var payments = await db.SalePayments.Where(x => x.IsReceivablePayment == true && DbFunctions.TruncateTime(x.PaymentDate) == DbFunctions.TruncateTime(date)).ToListAsync();
+                return payments.Count > 0 ? payments.Sum(x => x.Amount) : 0;
+            }
+        }
+
         public void Pay(int posTransactionID, decimal amountTendered, decimal total)
         {
             using (var db = new DataContext())

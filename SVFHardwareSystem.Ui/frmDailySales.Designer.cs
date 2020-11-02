@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.txtCriteria = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-            this.dtFrom = new MetroFramework.Controls.MetroDateTime();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.dtTo = new MetroFramework.Controls.MetroDateTime();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.dtDate = new MetroFramework.Controls.MetroDateTime();
+            this.dtTo = new MetroFramework.Controls.MetroDateTime();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -47,7 +47,7 @@
             this.metroPanel1.Controls.Add(this.metroLabel4);
             this.metroPanel1.Controls.Add(this.metroLabel2);
             this.metroPanel1.Controls.Add(this.metroLabel3);
-            this.metroPanel1.Controls.Add(this.dtFrom);
+            this.metroPanel1.Controls.Add(this.dtDate);
             this.metroPanel1.Controls.Add(this.dtTo);
             this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.metroPanel1.HorizontalScrollbarBarColor = true;
@@ -62,19 +62,13 @@
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
-            // metroToolTip1
-            // 
-            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroToolTip1.StyleManager = null;
-            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
-            // 
             // txtCriteria
             // 
             // 
             // 
             // 
             this.txtCriteria.CustomButton.Image = global::SVFHardwareSystem.Ui.Properties.Resources.search;
-            this.txtCriteria.CustomButton.Location = new System.Drawing.Point(200, 1);
+            this.txtCriteria.CustomButton.Location = new System.Drawing.Point(170, 1);
             this.txtCriteria.CustomButton.Name = "";
             this.txtCriteria.CustomButton.Size = new System.Drawing.Size(27, 27);
             this.txtCriteria.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -112,15 +106,15 @@
             this.metroLabel4.Text = "Criteria";
             this.metroLabel4.UseCustomBackColor = true;
             // 
-            // dtFrom
+            // metroLabel2
             // 
-            this.dtFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtFrom.Location = new System.Drawing.Point(56, 6);
-            this.dtFrom.MinimumSize = new System.Drawing.Size(0, 29);
-            this.dtFrom.Name = "dtFrom";
-            this.dtFrom.Size = new System.Drawing.Size(112, 29);
-            this.dtFrom.TabIndex = 2;
-            this.metroToolTip1.SetToolTip(this.dtFrom, "Date From");
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(9, 10);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(41, 19);
+            this.metroLabel2.TabIndex = 8;
+            this.metroLabel2.Text = "From";
+            this.metroLabel2.UseCustomBackColor = true;
             // 
             // metroLabel3
             // 
@@ -132,6 +126,16 @@
             this.metroLabel3.Text = "To";
             this.metroLabel3.UseCustomBackColor = true;
             // 
+            // dtDate
+            // 
+            this.dtDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtDate.Location = new System.Drawing.Point(56, 6);
+            this.dtDate.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dtDate.Name = "dtDate";
+            this.dtDate.Size = new System.Drawing.Size(112, 29);
+            this.dtDate.TabIndex = 2;
+            this.metroToolTip1.SetToolTip(this.dtDate, "Date From");
+            // 
             // dtTo
             // 
             this.dtTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
@@ -142,15 +146,11 @@
             this.dtTo.TabIndex = 3;
             this.metroToolTip1.SetToolTip(this.dtTo, "Date To");
             // 
-            // metroLabel2
+            // metroToolTip1
             // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(9, 10);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(41, 19);
-            this.metroLabel2.TabIndex = 8;
-            this.metroLabel2.Text = "From";
-            this.metroLabel2.UseCustomBackColor = true;
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // reportViewer1
             // 
@@ -162,14 +162,14 @@
             this.reportViewer1.Size = new System.Drawing.Size(927, 469);
             this.reportViewer1.TabIndex = 7;
             // 
-            // frmSalesReport
+            // frmDailySales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(967, 592);
             this.Controls.Add(this.reportViewer1);
             this.Controls.Add(this.metroPanel1);
-            this.Name = "frmSalesReport";
+            this.Name = "frmDailySales";
             this.Text = "Sales Report";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmSales_Load);
@@ -186,7 +186,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroLabel metroLabel3;
-        private MetroFramework.Controls.MetroDateTime dtFrom;
+        private MetroFramework.Controls.MetroDateTime dtDate;
         private MetroFramework.Controls.MetroDateTime dtTo;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
     }
