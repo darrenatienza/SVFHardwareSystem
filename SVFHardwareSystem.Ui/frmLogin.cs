@@ -1,6 +1,7 @@
 ﻿using MetroFramework;
 using MetroFramework.Forms;
 using SVFHardwareSystem.Services.Interfaces;
+using SVFHardwareSystem.Ui.Helpers;
 using SVFHardwareSystem.Ui.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -49,7 +50,7 @@ namespace SVFHardwareSystem.Ui
         {
             var userName = txtUserName.Text;
             var pass = txtPassword.Text;
-
+            lblwait.Visible = true;
             var user = await _userService.Get(userName);
             
             if (user != null)
@@ -57,6 +58,8 @@ namespace SVFHardwareSystem.Ui
                 var encrypPass = _authenticationService.EncodePasswordToBase64(pass);
                 if (user.Password == encrypPass)
                 {
+                    CurrentUser.UserID = user.UserID;
+                    CurrentUser.Name = user.UserName;
                     MetroMessageBox.Show(this, "Login success", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     IsLoginSuccess = true;
                     this.Close();
@@ -70,7 +73,8 @@ namespace SVFHardwareSystem.Ui
             {
                 MetroMessageBox.Show(this, "Invalid UserName or Password!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-           
+            lblwait.Visible = false;
+
         }
 
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)

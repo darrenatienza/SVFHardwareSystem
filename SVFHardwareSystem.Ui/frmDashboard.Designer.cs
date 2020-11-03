@@ -46,6 +46,9 @@
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
+            this.lblCurrentUser = new MetroFramework.Controls.MetroLabel();
+            this.btnUserForm = new System.Windows.Forms.Button();
+            this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -230,7 +233,7 @@
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 2;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(1021, 498);
             this.metroTabControl1.TabIndex = 12;
             this.metroTabControl1.UseSelectable = true;
@@ -318,14 +321,48 @@
             this.metroTabPage4.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage4.VerticalScrollbarSize = 10;
             // 
+            // lblCurrentUser
+            // 
+            this.lblCurrentUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCurrentUser.AutoSize = true;
+            this.lblCurrentUser.BackColor = System.Drawing.Color.Transparent;
+            this.lblCurrentUser.Location = new System.Drawing.Point(789, 16);
+            this.lblCurrentUser.Name = "lblCurrentUser";
+            this.lblCurrentUser.Size = new System.Drawing.Size(130, 19);
+            this.lblCurrentUser.TabIndex = 13;
+            this.lblCurrentUser.Text = "Current User: Admin";
+            // 
+            // btnUserForm
+            // 
+            this.btnUserForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUserForm.BackColor = System.Drawing.Color.Transparent;
+            this.btnUserForm.FlatAppearance.BorderSize = 0;
+            this.btnUserForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUserForm.Image = global::SVFHardwareSystem.Ui.Properties.Resources.gear_16;
+            this.btnUserForm.Location = new System.Drawing.Point(922, 13);
+            this.btnUserForm.Name = "btnUserForm";
+            this.btnUserForm.Size = new System.Drawing.Size(35, 24);
+            this.btnUserForm.TabIndex = 14;
+            this.metroToolTip1.SetToolTip(this.btnUserForm, "Manage Users");
+            this.btnUserForm.UseVisualStyleBackColor = false;
+            this.btnUserForm.Click += new System.EventHandler(this.btnUserForm_Click);
+            // 
+            // metroToolTip1
+            // 
+            this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroToolTip1.StyleManager = null;
+            this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
             // frmDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1061, 578);
+            this.Controls.Add(this.lblCurrentUser);
+            this.Controls.Add(this.btnUserForm);
             this.Controls.Add(this.metroTabControl1);
             this.Name = "frmDashboard";
-            this.Text = "Dashboard";
+            this.Text = "Dashboard - SVF Hardware Inventory System v1. Beta";
             this.Load += new System.EventHandler(this.frmDashboard_Load);
             this.metroTabControl1.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
@@ -333,6 +370,7 @@
             this.metroTabPage3.ResumeLayout(false);
             this.metroTabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -356,5 +394,8 @@
         private MetroFramework.Controls.MetroTabPage metroTabPage3;
         private MetroFramework.Controls.MetroTabPage metroTabPage4;
         private MetroFramework.Controls.MetroTile btnCustomerReceivables;
+        private MetroFramework.Controls.MetroLabel lblCurrentUser;
+        private System.Windows.Forms.Button btnUserForm;
+        private MetroFramework.Components.MetroToolTip metroToolTip1;
     }
 }

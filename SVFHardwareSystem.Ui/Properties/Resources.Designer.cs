@@ -103,6 +103,16 @@ namespace SVFHardwareSystem.Ui.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap gear_16 {
+            get {
+                object obj = ResourceManager.GetObject("gear-16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap money_64 {
             get {
                 object obj = ResourceManager.GetObject("money-64", resourceCulture);

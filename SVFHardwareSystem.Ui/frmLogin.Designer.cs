@@ -33,6 +33,7 @@
             this.txtPassword = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.txtUserName = new MetroFramework.Controls.MetroTextBox();
+            this.lblwait = new MetroFramework.Controls.MetroLabel();
             this.SuspendLayout();
             // 
             // btnLogin
@@ -126,11 +127,22 @@
             this.txtUserName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtUserName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
+            // lblwait
+            // 
+            this.lblwait.AutoSize = true;
+            this.lblwait.Location = new System.Drawing.Point(23, 195);
+            this.lblwait.Name = "lblwait";
+            this.lblwait.Size = new System.Drawing.Size(79, 19);
+            this.lblwait.TabIndex = 10;
+            this.lblwait.Text = "Please wait..";
+            this.lblwait.Visible = false;
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(285, 234);
+            this.Controls.Add(this.lblwait);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.txtPassword);
@@ -154,6 +166,7 @@
         private MetroFramework.Controls.MetroTextBox txtPassword;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroTextBox txtUserName;
+        private MetroFramework.Controls.MetroLabel lblwait;
     }
 }
 

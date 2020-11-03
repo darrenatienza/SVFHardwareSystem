@@ -254,6 +254,13 @@
     <Compile Include="frmSuppliers.Designer.cs">
       <DependentUpon>frmSuppliers.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserForm.Designer.cs">
+      <DependentUpon>frmUserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\CurrentUser.cs" />
     <Compile Include="Interfaces\AuthenticationService.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />
     <Compile Include="Misc\ItemX.cs" />
@@ -358,6 +365,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPurchaseProductInventoryReport.resx">
       <DependentUpon>frmPurchaseProductInventoryReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserForm.resx">
+      <DependentUpon>frmUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -478,6 +488,7 @@
     <None Include="Resources\search-3-16 %281%29.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\gear-16.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x86\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

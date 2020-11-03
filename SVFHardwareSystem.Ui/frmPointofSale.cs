@@ -76,7 +76,7 @@ namespace SVFHardwareSystem.Ui
                 txtReceivable.Text = "0.00"; // all unfinished transactions have 0.00 value
                 _isFinishedSale = previousPOSTransaction.IsFinished;
                 _isFullyPaid = previousPOSTransaction.IsFullyPaid;
-                txtTotal.Text = previousPOSTransaction.TotalAmount.ToString();
+                txtTotal.Text = previousPOSTransaction.TotalAmount.ToCurrencyFormat();
                 await LoadProductsOnTransaction();
             }
             catch (KeyNotFoundException ex)

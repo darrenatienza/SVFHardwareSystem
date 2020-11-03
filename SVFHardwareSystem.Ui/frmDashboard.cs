@@ -1,4 +1,5 @@
 ﻿using MetroFramework.Forms;
+using SVFHardwareSystem.Ui.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -86,11 +87,19 @@ namespace SVFHardwareSystem.Ui
         private void frmDashboard_Load(object sender, EventArgs e)
         {
             var login = FormHandler.OpenLogin();
+            
           login.ShowDialog();
+            lblCurrentUser.Text = "Current User: " + CurrentUser.Name;
             if (!login.IsLoginSuccess)
             {
                 Application.Exit();
             }
+            this.WindowState = FormWindowState.Maximized;
+        }
+
+        private void btnUserForm_Click(object sender, EventArgs e)
+        {
+            FormHandler.OpenUserForm().ShowDialog();
         }
     }
 }
