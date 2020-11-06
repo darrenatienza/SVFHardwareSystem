@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.spinnerLoading = new MetroFramework.Controls.MetroProgressSpinner();
             this.btnSave = new MetroFramework.Controls.MetroButton();
             this.radioPurchase = new MetroFramework.Controls.MetroRadioButton();
             this.radioBeginning = new MetroFramework.Controls.MetroRadioButton();
@@ -37,13 +38,13 @@
             this.dtDate = new MetroFramework.Controls.MetroDateTime();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.spinnerLoading = new MetroFramework.Controls.MetroProgressSpinner();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroPanel1
             // 
-            this.metroPanel1.Controls.Add(this.spinnerLoading);
+            this.metroPanel1.Controls.Add(this.metroLabel2);
             this.metroPanel1.Controls.Add(this.btnSave);
             this.metroPanel1.Controls.Add(this.radioPurchase);
             this.metroPanel1.Controls.Add(this.radioBeginning);
@@ -62,6 +63,18 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // spinnerLoading
+            // 
+            this.spinnerLoading.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.spinnerLoading.Location = new System.Drawing.Point(392, 244);
+            this.spinnerLoading.Maximum = 100;
+            this.spinnerLoading.Name = "spinnerLoading";
+            this.spinnerLoading.Size = new System.Drawing.Size(24, 24);
+            this.spinnerLoading.TabIndex = 8;
+            this.spinnerLoading.UseSelectable = true;
+            this.spinnerLoading.Value = 65;
+            this.spinnerLoading.Visible = false;
             // 
             // btnSave
             // 
@@ -145,28 +158,29 @@
             this.reportViewer1.Size = new System.Drawing.Size(760, 329);
             this.reportViewer1.TabIndex = 5;
             // 
-            // spinnerLoading
+            // metroLabel2
             // 
-            this.spinnerLoading.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.spinnerLoading.Location = new System.Drawing.Point(732, 12);
-            this.spinnerLoading.Maximum = 100;
-            this.spinnerLoading.Name = "spinnerLoading";
-            this.spinnerLoading.Size = new System.Drawing.Size(16, 16);
-            this.spinnerLoading.TabIndex = 8;
-            this.spinnerLoading.UseSelectable = true;
-            this.spinnerLoading.Value = 65;
-            this.spinnerLoading.Visible = false;
+            this.metroLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel2.Location = new System.Drawing.Point(572, 12);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(185, 15);
+            this.metroLabel2.Style = MetroFramework.MetroColorStyle.Red;
+            this.metroLabel2.TabIndex = 9;
+            this.metroLabel2.Text = "Note: Negative Amounts are profit.";
+            this.metroLabel2.UseStyleColors = true;
             // 
             // frmProductInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.spinnerLoading);
             this.Controls.Add(this.reportViewer1);
             this.Controls.Add(this.metroPanel1);
             this.Name = "frmProductInventory";
             this.Text = "Purchase and Sales";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmProductInventory_Load);
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
@@ -186,5 +200,6 @@
         private MetroFramework.Controls.MetroRadioButton radioEnding;
         private MetroFramework.Controls.MetroButton btnSave;
         private MetroFramework.Controls.MetroProgressSpinner spinnerLoading;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
     }
 }

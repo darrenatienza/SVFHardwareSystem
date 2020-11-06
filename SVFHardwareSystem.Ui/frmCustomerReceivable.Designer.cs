@@ -35,12 +35,14 @@
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.cboCustomers = new MetroFramework.Controls.MetroComboBox();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel1.SuspendLayout();
             this.pnlDate.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroPanel1
             // 
+            this.metroPanel1.Controls.Add(this.metroLabel3);
             this.metroPanel1.Controls.Add(this.pnlDate);
             this.metroPanel1.Controls.Add(this.metroLabel1);
             this.metroPanel1.Controls.Add(this.cboCustomers);
@@ -130,6 +132,20 @@
             this.reportViewer1.Size = new System.Drawing.Size(1021, 462);
             this.reportViewer1.TabIndex = 2;
             // 
+            // metroLabel3
+            // 
+            this.metroLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel3.Location = new System.Drawing.Point(748, 9);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(270, 15);
+            this.metroLabel3.Style = MetroFramework.MetroColorStyle.Red;
+            this.metroLabel3.TabIndex = 13;
+            this.metroLabel3.Text = "Note: Negative Balances are changed to costumer";
+            this.metroLabel3.UseStyleColors = true;
+            // 
             // frmCustomerReceivable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -158,5 +174,6 @@
         private MetroFramework.Controls.MetroDateTime dtDate;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroPanel pnlDate;
+        private MetroFramework.Controls.MetroLabel metroLabel3;
     }
 }

@@ -49,6 +49,7 @@
             this.lblCurrentUser = new MetroFramework.Controls.MetroLabel();
             this.btnUserForm = new System.Windows.Forms.Button();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -240,6 +241,7 @@
             // 
             // metroTabPage1
             // 
+            this.metroTabPage1.Controls.Add(this.metroLabel1);
             this.metroTabPage1.Controls.Add(this.btnCustomerReceivables);
             this.metroTabPage1.Controls.Add(this.btnSalesMontlyReport);
             this.metroTabPage1.Controls.Add(this.btnProductSale);
@@ -353,6 +355,22 @@
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
+            // metroLabel1
+            // 
+            this.metroLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel1.Location = new System.Drawing.Point(-4, 381);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(190, 75);
+            this.metroLabel1.Style = MetroFramework.MetroColorStyle.Red;
+            this.metroLabel1.TabIndex = 14;
+            this.metroLabel1.Text = "This is a beta version of application.\r\nFor any bugs and misleading results,\r\nple" +
+    "ase screenshots those errors and\r\nplease inform the developer for fixes.\r\nThank " +
+    "you.";
+            this.metroLabel1.UseStyleColors = true;
+            // 
             // frmDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -366,6 +384,7 @@
             this.Load += new System.EventHandler(this.frmDashboard_Load);
             this.metroTabControl1.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
+            this.metroTabPage1.PerformLayout();
             this.metroTabPage2.ResumeLayout(false);
             this.metroTabPage3.ResumeLayout(false);
             this.metroTabPage4.ResumeLayout(false);
@@ -397,5 +416,6 @@
         private MetroFramework.Controls.MetroLabel lblCurrentUser;
         private System.Windows.Forms.Button btnUserForm;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
     }
 }

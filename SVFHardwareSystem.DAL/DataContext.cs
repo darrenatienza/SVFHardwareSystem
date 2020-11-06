@@ -11,7 +11,7 @@ namespace SVFHardwareSystem.Queries
 {
     public class DataContext :DbContext ,IDataContext
     {
-        public DataContext() : base("name=DataContext")
+        public DataContext() : base(string.Format("name={0}",ConnectionStringProvider.GetContext()))
         {
             Configuration.LazyLoadingEnabled = true;
         }

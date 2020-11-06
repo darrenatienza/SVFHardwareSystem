@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVFHardwareSystem.Services"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVFHardwareSystem.Queries", "SVFHardwareSystem.DAL\SVFHardwareSystem.Queries.csproj", "{44DDEC24-5AAE-44FB-9F05-4BF60138BAA5}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SVFHardware.Setup", "SVFHardware.Setup\SVFHardware.Setup.vdproj", "{7166890E-CA59-4336-88C1-07BA264020DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,8 @@ Global
 		{44DDEC24-5AAE-44FB-9F05-4BF60138BAA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44DDEC24-5AAE-44FB-9F05-4BF60138BAA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44DDEC24-5AAE-44FB-9F05-4BF60138BAA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7166890E-CA59-4336-88C1-07BA264020DF}.Debug|Any CPU.ActiveCfg = Debug
+		{7166890E-CA59-4336-88C1-07BA264020DF}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

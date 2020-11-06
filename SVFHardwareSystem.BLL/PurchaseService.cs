@@ -26,7 +26,7 @@ namespace SVFHardwareSystem.Services
                 throw new InvalidFieldException("Supplier");
             }
             
-                var existingPurchase = db.Purchases.FirstOrDefaultAsync(x => x.SupplierID == model.SupplierID && x.SIDR == model.SIDR);
+                var existingPurchase = await db.Purchases.FirstOrDefaultAsync(x => x.SupplierID == model.SupplierID && x.SIDR == model.SIDR);
 
                 model.SIDR = existingPurchase != null ? throw new RecordAlreadyExistsException("SIDR") : model.SIDR;
 

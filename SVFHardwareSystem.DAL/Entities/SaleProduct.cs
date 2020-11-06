@@ -27,10 +27,6 @@ namespace SVFHardwareSystem.DAL.Entities
         /// </summary>
         public bool IsToPay { get; set; }
 
-        /// <summary>
-        /// Indicates the time when the product transaction updated
-        /// </summary>
-        public DateTime UpdateTimeStamp { get; set; }
         public bool IsReplace { get; set; }
         public DateTime ReplaceDate { get; set; } = DateTime.Now;
         public string ReplaceReason { get; set; }

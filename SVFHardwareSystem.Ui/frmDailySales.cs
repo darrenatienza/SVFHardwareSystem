@@ -125,7 +125,7 @@ namespace SVFHardwareSystem.Ui
                 // total purchase by customer per day
                 var __totalPurchaseSale = new ReportParameter("TotalPurchaseSale", saleAmount.ToCurrencyFormat());
                 // total cash payment paid bay customer per day
-                var __cash = new ReportParameter("CashPayment", cashAmount.ToString() );
+                var __cash = new ReportParameter("CashPayment", cashAmount.ToCurrencyFormat());
                 // total receivable payment by customer by that day
                 var __receivablePayment = new ReportParameter("ReceivablePayment",recievablePaymentAmount.ToCurrencyFormat());
                 // cash + receivablePayment

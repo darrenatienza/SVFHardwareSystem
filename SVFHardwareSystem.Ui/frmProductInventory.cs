@@ -25,6 +25,9 @@ namespace SVFHardwareSystem.Ui
         public frmProductInventory(IProductInventoryService productInventoryService)
         {
             InitializeComponent();
+            //useful centering circular progressbar
+            this.WindowState = FormWindowState.Maximized;
+
             _productInventoryService = productInventoryService;
             radioBeginning.CheckedChanged += RadioBeginning_CheckedChanged;
             radioSale.CheckedChanged += RadioBeginning_CheckedChanged;
