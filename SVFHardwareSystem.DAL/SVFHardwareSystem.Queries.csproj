@@ -73,9 +73,9 @@
     <Compile Include="Entities\ProductInventory.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="IDataContext.cs" />
-    <Compile Include="Migrations\202011061419041_initial.cs" />
-    <Compile Include="Migrations\202011061419041_initial.designer.cs">
-      <DependentUpon>202011061419041_initial.cs</DependentUpon>
+    <Compile Include="Migrations\202011070543111_prod_initial.cs" />
+    <Compile Include="Migrations\202011070543111_prod_initial.designer.cs">
+      <DependentUpon>202011070543111_prod_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Misc\PaymentType.cs" />
@@ -86,8 +86,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011061419041_initial.resx">
-      <DependentUpon>202011061419041_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011070543111_prod_initial.resx">
+      <DependentUpon>202011070543111_prod_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

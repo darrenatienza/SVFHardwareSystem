@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.spinnerLoading = new MetroFramework.Controls.MetroProgressSpinner();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.btnSave = new MetroFramework.Controls.MetroButton();
             this.radioPurchase = new MetroFramework.Controls.MetroRadioButton();
             this.radioBeginning = new MetroFramework.Controls.MetroRadioButton();
@@ -37,8 +37,8 @@
             this.radioSale = new MetroFramework.Controls.MetroRadioButton();
             this.dtDate = new MetroFramework.Controls.MetroDateTime();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.spinnerLoading = new MetroFramework.Controls.MetroProgressSpinner();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,17 +64,18 @@
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
-            // spinnerLoading
+            // metroLabel2
             // 
-            this.spinnerLoading.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.spinnerLoading.Location = new System.Drawing.Point(392, 244);
-            this.spinnerLoading.Maximum = 100;
-            this.spinnerLoading.Name = "spinnerLoading";
-            this.spinnerLoading.Size = new System.Drawing.Size(24, 24);
-            this.spinnerLoading.TabIndex = 8;
-            this.spinnerLoading.UseSelectable = true;
-            this.spinnerLoading.Value = 65;
-            this.spinnerLoading.Visible = false;
+            this.metroLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel2.Location = new System.Drawing.Point(572, 12);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(185, 15);
+            this.metroLabel2.Style = MetroFramework.MetroColorStyle.Red;
+            this.metroLabel2.TabIndex = 9;
+            this.metroLabel2.Text = "Note: Negative Amounts are profit.";
+            this.metroLabel2.UseStyleColors = true;
             // 
             // btnSave
             // 
@@ -118,6 +119,7 @@
             this.radioEnding.TabIndex = 5;
             this.radioEnding.Text = "Ending";
             this.radioEnding.UseSelectable = true;
+            this.radioEnding.CheckedChanged += new System.EventHandler(this.radioEnding_CheckedChanged_1);
             // 
             // radioSale
             // 
@@ -148,6 +150,18 @@
             this.metroLabel1.TabIndex = 2;
             this.metroLabel1.Text = "Year";
             // 
+            // spinnerLoading
+            // 
+            this.spinnerLoading.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.spinnerLoading.Location = new System.Drawing.Point(392, 244);
+            this.spinnerLoading.Maximum = 100;
+            this.spinnerLoading.Name = "spinnerLoading";
+            this.spinnerLoading.Size = new System.Drawing.Size(24, 24);
+            this.spinnerLoading.TabIndex = 8;
+            this.spinnerLoading.UseSelectable = true;
+            this.spinnerLoading.Value = 65;
+            this.spinnerLoading.Visible = false;
+            // 
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -157,19 +171,6 @@
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.Size = new System.Drawing.Size(760, 329);
             this.reportViewer1.TabIndex = 5;
-            // 
-            // metroLabel2
-            // 
-            this.metroLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.metroLabel2.Location = new System.Drawing.Point(572, 12);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(185, 15);
-            this.metroLabel2.Style = MetroFramework.MetroColorStyle.Red;
-            this.metroLabel2.TabIndex = 9;
-            this.metroLabel2.Text = "Note: Negative Amounts are profit.";
-            this.metroLabel2.UseStyleColors = true;
             // 
             // frmProductInventory
             // 

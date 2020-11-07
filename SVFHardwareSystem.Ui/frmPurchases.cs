@@ -360,17 +360,17 @@ namespace SVFHardwareSystem.Ui
             }
         }
 
-        private void btnUploadQuantity_Click(object sender, EventArgs e)
+        private async void btnUploadQuantity_Click(object sender, EventArgs e)
         {
             try
             {
                 DialogResult d = MetroMessageBox.Show(this, "Are you sure you want to upload purchase product quantity to product inventory? \n" +
                     "If Yes, the purchase product quantity will be added to the current product inventry quantity \n" +
-                    "Removing the uploaded purchase product quantity will not be permitted in the future.", "Delete Purchase Product", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    "Removing the uploaded purchase product quantity will not be permitted in the future.", "Upload Purchase Product Quantity", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (d == DialogResult.Yes)
                 {
                     _purchaseService.UploadPurchaseQuantity(_purchaseProductID);
-                    LoadPurchaseProducts();
+                    await LoadPurchaseProducts();
                 }
             }
             catch (CustomBaseException ex)

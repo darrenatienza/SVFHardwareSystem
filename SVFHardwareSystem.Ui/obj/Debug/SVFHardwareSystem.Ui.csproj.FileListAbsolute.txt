@@ -53,7 +53,6 @@ C:\Users\User\Desktop\projects\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\
 C:\Users\User\Desktop\projects\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmPurchaseProductForm.resources
 C:\Users\User\Desktop\projects\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmPurchases.resources
 C:\Users\User\Desktop\projects\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmPurchaseSaleInventories.resources
-C:\Users\User\Desktop\projects\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmSaleProductInventory.resources
 C:\Users\User\Desktop\projects\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmSalesMonthlyReport.resources
 C:\Users\User\Desktop\projects\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmProductInventoryReport.resources
 C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\SqlServerTypes\x86\msvcr120.dll
@@ -235,3 +234,5 @@ C:\Users\User\Desktop\projects\SVFHardwareSystem\SVFHardwareSystem.Ui\bin\Debug\
 C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmDailySales.resources
 C:\Users\darre\source\repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmProductSale.resources
 C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmUserForm.resources
+C:\Users\User\Desktop\projects\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmProductSale.resources
+C:\Users\User\Desktop\projects\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmUserForm.resources

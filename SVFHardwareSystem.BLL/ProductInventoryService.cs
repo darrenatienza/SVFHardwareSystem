@@ -213,5 +213,17 @@ namespace SVFHardwareSystem.Services
 
             }
         }
+
+        public async Task SaveEndingInventoryAsync(IList<ProductInventoryModel> productInventories)
+        {
+            using (var db = new DataContext())
+            {
+                
+                var _productInventories = Mapping.Mapper.Map<IList<ProductInventory>>(productInventories);
+                db.ProductInventories.AddRange(_productInventories);
+                await db.SaveChangesAsync();
+
+            }
+        }
     }
 }

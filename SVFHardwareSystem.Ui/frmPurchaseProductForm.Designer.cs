@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.cboProduct = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.txtQuantity = new MetroFramework.Controls.MetroTextBox();
@@ -41,6 +42,8 @@
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.txtPrice = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+            this.txtTotal = new MetroFramework.Controls.MetroLabel();
+            this.tmrCompute = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // cboProduct
@@ -104,7 +107,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(334, 194);
+            this.btnSave.Location = new System.Drawing.Point(334, 201);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 4;
@@ -135,7 +138,7 @@
             // chkUploadQuantity
             // 
             this.chkUploadQuantity.AutoSize = true;
-            this.chkUploadQuantity.Location = new System.Drawing.Point(25, 194);
+            this.chkUploadQuantity.Location = new System.Drawing.Point(301, 63);
             this.chkUploadQuantity.Name = "chkUploadQuantity";
             this.chkUploadQuantity.Size = new System.Drawing.Size(110, 15);
             this.chkUploadQuantity.TabIndex = 7;
@@ -231,11 +234,28 @@
             this.metroLabel5.TabIndex = 10;
             this.metroLabel5.Text = "Unit";
             // 
+            // txtTotal
+            // 
+            this.txtTotal.AutoSize = true;
+            this.txtTotal.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.txtTotal.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.txtTotal.Location = new System.Drawing.Point(23, 199);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.Size = new System.Drawing.Size(89, 25);
+            this.txtTotal.TabIndex = 12;
+            this.txtTotal.Text = "Total: 0.0";
+            // 
+            // tmrCompute
+            // 
+            this.tmrCompute.Enabled = true;
+            this.tmrCompute.Tick += new System.EventHandler(this.tmrCompute_Tick);
+            // 
             // frmPurchaseProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 244);
+            this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.txtUnit);
             this.Controls.Add(this.metroLabel5);
             this.Controls.Add(this.metroLabel4);
@@ -271,5 +291,7 @@
         private MetroFramework.Controls.MetroTextBox txtPrice;
         private MetroFramework.Controls.MetroLabel metroLabel5;
         private MetroFramework.Controls.MetroTextBox txtUnit;
+        private MetroFramework.Controls.MetroLabel txtTotal;
+        private System.Windows.Forms.Timer tmrCompute;
     }
 }

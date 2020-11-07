@@ -9,6 +9,7 @@ namespace SVFHardwareSystem.Services.Interfaces
 {
     public interface ISupplierService : IService<SupplierModel>
     {
-        Task<IList<SupplierModel>> GetAll(string criteria);
+        Task<IList<SupplierModel>> GetAllAsync(string criteria);
+        
     }
 }

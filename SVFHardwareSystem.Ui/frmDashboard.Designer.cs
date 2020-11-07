@@ -42,6 +42,7 @@
             this.btnProductSale = new MetroFramework.Controls.MetroTile();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.btnCustomerReceivables = new MetroFramework.Controls.MetroTile();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
@@ -49,7 +50,6 @@
             this.lblCurrentUser = new MetroFramework.Controls.MetroLabel();
             this.btnUserForm = new System.Windows.Forms.Button();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -259,6 +259,23 @@
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 10;
             // 
+            // metroLabel1
+            // 
+            this.metroLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel1.Location = new System.Drawing.Point(-4, 381);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(190, 75);
+            this.metroLabel1.Style = MetroFramework.MetroColorStyle.Red;
+            this.metroLabel1.TabIndex = 14;
+            this.metroLabel1.Text = "This is a beta version of application.\r\nFor any bugs and misleading results,\r\nple" +
+    "ase screenshots those errors and\r\nplease inform the developer for fixes.\r\nThank " +
+    "you.";
+            this.metroLabel1.UseCustomBackColor = true;
+            this.metroLabel1.UseStyleColors = true;
+            // 
             // btnCustomerReceivables
             // 
             this.btnCustomerReceivables.ActiveControl = null;
@@ -354,22 +371,6 @@
             this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.metroLabel1.Location = new System.Drawing.Point(-4, 381);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(190, 75);
-            this.metroLabel1.Style = MetroFramework.MetroColorStyle.Red;
-            this.metroLabel1.TabIndex = 14;
-            this.metroLabel1.Text = "This is a beta version of application.\r\nFor any bugs and misleading results,\r\nple" +
-    "ase screenshots those errors and\r\nplease inform the developer for fixes.\r\nThank " +
-    "you.";
-            this.metroLabel1.UseStyleColors = true;
             // 
             // frmDashboard
             // 

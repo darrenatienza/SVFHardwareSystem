@@ -21,6 +21,7 @@ namespace SVFHardwareSystem.Ui
     public partial class frmProductInventory : MetroForm
     {
         private IProductInventoryService _productInventoryService;
+        private IList<ProductInventoryModel> _productInventories;
 
         public frmProductInventory(IProductInventoryService productInventoryService)
         {
@@ -85,11 +86,16 @@ namespace SVFHardwareSystem.Ui
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
+            await SaveProductInventory();
+        }
+
+        private async Task SaveProductInventory()
+        {
             try
             {
                 var year = dtDate.Value.Year;
-                await _productInventoryService.SaveEndingInventoryAsync(year);
-                MetroMessageBox.Show(this, "New Purchase and Sales of Products have been saved!", "Purchase and Sales Products", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await _productInventoryService.SaveEndingInventoryAsync(_productInventories);
+                MetroMessageBox.Show(this, "New Purchase and Sales of Products have been saved!", "Purchase and Sales Products", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (CustomBaseException ex)
             {
@@ -102,6 +108,7 @@ namespace SVFHardwareSystem.Ui
                 MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private async Task LoadBeginningInventories(int year)
         {
             try
@@ -146,10 +153,10 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                var productInventories = await _productInventoryService.GetEndingInventories(year);
+                _productInventories = await _productInventoryService.GetEndingInventories(year);
                 var reportTitle = "Ending Inventory";
                 var finalAmount = await _productInventoryService.GetEndingInventoryAmount(year);
-                LoadReport(year, finalAmount, productInventories, reportTitle);
+                LoadReport(year, finalAmount, _productInventories, reportTitle);
             }
             catch (CustomBaseException ex)
             {
@@ -231,6 +238,11 @@ namespace SVFHardwareSystem.Ui
 
                 MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void radioEnding_CheckedChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

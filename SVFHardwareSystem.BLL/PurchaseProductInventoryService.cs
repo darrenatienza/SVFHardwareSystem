@@ -153,7 +153,7 @@ namespace SVFHardwareSystem.Services
         {
             return await db.Products
                     .Where(x => x.PurchaseProducts
-                    .Where(y => y.Purchase.DatePurchase.Year == year && y.Purchase.DatePurchase.Month == month)
+                    .Where(y => y.Purchase.DatePurchase.Year == year && y.Purchase.DatePurchase.Month == month && y.IsQuantityUploaded == true)
                     .Count() > 0).ToListAsync();
         }
 
@@ -179,8 +179,8 @@ namespace SVFHardwareSystem.Services
         {
             return await db.Products
                     .Where(x => x.PurchaseProducts
-                    .Where(y => y.Purchase.DatePurchase.Year == year)
-
+                    .Where(y => y.Purchase.DatePurchase.Year == year && y.IsQuantityUploaded == true)
+                    
                     .Count() > 0).ToListAsync();
         }
         

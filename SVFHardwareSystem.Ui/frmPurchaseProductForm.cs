@@ -100,6 +100,7 @@ namespace SVFHardwareSystem.Ui
             try
             {
                 var suppliers = await _productService.GetAllByCategoryID(_categoryID);
+                cboProduct.Items.Clear();
                 foreach (var item in suppliers)
                 {
                     cboProduct.Items.Add(new ItemX(item.Name, item.ProductID.ToString()));
@@ -209,6 +210,13 @@ namespace SVFHardwareSystem.Ui
         private void SetProductID()
         {
             _productID = ((ItemX)cboProduct.SelectedItem).Key.ToInt();
+        }
+
+        private void tmrCompute_Tick(object sender, EventArgs e)
+        {
+            int quantity = txtQuantity.Text.ToInt();
+            decimal unitPrice = txtPrice.Text.ToDecimal();
+            txtTotal.Text =string.Format("Total: {0}", (quantity * unitPrice).ToCurrencyFormat());
         }
     }
 }

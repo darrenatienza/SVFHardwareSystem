@@ -15,10 +15,11 @@ namespace SVFHardwareSystem.Services.Interfaces
         public int ProductInventoryID { get; set; }
         public DateTime CreateTimeStamp { get; set; }
         public int ProductID { get; set; }
-        public string  Name { get; set; }
+        public string Name { get; set; }
         public string Unit { get; set; }
         public int Year { get; set; }
         public int Qty { get; set; }
+        public int Quantity { get { return Qty; } }
         public decimal UnitPrice
         {
             get => TotalAmount > 0 && Qty > 0 ? TotalAmount / Qty : 0;

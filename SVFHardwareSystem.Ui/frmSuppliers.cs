@@ -27,16 +27,17 @@ namespace SVFHardwareSystem.Ui
             _supplierService = supplierService;
         }
 
-        private void frmSuppliers_Load(object sender, EventArgs e)
+        private async void frmSuppliers_Load(object sender, EventArgs e)
         {
-            LoadSuppliers();
+            await LoadSuppliers();
 
         }
-        private async void LoadSuppliers()
+        private async Task LoadSuppliers()
         {
             try
             {
-                var customers = await _supplierService.GetAllAsync();
+                var criteria = txtSearch.Text;
+                var customers = await _supplierService.GetAllAsync(criteria);
                 int count = 0;
                 gridSupplier.Rows.Clear();
                 foreach (var item in customers)
@@ -62,32 +63,7 @@ namespace SVFHardwareSystem.Ui
 
         private async void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var criteria = txtSearch.Text;
-                var categories = await _supplierService.GetAll(criteria);
-                int count = 0;
-                gridSupplier.Rows.Clear();
-                foreach (var item in categories)
-                {
-                    count++;
-                    gridSupplier.Rows.Add(new string[] {
-                            item.SupplierID.ToString(),
-                            count.ToString(),
-                            item.Name,
-                            item.Address,
-                    item.ContactNumber});
-                }
-
-
-
-
-            }
-            catch (Exception ex)
-            {
-
-                MetroMessageBox.Show(this, ex.ToString());
-            }
+            await LoadSuppliers();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
