@@ -101,7 +101,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\FormatExtensions.cs" />
     <Compile Include="frmCustomerReceivable.cs">
       <SubType>Form</SubType>
     </Compile>

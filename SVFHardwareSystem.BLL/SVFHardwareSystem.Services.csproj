@@ -60,6 +60,7 @@
     <Compile Include="CustomerReceivableService.cs" />
     <Compile Include="Exceptions\InvalidFieldException2.cs" />
     <Compile Include="Exceptions\OverPaymentException.cs" />
+    <Compile Include="Extensions\FormatExtensions.cs" />
     <Compile Include="Interfaces\ICustomerReceivableService.cs" />
     <Compile Include="Interfaces\IProductInventoryService.cs" />
     <Compile Include="Interfaces\IPurchaseProductInventoryService.cs" />

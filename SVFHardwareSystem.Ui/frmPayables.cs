@@ -5,7 +5,6 @@ using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.Extensions;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
-using SVFHardwareSystem.Ui.Extensions;
 using SVFHardwareSystem.Ui.Misc;
 using SVFHardwareSystem.Ui.Reports;
 using System;

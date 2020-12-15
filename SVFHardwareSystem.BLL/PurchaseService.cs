@@ -3,6 +3,7 @@ using AutoMapper;
 using SVFHardwareSystem.DAL.Entities;
 using SVFHardwareSystem.Queries;
 using SVFHardwareSystem.Services.Exceptions;
+using SVFHardwareSystem.Services.Extensions;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
 using System;
@@ -64,7 +65,8 @@ namespace SVFHardwareSystem.Services
                 
                 if (model.Price >= product.Price)
                 {
-                    throw new InvalidFieldException2("Purchase Unit Price must be less than product price"); 
+                    throw new InvalidFieldException2(string.Format("Purchase Unit Price {1} must be less than product price {0}.", 
+                        product.Price.ToCurrencyFormat(), model.Price.ToString()));
                 }
                 var purchaseProduct = Mapping.Mapper.Map<PurchaseProduct>(model);
                 

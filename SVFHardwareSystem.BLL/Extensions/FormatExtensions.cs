@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SVFHardwareSystem.Ui.Extensions
+namespace SVFHardwareSystem.Services.Extensions
 {
     public static class FormatExtensions
     {
