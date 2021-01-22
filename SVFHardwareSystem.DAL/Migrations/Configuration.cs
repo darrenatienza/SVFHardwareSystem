@@ -22,8 +22,8 @@
             //  to avoid creating duplicate seed data.
 
             // add seed on debug configuration
-            #if (DEBUG)
-                #region Add Categories
+#if (DEBUG)
+            #region Add Categoriesad
                 var categories = new Dictionary<string, Category>
                 {
                     //Users Lookup
@@ -34,9 +34,9 @@
                 };
                 foreach (var item in categories.Values)
                     context.Categories.AddOrUpdate(t => t.CategoryID, item);
-                #endregion
+            #endregion
 
-                #region Add Supplier
+            #region Add Supplier
                 var suppliers = new Dictionary<string, Supplier>
                 {
                     //Users Lookup
@@ -47,11 +47,11 @@
                 };
                 foreach (var supplier in suppliers.Values)
                     context.Suppliers.AddOrUpdate(t => t.SupplierID, supplier);
-                #endregion
+            #endregion
 
 
 
-                #region Add Customers
+            #region Add Customers
                 var customers = new Dictionary<string, Customer>
                 {
                     //Users Lookup
@@ -62,9 +62,9 @@
                 };
                 foreach (var item in customers.Values)
                     context.Customers.AddOrUpdate(t => t.CustomerID, item);
-                #endregion
+            #endregion
 
-                #region Add Payment Methods
+            #region Add Payment Methods
                 var paymentMethods = new Dictionary<string, PaymentMethod>
                 {
                     //Users Lookup
@@ -75,9 +75,9 @@
                 };
                 foreach (var item in paymentMethods.Values)
                     context.PaymentMethods.AddOrUpdate(t => t.PaymentMethodID, item);
-                #endregion
+            #endregion
 
-                #region Add Products
+            #region Add Products
                 var products = new Dictionary<string, Product>
                 {
                     //Users Lookup
@@ -88,20 +88,20 @@
                 };
                 foreach (var product in products.Values)
                     context.Products.AddOrUpdate(t => t.ProductID, product);
-                #endregion
-
-                #region Add Users
-                var users = new Dictionary<string, User>
+            #endregion
+    
+        #endif
+            #region Add Users
+            var users = new Dictionary<string, User>
                 {
                     //Users Lookup
                     {"1", new User {UserID = 1, UserName = "Admin", Password = "YWRtaW4="}},
                     {"2", new User {UserID = 2, UserName = "User", Password = "dXNlcg=="}},
 
                 };
-                foreach (var user in users.Values)
-                    context.Users.AddOrUpdate(t => t.UserID, user);
-                #endregion
-            #endif
+            foreach (var user in users.Values)
+                context.Users.AddOrUpdate(t => t.UserID, user);
+            #endregion
         }
     }
 }
