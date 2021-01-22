@@ -12,7 +12,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public string ProductName { get; set; }
         public string SaleCost { get; set; }
         public string SaleSIDR { get; set; }
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         public decimal ProductPrice { get; set; }
         public string ProductUnit { get; set; }
         /// <summary>
@@ -37,7 +37,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         /// <summary>
         /// Number of Quantity that is Cancel
         /// </summary>
-        public int QuantityToCancel { get; set; }
+        public decimal QuantityToCancel { get; set; }
         public bool IsCancel { get; internal set; }
         public bool IsPaid { get; internal set; }
         public int SaleID { get; internal set; }

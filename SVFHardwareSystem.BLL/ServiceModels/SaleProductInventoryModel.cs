@@ -15,7 +15,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         /// </summary>
         public string Name { get; internal set; }
         public string Unit { get; internal set; }
-        public int Quantity { get; internal set; }
+        public decimal Quantity { get; internal set; }
         /// <summary>
         /// Unit Cost
         /// Total Amount / Quantity

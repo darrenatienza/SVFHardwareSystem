@@ -11,7 +11,7 @@ namespace SVFHardwareSystem.Services.Exceptions
     {
         public LimitMustNotExceedOrLessException() { }
 
-        public LimitMustNotExceedOrLessException(int max, int min) :base(string.Format("Quantity must not exceed to the limit of {0} but not less than {1}", max, min)){  
+        public LimitMustNotExceedOrLessException(decimal max, int min) :base(string.Format("Quantity must not exceed to the limit of {0} but not less than {1}", max, min)){  
         }
     }
 }

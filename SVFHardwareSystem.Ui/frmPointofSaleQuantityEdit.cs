@@ -22,7 +22,7 @@ namespace SVFHardwareSystem.Ui
         private int _posTransactionID;
         private ISaleProductService _transactionProductService;
         private int productID;
-        private int availableQuantity;
+        private decimal availableQuantity;
 
         public frmPointofSaleQuantityEdit(IProductService productService,ISaleProductService transactionProductService, int posTransactionID)
         {

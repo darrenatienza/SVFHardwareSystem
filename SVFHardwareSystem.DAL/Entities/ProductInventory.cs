@@ -14,7 +14,7 @@ namespace SVFHardwareSystem.DAL.Entities
         public int ProductID { get; set; }
         public Product Product { get; set; }
         public int Year { get; set; }
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Total
         /// </summary>

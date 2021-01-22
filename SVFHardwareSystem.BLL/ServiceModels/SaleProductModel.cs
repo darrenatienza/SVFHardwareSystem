@@ -12,7 +12,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
 
         public int ProductID { get; set; }
         public string ProductName { get; set; }
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         public bool IsPaid { get; set; }
         public bool IsToPay { get; set; }
         /// <summary>
@@ -28,8 +28,8 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public bool IsReplace { get; set; }
         public bool IsForReturnToSupplierAfterReplace { get; set; }
         public bool IsForReturnToSupplierAfterCancel { get; set; }
-        public int QuantityToCancel { get; set; }
-        public int QuantityToReplace { get; set; }
+        public decimal QuantityToCancel { get; set; }
+        public decimal QuantityToReplace { get; set; }
         public decimal Price { get; set; }
     }
 }

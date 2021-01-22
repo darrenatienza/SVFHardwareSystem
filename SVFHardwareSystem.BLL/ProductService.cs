@@ -21,7 +21,7 @@ namespace SVFHardwareSystem.Services
 
         }
 
-        public void DeductQuantityOnProduct(int productID, int quantityToBuy)
+        public void DeductQuantityOnProduct(int productID, decimal quantityToBuy)
         {
             using (var db = new DataContext())
             {
@@ -67,7 +67,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public int GetQuantityByProductName(string productName)
+        public decimal GetQuantityByProductName(string productName)
         {
             using (var db = new DataContext())
             {
@@ -76,7 +76,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public int GetRemainingQuantity(int productID, int quantityToBuy)
+        public decimal GetRemainingQuantity(int productID, decimal quantityToBuy)
         {
             using (var db = new DataContext())
             {

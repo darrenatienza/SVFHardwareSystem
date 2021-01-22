@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class prod_initial : DbMigration
+    public partial class InitialProductionMigration : DbMigration
     {
         public override void Up()
         {
@@ -67,7 +67,7 @@
                         SaleProductID = c.Int(nullable: false, identity: true),
                         ProductID = c.Int(nullable: false),
                         SaleID = c.Int(nullable: false),
-                        Quantity = c.Int(nullable: false),
+                        Quantity = c.Decimal(nullable: false, precision: 18, scale: 2),
                         IsPaid = c.Boolean(nullable: false),
                         IsToPay = c.Boolean(nullable: false),
                         IsReplace = c.Boolean(nullable: false),
@@ -79,8 +79,8 @@
                         IsQuantityAddedToInventoryAfterReplaceOrCancel = c.Boolean(nullable: false),
                         IsForReturnToSupplierAfterReplace = c.Boolean(nullable: false),
                         IsForReturnToSupplierAfterCancel = c.Boolean(nullable: false),
-                        QuantityToReplace = c.Int(nullable: false),
-                        QuantityToCancel = c.Int(nullable: false),
+                        QuantityToReplace = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        QuantityToCancel = c.Decimal(nullable: false, precision: 18, scale: 2),
                         CreateTimeStamp = c.DateTime(nullable: false),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                     })
@@ -99,7 +99,7 @@
                         Name = c.String(),
                         Unit = c.String(),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Quantity = c.Int(nullable: false),
+                        Quantity = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Limit = c.Int(nullable: false),
                         CategoryID = c.Int(nullable: false),
                     })
@@ -115,7 +115,7 @@
                         CreateTimeStamp = c.DateTime(nullable: false),
                         ProductID = c.Int(nullable: false),
                         Year = c.Int(nullable: false),
-                        Quantity = c.Int(nullable: false),
+                        Quantity = c.Decimal(nullable: false, precision: 18, scale: 2),
                         TotalAmount = c.Decimal(nullable: false, precision: 18, scale: 2),
                     })
                 .PrimaryKey(t => t.ProductInventoryID)
@@ -129,7 +129,7 @@
                         PurchaseProductID = c.Int(nullable: false, identity: true),
                         ProductID = c.Int(nullable: false),
                         PurchaseID = c.Int(nullable: false),
-                        Quantity = c.Int(nullable: false),
+                        Quantity = c.Decimal(nullable: false, precision: 18, scale: 2),
                         IsQuantityUploaded = c.Boolean(nullable: false),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                     })
@@ -240,7 +240,7 @@
                         WarrantyProductID = c.Int(nullable: false, identity: true),
                         Code = c.String(),
                         ProductID = c.Int(nullable: false),
-                        Quantity = c.Int(nullable: false),
+                        Quantity = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Reason = c.String(),
                         IsProductFromCancelReplace = c.Boolean(nullable: false),
                         CreateTimeStamp = c.DateTime(nullable: false),

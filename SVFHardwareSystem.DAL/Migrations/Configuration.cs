@@ -24,16 +24,16 @@
             // add seed on debug configuration
 #if (DEBUG)
             #region Add Categoriesad
-                var categories = new Dictionary<string, Category>
-                {
-                    //Users Lookup
-                    {"1", new Category {CategoryID= 1, Name = "Category 1", }},
-                    {"2", new Category {CategoryID= 2, Name = "Category 2", }},
-                    {"3", new Category {CategoryID= 3, Name = "Category 3", }},
-
-                };
-                foreach (var item in categories.Values)
-                    context.Categories.AddOrUpdate(t => t.CategoryID, item);
+                //var categories = new Dictionary<string, Category>
+                //{
+                //    //Users Lookup
+                //    {"1", new Category {CategoryID= 1, Name = "Category 1", }},
+                //    {"2", new Category {CategoryID= 2, Name = "Category 2", }},
+                //    {"3", new Category {CategoryID= 3, Name = "Category 3", }},
+                //
+                //};
+                //foreach (var item in categories.Values)
+                //    context.Categories.AddOrUpdate(t => t.CategoryID, item);
             #endregion
 
             #region Add Supplier
@@ -78,16 +78,16 @@
             #endregion
 
             #region Add Products
-                var products = new Dictionary<string, Product>
-                {
-                    //Users Lookup
-                    {"1", new Product {ProductID = 1, Name = "Product 1", CategoryID = 1, Code="1", Limit = 1, Price = 20, Quantity= 0, Unit= "pc"}},
-                    {"2", new Product {ProductID = 2, Name = "Product 2", CategoryID = 1, Code="2", Limit = 1, Price = 5, Quantity= 0, Unit= "pc"}},
-                    {"3", new Product {ProductID = 3, Name = "Product 3", CategoryID = 1, Code="3", Limit = 1, Price = 14, Quantity= 0, Unit= "pc"}},
-
-                };
-                foreach (var product in products.Values)
-                    context.Products.AddOrUpdate(t => t.ProductID, product);
+                //var products = new Dictionary<string, Product>
+                //{
+                //    //Users Lookup
+                //    {"1", new Product {ProductID = 1, Name = "Product 1", CategoryID = 1, Code="1", Limit = 1, Price = 20, Quantity= 0, Unit= "pc"}},
+                //    {"2", new Product {ProductID = 2, Name = "Product 2", CategoryID = 1, Code="2", Limit = 1, Price = 5, Quantity= 0, Unit= "pc"}},
+                //    {"3", new Product {ProductID = 3, Name = "Product 3", CategoryID = 1, Code="3", Limit = 1, Price = 14, Quantity= 0, Unit= "pc"}},
+                //
+                //};
+                //foreach (var product in products.Values)
+                //    context.Products.AddOrUpdate(t => t.ProductID, product);
             #endregion
     
         #endif

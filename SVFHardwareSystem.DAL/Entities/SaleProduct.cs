@@ -17,7 +17,7 @@ namespace SVFHardwareSystem.DAL.Entities
         public virtual Product Product { get; set; }
         public int SaleID { get; set; }
         public virtual Sale Sale { get; set; }
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Indicates the product that is paid by customer
         /// </summary>
@@ -42,11 +42,11 @@ namespace SVFHardwareSystem.DAL.Entities
         /// <summary>
         /// Number of Quantity that is replace
         /// </summary>
-        public int QuantityToReplace { get; set; }
+        public decimal QuantityToReplace { get; set; }
         /// <summary>
         /// Number of Quantity that is Cancel
         /// </summary>
-        public int QuantityToCancel { get; set; }
+        public decimal QuantityToCancel { get; set; }
         public DateTime CreateTimeStamp { get; set; } = DateTime.Now;
         /// <summary>
         /// Amount of Item paid.

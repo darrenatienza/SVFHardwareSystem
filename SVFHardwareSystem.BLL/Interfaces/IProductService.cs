@@ -10,10 +10,10 @@ namespace SVFHardwareSystem.Services.Interfaces
     public interface IProductService : IService<ProductModel>
     {
         int GetProductID(string productName);
-        int GetQuantityByProductName(string productName);
+        decimal GetQuantityByProductName(string productName);
         ProductModel GetByProductName(string productName);
-        int GetRemainingQuantity(int productID, int quantityToBuy);
-        void DeductQuantityOnProduct(int productID, int quantityToBuy);
+        decimal GetRemainingQuantity(int productID, decimal quantityToBuy);
+        void DeductQuantityOnProduct(int productID, decimal quantityToBuy);
         IList<ProductModel> GetAll(string category, string criteria);
         Task<IList<ProductModel>> GetAllByCategoryID(int categoryID);
         Task<Dictionary<int,string>> GetProductNamesAsync(string criteria);

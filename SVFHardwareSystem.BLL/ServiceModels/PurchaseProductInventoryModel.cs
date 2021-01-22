@@ -23,7 +23,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
         /// </summary>
         public string SIDR { get; internal set; }
        
-        public int Quantity { get; internal set; }
+        public decimal Quantity { get; internal set; }
         /// <summary>
         /// Unit Cost
         /// Total Amount / Quantity

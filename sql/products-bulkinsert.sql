@@ -1,5 +1,5 @@
 bulk insert products
-from 'C:\Users\darre\Documents\products.csv'
+from 'C:\db\data\products.csv'
 with
 (
 rowterminator='\n',

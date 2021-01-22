@@ -14,7 +14,7 @@ namespace SVFHardwareSystem.DAL.Entities
         public string Name { get; set; }
         public string Unit { get; set; }
         public decimal Price { get; set; }
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         public int Limit { get; set; }
         public int CategoryID { get; set; }
         public virtual Category Category { get; set; }

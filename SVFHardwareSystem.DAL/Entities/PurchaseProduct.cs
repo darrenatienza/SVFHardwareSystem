@@ -14,7 +14,7 @@ namespace SVFHardwareSystem.DAL.Entities
         public virtual Product Product { get; set; }
         public int PurchaseID { get; set; }
         public virtual Purchase Purchase { get; set; }
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         public bool IsQuantityUploaded { get; set; }
         /// <summary>
         /// Price of the Product after Purchases

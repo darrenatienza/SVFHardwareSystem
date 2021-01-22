@@ -1,5 +1,5 @@
 bulk insert categories
-from 'C:\Users\darre\Documents\categories.csv'
+from 'C:\db\data\categories.csv'
 with
 (
 rowterminator='\n',

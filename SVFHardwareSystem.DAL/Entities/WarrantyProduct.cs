@@ -16,7 +16,7 @@ namespace SVFHardwareSystem.DAL.Entities
         public string Code { get; set; }
         public int ProductID { get; set; }
         public virtual Product Product { get; set; }
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Reason of product needs to return
         /// </summary>

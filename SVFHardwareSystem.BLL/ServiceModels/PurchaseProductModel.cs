@@ -10,7 +10,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
     public class PurchaseProductModel
     {
         private int _productID;
-        private int _quantity;
+        private decimal _quantity;
 
         public int ProductID
         {
@@ -25,7 +25,7 @@ namespace SVFHardwareSystem.Services.ServiceModels
             } 
         }
         public string ProductName { get; internal set; }
-        public int Quantity {
+        public decimal Quantity {
             get { return _quantity; }
             set
             {

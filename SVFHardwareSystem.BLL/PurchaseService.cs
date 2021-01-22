@@ -130,7 +130,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        private void ValidatePurchaseProduct(int productID, int quantity)
+        private void ValidatePurchaseProduct(int productID, decimal quantity)
         {
             if (productID == 0)
             {

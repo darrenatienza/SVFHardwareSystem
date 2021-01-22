@@ -7,13 +7,13 @@ namespace SVFHardwareSystem.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class prod_initial : IMigrationMetadata
+    public sealed partial class InitialProductionMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(prod_initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialProductionMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "202011070543111_prod_initial"; }
+            get { return "202101221557069_InitialProductionMigration"; }
         }
         
         string IMigrationMetadata.Source
