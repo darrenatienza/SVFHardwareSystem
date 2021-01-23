@@ -76,7 +76,7 @@ namespace SVFHardwareSystem.Ui
             var year = dtDate.Value.Year;
             spinnerLoading.Visible = true;
             await Task.Delay(100);
-            await LoadBeginningInventories(year);
+            await LoadBeginningInventoriesV2(year);
             spinnerLoading.Visible = false;
         }
 
@@ -97,7 +97,9 @@ namespace SVFHardwareSystem.Ui
             try
             {
                 var year = dtDate.Value.Year;
+                spinnerLoading.Visible = true;
                 await _productInventoryService.SaveEndingInventoryAsync(_productInventories);
+                spinnerLoading.Visible = false;
                 MetroMessageBox.Show(this, "New Purchase and Sales of Products have been saved!", "Purchase and Sales Products", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (CustomBaseException ex)
@@ -115,7 +117,9 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
+                spinnerLoading.Visible = true;
                 await _yearlyProductInventoryService.SaveYearlyProductInventory();
+                spinnerLoading.Visible = false;
                 MetroMessageBox.Show(this, "New Purchase and Sales of Products have been saved!", "Purchase and Sales Products", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (CustomBaseException ex)
@@ -356,6 +360,11 @@ namespace SVFHardwareSystem.Ui
             }
         }
         private void radioEnding_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioBeginning_CheckedChanged(object sender, EventArgs e)
         {
 
         }

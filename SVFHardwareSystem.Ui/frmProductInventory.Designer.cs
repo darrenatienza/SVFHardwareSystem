@@ -94,6 +94,7 @@
             this.radioBeginning.TabStop = true;
             this.radioBeginning.Text = "Beginning";
             this.radioBeginning.UseSelectable = true;
+            this.radioBeginning.CheckedChanged += new System.EventHandler(this.radioBeginning_CheckedChanged);
             // 
             // radioEnding
             // 
@@ -141,7 +142,7 @@
             this.spinnerLoading.Location = new System.Drawing.Point(392, 244);
             this.spinnerLoading.Maximum = 100;
             this.spinnerLoading.Name = "spinnerLoading";
-            this.spinnerLoading.Size = new System.Drawing.Size(24, 24);
+            this.spinnerLoading.Size = new System.Drawing.Size(48, 48);
             this.spinnerLoading.TabIndex = 8;
             this.spinnerLoading.UseSelectable = true;
             this.spinnerLoading.Value = 65;
