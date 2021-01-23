@@ -31,6 +31,7 @@ namespace SVFHardwareSystem.Ui
             container.RegisterType<ISalePaymentService, SalePaymentService>();
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IAuthenticationService, AuthenticationService>();
+            container.RegisterType<IYearlyProductInventoryService, YearlyProductInventoryService>();
             return container;
         }
     }

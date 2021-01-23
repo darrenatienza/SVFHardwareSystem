@@ -68,6 +68,7 @@
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\PaymentMethod.cs" />
+    <Compile Include="Entities\YearlyProductInventory.cs" />
     <Compile Include="Entities\SalePayment.cs" />
     <Compile Include="Entities\Sale.cs" />
     <Compile Include="Entities\Purchase.cs" />
@@ -83,9 +84,9 @@
     <Compile Include="Entities\ProductInventory.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="IDataContext.cs" />
-    <Compile Include="Migrations\202101221557069_InitialProductionMigration.cs" />
-    <Compile Include="Migrations\202101221557069_InitialProductionMigration.designer.cs">
-      <DependentUpon>202101221557069_InitialProductionMigration.cs</DependentUpon>
+    <Compile Include="Migrations\202101230531356_initial.cs" />
+    <Compile Include="Migrations\202101230531356_initial.designer.cs">
+      <DependentUpon>202101230531356_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Misc\PaymentType.cs" />
@@ -96,8 +97,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202101221557069_InitialProductionMigration.resx">
-      <DependentUpon>202101221557069_InitialProductionMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202101230531356_initial.resx">
+      <DependentUpon>202101230531356_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

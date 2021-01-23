@@ -67,12 +67,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="YearlyProductInventoryService.cs" />
     <Compile Include="CustomerReceivableService.cs" />
     <Compile Include="Exceptions\InvalidFieldException2.cs" />
     <Compile Include="Exceptions\OverPaymentException.cs" />
     <Compile Include="Extensions\FormatExtensions.cs" />
     <Compile Include="Interfaces\ICustomerReceivableService.cs" />
     <Compile Include="Interfaces\IProductInventoryService.cs" />
+    <Compile Include="Interfaces\IYearlyProductInventoryService.cs" />
     <Compile Include="Interfaces\IPurchaseProductInventoryService.cs" />
     <Compile Include="Interfaces\ISaleProductInventoryService.cs" />
     <Compile Include="Interfaces\IPurchaseSaleInventoryService.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="PurchaseService.cs" />
     <Compile Include="SalesService.cs" />
     <Compile Include="Service.cs" />
+    <Compile Include="ServiceModels\YearlyProductInventoryModel.cs" />
     <Compile Include="ServiceModels\SaleProductInventoryModel.cs" />
     <Compile Include="ServiceModels\PurchaseInventoryModel.cs" />
     <Compile Include="ServiceModels\PurchaseProductInventoryModel.cs" />

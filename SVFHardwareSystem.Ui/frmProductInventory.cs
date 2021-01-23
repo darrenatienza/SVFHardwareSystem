@@ -15,28 +15,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SVFHardwareSystem.Services.ServiceModels;
 
 namespace SVFHardwareSystem.Ui
 {
     public partial class frmProductInventory : MetroForm
     {
         private IProductInventoryService _productInventoryService;
+        private IYearlyProductInventoryService _yearlyProductInventoryService;
         private IList<ProductInventoryModel> _productInventories;
 
-        public frmProductInventory(IProductInventoryService productInventoryService)
+        public frmProductInventory(IProductInventoryService productInventoryService, IYearlyProductInventoryService yearlyProductInventoryService)
         {
             InitializeComponent();
             //useful centering circular progressbar
             this.WindowState = FormWindowState.Maximized;
 
             _productInventoryService = productInventoryService;
-            radioBeginning.CheckedChanged += RadioBeginning_CheckedChanged;
-            radioSale.CheckedChanged += RadioBeginning_CheckedChanged;
-            radioPurchase.CheckedChanged += RadioBeginning_CheckedChanged;
-            radioEnding.CheckedChanged += RadioBeginning_CheckedChanged;
+            _yearlyProductInventoryService = yearlyProductInventoryService;
+            radioBeginning.CheckedChanged += Radio_CheckedChanged;
+            radioSale.CheckedChanged += Radio_CheckedChanged;
+            radioPurchase.CheckedChanged += Radio_CheckedChanged;
+            radioEnding.CheckedChanged += Radio_CheckedChanged;
         }
 
-        private async void RadioBeginning_CheckedChanged(object sender, EventArgs e)
+        private async void Radio_CheckedChanged(object sender, EventArgs e)
         {
             var radio = (MetroRadioButton)sender;
             
@@ -48,7 +51,7 @@ namespace SVFHardwareSystem.Ui
                 await Task.Delay(500);
                 if (radio.Name == radioBeginning.Name)
                 {
-                    await LoadBeginningInventories(year);
+                    await LoadBeginningInventoriesV2(year);
                 }
                 if (radio.Name == radioSale.Name)
                 {
@@ -61,7 +64,7 @@ namespace SVFHardwareSystem.Ui
                 if (radio.Name == radioEnding.Name)
                 {
                     btnSave.Visible = radioEnding.Checked ? true : false;
-                    await LoadEndingInventories(year);
+                    await LoadEndingInventoriesV2(year);
                 }
             }
 
@@ -86,7 +89,7 @@ namespace SVFHardwareSystem.Ui
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            await SaveProductInventory();
+            await SaveProductInventoryV2();
         }
 
         private async Task SaveProductInventory()
@@ -108,7 +111,24 @@ namespace SVFHardwareSystem.Ui
                 MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private async Task SaveProductInventoryV2()
+        {
+            try
+            {
+                await _yearlyProductInventoryService.SaveYearlyProductInventory();
+                MetroMessageBox.Show(this, "New Purchase and Sales of Products have been saved!", "Purchase and Sales Products", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (CustomBaseException ex)
+            {
 
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private async Task LoadBeginningInventories(int year)
         {
             try
@@ -117,6 +137,30 @@ namespace SVFHardwareSystem.Ui
                 var reportTitle = "Beginning Inventory";
                 var finalAmount = await _productInventoryService.GetBeginningInventoryAmount(year);
                 LoadReport(year, finalAmount, productInventories, reportTitle);
+            }
+            catch (CustomBaseException ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private decimal ComputeYearlyFinalAmount(IList<YearlyProductInventoryModel> list)
+        {
+            return list.Sum(x => x.Quantity * x.Price);
+        }
+        private async Task LoadBeginningInventoriesV2(int year)
+        {
+            try
+            {
+                var yearlyProductInventories = await _yearlyProductInventoryService.GetBeginningYearlyProductInventories(year);
+                var reportTitle = "Beginning Inventory";
+                var finalAmount = ComputeYearlyFinalAmount(yearlyProductInventories);
+                LoadReport(year, finalAmount, yearlyProductInventories, reportTitle);
             }
             catch (CustomBaseException ex)
             {
@@ -157,6 +201,28 @@ namespace SVFHardwareSystem.Ui
                 var reportTitle = "Ending Inventory";
                 var finalAmount = await _productInventoryService.GetEndingInventoryAmount(year);
                 LoadReport(year, finalAmount, _productInventories, reportTitle);
+            }
+            catch (CustomBaseException ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async Task LoadEndingInventoriesV2(int year)
+        {
+            try
+            {
+                
+                var yearlyProductInventoryModels = await _yearlyProductInventoryService.GetEndingYearlyProductInventories();
+                var reportTitle = "Ending Inventory";
+                var finalAmount = ComputeYearlyFinalAmount(yearlyProductInventoryModels);
+                LoadReport(year, finalAmount, yearlyProductInventoryModels, reportTitle);
             }
             catch (CustomBaseException ex)
             {
@@ -240,6 +306,55 @@ namespace SVFHardwareSystem.Ui
             }
         }
 
+        private void LoadReport(int year, decimal finalAmount, IList<YearlyProductInventoryModel> productInventories, string reportTitle)
+        {
+            try
+            {
+                int count = 0;
+                var ds = new reports();
+                DataTable t = ds.Tables["ProductInventory"];
+                DataRow r;
+                foreach (var item in productInventories)
+                {
+                    count++;
+                    r = t.NewRow();
+                    //r["Id"] = count.ToString();
+                    r["Category"] = item.CategoryName;
+                    r["Description"] = item.ProductName;
+                    r["Unit"] = item.Unit;
+                    r["Qty"] = item.Quantity;
+                    r["UCost"] = item.Price.ToCurrencyFormat();
+                    r["Amount"] = item.TotalAmount.ToCurrencyFormat();
+
+                    t.Rows.Add(r);
+                }
+                // for total 
+                r = t.NewRow();
+                r["Description"] = "Total";
+                r["Amount"] = finalAmount.ToCurrencyFormat();
+
+
+                t.Rows.Add(r);
+                reportViewer1.LocalReport.DataSources.Clear();
+                var __year = new ReportParameter("Year", year.ToString());
+                var __reportTitle = new ReportParameter("ReportTitle", reportTitle);
+                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { __year, __reportTitle });
+
+                ReportDataSource rds = new ReportDataSource("ProductInventory", t);
+
+                reportViewer1.LocalReport.DataSources.Add(rds);
+                reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer1.ZoomMode = ZoomMode.PageWidth;
+                this.reportViewer1.RefreshReport();
+
+            }
+
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void radioEnding_CheckedChanged_1(object sender, EventArgs e)
         {
 

@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialProductionMigration : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -249,10 +249,26 @@
                 .ForeignKey("dbo.Products", t => t.ProductID, cascadeDelete: true)
                 .Index(t => t.ProductID);
             
+            CreateTable(
+                "dbo.YearlyProductInventories",
+                c => new
+                    {
+                        YearlyProductInventoryID = c.Int(nullable: false, identity: true),
+                        ProductID = c.Int(nullable: false),
+                        Year = c.Int(nullable: false),
+                        Quantity = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        CreateTimeStamp = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.YearlyProductInventoryID)
+                .ForeignKey("dbo.Products", t => t.ProductID, cascadeDelete: true)
+                .Index(t => t.ProductID);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.YearlyProductInventories", "ProductID", "dbo.Products");
             DropForeignKey("dbo.WarrantyProducts", "ProductID", "dbo.Products");
             DropForeignKey("dbo.PurchaseSaleInventoryProducts", "PurchaseSaleInventoryID", "dbo.PurchaseSaleInventories");
             DropForeignKey("dbo.PurchaseSaleInventoryProducts", "ProductID", "dbo.Products");
@@ -267,6 +283,7 @@
             DropForeignKey("dbo.Products", "CategoryID", "dbo.Categories");
             DropForeignKey("dbo.SalePayments", "SaleID", "dbo.Sales");
             DropForeignKey("dbo.Sales", "CustomerID", "dbo.Customers");
+            DropIndex("dbo.YearlyProductInventories", new[] { "ProductID" });
             DropIndex("dbo.WarrantyProducts", new[] { "ProductID" });
             DropIndex("dbo.PurchaseSaleInventoryProducts", new[] { "ProductID" });
             DropIndex("dbo.PurchaseSaleInventoryProducts", new[] { "PurchaseSaleInventoryID" });
@@ -281,6 +298,7 @@
             DropIndex("dbo.SaleProducts", new[] { "ProductID" });
             DropIndex("dbo.SalePayments", new[] { "SaleID" });
             DropIndex("dbo.Sales", new[] { "CustomerID" });
+            DropTable("dbo.YearlyProductInventories");
             DropTable("dbo.WarrantyProducts");
             DropTable("dbo.Users");
             DropTable("dbo.PurchaseSaleInventoryProducts");
