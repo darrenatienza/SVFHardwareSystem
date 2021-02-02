@@ -353,3 +353,4 @@ C:\Users\darre\source\repos\darrenatienza\SVFHardwareSystem\SVFHardwareSystem.Ui
 C:\Users\darre\source\repos\darrenatienza\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.csproj.CopyComplete
 C:\Users\darre\source\repos\darrenatienza\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.exe
 C:\Users\darre\source\repos\darrenatienza\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.pdb
+C:\Users\darre\Source\Repos\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmPointOfSaleDiscountForm.resources

@@ -41,7 +41,11 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var products = db.Products.Where(x => x.Category.Name.Contains(category) && x.Name.Contains(criteria)).ToList();
+                var products = db.Products
+                    .Where(x => x.Category.Name.Contains(category) && x.Name.Contains(criteria))
+                    .OrderBy(x => x.Category.Name)
+                    .ThenBy(x => x.Name)
+                    .ToList();
                 var models = Mapping.Mapper.Map<IList<ProductModel>>(products);
                 return models;
 
@@ -136,7 +140,7 @@ namespace SVFHardwareSystem.Services
         {
             using (var db = new DataContext())
             {
-                var products = await db.Products.Where(x => x.CategoryID == categoryID).ToListAsync();
+                var products = await db.Products.Where(x => x.CategoryID == categoryID).OrderBy(x => x.Name).ToListAsync();
                 var models = Mapping.Mapper.Map<IList<ProductModel>>(products);
                 return models;
             }

@@ -179,9 +179,9 @@ namespace SVFHardwareSystem.Ui
                             :  item.IsReplace ?  string.Format("{0} [{1} {2}]", item.ProductName ,item.QuantityToReplace.ToString(),"replaced")
                             //show product name only
                              : item.ProductName,
-                            item.Price.ToString(),
-                    item.Quantity.ToString(),
-                    item.Total.ToString()});
+                            item.Price.ToCurrencyFormat(),
+                    item.Quantity.ToCurrencyFormat(),
+                    item.Total.ToCurrencyFormat()});
                     DataGridViewCheckBoxCell chk = gridList.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
                     if (item.IsPaid)
                     {
@@ -427,7 +427,7 @@ namespace SVFHardwareSystem.Ui
             txtCost.Text = model.Cost;
             txtCustomerName.Text = model.CustomerFullName;
             customerID = model.CustomerID;
-            txtReceivable.Text = model.Receivable.ToString();
+            txtReceivable.Text = model.Receivable.ToCurrencyFormat();
             _isFinishedSale = model.IsFinished;
             _isFullyPaid = model.IsFullyPaid;
             txtTotal.Text = model.TotalAmount.ToCurrencyFormat();
@@ -745,6 +745,7 @@ namespace SVFHardwareSystem.Ui
                 }
             }
             if (e.KeyCode == Keys.Enter)
+            
             {
                 
                 txtCustomerName.Text = lbCustomer.Text;
@@ -912,6 +913,22 @@ namespace SVFHardwareSystem.Ui
         private void txtCustomerName_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private async void btnDiscount_Click(object sender, EventArgs e)
+        {
+            if(_transactionProductID > 0)
+            {
+                FormHandler.OpenProductDiscountForm(_transactionProductID).ShowDialog();
+                await LoadProductsOnTransaction();
+                await SetTransactionData();
+
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "Please select the product you want to discount!", "Point Of Sale", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
     }
 }

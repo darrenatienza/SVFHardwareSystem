@@ -65,6 +65,15 @@ namespace SVFHardwareSystem.Ui
                 .Resolve<frmSupplierForm>();
 
         }
+
+        public static frmPointOfSaleDiscountForm OpenProductDiscountForm(int saleProductID)
+        {
+            return UnityConfig
+                .Register()
+                .RegisterType<frmPointOfSaleDiscountForm>(new InjectionConstructor(new object[] { new SaleProductService(), saleProductID }))
+                .Resolve<frmPointOfSaleDiscountForm>();
+
+        }
         public static frmPurchaseProductForm OpenPurchaseProductForm(int purchaseID)
         {
             return UnityConfig

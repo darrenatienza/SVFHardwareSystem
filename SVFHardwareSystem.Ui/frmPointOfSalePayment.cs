@@ -1,6 +1,7 @@
 ﻿using MetroFramework;
 using MetroFramework.Forms;
 using SVFHardwareSystem.Services.Exceptions;
+using SVFHardwareSystem.Services.Extensions;
 using SVFHardwareSystem.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -36,11 +37,11 @@ namespace SVFHardwareSystem.Ui
 
         private void frmPointOfSalePayment_Load(object sender, EventArgs e)
         {
-            _total = _pOSTransactionService.GetTotalAmount(_posTransactionID);
-            txtTotal.Text = _total.ToString();
+            _total = _pOSTransactionService.GetTotalAmount(_posTransactionID); 
+            txtTotal.Text = _total.ToCurrencyFormat();
 
             _receivable = _pOSTransactionService.GetReceivableAmount(_posTransactionID);
-            txtReceivable.Text = _receivable.ToString();
+            txtReceivable.Text = _receivable.ToCurrencyFormat();
             dtPaymentDate.Value = _saleDate;
 
 
@@ -65,7 +66,7 @@ namespace SVFHardwareSystem.Ui
                 if (decimal.TryParse(strAmount, out _amount))
                 {
                     _change = _amount - _receivable;
-                    txtChange.Text = _change.ToString();
+                    txtChange.Text = _change.ToCurrencyFormat();
                 }
             }
             else
@@ -73,7 +74,7 @@ namespace SVFHardwareSystem.Ui
                 if (decimal.TryParse(strAmount, out _amount))
                 {
                     _change = _amount - _total;
-                    txtChange.Text = _change.ToString();
+                    txtChange.Text = _change.ToCurrencyFormat();
                 }
             }
 

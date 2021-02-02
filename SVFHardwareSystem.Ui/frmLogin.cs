@@ -33,7 +33,11 @@ namespace SVFHardwareSystem.Ui
 
         private void Form1_Load(object sender, EventArgs e)
         {
+#if (DEBUG)
+            txtUserName.Text = "admin";
+            txtPassword.Text = "admin";
 
+#endif
         }
 
         private void button1_Click(object sender, EventArgs e)

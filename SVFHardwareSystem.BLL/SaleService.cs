@@ -161,7 +161,9 @@ namespace SVFHardwareSystem.Services
 
                 if (transactionProducts.Count() > 0)
                 {
-                    total = transactionProducts.Sum(y => y.Quantity * y.Product.Price);
+                    // fetch price from sale product not on product inventory price because 
+                    // the discount will not be exact to the current total
+                    total = transactionProducts.Sum(y => y.Quantity * y.Price);
                     model.TotalAmount = total;
                 }
                 return model;
