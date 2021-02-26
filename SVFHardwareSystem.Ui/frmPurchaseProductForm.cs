@@ -192,8 +192,9 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
-                var product = _productService.Get(_productID);
+                var product = _productService.GetProduct(_productID);
                 txtUnit.Text = product.Unit;
+                txtPrice.Text = product.PreviousPurchasePrice.ToCurrencyFormat();
             }
             catch (CustomBaseException ex)
             {

@@ -159,5 +159,25 @@ namespace SVFHardwareSystem.Services
                 return dictionaries;
             }
         }
+
+        public ProductModel GetProduct(int productID)
+        {
+            
+            using (var db = new DataContext())
+            {
+                var entity = db.Products.Find(productID);
+                var model = Mapping.Mapper.Map<ProductModel>(entity) ?? throw new RecordNotFoundException();
+                //get the last purchase price from supplier of particular product
+                var purchases = db.PurchaseProducts.Where(x => x.ProductID == productID);
+                var lastPurchase = purchases.OrderByDescending(x => x.PurchaseProductID).FirstOrDefault();
+                if (lastPurchase != null)
+                {
+                    model.PreviousPurchasePrice = lastPurchase.Price;
+                }
+                
+                return model;
+
+            }
+        }
     }
 }

@@ -25,5 +25,6 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public string SupplierName { get; set; }
         public int SupplierID { get; set; }
         public int CategoryID { get; set; }
+        public decimal PreviousPurchasePrice { get; set; }
     }
 }

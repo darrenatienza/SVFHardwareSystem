@@ -17,5 +17,6 @@ namespace SVFHardwareSystem.Services.Interfaces
         IList<ProductModel> GetAll(string category, string criteria);
         Task<IList<ProductModel>> GetAllByCategoryID(int categoryID);
         Task<Dictionary<int,string>> GetProductNamesAsync(string criteria);
+        ProductModel GetProduct(int productID);
     }
 }
