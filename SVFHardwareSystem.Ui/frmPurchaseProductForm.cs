@@ -195,6 +195,7 @@ namespace SVFHardwareSystem.Ui
                 var product = _productService.GetProduct(_productID);
                 txtUnit.Text = product.Unit;
                 txtPrice.Text = product.PreviousPurchasePrice.ToCurrencyFormat();
+                lblSelling.Text = "Selling Unit Price: " + product.Price.ToCurrencyFormat();
             }
             catch (CustomBaseException ex)
             {

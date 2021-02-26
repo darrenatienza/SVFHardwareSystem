@@ -33,18 +33,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_0F16A3EC723A5CE84E5C1E81842D42F2"
-        "OwnerKey" = "8:_B862BAB4325E4EF9AC7D452CADA58F4D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_0F16A3EC723A5CE84E5C1E81842D42F2"
-        "OwnerKey" = "8:_C6AD4A3767FE2DE6255D767F16F78C4E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_0F997913F8C0468C79D1A211FE58952E"
         "OwnerKey" = "8:_B862BAB4325E4EF9AC7D452CADA58F4D"
         "MsmSig" = "8:_UNDEFINED"
@@ -177,6 +165,24 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_684E027D665513AD43550142B19A6C29"
+        "OwnerKey" = "8:_B862BAB4325E4EF9AC7D452CADA58F4D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_76BAA1DFADF23671C580577730273630"
+        "OwnerKey" = "8:_B862BAB4325E4EF9AC7D452CADA58F4D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_76BAA1DFADF23671C580577730273630"
+        "OwnerKey" = "8:_684E027D665513AD43550142B19A6C29"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_793E0EA8F04FFE86FEC5A12B497BDA6F"
         "OwnerKey" = "8:_340498B4894E2F8F9FA299829C6494CB"
         "MsmSig" = "8:_UNDEFINED"
@@ -202,13 +208,13 @@
         "Entry"
         {
         "MsmKey" = "8:_7F7EC0257ABD3D9D5E1A2119B5D8E082"
-        "OwnerKey" = "8:_C6AD4A3767FE2DE6255D767F16F78C4E"
+        "OwnerKey" = "8:_684E027D665513AD43550142B19A6C29"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_7F7EC0257ABD3D9D5E1A2119B5D8E082"
-        "OwnerKey" = "8:_0F16A3EC723A5CE84E5C1E81842D42F2"
+        "OwnerKey" = "8:_76BAA1DFADF23671C580577730273630"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -256,7 +262,7 @@
         "Entry"
         {
         "MsmKey" = "8:_998374D0092D70F5710810F0A018A080"
-        "OwnerKey" = "8:_C6AD4A3767FE2DE6255D767F16F78C4E"
+        "OwnerKey" = "8:_684E027D665513AD43550142B19A6C29"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -322,7 +328,7 @@
         "Entry"
         {
         "MsmKey" = "8:_B8330999886A00C8DC37DF1FABE91F4C"
-        "OwnerKey" = "8:_C6AD4A3767FE2DE6255D767F16F78C4E"
+        "OwnerKey" = "8:_684E027D665513AD43550142B19A6C29"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -341,12 +347,6 @@
         {
         "MsmKey" = "8:_BA9FBFE6430A6354FF7D9586FEFF1B8F"
         "OwnerKey" = "8:_340498B4894E2F8F9FA299829C6494CB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C6AD4A3767FE2DE6255D767F16F78C4E"
-        "OwnerKey" = "8:_B862BAB4325E4EF9AC7D452CADA58F4D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -454,13 +454,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C6AD4A3767FE2DE6255D767F16F78C4E"
+        "OwnerKey" = "8:_684E027D665513AD43550142B19A6C29"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0F16A3EC723A5CE84E5C1E81842D42F2"
+        "OwnerKey" = "8:_76BAA1DFADF23671C580577730273630"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -784,37 +784,6 @@
                     }
                 }
             "SourcePath" = "8:Microsoft.SqlServer.Types.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_4C3943A444A146EB9D17034E7FC11DB6"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0F16A3EC723A5CE84E5C1E81842D42F2"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:SVFHardwareSystem.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_0F16A3EC723A5CE84E5C1E81842D42F2"
-                    {
-                    "Name" = "8:SVFHardwareSystem.DAL.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:SVFHardwareSystem.DAL.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_4C3943A444A146EB9D17034E7FC11DB6"
@@ -1160,6 +1129,68 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_684E027D665513AD43550142B19A6C29"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:SVFHardwareSystem.Services, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_684E027D665513AD43550142B19A6C29"
+                    {
+                    "Name" = "8:SVFHardwareSystem.Services.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:SVFHardwareSystem.Services.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_4C3943A444A146EB9D17034E7FC11DB6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_76BAA1DFADF23671C580577730273630"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:SVFHardwareSystem.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_76BAA1DFADF23671C580577730273630"
+                    {
+                    "Name" = "8:SVFHardwareSystem.DAL.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:SVFHardwareSystem.DAL.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_4C3943A444A146EB9D17034E7FC11DB6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_793E0EA8F04FFE86FEC5A12B497BDA6F"
@@ -1616,37 +1647,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C6AD4A3767FE2DE6255D767F16F78C4E"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:SVFHardwareSystem.Services, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_C6AD4A3767FE2DE6255D767F16F78C4E"
-                    {
-                    "Name" = "8:SVFHardwareSystem.Services.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:SVFHardwareSystem.Services.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_4C3943A444A146EB9D17034E7FC11DB6"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CF16642EFB5154B6D0B88CAA1C6B6688"
             {
             "AssemblyRegister" = "3:1"
@@ -1889,15 +1889,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SVF Hardware Inventory"
-        "ProductCode" = "8:{4C5C94FF-3763-4CC7-A157-42E6722354E0}"
-        "PackageCode" = "8:{D0C3D66B-4333-41DD-BC2E-E2F99E575724}"
+        "ProductCode" = "8:{9E36BCFE-3524-47E2-8A72-F7127202F9AA}"
+        "PackageCode" = "8:{1B64A052-F267-4495-A1CF-E43409A1939C}"
         "UpgradeCode" = "8:{7ABBAD1F-93B2-44C8-99E9-50CF862359E8}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.0"
+        "ProductVersion" = "8:1.2.0"
         "Manufacturer" = "8:Darren Atienza"
         "ARPHELPTELEPHONE" = "8:09501743188"
         "ARPHELPLINK" = "8:"
@@ -1907,7 +1907,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Inventory System"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_634C229C6F0D4ABA8A04D54262074C0B"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -2439,7 +2439,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B862BAB4325E4EF9AC7D452CADA58F4D"
             {
-            "SourcePath" = "8:..\\SVFHardwareSystem.Ui\\obj\\Release\\SVFHardwareSystem.Ui.exe"
+            "SourcePath" = "8:..\\SVFHardwareSystem.Ui\\obj\\Debug\\SVFHardwareSystem.Ui.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_4C3943A444A146EB9D17034E7FC11DB6"

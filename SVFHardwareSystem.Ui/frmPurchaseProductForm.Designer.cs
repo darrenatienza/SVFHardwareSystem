@@ -44,6 +44,7 @@
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.txtTotal = new MetroFramework.Controls.MetroLabel();
             this.tmrCompute = new System.Windows.Forms.Timer(this.components);
+            this.lblSelling = new MetroFramework.Controls.MetroLabel();
             this.SuspendLayout();
             // 
             // cboProduct
@@ -107,7 +108,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(334, 201);
+            this.btnSave.Location = new System.Drawing.Point(334, 218);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 4;
@@ -221,6 +222,7 @@
             this.txtPrice.ShortcutsEnabled = true;
             this.txtPrice.Size = new System.Drawing.Size(115, 23);
             this.txtPrice.TabIndex = 8;
+            this.metroToolTip1.SetToolTip(this.txtPrice, "Your purchase unit price from supplier");
             this.txtPrice.UseSelectable = true;
             this.txtPrice.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtPrice.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -239,7 +241,7 @@
             this.txtTotal.AutoSize = true;
             this.txtTotal.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.txtTotal.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.txtTotal.Location = new System.Drawing.Point(23, 199);
+            this.txtTotal.Location = new System.Drawing.Point(23, 191);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(89, 25);
             this.txtTotal.TabIndex = 12;
@@ -250,11 +252,25 @@
             this.tmrCompute.Enabled = true;
             this.tmrCompute.Tick += new System.EventHandler(this.tmrCompute_Tick);
             // 
+            // lblSelling
+            // 
+            this.lblSelling.AutoSize = true;
+            this.lblSelling.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblSelling.Location = new System.Drawing.Point(270, 191);
+            this.lblSelling.Name = "lblSelling";
+            this.lblSelling.Size = new System.Drawing.Size(91, 15);
+            this.lblSelling.Style = MetroFramework.MetroColorStyle.Red;
+            this.lblSelling.TabIndex = 13;
+            this.lblSelling.Text = "Selling Unit Price:";
+            this.metroToolTip1.SetToolTip(this.lblSelling, "Selling of product to your customer");
+            this.lblSelling.UseStyleColors = true;
+            // 
             // frmPurchaseProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 244);
+            this.ClientSize = new System.Drawing.Size(434, 254);
+            this.Controls.Add(this.lblSelling);
             this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.txtUnit);
             this.Controls.Add(this.metroLabel5);
@@ -293,5 +309,6 @@
         private MetroFramework.Controls.MetroTextBox txtUnit;
         private MetroFramework.Controls.MetroLabel txtTotal;
         private System.Windows.Forms.Timer tmrCompute;
+        private MetroFramework.Controls.MetroLabel lblSelling;
     }
 }
