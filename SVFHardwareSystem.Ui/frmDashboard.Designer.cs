@@ -381,7 +381,7 @@
             this.Controls.Add(this.btnUserForm);
             this.Controls.Add(this.metroTabControl1);
             this.Name = "frmDashboard";
-            this.Text = "Dashboard - SVF Hardware Inventory System v1. Beta";
+            this.Text = "Dashboard - SVF Hardware Inventory System v1.2.0 Beta";
             this.Load += new System.EventHandler(this.frmDashboard_Load);
             this.metroTabControl1.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);

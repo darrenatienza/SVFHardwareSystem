@@ -34,6 +34,7 @@
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.txtUserName = new MetroFramework.Controls.MetroTextBox();
             this.lblwait = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.SuspendLayout();
             // 
             // btnLogin
@@ -137,11 +138,23 @@
             this.lblwait.Text = "Please wait..";
             this.lblwait.Visible = false;
             // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.Location = new System.Drawing.Point(222, 28);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(40, 19);
+            this.metroLabel3.Style = MetroFramework.MetroColorStyle.Red;
+            this.metroLabel3.TabIndex = 11;
+            this.metroLabel3.Text = "v1.2.0";
+            this.metroLabel3.UseStyleColors = true;
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(285, 234);
+            this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.lblwait);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.metroLabel2);
@@ -167,6 +180,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroTextBox txtUserName;
         private MetroFramework.Controls.MetroLabel lblwait;
+        private MetroFramework.Controls.MetroLabel metroLabel3;
     }
 }
 
