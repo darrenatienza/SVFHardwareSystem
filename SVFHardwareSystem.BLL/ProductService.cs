@@ -21,6 +21,22 @@ namespace SVFHardwareSystem.Services
 
         }
 
+        public override Task RemoveAsync(int id)
+        {
+            using (var db = new DataContext())
+            {
+                // products with sales and purchases must not delete because it may have conflict to the inventory.
+                var product = db.Products.Find(id);
+                var productsOnSales = db.SaleProducts.Where(x => x.ProductID == id).Count();
+                var productsOnPurchases = db.PurchaseProducts.Where(x => x.ProductID == id).Count();
+                if (productsOnPurchases > 0 || productsOnSales > 0)
+                {
+                    throw new RemoveNotPermittedException(string.Format("Product {0} cannot be delete because it has recorded sales to customers and purchases from suppliers!", product.Name));
+                }
+            }
+            //proceed to operation if validation was success
+            return base.RemoveAsync(id);
+        }
         public void DeductQuantityOnProduct(int productID, decimal quantityToBuy)
         {
             using (var db = new DataContext())
@@ -44,9 +60,26 @@ namespace SVFHardwareSystem.Services
                 var products = db.Products
                     .Where(x => x.Category.Name.Contains(category) && x.Name.Contains(criteria))
                     .OrderBy(x => x.Category.Name)
-                    .ThenBy(x => x.Name)
-                    .ToList();
-                var models = Mapping.Mapper.Map<IList<ProductModel>>(products);
+                    .ThenBy(x => x.Name).ToList();
+
+
+                var models = new List<ProductModel>();
+                foreach (var item in products)
+                {
+                    var product = new ProductModel();
+                    product.CategoryID = item.CategoryID;
+                    product.CategoryName = item.Category.Name;
+                    product.Code = item.Code;
+                    product.Limit = item.Limit;
+                    product.Name = item.Name;
+                    product.Price = item.Price;
+                    product.ProductID = item.ProductID;
+                    product.Quantity = item.Quantity;
+                    product.Unit = item.Unit;
+                    var lastPurchaseProduct = db.PurchaseProducts.Where(x => x.ProductID == item.ProductID).OrderByDescending(x => x.PurchaseProductID).FirstOrDefault();
+                    product.UnitCost = lastPurchaseProduct == null ? 0 : lastPurchaseProduct.UnitCost;
+                    models.Add(product);
+                }
                 return models;
 
             }
@@ -172,7 +205,7 @@ namespace SVFHardwareSystem.Services
                 var lastPurchase = purchases.OrderByDescending(x => x.PurchaseProductID).FirstOrDefault();
                 if (lastPurchase != null)
                 {
-                    model.PreviousPurchasePrice = lastPurchase.Price;
+                    model.UnitCost = lastPurchase.UnitCost;
                 }
                 
                 return model;

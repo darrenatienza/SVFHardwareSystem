@@ -2,6 +2,7 @@
 using MetroFramework.Forms;
 using SVFHardwareSystem.Services;
 using SVFHardwareSystem.Services.Exceptions;
+using SVFHardwareSystem.Services.Extensions;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Services.ServiceModels;
 using System;
@@ -112,6 +113,7 @@ namespace SVFHardwareSystem.Ui
                 productID = product.ProductID;
                 availableQuantity = product.Quantity;
                 lblavailable.Text = string.Format("Available: {0}", product.Quantity.ToString());
+                    lblSellingPrice.Text = string.Format("Selling Price: {0}", product.Price.ToCurrencyFormat());
                 lbProducts.Visible = false;
                 }
             catch (RecordNotFoundException)
@@ -156,6 +158,7 @@ namespace SVFHardwareSystem.Ui
                     txtProductName_TextChanged(sender, e);
                     txtProductName.Focus();
                     lbProducts.Visible = false;
+             
                 }
             }
         }
@@ -197,6 +200,7 @@ namespace SVFHardwareSystem.Ui
         private void UpdateProductSearchList(Dictionary<int, string> productNames)
         {
             lbProducts.Visible = false;
+          
             if (productNames.Count > 0)
             {
                 lbProducts.Visible = true;

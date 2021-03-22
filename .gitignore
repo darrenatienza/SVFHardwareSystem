@@ -7,7 +7,7 @@
 *.sln.docstates
 
 # Build results
-
+[Ss]etup/
 [Dd]ebug/
 [Rr]elease/
 x64/

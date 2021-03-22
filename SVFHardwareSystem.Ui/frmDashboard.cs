@@ -95,6 +95,7 @@ namespace SVFHardwareSystem.Ui
                 Application.Exit();
             }
             this.WindowState = FormWindowState.Maximized;
+            this.Text = string.Format("Dashboard - SVF Hardware Inventory System v{0} Beta", Application.ProductVersion);
         }
 
         private void btnUserForm_Click(object sender, EventArgs e)

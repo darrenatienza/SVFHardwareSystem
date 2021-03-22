@@ -243,7 +243,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>UCost</Value>
+                                  <Value>Price</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>

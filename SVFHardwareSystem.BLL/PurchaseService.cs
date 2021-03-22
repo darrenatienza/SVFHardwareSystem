@@ -63,10 +63,10 @@ namespace SVFHardwareSystem.Services
                     db.Entry(product).State = EntityState.Modified;
                 }
                 
-                if (model.Price >= product.Price)
+                if (model.UnitCost >= product.Price)
                 {
                     throw new InvalidFieldException2(string.Format("Purchase Unit Price {1} must be less than product price {0}.", 
-                        product.Price.ToCurrencyFormat(), model.Price.ToString()));
+                        product.Price.ToCurrencyFormat(), model.UnitCost.ToString()));
                 }
                 var purchaseProduct = Mapping.Mapper.Map<PurchaseProduct>(model);
                 
@@ -190,11 +190,25 @@ namespace SVFHardwareSystem.Services
                 {
                     throw new RecordNotFoundException("Purchase Product");
                 }
-                if (purchaseProduct.IsQuantityUploaded)
+                // get product inventory quantity count
+                // the difference after subtracting the product inventory quantity and recorded purchase product must be >= to 0
+                // it not, return an error
+                var product = db.Products.Find(purchaseProduct.ProductID);
+                var productQuantity = product.Quantity;
+                var purchaseProductQuantity = purchaseProduct.Quantity;
+                var productQuantityDiff = productQuantity - purchaseProductQuantity;
+                if (productQuantityDiff < 0 && purchaseProduct.IsQuantityUploaded)
                 {
-                    throw new RemoveNotPermittedException("Remove is not permitted for Purchase Products where the quantity was uploaded to the Product Inventory.");
-
+                    throw new RemoveNotPermittedException(
+                        string
+                        .Format("The Quantity {0} of the purchase product {1} you want to remove must be less than the current product inventory quantity which is {2}",
+                        purchaseProductQuantity,
+                        product.Name,
+                        productQuantity));
                 }
+                //if validation success, remove the purchase product and subtract the purchase product quantity on current product inventory
+                product.Quantity = productQuantityDiff;
+                db.Entry(product).State = EntityState.Modified;
                 db.PurchaseProducts.Remove(purchaseProduct);
                 db.SaveChanges();
 

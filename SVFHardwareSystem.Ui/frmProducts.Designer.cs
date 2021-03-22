@@ -45,6 +45,7 @@
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.metroPanel1.SuspendLayout();
@@ -64,7 +65,7 @@
             this.metroPanel1.HorizontalScrollbarSize = 10;
             this.metroPanel1.Location = new System.Drawing.Point(20, 60);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(767, 31);
+            this.metroPanel1.Size = new System.Drawing.Size(992, 31);
             this.metroPanel1.TabIndex = 0;
             this.metroPanel1.UseStyleColors = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;
@@ -87,7 +88,7 @@
             this.txtCategories.CustomButton.UseVisualStyleBackColor = false;
             this.txtCategories.CustomButton.Visible = false;
             this.txtCategories.Lines = new string[0];
-            this.txtCategories.Location = new System.Drawing.Point(420, 3);
+            this.txtCategories.Location = new System.Drawing.Point(645, 2);
             this.txtCategories.MaxLength = 32767;
             this.txtCategories.Name = "txtCategories";
             this.txtCategories.PasswordChar = '\0';
@@ -123,7 +124,7 @@
             this.txtSearch.CustomButton.UseSelectable = true;
             this.txtSearch.CustomButton.UseVisualStyleBackColor = false;
             this.txtSearch.Lines = new string[0];
-            this.txtSearch.Location = new System.Drawing.Point(586, 3);
+            this.txtSearch.Location = new System.Drawing.Point(811, 2);
             this.txtSearch.MaxLength = 32767;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PasswordChar = '\0';
@@ -211,6 +212,7 @@
             this.Column3,
             this.Column4,
             this.Column6,
+            this.Column7,
             this.Column8,
             this.Column9});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -239,7 +241,7 @@
             this.gridProducts.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gridProducts.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridProducts.Size = new System.Drawing.Size(767, 318);
+            this.gridProducts.Size = new System.Drawing.Size(992, 479);
             this.gridProducts.TabIndex = 7;
             this.gridProducts.UseCustomBackColor = true;
             this.gridProducts.UseCustomForeColor = true;
@@ -293,6 +295,13 @@
             this.Column6.Name = "Column6";
             this.Column6.ReadOnly = true;
             // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "Unit Cost (Base on Last Purchase)";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Width = 200;
+            // 
             // Column8
             // 
             this.Column8.HeaderText = "Quantity";
@@ -311,7 +320,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(807, 429);
+            this.ClientSize = new System.Drawing.Size(1032, 590);
             this.Controls.Add(this.gridProducts);
             this.Controls.Add(this.metroPanel1);
             this.Name = "frmProducts";
@@ -339,6 +348,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
     }

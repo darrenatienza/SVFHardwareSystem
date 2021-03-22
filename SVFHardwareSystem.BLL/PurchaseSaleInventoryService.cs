@@ -48,7 +48,7 @@ namespace SVFHardwareSystem.Services
                     var totalQuantityPurchase = purchases.Sum(x => x.Quantity);
 
                     //get total purchase amount purchase according to the year
-                    var totalAmountPurchase = purchases.Sum(x => x.Price * x.Quantity);
+                    var totalAmountPurchase = purchases.Sum(x => x.UnitCost * x.Quantity);
 
                     if (totalQuantityPurchase > 0 && totalAmountPurchase > 0)
                     {

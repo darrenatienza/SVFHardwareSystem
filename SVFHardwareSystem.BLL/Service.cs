@@ -70,7 +70,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public async Task RemoveAsync(int id)
+        public virtual async Task RemoveAsync(int id)
         {
             using (var db = new DataContext())
             {
