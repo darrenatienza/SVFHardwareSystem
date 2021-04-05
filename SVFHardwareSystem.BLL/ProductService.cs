@@ -149,7 +149,7 @@ namespace SVFHardwareSystem.Services
             //{
             //    throw new InvalidFieldException("Dealers Price");
             //}
-            if (model.Limit == 0)
+            if (model.Limit < 0)
             {
                 throw new InvalidFieldException("Limit");
             }
