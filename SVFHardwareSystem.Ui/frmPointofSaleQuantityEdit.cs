@@ -77,7 +77,7 @@ namespace SVFHardwareSystem.Ui
                 transactionProduct.IsToPay = true;
                 transactionProduct.SaleID = _posTransactionID;
                 transactionProduct.ProductID = productID;
-                transactionProduct.Quantity = int.Parse(txtQuantity.Text);
+                transactionProduct.Quantity = txtQuantity.Text.ToDecimal();
                 transactionProduct.UpdateTimeStamp = DateTime.Now;
                 await _transactionProductService.AddNewTransactionProductAsync(transactionProduct);
                 this.Close();
