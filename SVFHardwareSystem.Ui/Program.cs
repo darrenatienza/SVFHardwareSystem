@@ -23,8 +23,8 @@ namespace SVFHardwareSystem.Ui
 
 
 
-            Application.Run(new frmDashboard());
-            //Application.Run(FormHandler.OpenUserForm()) ;
+            //Application.Run(new frmDashboard());
+            Application.Run(FormHandler.OpenInitialProductQuantity()) ;
         }
 
     }

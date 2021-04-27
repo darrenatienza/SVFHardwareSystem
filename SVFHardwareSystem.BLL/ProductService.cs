@@ -179,5 +179,15 @@ namespace SVFHardwareSystem.Services
 
             }
         }
+
+        public IList<ProductModel> GetAllWithZeroBeginningQuantityByCategoryID(int categoryID)
+        {
+            using (var db = new DataContext())
+            {
+                var products =  db.YearlyProductInventories.Where(x => x.Product.CategoryID == categoryID && x.Quantity == 0).OrderBy(x => x.Product.Name).ToList();
+               
+                return models;
+            }
+        }
     }
 }
