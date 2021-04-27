@@ -31,7 +31,7 @@ namespace SVFHardwareSystem.Services
                 {
                     // ramaining quantity must not less than or equal to limit.
                     var remainingQuantity = product.Quantity - model.Quantity;
-                    if (remainingQuantity <= product.Limit)
+                    if (remainingQuantity < product.Limit)
                     {
                         throw new LimitMustNotReachException(product.Limit);
                     }

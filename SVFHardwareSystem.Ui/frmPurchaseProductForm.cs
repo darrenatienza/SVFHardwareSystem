@@ -146,7 +146,7 @@ namespace SVFHardwareSystem.Ui
                 purchaseProduct.ProductID = _productID;
                 purchaseProduct.Quantity = txtQuantity.Text.ToInt();
                 //purchaseProduct.IsQuantityUploaded = chkUploadQuantity.Checked;
-                purchaseProduct.Price = txtPrice.Text.ToDecimal();
+                purchaseProduct.UnitCost = txtPrice.Text.ToDecimal();
                 if (_purchaseProductID > 0)
                 {
                     // edit
@@ -194,7 +194,8 @@ namespace SVFHardwareSystem.Ui
             {
                 var product = _productService.GetProduct(_productID);
                 txtUnit.Text = product.Unit;
-                txtPrice.Text = product.PreviousPurchasePrice.ToCurrencyFormat();
+                // load the last purchase cost amount from supplier
+                txtPrice.Text = product.UnitCost.ToCurrencyFormat();
                 lblSelling.Text = "Selling Unit Price: " + product.Price.ToCurrencyFormat();
             }
             catch (CustomBaseException ex)

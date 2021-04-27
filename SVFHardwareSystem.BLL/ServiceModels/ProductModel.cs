@@ -13,18 +13,21 @@ namespace SVFHardwareSystem.Services.ServiceModels
         public string Code { get; set; }
         public string Name { get; set; }
         public string Unit { get; set; }
+        /// <summary>
+        /// Selling Amount to Customers
+        /// </summary>
         public decimal Price { get; set; }
         public decimal Quantity { get; set; }
         public int ProductID { get; set; }
         public string CategoryName { get; set; }
         public int Limit { get; set; }
-        public decimal DealersPrice
-        {
-            get; set;
-        }
-        public string SupplierName { get; set; }
-        public int SupplierID { get; set; }
+        
+       
+       
         public int CategoryID { get; set; }
-        public decimal PreviousPurchasePrice { get; set; }
+        /// <summary>
+        /// Cost of product purchase
+        /// </summary>
+        public decimal UnitCost { get; set; }
     }
 }

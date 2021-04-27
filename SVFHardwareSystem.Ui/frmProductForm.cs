@@ -55,7 +55,7 @@ namespace SVFHardwareSystem.Ui
 
         private void frmProductForm_Load(object sender, EventArgs e)
         {
-            LoadSupplierAutoComplete();
+           
             LoadCategories();
             SetProductData();
         }
@@ -71,13 +71,13 @@ namespace SVFHardwareSystem.Ui
                     var product = await _productService.GetAsync(_productID);
 
                     txtCode.Text = product.Code;
-                    txtDealersPrice.Text = product.DealersPrice.ToString();
+                   
                     txtLimit.Text = product.Limit.ToString();
                     txtName.Text = product.Name;
                     txtPrice.Text = product.Price.ToCurrencyFormat();
                     txtQuantity.Text = product.Quantity.ToString();
                     cboCategory.SelectedItem = cboCategory.Items.SelectItemByID(product.CategoryID);
-                    cboSupplier.SelectedItem = cboSupplier.Items.SelectItemByID(product.SupplierID);
+                    
                     txtUnit.Text = product.Unit;
                 }
             }
@@ -88,16 +88,7 @@ namespace SVFHardwareSystem.Ui
             }
         }
 
-        private async void LoadSupplierAutoComplete()
-        {
-
-            var suppliers = await _supplierService.GetAllAsync();
-            foreach (var item in suppliers)
-            {
-                cboSupplier.Items.Add(new ItemX(item.Name, item.SupplierID.ToString()));
-
-            }
-        }
+        
 
         private async void LoadCategories()
         {
@@ -126,10 +117,10 @@ namespace SVFHardwareSystem.Ui
                 productModel.Name = txtName.Text;
                 productModel.Price = txtPrice.Text.ToDecimal();
                 productModel.Unit = txtUnit.Text;
-                productModel.SupplierID = _supplierID;
+               
                 productModel.CategoryID = _categoryID;
                 productModel.Limit = txtLimit.Text.ToInt();
-                productModel.DealersPrice = txtDealersPrice.Text.ToDecimal();
+
                 //edit
                 if (_productID > 0)
                 {
@@ -158,10 +149,7 @@ namespace SVFHardwareSystem.Ui
 
         }
 
-        private void cboSupplier_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _supplierID = ((ItemX)cboSupplier.SelectedItem).Key.ToInt();
-        }
+       
 
         private void cboCategory_SelectedIndexChanged(object sender, EventArgs e)
         {

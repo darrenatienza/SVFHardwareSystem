@@ -39,7 +39,7 @@ namespace SVFHardwareSystem.Services
 
                     //set values
                     model.Quantity = purchaseProducts.Sum(x => x.Quantity);
-                    model.TotalAmount = purchaseProducts.Sum(x => x.Quantity * x.Price);
+                    model.TotalAmount = purchaseProducts.Sum(x => x.Quantity * x.UnitCost);
                     //fill property
                     foreach (var item in purchaseProducts)
                     {
@@ -83,7 +83,7 @@ namespace SVFHardwareSystem.Services
                     var purchaseProducts = await GetPurchaseProducts(db, year, product.ProductID);
                     //set values
                     model.Quantity = purchaseProducts.Sum(x => x.Quantity);
-                    model.TotalAmount = purchaseProducts.Sum(x => x.Quantity * x.Price);
+                    model.TotalAmount = purchaseProducts.Sum(x => x.Quantity * x.UnitCost);
                     //fill property
                     foreach (var item in purchaseProducts)
                     {
@@ -114,8 +114,8 @@ namespace SVFHardwareSystem.Services
                 var saleProducts = await db.PurchaseProducts
                     .Where(x =>
                         x.Purchase.DatePurchase.Year == year && x.Purchase.DatePurchase.Month == month
-                      ).Select(x => new { x.Quantity, x.Price }).ToListAsync();
-                return saleProducts.Sum(x => x.Quantity * x.Price);
+                      ).Select(x => new { x.Quantity, x.UnitCost }).ToListAsync();
+                return saleProducts.Sum(x => x.Quantity * x.UnitCost);
             }
         }
         public async Task<decimal> GetPurchaseProductTotal(int year)
@@ -129,8 +129,8 @@ namespace SVFHardwareSystem.Services
                 var saleProducts = await db.PurchaseProducts
                     .Where(x =>
                         x.Purchase.DatePurchase.Year == year
-                      ).Select(x => new { x.Quantity, x.Price }).ToListAsync();
-                return saleProducts.Sum(x => x.Quantity * x.Price);
+                      ).Select(x => new { x.Quantity, x.UnitCost }).ToListAsync();
+                return saleProducts.Sum(x => x.Quantity * x.UnitCost);
             }
         }
         public async Task<decimal> GetPurchaseProductYearlyFinalTotalAmount(int year)
@@ -142,8 +142,8 @@ namespace SVFHardwareSystem.Services
                 var purchaseProducts = await db.PurchaseProducts
                     .Where(x =>
                         x.Purchase.DatePurchase.Year == year
-                      ).Select(x => new { x.Quantity, x.Price }).ToListAsync();
-                return purchaseProducts.Sum(x => x.Quantity * x.Price);
+                      ).Select(x => new { x.Quantity, x.UnitCost }).ToListAsync();
+                return purchaseProducts.Sum(x => x.Quantity * x.UnitCost);
             }
 
         }

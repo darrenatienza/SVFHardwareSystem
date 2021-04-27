@@ -35,6 +35,7 @@
             this.lblavailable = new MetroFramework.Controls.MetroLabel();
             this.btnApply = new MetroFramework.Controls.MetroButton();
             this.lbProducts = new System.Windows.Forms.ListBox();
+            this.lblSellingPrice = new MetroFramework.Controls.MetroLabel();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -49,7 +50,7 @@
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(16, 145);
+            this.metroLabel2.Location = new System.Drawing.Point(16, 170);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(88, 19);
             this.metroLabel2.TabIndex = 1;
@@ -71,7 +72,7 @@
             this.txtQuantity.CustomButton.Visible = false;
             this.txtQuantity.FontWeight = MetroFramework.MetroTextBoxWeight.Bold;
             this.txtQuantity.Lines = new string[0];
-            this.txtQuantity.Location = new System.Drawing.Point(16, 167);
+            this.txtQuantity.Location = new System.Drawing.Point(16, 192);
             this.txtQuantity.MaxLength = 32767;
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.PasswordChar = '\0';
@@ -134,7 +135,7 @@
             // btnApply
             // 
             this.btnApply.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnApply.Location = new System.Drawing.Point(16, 196);
+            this.btnApply.Location = new System.Drawing.Point(16, 221);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(221, 29);
             this.btnApply.TabIndex = 13;
@@ -145,17 +146,31 @@
             // lbProducts
             // 
             this.lbProducts.FormattingEnabled = true;
-            this.lbProducts.Location = new System.Drawing.Point(269, 95);
+            this.lbProducts.Location = new System.Drawing.Point(98, 120);
             this.lbProducts.Name = "lbProducts";
             this.lbProducts.Size = new System.Drawing.Size(178, 95);
             this.lbProducts.TabIndex = 14;
+            // 
+            // lblSellingPrice
+            // 
+            this.lblSellingPrice.AutoSize = true;
+            this.lblSellingPrice.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblSellingPrice.Location = new System.Drawing.Point(16, 139);
+            this.lblSellingPrice.Name = "lblSellingPrice";
+            this.lblSellingPrice.Size = new System.Drawing.Size(68, 15);
+            this.lblSellingPrice.Style = MetroFramework.MetroColorStyle.Red;
+            this.lblSellingPrice.TabIndex = 15;
+            this.lblSellingPrice.Text = "Selling Price:";
+            this.lblSellingPrice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSellingPrice.UseStyleColors = true;
             // 
             // frmPointofSaleQuantityEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(255, 245);
+            this.ClientSize = new System.Drawing.Size(255, 264);
             this.Controls.Add(this.lbProducts);
+            this.Controls.Add(this.lblSellingPrice);
             this.Controls.Add(this.lblavailable);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.txtProductName);
@@ -181,5 +196,6 @@
         private MetroFramework.Controls.MetroLabel lblavailable;
         private MetroFramework.Controls.MetroButton btnApply;
         private System.Windows.Forms.ListBox lbProducts;
+        private MetroFramework.Controls.MetroLabel lblSellingPrice;
     }
 }

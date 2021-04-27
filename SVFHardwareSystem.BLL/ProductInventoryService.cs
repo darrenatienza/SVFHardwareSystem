@@ -138,7 +138,7 @@ namespace SVFHardwareSystem.Services
                 var productOnPurchases = await db.PurchaseProducts.Where(x => x.ProductID == product.ProductID && x.Purchase.DatePurchase.Year == year).ToListAsync();
                 // set computed properties
                 model.Qty = productOnPurchases.Sum(x => x.Quantity);
-                model.TotalAmount = productOnPurchases.Sum(x => x.Price * x.Quantity);
+                model.TotalAmount = productOnPurchases.Sum(x => x.UnitCost * x.Quantity);
                 model.Year = year;
                 models.Add(model);
             }

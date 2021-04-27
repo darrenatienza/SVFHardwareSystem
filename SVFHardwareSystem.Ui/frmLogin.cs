@@ -38,6 +38,7 @@ namespace SVFHardwareSystem.Ui
             txtPassword.Text = "admin";
 
 #endif
+            lblVersion.Text = string.Format("v{0}", Application.ProductVersion);
         }
 
         private void button1_Click(object sender, EventArgs e)

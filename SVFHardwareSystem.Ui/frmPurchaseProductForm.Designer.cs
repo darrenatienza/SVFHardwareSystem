@@ -39,12 +39,12 @@
             this.chkUploadQuantity = new MetroFramework.Controls.MetroCheckBox();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
             this.txtUnit = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.txtPrice = new MetroFramework.Controls.MetroTextBox();
+            this.lblSelling = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.txtTotal = new MetroFramework.Controls.MetroLabel();
             this.tmrCompute = new System.Windows.Forms.Timer(this.components);
-            this.lblSelling = new MetroFramework.Controls.MetroLabel();
             this.SuspendLayout();
             // 
             // cboProduct
@@ -187,15 +187,6 @@
             this.txtUnit.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtUnit.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // metroLabel4
-            // 
-            this.metroLabel4.AutoSize = true;
-            this.metroLabel4.Location = new System.Drawing.Point(296, 143);
-            this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(65, 19);
-            this.metroLabel4.TabIndex = 9;
-            this.metroLabel4.Text = "Unit Price";
-            // 
             // txtPrice
             // 
             // 
@@ -227,6 +218,28 @@
             this.txtPrice.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtPrice.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
+            // lblSelling
+            // 
+            this.lblSelling.AutoSize = true;
+            this.lblSelling.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblSelling.Location = new System.Drawing.Point(270, 191);
+            this.lblSelling.Name = "lblSelling";
+            this.lblSelling.Size = new System.Drawing.Size(91, 15);
+            this.lblSelling.Style = MetroFramework.MetroColorStyle.Red;
+            this.lblSelling.TabIndex = 13;
+            this.lblSelling.Text = "Selling Unit Price:";
+            this.metroToolTip1.SetToolTip(this.lblSelling, "Selling of product to your customer");
+            this.lblSelling.UseStyleColors = true;
+            // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.Location = new System.Drawing.Point(296, 143);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(62, 19);
+            this.metroLabel4.TabIndex = 9;
+            this.metroLabel4.Text = "Unit Cost";
+            // 
             // metroLabel5
             // 
             this.metroLabel5.AutoSize = true;
@@ -251,19 +264,6 @@
             // 
             this.tmrCompute.Enabled = true;
             this.tmrCompute.Tick += new System.EventHandler(this.tmrCompute_Tick);
-            // 
-            // lblSelling
-            // 
-            this.lblSelling.AutoSize = true;
-            this.lblSelling.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblSelling.Location = new System.Drawing.Point(270, 191);
-            this.lblSelling.Name = "lblSelling";
-            this.lblSelling.Size = new System.Drawing.Size(91, 15);
-            this.lblSelling.Style = MetroFramework.MetroColorStyle.Red;
-            this.lblSelling.TabIndex = 13;
-            this.lblSelling.Text = "Selling Unit Price:";
-            this.metroToolTip1.SetToolTip(this.lblSelling, "Selling of product to your customer");
-            this.lblSelling.UseStyleColors = true;
             // 
             // frmPurchaseProductForm
             // 

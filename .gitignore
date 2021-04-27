@@ -7,7 +7,7 @@
 *.sln.docstates
 
 # Build results
-
+[Ss]etup/
 [Dd]ebug/
 [Rr]elease/
 x64/
@@ -156,3 +156,4 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+/.vs/SVFHardwareSystem/v16/TestStore/0

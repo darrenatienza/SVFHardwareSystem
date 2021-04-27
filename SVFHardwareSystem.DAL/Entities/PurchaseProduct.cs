@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,8 +18,9 @@ namespace SVFHardwareSystem.DAL.Entities
         public decimal Quantity { get; set; }
         public bool IsQuantityUploaded { get; set; }
         /// <summary>
-        /// Price of the Product after Purchases
+        /// Cost of the Product after Purchases
         /// </summary>
-        public decimal Price { get; set; }
+        [Column("Price")]
+        public decimal UnitCost { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MetroFramework;
 using MetroFramework.Forms;
+using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -89,13 +90,18 @@ namespace SVFHardwareSystem.Ui
                         await _supplierService.RemoveAsync(_supplierID);
                         _supplierID = 0;
                     }
-                    LoadSuppliers();
+                    await LoadSuppliers();
 
                 }
                 else
                 {
                     MetroMessageBox.Show(this, "No record selected to remove", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+            catch (RemoveNotPermittedException ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message,"Remove Supplier",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {

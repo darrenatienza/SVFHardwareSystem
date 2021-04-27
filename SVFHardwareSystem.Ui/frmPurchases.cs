@@ -207,7 +207,7 @@ namespace SVFHardwareSystem.Ui
                             item.Quantity,
                             item.ProductUnit,
                             item.ProductName,
-                            item.Price,
+                            item.UnitCost,
                             item.Total,
 
                     });
@@ -336,7 +336,7 @@ namespace SVFHardwareSystem.Ui
             LoadPurchaseProducts();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
             try
             {
@@ -344,7 +344,7 @@ namespace SVFHardwareSystem.Ui
                 if (d == DialogResult.Yes)
                 {
                     _purchaseService.DeletePurchaseProduct(_purchaseProductID);
-                    LoadPurchaseProducts();
+                    await LoadPurchaseProducts();
                 }
             }
 
