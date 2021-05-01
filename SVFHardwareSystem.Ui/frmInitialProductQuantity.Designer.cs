@@ -35,7 +35,7 @@
             this.cboProduct = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.btnUpdate = new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -128,21 +128,21 @@
             this.metroLabel4.Text = "*All listed products have 0 beginning quantity";
             this.metroLabel4.UseStyleColors = true;
             // 
-            // metroButton1
+            // btnUpdate
             // 
-            this.metroButton1.Location = new System.Drawing.Point(320, 259);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(75, 23);
-            this.metroButton1.TabIndex = 7;
-            this.metroButton1.Text = "Update";
-            this.metroButton1.UseSelectable = true;
+            this.btnUpdate.Location = new System.Drawing.Point(320, 259);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.TabIndex = 7;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseSelectable = true;
             // 
             // frmInitialProductQuantity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(423, 307);
-            this.Controls.Add(this.metroButton1);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.metroLabel4);
             this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.cboProduct);
@@ -167,6 +167,6 @@
         private MetroFramework.Controls.MetroComboBox cboProduct;
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroLabel metroLabel4;
-        private MetroFramework.Controls.MetroButton metroButton1;
+        private MetroFramework.Controls.MetroButton btnUpdate;
     }
 }

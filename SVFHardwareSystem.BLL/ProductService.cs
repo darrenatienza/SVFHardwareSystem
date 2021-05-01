@@ -213,13 +213,25 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public IList<ProductModel> GetAllWithZeroBeginningQuantityByCategoryID(int categoryID)
+
+        public async Task<IList<ProductModel>> GetAllWithZeroBeginningQuantityByCategoryID(int categoryID)
         {
             using (var db = new DataContext())
             {
-                var products =  db.YearlyProductInventories.Where(x => x.Product.CategoryID == categoryID && x.Quantity == 0).OrderBy(x => x.Product.Name).ToList();
-               
-                return models;
+                var products = await db.YearlyProductInventories.Include(x => x.Product).Where(x => x.Product.CategoryID == categoryID && x.Quantity == 0).OrderBy(x => x.Product.Name).ToListAsync();
+                var productModels = new List<ProductModel>();
+                if (products.Count() > 0)
+                {
+                    foreach (var item in products)
+                    {
+                        var productModel = new ProductModel();
+                        productModel.ProductID = item.ProductID;
+                        productModel.Name = item.Product.Name;
+                        productModels.Add(productModel);
+                    }
+                    
+                }
+                return productModels;
             }
         }
     }
