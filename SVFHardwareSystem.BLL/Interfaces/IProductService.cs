@@ -20,7 +20,7 @@ namespace SVFHardwareSystem.Services.Interfaces
         ProductModel GetProduct(int productID);
         Task<IList<ProductModel>> GetAllWithZeroBeginningQuantityByCategoryID(int categoryID);
         BeginningProductModel GetBeginningInventory(int productID);
-        void EditBeginningInventoryQuantity(int productID, int quantity);
-        void EditProductQuantity(int productID, int quantity);
+        void EditBeginningInventoryQuantity(int productID, decimal quantity,decimal price);
+        void EditProductQuantity(int productID, decimal quantity,decimal price);
     }
 }

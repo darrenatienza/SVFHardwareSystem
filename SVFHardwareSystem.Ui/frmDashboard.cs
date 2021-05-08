@@ -102,5 +102,10 @@ namespace SVFHardwareSystem.Ui
         {
             FormHandler.OpenUserForm().ShowDialog();
         }
+
+        private void btnUpdateProdBegInv_Click(object sender, EventArgs e)
+        {
+            FormHandler.OpenInitialProductQuantity().ShowDialog();
+        }
     }
 }

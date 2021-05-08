@@ -251,23 +251,33 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public void EditBeginningInventoryQuantity(int productID, int quantity)
+        public void EditBeginningInventoryQuantity(int productID, decimal quantity, decimal price)
         {
             using (var db = new DataContext())
             {
                 var entity = db.YearlyProductInventories.FirstOrDefault(x => x.ProductID == productID);
-                entity.Quantity = quantity;
-                db.Entry(entity).State = EntityState.Modified;
-                db.SaveChanges();
+                if (entity.Quantity > 0)
+                {
+                    throw new InvalidQuantityException("Product with more than 0 quantity is invalid for this operation!");
+                }
+                else
+                {
+                    entity.Quantity = quantity;
+                    entity.Price = price;
+                    db.Entry(entity).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+               
             }
         }
 
-        public void EditProductQuantity(int productID, int quantity)
+        public void EditProductQuantity(int productID, decimal quantity, decimal price)
         {
             using (var db = new DataContext())
             {
                 var entity = db.Products.FirstOrDefault(x => x.ProductID == productID);
                 entity.Quantity = quantity;
+                entity.Price = price;
                 db.Entry(entity).State = EntityState.Modified;
                 db.SaveChanges();
             }

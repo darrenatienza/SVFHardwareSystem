@@ -22,6 +22,10 @@ namespace SVFHardwareSystem.Ui
         private IProductService _productService;
         private ICategoryService _categoryService;
         private int _productID;
+        private bool quantityHasError;
+        private bool priceHasError;
+        private bool categoryHasError;
+        private bool productHasError;
 
         public frmInitialProductQuantity(IProductService productService, ICategoryService categoryService)
         {
@@ -120,9 +124,52 @@ namespace SVFHardwareSystem.Ui
 
             try
             {
-                var quantity = txtQuantity.Text.ToInt();
-                _productService.EditBeginningInventoryQuantity(_productID, quantity);
-                _productService.EditProductQuantity(_productID, quantity);
+                if (quantityHasError
+                    || priceHasError
+                    || categoryHasError
+                    ||productHasError)
+                {
+                    MetroMessageBox.Show(this, "Invalid input found!", "Update Beginning Quantity",
+                   MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                }
+                else
+                {
+                    var productOnInventory = _productService.Get(_productID);
+                    if(productOnInventory.ProductID > 0)
+                    {
+                        var dialog = MetroMessageBox.Show(this, "Are you sure you want to update quantity of this record? " +
+                   "\n" +
+                   "You cannot revert the changes after you update!", "Update Beginning Quantity",
+                   MessageBoxButtons.YesNo,
+                   MessageBoxIcon.Warning);
+                        if (dialog == DialogResult.Yes)
+                        {
+                            var quantity = txtQuantity.Text.ToDecimal();
+                            var price = txtPrice.Text.ToDecimal();
+                            _productService.EditBeginningInventoryQuantity(_productID, quantity, price);
+                            _productService.EditProductQuantity(_productID, quantity,price);
+                            LoadProducts();
+                            txtQuantity.Text = "";
+                            txtPrice.Text = "";
+                            lblBegQty.Text = string.Format("Beginning Quantity: {0}", "Please select product...");
+                            MetroMessageBox.Show(this, "Beginning quantity has been updated!", "Update Beginning Quantity",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                        }
+                    }
+                    else
+                    {
+                        MetroMessageBox.Show(this, "Product on inventory not exists!", "Update Beginning Quantity",
+                           MessageBoxButtons.OK,
+                           MessageBoxIcon.Error);
+                    }
+                    
+                }
+               
+                
+
+               
             }
             catch (CustomBaseException ex)
             {
@@ -133,6 +180,78 @@ namespace SVFHardwareSystem.Ui
             {
 
                 MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtQuantity_Validating(object sender, CancelEventArgs e)
+        {
+            var quantity = txtQuantity.Text;
+            if (quantity == "" || quantity.ToDecimal() == 0)
+            {
+                errorProvider1.SetError(txtQuantity, "Please provide valid quantity!");
+                quantityHasError = true;
+        
+            }
+            else
+            {
+               
+                errorProvider1.SetError(txtQuantity, null);
+                quantityHasError = false;
+
+            }
+        }
+
+        private void txtPrice_Validating(object sender, CancelEventArgs e)
+        {
+            var price = txtPrice.Text;
+            if (price == "" || price.ToDecimal() == 0)
+            {
+                errorProvider1.SetError(txtPrice, "Please provide valid price!");
+                priceHasError = true;
+               
+
+
+            }
+            else
+            {
+                errorProvider1.SetError(txtPrice, null);
+                priceHasError = false;
+            }
+        }
+
+        private void cboCategory_Validating(object sender, CancelEventArgs e)
+        {
+            var category = cboCategory.Text;
+            if (category == "")
+            {
+                errorProvider1.SetError(cboCategory, "Please provide valid category!");
+                categoryHasError = true;
+
+
+
+            }
+            else
+            {
+                errorProvider1.SetError(cboCategory, null);
+                categoryHasError = false;
+            }
+        }
+
+        private void cboProduct_Validating(object sender, CancelEventArgs e)
+        {
+            var product = cboProduct.Text;
+            if (product == "")
+            {
+                errorProvider1.SetError(cboProduct, "Please provide valid product!");
+                productHasError = true;
+
+
+
+            }
+            else
+            {
+                errorProvider1.SetError(cboProduct, null);
+                productHasError = false;
             }
         }
     }

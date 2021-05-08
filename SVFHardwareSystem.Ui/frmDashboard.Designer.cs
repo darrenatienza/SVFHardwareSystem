@@ -50,6 +50,7 @@
             this.lblCurrentUser = new MetroFramework.Controls.MetroLabel();
             this.btnUserForm = new System.Windows.Forms.Button();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
+            this.btnInitialProdQty = new MetroFramework.Controls.MetroTile();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -234,7 +235,7 @@
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.SelectedIndex = 2;
             this.metroTabControl1.Size = new System.Drawing.Size(1021, 498);
             this.metroTabControl1.TabIndex = 12;
             this.metroTabControl1.UseSelectable = true;
@@ -309,6 +310,7 @@
             // 
             // metroTabPage3
             // 
+            this.metroTabPage3.Controls.Add(this.btnInitialProdQty);
             this.metroTabPage3.Controls.Add(this.btnCustomer);
             this.metroTabPage3.Controls.Add(this.btnSupplier);
             this.metroTabPage3.Controls.Add(this.btnCategory);
@@ -372,6 +374,20 @@
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
+            // btnInitialProdQty
+            // 
+            this.btnInitialProdQty.ActiveControl = null;
+            this.btnInitialProdQty.Location = new System.Drawing.Point(3, 311);
+            this.btnInitialProdQty.Name = "btnInitialProdQty";
+            this.btnInitialProdQty.Size = new System.Drawing.Size(401, 139);
+            this.btnInitialProdQty.Style = MetroFramework.MetroColorStyle.Orange;
+            this.btnInitialProdQty.TabIndex = 6;
+            this.btnInitialProdQty.Text = "Initial Product Quantity";
+            this.btnInitialProdQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnInitialProdQty.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.btnInitialProdQty.UseSelectable = true;
+            this.btnInitialProdQty.Click += new System.EventHandler(this.btnUpdateProdBegInv_Click);
+            // 
             // frmDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -418,5 +434,6 @@
         private System.Windows.Forms.Button btnUserForm;
         private MetroFramework.Components.MetroToolTip metroToolTip1;
         private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroTile btnInitialProdQty;
     }
 }
