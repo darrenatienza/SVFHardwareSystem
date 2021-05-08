@@ -179,7 +179,7 @@ namespace SVFHardwareSystem.Services
             }
         }
 
-        public async Task<Dictionary<int,string>> GetProductNamesAsync(string criteria)
+        public async Task<Dictionary<int, string>> GetProductNamesAsync(string criteria)
         {
             using (var db = new DataContext())
             {
@@ -195,7 +195,7 @@ namespace SVFHardwareSystem.Services
 
         public ProductModel GetProduct(int productID)
         {
-            
+
             using (var db = new DataContext())
             {
                 var entity = db.Products.Find(productID);
@@ -207,7 +207,7 @@ namespace SVFHardwareSystem.Services
                 {
                     model.UnitCost = lastPurchase.UnitCost;
                 }
-                
+
                 return model;
 
             }
@@ -229,9 +229,47 @@ namespace SVFHardwareSystem.Services
                         productModel.Name = item.Product.Name;
                         productModels.Add(productModel);
                     }
-                    
+
                 }
                 return productModels;
+            }
+        }
+
+        public BeginningProductModel GetBeginningInventory(int productID)
+        {
+            using (var db = new DataContext())
+            {
+                var entity = db.YearlyProductInventories.Include(x => x.Product).FirstOrDefault(x => x.ProductID == productID);
+                var model = new BeginningProductModel();
+                model.Code = entity.Product.Code;
+                model.Name = entity.Product.Name;
+                model.Price = entity.Product.Price;
+                model.Quantity = entity.Quantity;
+                model.Unit = entity.Product.Unit;
+                return model;
+
+            }
+        }
+
+        public void EditBeginningInventoryQuantity(int productID, int quantity)
+        {
+            using (var db = new DataContext())
+            {
+                var entity = db.YearlyProductInventories.FirstOrDefault(x => x.ProductID == productID);
+                entity.Quantity = quantity;
+                db.Entry(entity).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public void EditProductQuantity(int productID, int quantity)
+        {
+            using (var db = new DataContext())
+            {
+                var entity = db.Products.FirstOrDefault(x => x.ProductID == productID);
+                entity.Quantity = quantity;
+                db.Entry(entity).State = EntityState.Modified;
+                db.SaveChanges();
             }
         }
     }

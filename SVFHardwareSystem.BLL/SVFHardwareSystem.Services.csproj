@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ServiceModels\BeginningProductModel.cs" />
     <Compile Include="YearlyProductInventoryService.cs" />
     <Compile Include="CustomerReceivableService.cs" />
     <Compile Include="Exceptions\InvalidFieldException2.cs" />

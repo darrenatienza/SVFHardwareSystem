@@ -19,5 +19,8 @@ namespace SVFHardwareSystem.Services.Interfaces
         Task<Dictionary<int,string>> GetProductNamesAsync(string criteria);
         ProductModel GetProduct(int productID);
         Task<IList<ProductModel>> GetAllWithZeroBeginningQuantityByCategoryID(int categoryID);
+        BeginningProductModel GetBeginningInventory(int productID);
+        void EditBeginningInventoryQuantity(int productID, int quantity);
+        void EditProductQuantity(int productID, int quantity);
     }
 }

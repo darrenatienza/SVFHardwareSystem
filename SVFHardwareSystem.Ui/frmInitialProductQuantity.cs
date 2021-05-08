@@ -1,5 +1,6 @@
 ﻿using MetroFramework;
 using MetroFramework.Forms;
+using SVFHardwareSystem.Services.Exceptions;
 using SVFHardwareSystem.Services.Extensions;
 using SVFHardwareSystem.Services.Interfaces;
 using SVFHardwareSystem.Ui.Misc;
@@ -20,6 +21,7 @@ namespace SVFHardwareSystem.Ui
         private int _categoryID;
         private IProductService _productService;
         private ICategoryService _categoryService;
+        private int _productID;
 
         public frmInitialProductQuantity(IProductService productService, ICategoryService categoryService)
         {
@@ -80,6 +82,58 @@ namespace SVFHardwareSystem.Ui
         {
             SetCategoryID();
             LoadProducts();
+        }
+
+        private void cboProduct_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetProductID();
+            SetProductData();
+        }
+        private void SetProductID()
+        {
+            _productID = ((ItemX)cboProduct.SelectedItem).Key.ToInt();
+        }
+        private void SetProductData()
+        {
+            try
+            {
+                var product = _productService.GetBeginningInventory(_productID);
+                lblBegQty.Text = string.Format("Beginning Quantity: {0}", product.Quantity.ToString());
+                
+            }
+            catch (CustomBaseException ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            // update the quantity of beginning inventory
+            // update the quantity of product inventory
+
+            try
+            {
+                var quantity = txtQuantity.Text.ToInt();
+                _productService.EditBeginningInventoryQuantity(_productID, quantity);
+                _productService.EditProductQuantity(_productID, quantity);
+            }
+            catch (CustomBaseException ex)
+            {
+
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
