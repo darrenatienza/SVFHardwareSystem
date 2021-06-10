@@ -157,3 +157,4 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 /.vs/SVFHardwareSystem/v16/TestStore/0
+/SVFHardware.Setup/svf_installer_v1.7.0.0.zip

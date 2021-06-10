@@ -91,7 +91,7 @@ namespace SVFHardwareSystem.Services
                                 //get portion of cash debit paid
                                 salesProduct.CashDebit = remainingQuantityAmount - salesProduct.ReceivableDebit;
                             }
-
+                            
                             amountPaidOnCash = 0; // set to zero to avoid wrong computation for later amount
 
 
@@ -283,26 +283,27 @@ namespace SVFHardwareSystem.Services
 
                         else
                         {
+                            decimal newReceivablePayment = 0;
                             //then subtract the amount paid on receivables
-                            receivablePayment -= Math.Abs(amountPaidOnCash);
-                            if (receivablePayment >= 0)
-                            {
-                                salesProduct.ReceivablesCredit = Math.Abs(amountPaidOnCash);
-                                salesProduct.CashDebit = remainingQuantityAmount - salesProduct.ReceivablesCredit;
+                            newReceivablePayment = receivablePayment - Math.Abs(amountPaidOnCash);
+                             if (newReceivablePayment >= 0)
+                                {
+                                    salesProduct.ReceivablesCredit = Math.Abs(amountPaidOnCash);
+                              
+                                    salesProduct.CashDebit = remainingQuantityAmount - salesProduct.ReceivablesCredit;
+                                    
+                                }
+                                else
+                                {
+                                    //if negative credit, convert the negative to positive, put this as receivable credit
+                                    salesProduct.ReceivableDebit = Math.Abs(newReceivablePayment);
+                                    //get portion of cash debit paid
+                                    salesProduct.CashDebit = remainingQuantityAmount - salesProduct.ReceivableDebit;
+                                }
+
+                                amountPaidOnCash = 0; // set to zero to avoid wrong computation for later amount
                             }
-                            else
-                            {
-                                //if negative credit, convert the negative to positive, put this as receivable credit
-                                salesProduct.ReceivableDebit = Math.Abs(receivablePayment);
-                                //get portion of cash debit paid
-                                salesProduct.CashDebit = remainingQuantityAmount - salesProduct.ReceivableDebit;
-                            }
-
-                            amountPaidOnCash = 0; // set to zero to avoid wrong computation for later amount
-
-
-
-                        }
+                        
                         sale.SalesProducts.Add(salesProduct);
                     }
                     sales.Add(sale);
