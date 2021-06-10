@@ -46,11 +46,11 @@
             this.btnCustomerReceivables = new MetroFramework.Controls.MetroTile();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
+            this.btnInitialProdQty = new MetroFramework.Controls.MetroTile();
             this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
             this.lblCurrentUser = new MetroFramework.Controls.MetroLabel();
             this.btnUserForm = new System.Windows.Forms.Button();
             this.metroToolTip1 = new MetroFramework.Components.MetroToolTip();
-            this.btnInitialProdQty = new MetroFramework.Controls.MetroTile();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
@@ -235,7 +235,7 @@
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 2;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(1021, 498);
             this.metroTabControl1.TabIndex = 12;
             this.metroTabControl1.UseSelectable = true;
@@ -327,6 +327,20 @@
             this.metroTabPage3.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage3.VerticalScrollbarSize = 10;
             // 
+            // btnInitialProdQty
+            // 
+            this.btnInitialProdQty.ActiveControl = null;
+            this.btnInitialProdQty.Location = new System.Drawing.Point(3, 311);
+            this.btnInitialProdQty.Name = "btnInitialProdQty";
+            this.btnInitialProdQty.Size = new System.Drawing.Size(401, 139);
+            this.btnInitialProdQty.Style = MetroFramework.MetroColorStyle.Orange;
+            this.btnInitialProdQty.TabIndex = 6;
+            this.btnInitialProdQty.Text = "Initial Product Quantity";
+            this.btnInitialProdQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnInitialProdQty.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.btnInitialProdQty.UseSelectable = true;
+            this.btnInitialProdQty.Click += new System.EventHandler(this.btnUpdateProdBegInv_Click);
+            // 
             // metroTabPage4
             // 
             this.metroTabPage4.Controls.Add(this.btnInventory);
@@ -373,20 +387,6 @@
             this.metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroToolTip1.StyleManager = null;
             this.metroToolTip1.Theme = MetroFramework.MetroThemeStyle.Light;
-            // 
-            // btnInitialProdQty
-            // 
-            this.btnInitialProdQty.ActiveControl = null;
-            this.btnInitialProdQty.Location = new System.Drawing.Point(3, 311);
-            this.btnInitialProdQty.Name = "btnInitialProdQty";
-            this.btnInitialProdQty.Size = new System.Drawing.Size(401, 139);
-            this.btnInitialProdQty.Style = MetroFramework.MetroColorStyle.Orange;
-            this.btnInitialProdQty.TabIndex = 6;
-            this.btnInitialProdQty.Text = "Initial Product Quantity";
-            this.btnInitialProdQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnInitialProdQty.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
-            this.btnInitialProdQty.UseSelectable = true;
-            this.btnInitialProdQty.Click += new System.EventHandler(this.btnUpdateProdBegInv_Click);
             // 
             // frmDashboard
             // 
