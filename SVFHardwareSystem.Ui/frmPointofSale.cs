@@ -930,5 +930,29 @@ namespace SVFHardwareSystem.Ui
             }
            
         }
+
+        private  void btnEditDate_Click(object sender, EventArgs e)
+        {
+            if(_saleID > 0)
+            {
+                var form = FormHandler.OpenEditPointOfSaleDateForm(_saleID);
+                form.OnDateUpdated += Form_OnDateUpdated;
+                form.ShowDialog();
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "No Record selected!");
+            }
+           
+
+        }
+
+        private void Form_OnDateUpdated(object sender, EventArgs e)
+        {
+
+            var form = (frmEditPointOfSaleDate)sender;
+                    dtSalesTransactionDate.Value = form.NewDate;
+            
+        }
     }
 }

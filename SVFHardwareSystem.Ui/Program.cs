@@ -24,7 +24,7 @@ namespace SVFHardwareSystem.Ui
 
 
             Application.Run(new frmDashboard());
-            //Application.Run(FormHandler.OpenInitialProductQuantity()) ;
+            //Application.Run(FormHandler.OpenPointofSaleForm()) ;
         }
 
     }

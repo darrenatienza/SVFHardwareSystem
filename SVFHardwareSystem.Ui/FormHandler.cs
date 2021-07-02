@@ -11,6 +11,14 @@ namespace SVFHardwareSystem.Ui
 {
     public static class FormHandler
     {
+        public static frmEditPointOfSaleDate OpenEditPointOfSaleDateForm(int saleID)
+        {
+            return UnityConfig
+                .Register()
+                .RegisterType<frmEditPointOfSaleDate>(new InjectionConstructor(new object[] { new SaleService(), saleID }))
+                .Resolve<frmEditPointOfSaleDate>();
+
+        }
         public static frmCustomers OpenCustomersForm() => UnityConfig
                             .Register().Resolve<frmCustomers>();
 

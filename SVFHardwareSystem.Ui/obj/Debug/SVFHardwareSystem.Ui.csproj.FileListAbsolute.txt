@@ -359,3 +359,4 @@ C:\Users\darre\source\repos\darrenatienza\SVFHardwareSystem\SVFHardwareSystem.Ui
 C:\Users\darre\source\repos\darrenatienza\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmPointOfSaleDiscountForm.resources
 C:\Users\darre\source\repos\darrenatienza\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\RdlCompile.cache
 C:\Users\darre\source\repos\darrenatienza\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\RdlCompile.compiled
+C:\Users\darre\source\repos\darrenatienza\SVFHardwareSystem\SVFHardwareSystem.Ui\obj\Debug\SVFHardwareSystem.Ui.frmEditPointOfSaleDate.resources
