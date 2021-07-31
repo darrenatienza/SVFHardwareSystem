@@ -197,7 +197,14 @@ namespace SVFHardwareSystem.Services
                 var productQuantity = product.Quantity;
                 var purchaseProductQuantity = purchaseProduct.Quantity;
                 var productQuantityDiff = productQuantity - purchaseProductQuantity;
-                if (productQuantityDiff < 0 && purchaseProduct.IsQuantityUploaded)
+
+                if (!purchaseProduct.IsQuantityUploaded)
+                {
+                    // remove only the purchase product
+                    db.PurchaseProducts.Remove(purchaseProduct);
+                    db.SaveChanges();
+                }
+                else if (productQuantityDiff < 0 )
                 {
                     throw new RemoveNotPermittedException(
                         string
@@ -206,11 +213,17 @@ namespace SVFHardwareSystem.Services
                         product.Name,
                         productQuantity));
                 }
-                //if validation success, remove the purchase product and subtract the purchase product quantity on current product inventory
-                product.Quantity = productQuantityDiff;
-                db.Entry(product).State = EntityState.Modified;
-                db.PurchaseProducts.Remove(purchaseProduct);
-                db.SaveChanges();
+                
+                else
+                {
+                    
+                    //if validation success, remove the purchase product and subtract the purchase product quantity on current product inventory
+                    product.Quantity = productQuantityDiff;
+                    db.Entry(product).State = EntityState.Modified;
+                    db.PurchaseProducts.Remove(purchaseProduct);
+                    db.SaveChanges();
+                }
+                
 
             }
         }

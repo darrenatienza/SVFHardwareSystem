@@ -19,6 +19,15 @@ namespace SVFHardwareSystem.Ui
                 .Resolve<frmEditPointOfSaleDate>();
 
         }
+        public static frmSIDRListingByProduct OpenSIDRListingByProduct(int selProductID)
+        {
+            return UnityConfig
+                .Register()
+                .RegisterType<frmSIDRListingByProduct>(new InjectionConstructor(new object[] { new ProductService(), new SalesService(),  selProductID }))
+                .Resolve<frmSIDRListingByProduct>();
+
+        }
+     
         public static frmCustomers OpenCustomersForm() => UnityConfig
                             .Register().Resolve<frmCustomers>();
 

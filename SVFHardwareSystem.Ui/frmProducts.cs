@@ -173,5 +173,11 @@ namespace SVFHardwareSystem.Ui
         {
             SetProductID();
         }
+
+        private void btnViewSIDRListing_Click(object sender, EventArgs e)
+        {
+            FormHandler.OpenSIDRListingByProduct(_productID).ShowDialog();
+           
+        }
     }
 }

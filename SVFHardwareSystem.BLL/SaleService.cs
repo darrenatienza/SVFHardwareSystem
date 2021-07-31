@@ -294,5 +294,25 @@ namespace SVFHardwareSystem.Services
 
             }
         }
+        
+        public void RemoveTransaction(int saleID)
+        {
+            using (var db = new DataContext())
+            {
+                var saleProducts = db.SaleProducts.Where(x => x.SaleID == saleID).ToList();
+                var sale = db.Sales.Find(saleID);
+                foreach (var saleProduct in saleProducts)
+                {
+                    var product = db.Products.Find(saleProduct.ProductID);
+                    // add quantity to product
+                    product.Quantity += saleProduct.Quantity;
+                    db.Entry(product).State = EntityState.Modified;
+                }
+                // this will remove the child record related to sales table
+                db.Sales.Remove(sale);
+                db.SaveChanges();
+
+            }
+        }
     }
 }

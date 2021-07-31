@@ -18,5 +18,6 @@ namespace SVFHardwareSystem.Services.Interfaces
 
         Task<List<SaleProductInventoryModel>> GetAllProductSaleInventoryByMonthYear(int month, int year);
         Task<IList<SalesModel>> GetSales(DateTime date, string criteria);
+        List<string> GetAllSIDRByProduct(int selProductID);
     }
 }

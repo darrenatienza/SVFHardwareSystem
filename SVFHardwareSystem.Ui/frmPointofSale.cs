@@ -427,7 +427,7 @@ namespace SVFHardwareSystem.Ui
             txtCost.Text = model.Cost;
             txtCustomerName.Text = model.CustomerFullName;
             customerID = model.CustomerID;
-            txtReceivable.Text = model.Receivable.ToCurrencyFormat();
+            txtReceivable.Text = model.Receivable > 0 ? model.Receivable.ToCurrencyFormat() : "0.00";
             _isFinishedSale = model.IsFinished;
             _isFullyPaid = model.IsFullyPaid;
             txtTotal.Text = model.TotalAmount.ToCurrencyFormat();
@@ -658,6 +658,7 @@ namespace SVFHardwareSystem.Ui
                 btnUpdatePOSTransactionDetails.Enabled = false;
                 txtProductName.Enabled = false;
 
+
             }
             else
             {
@@ -672,11 +673,13 @@ namespace SVFHardwareSystem.Ui
             {
                 pnlSummary.Visible = false;
                 btnCancelReplace.Enabled = false;
+                btnRemoveTransaction.Visible = false;
             }
             else
             {
                 pnlSummary.Visible = true;
                 btnCancelReplace.Enabled = true;
+                btnRemoveTransaction.Visible = true;
             }
             // when transaction is fully paid or when the grid list has no product
             if (_isFullyPaid || gridList.Rows.Count == 0)
@@ -953,6 +956,28 @@ namespace SVFHardwareSystem.Ui
             var form = (frmEditPointOfSaleDate)sender;
                     dtSalesTransactionDate.Value = form.NewDate;
             
+        }
+
+        private async void btnRemoveTransaction_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dialogResult = MetroMessageBox.Show(this, "Do you want to remove this transaction?", "Remove Transaction", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    _saleService.RemoveTransaction(_saleID);
+                    MetroMessageBox.Show(this, "Sale Transaction has been removed!","Remove Transaction Done");
+                    await GenerateNewOrLoadUnFinishedSale();
+
+                }
+               
+
+            }
+            catch (Exception ex)
+            {
+
+                MetroMessageBox.Show(this, ex.ToString());
+            }
         }
     }
 }

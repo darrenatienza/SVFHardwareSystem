@@ -39,5 +39,6 @@ namespace SVFHardwareSystem.Services.Interfaces
         void Pay(int saleID, decimal amountTendered, DateTime paymentDate);
         
         void CheckAndUpdateIfSaleIsFullyPaid(int posTransactionID);
+        void RemoveTransaction(int saleID);
     }
 }

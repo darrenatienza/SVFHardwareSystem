@@ -19,6 +19,11 @@ namespace SVFHardwareSystem.Services
     {
         private ISaleService _saleService;
 
+        public SalesService()
+        {
+            
+        }
+
         public SalesService(ISaleService saleService)
         {
             _saleService = saleService;
@@ -310,6 +315,21 @@ namespace SVFHardwareSystem.Services
                 }
                 // order sales according on update time
                 return sales;
+            }
+        }
+
+        public List<string> GetAllSIDRByProduct(int selProductID)
+        {
+            List<string> sidrList = new List<string>();
+            using (var db = new DataContext())
+            {
+                var salesProductList = db.SaleProducts.Include(x => x.Sale).Where(x => x.ProductID == selProductID).Select(x => x.Sale);
+                foreach (var salesProduct in  salesProductList)
+                {
+                    
+                    sidrList.Add(salesProduct.SIDR);
+                }
+                return sidrList;
             }
         }
     }
