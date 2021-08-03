@@ -179,5 +179,10 @@ namespace SVFHardwareSystem.Ui
             FormHandler.OpenSIDRListingByProduct(_productID).ShowDialog();
            
         }
+
+        private void btnPurchaseListing_Click(object sender, EventArgs e)
+        {
+            FormHandler.OpenPurchaseListingByProduct(_productID).ShowDialog();
+        }
     }
 }

@@ -273,6 +273,12 @@
     <Compile Include="frmPointOfSalesReplaceCancel.Designer.cs">
       <DependentUpon>frmPointOfSalesReplaceCancel.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPurchaseListingByProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPurchaseListingByProduct.Designer.cs">
+      <DependentUpon>frmPurchaseListingByProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSIDRListingByProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -402,6 +408,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPointOfSalesReplaceCancel.resx">
       <DependentUpon>frmPointOfSalesReplaceCancel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPurchaseListingByProduct.resx">
+      <DependentUpon>frmPurchaseListingByProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSIDRListingByProduct.resx">
       <DependentUpon>frmSIDRListingByProduct.cs</DependentUpon>

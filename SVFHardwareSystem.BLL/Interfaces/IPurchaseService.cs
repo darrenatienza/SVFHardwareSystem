@@ -24,6 +24,7 @@ namespace SVFHardwareSystem.Services.Interfaces
         Task EditPurchaseProduct(PurchaseProductModel purchaseProduct);
         Task AddPurchaseProductAsync(int purchaseID, PurchaseProductModel purchaseProduct);
         Task<PurchaseProductModel> GetPurchaseProduct(int purchaseID, int productID);
+        IList<PurchaseModel> GetPurchaseListByProductID(int selProductID);
         Task<IList<PurchaseModel>> GetAllPurchasePayablesAsync(int year, int month, string supplierName);
 
         /// <summary>

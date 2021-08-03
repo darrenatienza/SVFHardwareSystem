@@ -44,6 +44,7 @@
             this.cboCategory = new MetroFramework.Controls.MetroComboBox();
             this.txtQuantity = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
+            this.chkAddInitialProd = new MetroFramework.Controls.MetroCheckBox();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -330,11 +331,25 @@
             this.metroLabel9.TabIndex = 27;
             this.metroLabel9.Text = "Quantity";
             // 
+            // chkAddInitialProd
+            // 
+            this.chkAddInitialProd.AutoSize = true;
+            this.chkAddInitialProd.Checked = true;
+            this.chkAddInitialProd.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAddInitialProd.Enabled = false;
+            this.chkAddInitialProd.Location = new System.Drawing.Point(282, 63);
+            this.chkAddInitialProd.Name = "chkAddInitialProd";
+            this.chkAddInitialProd.Size = new System.Drawing.Size(189, 15);
+            this.chkAddInitialProd.TabIndex = 29;
+            this.chkAddInitialProd.Text = "Add to Initial Product Inventory";
+            this.chkAddInitialProd.UseSelectable = true;
+            // 
             // frmProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(494, 325);
+            this.Controls.Add(this.chkAddInitialProd);
             this.Controls.Add(this.txtQuantity);
             this.Controls.Add(this.metroLabel9);
             this.Controls.Add(this.cboCategory);
@@ -377,5 +392,6 @@
         private MetroFramework.Controls.MetroComboBox cboCategory;
         private MetroFramework.Controls.MetroTextBox txtQuantity;
         private MetroFramework.Controls.MetroLabel metroLabel9;
+        private MetroFramework.Controls.MetroCheckBox chkAddInitialProd;
     }
 }

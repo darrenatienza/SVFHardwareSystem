@@ -25,10 +25,11 @@ namespace SVFHardwareSystem.Ui
         private ICategoryService _categoryService;
         private int _productID;
         private ISupplierService _supplierService;
+        private IYearlyProductInventoryService _yearlyProductInventoryService;
         private int _categoryID;
         private int _supplierID;
 
-        public frmProductForm(IProductService productService, ICategoryService categoryService, ISupplierService supplierService)
+        public frmProductForm(IProductService productService, ICategoryService categoryService, ISupplierService supplierService, IYearlyProductInventoryService yearlyProductInventoryService)
         {
             InitializeComponent();
             this.MinimizeBox = false;
@@ -37,6 +38,7 @@ namespace SVFHardwareSystem.Ui
             _productService = productService;
             _categoryService = categoryService;
             _supplierService = supplierService;
+            _yearlyProductInventoryService = yearlyProductInventoryService;
 
         }
 
@@ -58,6 +60,7 @@ namespace SVFHardwareSystem.Ui
            
             LoadCategories();
             SetProductData();
+            chkAddInitialProd.Visible = _productID > 0 ? false : true;
         }
 
         private async void SetProductData()
@@ -111,15 +114,19 @@ namespace SVFHardwareSystem.Ui
         {
             try
             {
+                var newProdID = 0;
                 var productModel = new ProductModel();
+                
                 productModel.ProductID = _productID;
                 productModel.Code = txtCode.Text;
                 productModel.Name = txtName.Text;
                 productModel.Price = txtPrice.Text.ToDecimal();
                 productModel.Unit = txtUnit.Text;
-               
                 productModel.CategoryID = _categoryID;
                 productModel.Limit = txtLimit.Text.ToInt();
+
+                
+               
 
                 //edit
                 if (_productID > 0)
@@ -130,6 +137,21 @@ namespace SVFHardwareSystem.Ui
                 {
                     //add
                     await _productService.AddAsync(productModel);
+                    newProdID = _productService.GetByProductName(txtName.Text).ProductID;
+                }
+                if (_productID == 0 && chkAddInitialProd.Checked)
+                {
+                    var yearlyProductInventoryModel = new YearlyProductInventoryModel();
+                    yearlyProductInventoryModel.CategoryName = cboCategory.Text;
+                    yearlyProductInventoryModel.Price = txtPrice.Text.ToDecimal();
+                    yearlyProductInventoryModel.ProductID = newProdID;
+                    yearlyProductInventoryModel.ProductName = txtName.Text;
+                    yearlyProductInventoryModel.Quantity = 0;
+                    yearlyProductInventoryModel.Unit = txtUnit.Text;
+                    yearlyProductInventoryModel.Year = 2020;
+                    yearlyProductInventoryModel.CreateTimeStamp = DateTime.Now;
+                    //add
+                    await _yearlyProductInventoryService.AddAsync(yearlyProductInventoryModel);
                 }
                 this.Close();
             }

@@ -276,7 +276,7 @@ namespace SVFHardwareSystem.Services
             using (var db = new DataContext())
             {
                 var entity = db.Products.FirstOrDefault(x => x.ProductID == productID);
-                entity.Quantity = quantity;
+                entity.Quantity += quantity;
                 entity.Price = price;
                 db.Entry(entity).State = EntityState.Modified;
                 db.SaveChanges();

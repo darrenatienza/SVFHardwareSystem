@@ -11,6 +11,15 @@ namespace SVFHardwareSystem.Ui
 {
     public static class FormHandler
     {
+        public static frmPurchaseListingByProduct OpenPurchaseListingByProduct(int selProductID)
+        {
+            return UnityConfig
+                .Register()
+                .RegisterType<frmPurchaseListingByProduct>(new InjectionConstructor(new object[] { new ProductService(), new PurchaseService(), selProductID }))
+                .Resolve<frmPurchaseListingByProduct>();
+
+        }
+
         public static frmEditPointOfSaleDate OpenEditPointOfSaleDateForm(int saleID)
         {
             return UnityConfig

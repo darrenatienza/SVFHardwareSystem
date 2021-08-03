@@ -433,5 +433,19 @@ namespace SVFHardwareSystem.Services
                 return purchase.PurchaseID;
             }
         }
+
+        public IList<PurchaseModel> GetPurchaseListByProductID(int selProductID)
+        {
+            var purchaseListObj = new List<Purchase>();
+            using (var db = new DataContext())
+            {
+                var purchaseList = db.PurchaseProducts
+                    .Where(x => x.ProductID == selProductID)
+                    .Select(x => x.Purchase).ToList();
+                var purchaseModels = Mapping.Mapper.Map<List<PurchaseModel>>(purchaseList);
+
+                return purchaseModels;
+            }
+        }
     }
 }
