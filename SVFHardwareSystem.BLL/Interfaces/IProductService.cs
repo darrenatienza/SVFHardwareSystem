@@ -22,5 +22,6 @@ namespace SVFHardwareSystem.Services.Interfaces
         BeginningProductModel GetBeginningInventory(int productID);
         void EditBeginningInventoryQuantity(int productID, decimal quantity,decimal price);
         void EditProductQuantity(int productID, decimal quantity,decimal price);
+        bool IsNegativeProductQuantity(int purchaseProductID);
     }
 }

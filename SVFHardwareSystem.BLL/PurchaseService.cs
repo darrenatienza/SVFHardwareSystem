@@ -447,5 +447,28 @@ namespace SVFHardwareSystem.Services
                 return purchaseModels;
             }
         }
+
+        public void ForceDeletePurchaseProduct(int productID)
+        {
+            using (var db = new DataContext())
+            {
+                var purchaseProduct = db.PurchaseProducts.Find(productID);
+                if (purchaseProduct == null)
+                {
+                    throw new RecordNotFoundException("Purchase Product");
+                }
+              
+                db.PurchaseProducts.Remove(purchaseProduct);
+                db.SaveChanges();
+            }
+        }
+
+        public int GetProductIDByPurchaseProductID(int purchaseProductID)
+        {
+            using (var db = new DataContext())
+            {
+                return db.PurchaseProducts.Find(purchaseProductID).ProductID;
+            }
+        }
     }
 }

@@ -314,5 +314,17 @@ namespace SVFHardwareSystem.Services
 
             }
         }
+
+        public bool HasProductOnSale(int purchaseProductID)
+        {
+            using (var db = new DataContext())
+            {
+                return db.SaleProducts
+                    .Where(x => x.ProductID == purchaseProductID)
+                    .Select(x => x.ProductID)
+                    .ToList()
+                    .Count() > 0 ? true : false;
+            }
+        }
     }
 }

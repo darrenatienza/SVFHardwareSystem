@@ -282,5 +282,13 @@ namespace SVFHardwareSystem.Services
                 db.SaveChanges();
             }
         }
+
+        public bool IsNegativeProductQuantity(int purchaseProductID)
+        {
+            using (var db = new DataContext())
+            {
+                return db.Products.Where(x => x.ProductID == purchaseProductID && x.Quantity < 0).Select(x => x.ProductID).ToList().Count() > 0 ? true : false;
+            }
+        }
     }
 }

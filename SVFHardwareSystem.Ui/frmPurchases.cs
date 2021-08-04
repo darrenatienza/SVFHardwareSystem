@@ -21,15 +21,20 @@ namespace SVFHardwareSystem.Ui
     {
         private ISupplierService _supplierService;
         private IPurchaseService _purchaseService;
+        private ISaleService _saleService;
+        private IProductService _productService;
         private int _supplierID;
         private int _purchaseID;
         private int _purchaseProductID;
+        private int _productID;
 
-        public frmPurchases(ISupplierService supplierService, IPurchaseService purchaseService)
+        public frmPurchases(ISupplierService supplierService, IPurchaseService purchaseService, ISaleService saleService, IProductService productService)
         {
             InitializeComponent();
             _supplierService = supplierService;
             _purchaseService = purchaseService;
+            _saleService = saleService;
+            _productService = productService;
            
         }
 
@@ -318,6 +323,7 @@ namespace SVFHardwareSystem.Ui
             if (grid.SelectedRows.Count > 0)
             {
                 _purchaseProductID = int.Parse(grid.SelectedRows[0].Cells[0].Value.ToString());
+                _productID = _purchaseService.GetProductIDByPurchaseProductID(_purchaseProductID);
 
 
 
@@ -343,8 +349,30 @@ namespace SVFHardwareSystem.Ui
                 DialogResult d = MetroMessageBox.Show(this, "Are you sure you want to delete this purchase product?", "Delete Purchase Product", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (d == DialogResult.Yes)
                 {
-                    _purchaseService.DeletePurchaseProduct(_purchaseProductID);
-                    await LoadPurchaseProducts();
+                    //must not delete if still have same product on sale
+                    //must also check negative product quantity
+                    //must first delete product on sale
+                    var hasProductOnSale = _saleService.HasProductOnSale(_productID);
+                    var isNegativeProductQuantity = _productService.IsNegativeProductQuantity(_productID);
+                    //do force delete if condition satisfy
+                    if (hasProductOnSale && isNegativeProductQuantity)
+                    {
+                        MetroMessageBox.Show(this, "This Product has record(s) on Point of sale, you must delete that first!", "Delete Purchase Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        if (isNegativeProductQuantity)
+                        {
+                            _purchaseService.ForceDeletePurchaseProduct(_purchaseProductID);
+                        }
+                        else
+                        {
+                            _purchaseService.DeletePurchaseProduct(_purchaseProductID);
+                        }
+                        await LoadPurchaseProducts();
+                    }
+                    
+                    
                 }
             }
 

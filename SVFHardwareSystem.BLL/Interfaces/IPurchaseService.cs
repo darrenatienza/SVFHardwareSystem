@@ -49,8 +49,11 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// <param name="purchasePayment"></param>
         void AddPurchasePayment(PurchasePaymentModel purchasePayment);
         Task<PurchasesPerSupplierModel> GetPurchasesPerSupplier(int year, int supplierID,bool fullyPaid);
-
-        
-
+        /// <summary>
+        /// Force delete the purchase product, does not implement less than product quantity validation
+        /// </summary>
+        /// <param name="productID"></param>
+        void ForceDeletePurchaseProduct(int productID);
+        int GetProductIDByPurchaseProductID(int purchaseProductID);
     }
 }

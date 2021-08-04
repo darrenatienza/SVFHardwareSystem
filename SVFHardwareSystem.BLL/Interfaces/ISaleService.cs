@@ -40,5 +40,7 @@ namespace SVFHardwareSystem.Services.Interfaces
         
         void CheckAndUpdateIfSaleIsFullyPaid(int posTransactionID);
         void RemoveTransaction(int saleID);
+        bool HasProductOnSale(int purchaseProductID);
+        
     }
 }
