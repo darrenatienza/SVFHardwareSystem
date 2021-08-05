@@ -470,5 +470,29 @@ namespace SVFHardwareSystem.Services
                 return db.PurchaseProducts.Find(purchaseProductID).ProductID;
             }
         }
+
+        public void DeletePurchaseProductV2(int purchaseProductID)
+        {
+            using (var db = new DataContext())
+            {
+                var purchaseProduct = db.PurchaseProducts.Find(purchaseProductID);
+                if (purchaseProduct == null)
+                {
+                    throw new RecordNotFoundException("Purchase Product");
+                }
+                // get product inventory quantity count
+                // the difference after subtracting the product inventory quantity and recorded purchase product must be >= to 0
+                // it not, return an error
+                var product = db.Products.Find(purchaseProduct.ProductID);
+                var productQuantity = product.Quantity;
+                var purchaseProductQuantity = purchaseProduct.Quantity;
+                var productQuantityDiff = productQuantity - purchaseProductQuantity;
+                
+                product.Quantity = productQuantityDiff > 0 ? productQuantityDiff : 0;
+                db.Entry(product).State = EntityState.Modified;
+                db.PurchaseProducts.Remove(purchaseProduct);
+                db.SaveChanges();
+            }
+        }
     }
 }

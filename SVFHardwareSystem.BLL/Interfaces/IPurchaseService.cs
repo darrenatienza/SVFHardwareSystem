@@ -55,5 +55,10 @@ namespace SVFHardwareSystem.Services.Interfaces
         /// <param name="productID"></param>
         void ForceDeletePurchaseProduct(int productID);
         int GetProductIDByPurchaseProductID(int purchaseProductID);
+        /// <summary>
+        /// Delete Purchase Product without validation
+        /// </summary>
+        /// <param name="purchaseProductID"></param>
+        void DeletePurchaseProductV2(int purchaseProductID);
     }
 }

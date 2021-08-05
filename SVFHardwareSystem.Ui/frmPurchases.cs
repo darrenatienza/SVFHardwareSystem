@@ -353,22 +353,14 @@ namespace SVFHardwareSystem.Ui
                     //must also check negative product quantity
                     //must first delete product on sale
                     var hasProductOnSale = _saleService.HasProductOnSale(_productID);
-                    var isNegativeProductQuantity = _productService.IsNegativeProductQuantity(_productID);
                     //do force delete if condition satisfy
-                    if (hasProductOnSale && isNegativeProductQuantity)
+                    if (hasProductOnSale)
                     {
                         MetroMessageBox.Show(this, "This Product has record(s) on Point of sale, you must delete that first!", "Delete Purchase Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                     {
-                        if (isNegativeProductQuantity)
-                        {
-                            _purchaseService.ForceDeletePurchaseProduct(_purchaseProductID);
-                        }
-                        else
-                        {
-                            _purchaseService.DeletePurchaseProduct(_purchaseProductID);
-                        }
+                        _purchaseService.DeletePurchaseProductV2(_purchaseProductID);
                         await LoadPurchaseProducts();
                     }
                     
